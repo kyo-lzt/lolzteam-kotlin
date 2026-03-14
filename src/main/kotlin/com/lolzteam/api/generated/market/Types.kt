@@ -16,7 +16,7 @@ data class CategoryAllParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -37,13 +37,13 @@ data class CategoryAllParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 )
@@ -57,7 +57,7 @@ data class CategorySteamParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -78,7 +78,7 @@ data class CategorySteamParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_type[]")
@@ -86,7 +86,7 @@ data class CategorySteamParams(
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("item_domain")
@@ -102,17 +102,17 @@ data class CategorySteamParams(
 	val vac: List<Int>? = null,
 	@SerialName("vac_skip_game_check")
 	val vacSkipGameCheck: Boolean? = null,
-	val rt: JsonElement? = null,
+	val rt: String? = null,
 	@SerialName("trade_ban")
-	val tradeBan: JsonElement? = null,
+	val tradeBan: String? = null,
 	@SerialName("trade_limit")
-	val tradeLimit: JsonElement? = null,
+	val tradeLimit: String? = null,
 	val daybreak: Int? = null,
-	val limit: JsonElement? = null,
-	val mafile: JsonElement? = null,
+	val limit: String? = null,
+	val mafile: String? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	val lmin: Int? = null,
 	val lmax: Int? = null,
 	val rmin: Int? = null,
@@ -124,7 +124,7 @@ data class CategorySteamParams(
 	@SerialName("no_vac")
 	val noVac: Boolean? = null,
 	@SerialName("mm_ban")
-	val mmBan: JsonElement? = null,
+	val mmBan: String? = null,
 	@SerialName("balance_min")
 	val balanceMin: Int? = null,
 	@SerialName("balance_max")
@@ -202,11 +202,11 @@ data class CategorySteamParams(
 	@SerialName("last_trans_date")
 	val lastTransDate: Int? = null,
 	@SerialName("last_trans_date_period")
-	val lastTransDatePeriod: JsonElement? = null,
+	val lastTransDatePeriod: String? = null,
 	@SerialName("last_trans_date_later")
 	val lastTransDateLater: Int? = null,
 	@SerialName("last_trans_date_period_later")
-	val lastTransDatePeriodLater: JsonElement? = null,
+	val lastTransDatePeriodLater: String? = null,
 	@SerialName("no_trans")
 	val noTrans: Boolean? = null,
 	val trans: Boolean? = null,
@@ -231,7 +231,7 @@ data class CategorySteamParams(
 	@SerialName("purchase_max")
 	val purchaseMax: Double? = null,
 	@SerialName("has_activated_keys")
-	val hasActivatedKeys: JsonElement? = null,
+	val hasActivatedKeys: String? = null,
 	@SerialName("elo_min")
 	val eloMin: Int? = null,
 	@SerialName("elo_max")
@@ -243,7 +243,7 @@ data class CategorySteamParams(
 	@SerialName("cs2_map_rmax")
 	val cs2MapRmax: Int? = null,
 	@SerialName("has_faceit")
-	val hasFaceit: JsonElement? = null,
+	val hasFaceit: String? = null,
 	@SerialName("faceit_csgo_lvl_min")
 	val faceitCsgoLvlMin: Int? = null,
 	@SerialName("faceit_csgo_lvl_max")
@@ -259,7 +259,7 @@ data class CategorySteamParams(
 	@SerialName("d2_last_match_date")
 	val d2LastMatchDate: Int? = null,
 	@SerialName("d2_last_match_date_period")
-	val d2LastMatchDatePeriod: JsonElement? = null,
+	val d2LastMatchDatePeriod: String? = null,
 	@SerialName("cards_min")
 	val cardsMin: Int? = null,
 	@SerialName("cards_max")
@@ -281,7 +281,7 @@ data class CategoryFortniteParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -302,7 +302,7 @@ data class CategoryFortniteParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
@@ -310,11 +310,11 @@ data class CategoryFortniteParams(
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("temp_email")
-	val tempEmail: JsonElement? = null,
+	val tempEmail: String? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
 	val eg: JsonElement? = null,
@@ -331,7 +331,7 @@ data class CategoryFortniteParams(
 	@SerialName("dance[]")
 	val dance: JsonElement? = null,
 	@SerialName("change_email")
-	val changeEmail: JsonElement? = null,
+	val changeEmail: String? = null,
 	@SerialName("platform[]")
 	val platform: JsonElement? = null,
 	@SerialName("skins_shop_min")
@@ -366,7 +366,7 @@ data class CategoryFortniteParams(
 	val glidersShopVbmin: Int? = null,
 	@SerialName("gliders_shop_vbmax")
 	val glidersShopVbmax: Int? = null,
-	val bp: JsonElement? = null,
+	val bp: String? = null,
 	val lmin: Int? = null,
 	val lmax: Int? = null,
 	@SerialName("bp_lmin")
@@ -376,19 +376,19 @@ data class CategoryFortniteParams(
 	@SerialName("last_trans_date")
 	val lastTransDate: Int? = null,
 	@SerialName("last_trans_date_period")
-	val lastTransDatePeriod: JsonElement? = null,
+	val lastTransDatePeriod: String? = null,
 	@SerialName("no_trans")
 	val noTrans: Boolean? = null,
 	@SerialName("xbox_linkable")
-	val xboxLinkable: JsonElement? = null,
+	val xboxLinkable: String? = null,
 	@SerialName("psn_linkable")
-	val psnLinkable: JsonElement? = null,
+	val psnLinkable: String? = null,
 	val daybreak: Int? = null,
 	@SerialName("rl_purchases")
 	val rlPurchases: Boolean? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("refund_credits_min")
 	val refundCreditsMin: Int? = null,
 	@SerialName("refund_credits_max")
@@ -416,7 +416,7 @@ data class CategoryMihoyoParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -437,21 +437,21 @@ data class CategoryMihoyoParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val email: JsonElement? = null,
-	val ea: JsonElement? = null,
+	val email: String? = null,
+	val ea: String? = null,
 	val region: JsonElement? = null,
 	@SerialName("not_region")
 	val notRegion: JsonElement? = null,
@@ -575,7 +575,7 @@ data class CategoryRiotParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -596,13 +596,13 @@ data class CategoryRiotParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -695,8 +695,8 @@ data class CategoryRiotParams(
 	val riotMin: Int? = null,
 	@SerialName("riot_max")
 	val riotMax: Int? = null,
-	val email: JsonElement? = null,
-	val tel: JsonElement? = null,
+	val email: String? = null,
+	val tel: String? = null,
 	@SerialName("valorant_knife_min")
 	val valorantKnifeMin: Int? = null,
 	@SerialName("valorant_knife_max")
@@ -722,7 +722,7 @@ data class CategoryTelegramParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -743,22 +743,22 @@ data class CategoryTelegramParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val spam: JsonElement? = null,
-	val password: JsonElement? = null,
-	val premium: JsonElement? = null,
+	val spam: String? = null,
+	val password: String? = null,
+	val premium: String? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Int? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: JsonElement? = null,
+	val premiumExpirationPeriod: String? = null,
 	@SerialName("country[]")
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
@@ -798,11 +798,11 @@ data class CategoryTelegramParams(
 	val maxStars: Int? = null,
 	val birthday: Int? = null,
 	@SerialName("birthday_period")
-	val birthdayPeriod: JsonElement? = null,
+	val birthdayPeriod: String? = null,
 	@SerialName("birthday_after")
 	val birthdayAfter: Int? = null,
 	@SerialName("birthday_after_period")
-	val birthdayAfterPeriod: JsonElement? = null,
+	val birthdayAfterPeriod: String? = null,
 	@SerialName("min_id")
 	val minId: Int? = null,
 	@SerialName("max_id")
@@ -829,7 +829,7 @@ data class CategoryTelegramParams(
 	val dcId: List<Int>? = null,
 	@SerialName("not_dc_id[]")
 	val notDcId: List<Int>? = null,
-	val email: JsonElement? = null,
+	val email: String? = null,
 	@SerialName("min_bots")
 	val minBots: Int? = null,
 	@SerialName("max_bots")
@@ -849,7 +849,7 @@ data class CategorySupercellParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -870,13 +870,13 @@ data class CategorySupercellParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	val daybreak: Int? = null,
@@ -885,7 +885,7 @@ data class CategorySupercellParams(
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
 	val eg: JsonElement? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	@SerialName("brawl_level_min")
 	val brawlLevelMin: Int? = null,
 	@SerialName("brawl_level_max")
@@ -899,7 +899,7 @@ data class CategorySupercellParams(
 	@SerialName("brawl_wins_max")
 	val brawlWinsMax: Int? = null,
 	@SerialName("brawl_pass")
-	val brawlPass: JsonElement? = null,
+	val brawlPass: String? = null,
 	@SerialName("brawler[]")
 	val brawler: JsonElement? = null,
 	@SerialName("brawlers_min")
@@ -927,7 +927,7 @@ data class CategorySupercellParams(
 	@SerialName("king_level_max")
 	val kingLevelMax: Int? = null,
 	@SerialName("royale_pass")
-	val royalePass: JsonElement? = null,
+	val royalePass: String? = null,
 	@SerialName("clash_level_min")
 	val clashLevelMin: Int? = null,
 	@SerialName("clash_level_max")
@@ -941,7 +941,7 @@ data class CategorySupercellParams(
 	@SerialName("clash_wins_max")
 	val clashWinsMax: Int? = null,
 	@SerialName("clash_pass")
-	val clashPass: JsonElement? = null,
+	val clashPass: String? = null,
 	@SerialName("total_heroes_level_min")
 	val totalHeroesLevelMin: Int? = null,
 	@SerialName("total_heroes_level_max")
@@ -989,7 +989,7 @@ data class CategoryEaParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1010,13 +1010,13 @@ data class CategoryEaParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -1040,23 +1040,23 @@ data class CategoryEaParams(
 	@SerialName("al_level_max")
 	val alLevelMax: Int? = null,
 	@SerialName("has_ban")
-	val hasBan: JsonElement? = null,
+	val hasBan: String? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: JsonElement? = null,
+	val xboxConnected: String? = null,
 	@SerialName("steam_connected")
-	val steamConnected: JsonElement? = null,
+	val steamConnected: String? = null,
 	@SerialName("psn_connected")
-	val psnConnected: JsonElement? = null,
-	val subscription: JsonElement? = null,
+	val psnConnected: String? = null,
+	val subscription: String? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
 	@SerialName("hours_played")
 	val hoursPlayed: JsonObject? = null,
 	@SerialName("hours_played_max")
 	val hoursPlayedMax: JsonObject? = null,
-	val transactions: JsonElement? = null,
+	val transactions: String? = null,
 )
 
 typealias CategoryEaResponse = JsonElement
@@ -1068,7 +1068,7 @@ data class CategoryWotParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1089,20 +1089,20 @@ data class CategoryWotParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	val daybreak: Int? = null,
 	@SerialName("battles_min")
 	val battlesMin: Int? = null,
@@ -1138,12 +1138,12 @@ data class CategoryWotParams(
 	val region: JsonElement? = null,
 	@SerialName("not_region[]")
 	val notRegion: JsonElement? = null,
-	val premium: JsonElement? = null,
+	val premium: String? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Int? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: JsonElement? = null,
-	val clan: JsonElement? = null,
+	val premiumExpirationPeriod: String? = null,
+	val clan: String? = null,
 	@SerialName("clan_role[]")
 	val clanRole: JsonElement? = null,
 	@SerialName("not_clan_role[]")
@@ -1175,7 +1175,7 @@ data class CategoryWotBlitzParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1196,20 +1196,20 @@ data class CategoryWotBlitzParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	val daybreak: Int? = null,
 	@SerialName("battles_min")
 	val battlesMin: Int? = null,
@@ -1245,12 +1245,12 @@ data class CategoryWotBlitzParams(
 	val region: JsonElement? = null,
 	@SerialName("not_region[]")
 	val notRegion: JsonElement? = null,
-	val premium: JsonElement? = null,
+	val premium: String? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Int? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: JsonElement? = null,
-	val clan: JsonElement? = null,
+	val premiumExpirationPeriod: String? = null,
+	val clan: String? = null,
 	@SerialName("clan_role[]")
 	val clanRole: JsonElement? = null,
 	@SerialName("not_clan_role[]")
@@ -1282,7 +1282,7 @@ data class CategoryGiftsParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1303,20 +1303,20 @@ data class CategoryGiftsParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val subscription: JsonElement? = null,
+	val subscription: String? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
 )
 
 typealias CategoryGiftsResponse = JsonElement
@@ -1328,7 +1328,7 @@ data class CategoryEpicGamesParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1349,13 +1349,13 @@ data class CategoryEpicGamesParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -1366,7 +1366,7 @@ data class CategoryEpicGamesParams(
 	@SerialName("game[]")
 	val game: List<String>? = null,
 	@SerialName("change_email")
-	val changeEmail: JsonElement? = null,
+	val changeEmail: String? = null,
 	@SerialName("rl_purchases")
 	val rlPurchases: Boolean? = null,
 	@SerialName("balance_min")
@@ -1399,7 +1399,7 @@ data class CategoryEscapeFromTarkovParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1420,31 +1420,31 @@ data class CategoryEscapeFromTarkovParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val region: JsonElement? = null,
+	val region: String? = null,
 	@SerialName("version[]")
 	val version: JsonElement? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("level_min")
 	val levelMin: Int? = null,
 	@SerialName("level_max")
 	val levelMax: Int? = null,
-	val pve: JsonElement? = null,
-	val side: JsonElement? = null,
+	val pve: String? = null,
+	val side: String? = null,
 )
 
 typealias CategoryEscapeFromTarkovResponse = JsonElement
@@ -1456,7 +1456,7 @@ data class CategorySocialClubParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1477,13 +1477,13 @@ data class CategorySocialClubParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	val daybreak: Int? = null,
@@ -1512,7 +1512,7 @@ data class CategoryUplayParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1533,13 +1533,13 @@ data class CategoryUplayParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -1555,11 +1555,11 @@ data class CategoryUplayParams(
 	val daybreak: Int? = null,
 	val gmin: Int? = null,
 	val gmax: Int? = null,
-	val subscription: JsonElement? = null,
+	val subscription: String? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
 	@SerialName("r6_level_min")
 	val r6LevelMin: Int? = null,
 	@SerialName("r6_level_max")
@@ -1573,7 +1573,7 @@ data class CategoryUplayParams(
 	@SerialName("r6_operators_max")
 	val r6OperatorsMax: Int? = null,
 	@SerialName("r6_ban")
-	val r6Ban: JsonElement? = null,
+	val r6Ban: String? = null,
 	@SerialName("r6_smin")
 	val r6Smin: Int? = null,
 	@SerialName("r6_smax")
@@ -1583,19 +1583,19 @@ data class CategoryUplayParams(
 	@SerialName("r6_operator[]")
 	val r6Operator: List<String>? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: JsonElement? = null,
+	val xboxConnected: String? = null,
 	@SerialName("psn_connected")
-	val psnConnected: JsonElement? = null,
+	val psnConnected: String? = null,
 	@SerialName("steam_connected")
-	val steamConnected: JsonElement? = null,
+	val steamConnected: String? = null,
 	@SerialName("balance_min")
 	val balanceMin: Double? = null,
 	@SerialName("balance_max")
 	val balanceMax: Double? = null,
-	val transactions: JsonElement? = null,
+	val transactions: String? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 )
 
 typealias CategoryUplayResponse = JsonElement
@@ -1607,7 +1607,7 @@ data class CategoryDiscordParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1628,34 +1628,34 @@ data class CategoryDiscordParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: JsonElement? = null,
-	val nitro: JsonElement? = null,
+	val tel: String? = null,
+	val nitro: String? = null,
 	@SerialName("nitro_type[]")
 	val nitroType: JsonElement? = null,
 	@SerialName("nitro_length")
 	val nitroLength: Int? = null,
 	@SerialName("nitro_period")
-	val nitroPeriod: JsonElement? = null,
+	val nitroPeriod: String? = null,
 	@SerialName("boosts_min")
 	val boostsMin: Int? = null,
 	@SerialName("boosts_max")
 	val boostsMax: Int? = null,
-	val billing: JsonElement? = null,
-	val gifts: JsonElement? = null,
-	val transactions: JsonElement? = null,
+	val billing: String? = null,
+	val gifts: String? = null,
+	val transactions: String? = null,
 	@SerialName("badge[]")
 	val badge: JsonElement? = null,
 	@SerialName("condition[]")
@@ -1674,12 +1674,12 @@ data class CategoryDiscordParams(
 	val maxAdmin: Int? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("language[]")
 	val language: List<String>? = null,
 	@SerialName("not_language[]")
 	val notLanguage: List<String>? = null,
-	val clans: JsonElement? = null,
+	val clans: String? = null,
 	@SerialName("min_admin_clans")
 	val minAdminClans: Int? = null,
 	@SerialName("max_admin_clans")
@@ -1697,7 +1697,7 @@ data class CategoryDiscordParams(
 	@SerialName("max_servers")
 	val maxServers: Int? = null,
 	@SerialName("2fa")
-	val `2fa`: JsonElement? = null,
+	val `2fa`: String? = null,
 	@SerialName("min_full_credits")
 	val minFullCredits: Int? = null,
 	@SerialName("max_full_credits")
@@ -1721,7 +1721,7 @@ data class CategoryTikTokParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1742,23 +1742,23 @@ data class CategoryTikTokParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("followers_min")
 	val followersMin: Int? = null,
 	@SerialName("followers_max")
@@ -1776,9 +1776,9 @@ data class CategoryTikTokParams(
 	@SerialName("coins_max")
 	val coinsMax: Int? = null,
 	@SerialName("cookie_login")
-	val cookieLogin: JsonElement? = null,
-	val verified: JsonElement? = null,
-	val email: JsonElement? = null,
+	val cookieLogin: String? = null,
+	val verified: String? = null,
+	val email: String? = null,
 )
 
 typealias CategoryTikTokResponse = JsonElement
@@ -1790,7 +1790,7 @@ data class CategoryInstagramParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1811,27 +1811,27 @@ data class CategoryInstagramParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	@SerialName("country[]")
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
-	val cookies: JsonElement? = null,
+	val cookies: String? = null,
 	@SerialName("login_without_cookies")
-	val loginWithoutCookies: JsonElement? = null,
+	val loginWithoutCookies: String? = null,
 	@SerialName("followers_min")
 	val followersMin: Int? = null,
 	@SerialName("followers_max")
@@ -1842,7 +1842,7 @@ data class CategoryInstagramParams(
 	val postMax: Int? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 )
 
 typealias CategoryInstagramResponse = JsonElement
@@ -1854,7 +1854,7 @@ data class CategoryBattleNetParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1875,13 +1875,13 @@ data class CategoryBattleNetParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -1896,17 +1896,17 @@ data class CategoryBattleNetParams(
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	@SerialName("edit_btag")
-	val editBtag: JsonElement? = null,
+	val editBtag: String? = null,
 	@SerialName("changeable_fn")
-	val changeableFn: JsonElement? = null,
+	val changeableFn: String? = null,
 	@SerialName("real_id")
-	val realId: JsonElement? = null,
+	val realId: String? = null,
 	@SerialName("parent_control")
-	val parentControl: JsonElement? = null,
+	val parentControl: String? = null,
 	@SerialName("no_bans")
-	val noBans: JsonElement? = null,
+	val noBans: String? = null,
 	@SerialName("balance_min")
 	val balanceMin: Int? = null,
 	@SerialName("balance_max")
@@ -1922,7 +1922,7 @@ data class CategoryChatGPTParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -1943,13 +1943,13 @@ data class CategoryChatGPTParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -1961,13 +1961,13 @@ data class CategoryChatGPTParams(
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
-	val autorenewal: JsonElement? = null,
-	val tel: JsonElement? = null,
-	val transactions: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
+	val autorenewal: String? = null,
+	val tel: String? = null,
+	val transactions: String? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("openai_tier[]")
 	val openaiTier: JsonElement? = null,
 	@SerialName("openai_balance_min")
@@ -1985,7 +1985,7 @@ data class CategoryVpnParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2006,13 +2006,13 @@ data class CategoryVpnParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("service[]")
@@ -2020,8 +2020,8 @@ data class CategoryVpnParams(
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
-	val autorenewal: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
+	val autorenewal: String? = null,
 )
 
 typealias CategoryVpnResponse = JsonElement
@@ -2033,7 +2033,7 @@ data class CategoryRobloxParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2054,16 +2054,16 @@ data class CategoryRobloxParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val email: JsonElement? = null,
+	val email: String? = null,
 	@SerialName("robux_min")
 	val robuxMin: Int? = null,
 	@SerialName("robux_max")
@@ -2081,20 +2081,20 @@ data class CategoryRobloxParams(
 	val notCountry: List<String>? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
-	val subscription: JsonElement? = null,
+	val regPeriod: String? = null,
+	val subscription: String? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
-	val autorenewal: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
+	val autorenewal: String? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: JsonElement? = null,
+	val xboxConnected: String? = null,
 	@SerialName("psn_connected")
-	val psnConnected: JsonElement? = null,
-	val verified: JsonElement? = null,
+	val psnConnected: String? = null,
+	val verified: String? = null,
 	@SerialName("age_verified")
-	val ageVerified: JsonElement? = null,
+	val ageVerified: String? = null,
 	@SerialName("incoming_robux_total_min")
 	val incomingRobuxTotalMin: Int? = null,
 	@SerialName("incoming_robux_total_max")
@@ -2108,7 +2108,7 @@ data class CategoryRobloxParams(
 	@SerialName("gamepass_max")
 	val gamepassMax: Int? = null,
 	@SerialName("game_donations")
-	val gameDonations: JsonElement? = null,
+	val gameDonations: String? = null,
 	@SerialName("inv_min")
 	val invMin: Int? = null,
 	@SerialName("inv_max")
@@ -2125,7 +2125,7 @@ data class CategoryRobloxParams(
 	val offsaleMin: Int? = null,
 	@SerialName("offsale_max")
 	val offsaleMax: Int? = null,
-	val voice: JsonElement? = null,
+	val voice: String? = null,
 	@SerialName("age_group[]")
 	val ageGroup: List<String>? = null,
 	@SerialName("not_age_group[]")
@@ -2141,7 +2141,7 @@ data class CategoryWarfaceParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2162,13 +2162,13 @@ data class CategoryWarfaceParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("rank_min")
@@ -2179,7 +2179,7 @@ data class CategoryWarfaceParams(
 	val bonusRankMin: Int? = null,
 	@SerialName("bonus_rank_max")
 	val bonusRankMax: Int? = null,
-	val tel: JsonElement? = null,
+	val tel: String? = null,
 	val daybreak: Int? = null,
 	@SerialName("kredits_min")
 	val kreditsMin: Int? = null,
@@ -2200,7 +2200,7 @@ data class CategoryMinecraftParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2221,27 +2221,27 @@ data class CategoryMinecraftParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val subscription: JsonElement? = null,
+	val subscription: String? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Int? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: JsonElement? = null,
-	val autorenewal: JsonElement? = null,
-	val java: JsonElement? = null,
-	val bedrock: JsonElement? = null,
-	val dungeons: JsonElement? = null,
-	val legends: JsonElement? = null,
+	val subscriptionPeriod: String? = null,
+	val autorenewal: String? = null,
+	val java: String? = null,
+	val bedrock: String? = null,
+	val dungeons: String? = null,
+	val legends: String? = null,
 	@SerialName("change_nickname")
-	val changeNickname: JsonElement? = null,
+	val changeNickname: String? = null,
 	@SerialName("capes[]")
 	val capes: List<String>? = null,
 	@SerialName("capes_min")
@@ -2253,9 +2253,9 @@ data class CategoryMinecraftParams(
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
 	@SerialName("hypixel_ban")
-	val hypixelBan: JsonElement? = null,
+	val hypixelBan: String? = null,
 	@SerialName("hypixel_skyblock_api_enabled")
-	val hypixelSkyblockApiEnabled: JsonElement? = null,
+	val hypixelSkyblockApiEnabled: String? = null,
 	@SerialName("rank_hypixel[]")
 	val rankHypixel: JsonElement? = null,
 	@SerialName("level_hypixel_min")
@@ -2276,19 +2276,19 @@ data class CategoryMinecraftParams(
 	val netWorthHypixelSkyblockMax: Int? = null,
 	val reg: Int? = null,
 	@SerialName("reg_period")
-	val regPeriod: JsonElement? = null,
+	val regPeriod: String? = null,
 	@SerialName("last_login_hypixel")
 	val lastLoginHypixel: Int? = null,
 	@SerialName("last_login_hypixel_period")
-	val lastLoginHypixelPeriod: JsonElement? = null,
+	val lastLoginHypixelPeriod: String? = null,
 	@SerialName("can_change_details")
-	val canChangeDetails: JsonElement? = null,
+	val canChangeDetails: String? = null,
 	@SerialName("nickname_length_min")
 	val nicknameLengthMin: Int? = null,
 	@SerialName("nickname_length_max")
 	val nicknameLengthMax: Int? = null,
 	@SerialName("hypixel_ban_parsed")
-	val hypixelBanParsed: JsonElement? = null,
+	val hypixelBanParsed: String? = null,
 	@SerialName("minecoins_min")
 	val minecoinsMin: Int? = null,
 	@SerialName("minecoins_max")
@@ -2304,7 +2304,7 @@ data class CategoryHytaleParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2325,13 +2325,13 @@ data class CategoryHytaleParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("edition[]")
@@ -2365,7 +2365,7 @@ data class ListUserParams(
 	@SerialName("category_id")
 	val categoryId: JsonElement? = null,
 	val page: Int? = null,
-	val show: JsonElement? = null,
+	val show: String? = null,
 	@SerialName("delete_reason")
 	val deleteReason: String? = null,
 	val title: String? = null,
@@ -2377,7 +2377,7 @@ data class ListUserParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -2414,7 +2414,7 @@ data class ListOrdersParams(
 	@SerialName("category_id")
 	val categoryId: JsonElement? = null,
 	val page: Int? = null,
-	val show: JsonElement? = null,
+	val show: String? = null,
 	val title: String? = null,
 	val pmin: Int? = null,
 	val pmax: Int? = null,
@@ -2424,7 +2424,7 @@ data class ListOrdersParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -2445,13 +2445,13 @@ typealias ListStatesResponse = JsonElement
 
 @Serializable
 data class ListDownloadParams(
-	val format: JsonElement? = null,
+	val format: String? = null,
 	@SerialName("custom_format")
 	val customFormat: String? = null,
 	@SerialName("category_id")
 	val categoryId: JsonElement? = null,
 	val page: Int? = null,
-	val show: JsonElement? = null,
+	val show: String? = null,
 	@SerialName("delete_reason")
 	val deleteReason: String? = null,
 	val title: String? = null,
@@ -2462,7 +2462,7 @@ data class ListDownloadParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -2495,7 +2495,7 @@ typealias ListDownloadResponse = JsonElement
 @Serializable
 data class ListFavoritesParams(
 	val page: Int? = null,
-	val show: JsonElement? = null,
+	val show: String? = null,
 	val title: String? = null,
 	val pmin: Int? = null,
 	val pmax: Int? = null,
@@ -2504,7 +2504,7 @@ data class ListFavoritesParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -2518,7 +2518,7 @@ typealias ListFavoritesResponse = JsonElement
 @Serializable
 data class ListViewedParams(
 	val page: Int? = null,
-	val show: JsonElement? = null,
+	val show: String? = null,
 	val title: String? = null,
 	val pmin: Int? = null,
 	val pmax: Int? = null,
@@ -2527,7 +2527,7 @@ data class ListViewedParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -2579,7 +2579,7 @@ typealias ManagingBulkGetResponse = JsonElement
 data class ManagingSteamInventoryValueParams(
 	@SerialName("app_id")
 	val appId: JsonElement? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("ignore_cache")
 	val ignoreCache: Boolean? = null,
 )
@@ -2591,7 +2591,7 @@ data class ManagingSteamValueParams(
 	val link: String,
 	@SerialName("app_id")
 	val appId: JsonElement? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("ignore_cache")
 	val ignoreCache: Boolean? = null,
 )
@@ -2600,7 +2600,7 @@ typealias ManagingSteamValueResponse = JsonElement
 
 @Serializable
 data class ManagingSteamPreviewParams(
-	val type: JsonElement? = null,
+	val type: String? = null,
 )
 
 typealias ManagingSteamPreviewResponse = JsonElement
@@ -2611,13 +2611,13 @@ data class ManagingEditBody(
 	@SerialName("title_en")
 	val titleEn: String? = null,
 	val price: Int? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("item_origin")
-	val itemOrigin: JsonElement? = null,
+	val itemOrigin: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: JsonElement? = null,
+	val emailType: String? = null,
 	@SerialName("allow_ask_discount")
 	val allowAskDiscount: Boolean? = null,
 	@SerialName("proxy_id")
@@ -2666,7 +2666,7 @@ typealias ManagingCloseResponse = JsonElement
 
 @Serializable
 data class ManagingImageParams(
-	val type: JsonElement,
+	val type: String,
 )
 
 typealias ManagingImageResponse = JsonElement
@@ -2779,9 +2779,9 @@ typealias ManagingTransferResponse = JsonElement
 
 @Serializable
 data class ProfileClaimsParams(
-	val type: JsonElement? = null,
+	val type: String? = null,
 	@SerialName("claim_state")
-	val claimState: JsonElement? = null,
+	val claimState: String? = null,
 )
 
 typealias ProfileClaimsResponse = JsonElement
@@ -2796,7 +2796,7 @@ typealias ProfileGetResponse = JsonElement
 
 @Serializable
 data class ProfileEditBody(
-	val user: JsonElement? = null,
+	val user: JsonObject? = null,
 	val option: JsonObject? = null,
 	@SerialName("allow_accept_accounts")
 	val allowAcceptAccounts: List<String>? = null,
@@ -2833,7 +2833,7 @@ data class CartGetParams(
 	val pmax: Int? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: JsonElement? = null,
+	val orderBy: String? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Int>? = null,
 	@SerialName("not_tag_id[]")
@@ -2854,13 +2854,13 @@ data class CartGetParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: JsonElement? = null,
+	val notEmailProvider: String? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 )
@@ -2932,7 +2932,7 @@ data class CustomDiscountsCreateBody(
 	val minPrice: Double,
 	@SerialName("max_price")
 	val maxPrice: Double? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 )
 
 typealias CustomDiscountsCreateResponse = JsonElement
@@ -2969,9 +2969,9 @@ data class PublishingFastSellBody(
 	val price: Double,
 	@SerialName("category_id")
 	val categoryId: JsonElement,
-	val currency: JsonElement,
+	val currency: String,
 	@SerialName("item_origin")
-	val itemOrigin: JsonElement,
+	val itemOrigin: String,
 	@SerialName("extended_guarantee")
 	val extendedGuarantee: JsonElement? = null,
 	@SerialName("allow_ask_discount")
@@ -2991,8 +2991,8 @@ data class PublishingFastSellBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: JsonElement? = null,
-	val extra: JsonElement? = null,
+	val emailType: String? = null,
+	val extra: JsonObject? = null,
 )
 
 typealias PublishingFastSellResponse = JsonElement
@@ -3005,9 +3005,9 @@ data class PublishingAddBody(
 	val price: Double,
 	@SerialName("category_id")
 	val categoryId: JsonElement,
-	val currency: JsonElement,
+	val currency: String,
 	@SerialName("item_origin")
-	val itemOrigin: JsonElement,
+	val itemOrigin: String,
 	@SerialName("extended_guarantee")
 	val extendedGuarantee: JsonElement? = null,
 	val description: String? = null,
@@ -3020,7 +3020,7 @@ data class PublishingAddBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: JsonElement? = null,
+	val emailType: String? = null,
 	@SerialName("allow_ask_discount")
 	val allowAskDiscount: Boolean? = null,
 	@SerialName("proxy_id")
@@ -3046,8 +3046,8 @@ data class PublishingCheckBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: JsonElement? = null,
-	val extra: JsonElement? = null,
+	val emailType: String? = null,
+	val extra: JsonObject? = null,
 )
 
 typealias PublishingCheckResponse = JsonElement
@@ -3077,7 +3077,7 @@ typealias PaymentsInvoiceGetResponse = JsonElement
 
 @Serializable
 data class PaymentsInvoiceCreateBody(
-	val currency: JsonElement,
+	val currency: String,
 	val amount: Double,
 	@SerialName("payment_id")
 	val paymentId: String,
@@ -3104,8 +3104,8 @@ typealias PaymentsInvoiceCreateResponse = JsonElement
 @Serializable
 data class PaymentsInvoiceListParams(
 	val page: Int? = null,
-	val currency: JsonElement? = null,
-	val status: JsonElement? = null,
+	val currency: String? = null,
+	val status: String? = null,
 	val amount: Double? = null,
 	@SerialName("merchant_id")
 	val merchantId: Int? = null,
@@ -3134,7 +3134,7 @@ data class PaymentsTransferBody(
 	val userId: Int? = null,
 	val username: String? = null,
 	val amount: Int,
-	val currency: JsonElement,
+	val currency: String,
 	val comment: String? = null,
 	@SerialName("telegram_deal")
 	val telegramDeal: Boolean? = null,
@@ -3145,7 +3145,7 @@ data class PaymentsTransferBody(
 	@SerialName("hold_length_value")
 	val holdLengthValue: Int? = null,
 	@SerialName("hold_length_option")
-	val holdLengthOption: JsonElement? = null,
+	val holdLengthOption: String? = null,
 )
 
 typealias PaymentsTransferResponse = JsonElement
@@ -3167,10 +3167,10 @@ typealias PaymentsCancelResponse = JsonElement
 
 @Serializable
 data class PaymentsHistoryParams(
-	val type: JsonElement? = null,
+	val type: String? = null,
 	val pmin: Int? = null,
 	val pmax: Int? = null,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	val page: Int? = null,
 	@SerialName("operation_id_lt")
 	val operationIdLt: Int? = null,
@@ -3198,7 +3198,7 @@ data class PaymentsPayoutBody(
 	val paymentSystem: String,
 	val wallet: String,
 	val amount: Double,
-	val currency: JsonElement,
+	val currency: String,
 	@SerialName("include_fee")
 	val includeFee: Boolean? = null,
 	val extra: JsonObject? = null,
@@ -3218,7 +3218,7 @@ data class AutoPaymentsCreateBody(
 	val usernameReceiver: String,
 	val day: JsonElement,
 	val amount: Double,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	val description: String? = null,
 )
 
@@ -3284,6 +3284,7 @@ typealias ImapDeleteResponse = JsonElement
 
 // ─── BatchApi Types ────────────────────────────────────────
 
-typealias BatchBatchBody = List<JsonElement>
+typealias BatchBatchBody = List<JsonObject>
 
 typealias BatchBatchResponse = JsonElement
+

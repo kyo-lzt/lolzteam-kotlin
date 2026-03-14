@@ -4,13 +4,15 @@ import io.ktor.client.HttpClient as KtorHttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.forms.FormDataContent
+import io.ktor.client.request.forms.MultiPartFormDataContent
+import io.ktor.client.request.forms.formData
 import io.ktor.client.request.request
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
-import io.ktor.http.ContentType
+import io.ktor.http.Headers
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.Parameters
-import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -29,6 +31,7 @@ data class RequestOptions(
     val query: JsonElement? = null,
     val body: JsonElement? = null,
     val multipart: Boolean = false,
+    val byteArrayFields: Map<String, ByteArray> = emptyMap(),
 )
 
 class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = null) : Closeable {
@@ -85,16 +88,23 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                 method = HttpMethod.parse(options.method)
                 bearerAuth(token)
 
-                if (options.body != null && options.method != "GET") {
-                    if (options.multipart) {
-                        val params = Parameters.build {
-                            flattenJsonToParams(options.body, this)
+                if (options.multipart && options.method != "GET") {
+                    setBody(MultiPartFormDataContent(formData {
+                        if (options.body != null) {
+                            flattenJsonToFormParts(options.body, this)
                         }
-                        setBody(FormDataContent(params))
-                    } else {
-                        contentType(ContentType.Application.Json)
-                        setBody(options.body.toString())
+                        for ((name, bytes) in options.byteArrayFields) {
+                            append(name, bytes, Headers.build {
+                                append(HttpHeaders.ContentDisposition, "filename=\"$name\"")
+                                append(HttpHeaders.ContentType, "application/octet-stream")
+                            })
+                        }
+                    }))
+                } else if (options.body != null && options.method != "GET") {
+                    val params = Parameters.build {
+                        flattenJsonToParams(options.body, this)
                     }
+                    setBody(FormDataContent(params))
                 }
             }
         } catch (e: Exception) {
@@ -154,7 +164,28 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                         }
                     }
                 }
-                is JsonObject -> {}
+                is JsonObject -> builder.append(key, value.toString())
+            }
+        }
+    }
+
+    private fun flattenJsonToFormParts(
+        element: JsonElement,
+        builder: io.ktor.client.request.forms.FormBuilder,
+    ) {
+        if (element !is JsonObject) return
+        for ((key, value) in element) {
+            when (value) {
+                is JsonNull -> {}
+                is JsonPrimitive -> builder.append(key, value.content)
+                is JsonArray -> {
+                    for (item in value) {
+                        if (item is JsonPrimitive) {
+                            builder.append(key, item.content)
+                        }
+                    }
+                }
+                is JsonObject -> builder.append(key, value.toString())
             }
         }
     }

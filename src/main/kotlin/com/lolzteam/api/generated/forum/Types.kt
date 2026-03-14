@@ -46,7 +46,7 @@ data class CategoriesListParams(
 	val parentCategoryId: Int? = null,
 	@SerialName("parent_forum_id")
 	val parentForumId: Int? = null,
-	val order: JsonElement? = null,
+	val order: String? = null,
 )
 
 typealias CategoriesListResponse = JsonElement
@@ -61,7 +61,7 @@ data class ForumsListParams(
 	val parentCategoryId: Int? = null,
 	@SerialName("parent_forum_id")
 	val parentForumId: Int? = null,
-	val order: JsonElement? = null,
+	val order: String? = null,
 )
 
 typealias ForumsListResponse = JsonElement
@@ -117,7 +117,7 @@ typealias LinksGetResponse = JsonElement
 data class PagesListParams(
 	@SerialName("parent_page_id")
 	val parentPageId: Int? = null,
-	val order: JsonElement? = null,
+	val order: String? = null,
 )
 
 typealias PagesListResponse = JsonElement
@@ -140,8 +140,8 @@ data class ThreadsListParams(
 	@SerialName("forum_id")
 	val forumId: Int? = null,
 	val tab: String? = null,
-	val state: JsonElement? = null,
-	val period: JsonElement? = null,
+	val state: String? = null,
+	val period: String? = null,
 	val title: String? = null,
 	@SerialName("title_only")
 	val titleOnly: Boolean? = null,
@@ -156,8 +156,8 @@ data class ThreadsListParams(
 	val threadTagId: Int? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
-	val order: JsonElement? = null,
-	val direction: JsonElement? = null,
+	val order: String? = null,
+	val direction: String? = null,
 	@SerialName("thread_create_date")
 	val threadCreateDate: Int? = null,
 	@SerialName("thread_update_date")
@@ -216,9 +216,9 @@ data class ThreadsCreateContestBody(
 	@SerialName("length_value")
 	val lengthValue: Int? = null,
 	@SerialName("length_option")
-	val lengthOption: JsonElement? = null,
+	val lengthOption: String? = null,
 	@SerialName("prize_type")
-	val prizeType: JsonElement,
+	val prizeType: String,
 	@SerialName("count_winners")
 	val countWinners: Int? = null,
 	@SerialName("prize_data_money")
@@ -272,11 +272,11 @@ data class ThreadsClaimBody(
 	val asData: String? = null,
 	@SerialName("as_amount")
 	val asAmount: Double,
-	val currency: JsonElement? = null,
+	val currency: String? = null,
 	@SerialName("transfer_type")
-	val transferType: JsonElement,
+	val transferType: String,
 	@SerialName("pay_claim")
-	val payClaim: JsonElement? = null,
+	val payClaim: String? = null,
 	@SerialName("as_funds_receipt")
 	val asFundsReceipt: String? = null,
 	@SerialName("as_tg_login_screenshot")
@@ -439,7 +439,7 @@ data class PostsListParams(
 	val pageOfPostId: Int? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
-	val order: JsonElement? = null,
+	val order: String? = null,
 )
 
 typealias PostsListResponse = JsonElement
@@ -603,8 +603,8 @@ data class UsersEditBody(
 	val shortLink: String? = null,
 	@SerialName("language_id")
 	val languageId: JsonElement? = null,
-	val gender: JsonElement? = null,
-	val timezone: JsonElement? = null,
+	val gender: String? = null,
+	val timezone: String? = null,
 	@SerialName("receive_admin_email")
 	val receiveAdminEmail: Boolean? = null,
 	@SerialName("activity_visible")
@@ -616,15 +616,15 @@ data class UsersEditBody(
 	@SerialName("hide_username_change_logs")
 	val hideUsernameChangeLogs: Boolean? = null,
 	@SerialName("allow_view_profile")
-	val allowViewProfile: JsonElement? = null,
+	val allowViewProfile: String? = null,
 	@SerialName("allow_post_profile")
-	val allowPostProfile: JsonElement? = null,
+	val allowPostProfile: String? = null,
 	@SerialName("allow_send_personal_conversation")
-	val allowSendPersonalConversation: JsonElement? = null,
+	val allowSendPersonalConversation: String? = null,
 	@SerialName("allow_invite_group")
-	val allowInviteGroup: JsonElement? = null,
+	val allowInviteGroup: String? = null,
 	@SerialName("allow_receive_news_feed")
-	val allowReceiveNewsFeed: JsonElement? = null,
+	val allowReceiveNewsFeed: String? = null,
 	val alert: JsonObject? = null,
 	val fields: JsonObject? = null,
 )
@@ -633,14 +633,13 @@ typealias UsersEditResponse = JsonElement
 
 @Serializable
 data class UsersClaimsParams(
-	val type: JsonElement? = null,
+	val type: String? = null,
 	@SerialName("claim_state")
-	val claimState: JsonElement? = null,
+	val claimState: String? = null,
 )
 
 typealias UsersClaimsResponse = JsonElement
 
-@Serializable
 data class UsersAvatarUploadBody(
 	val avatar: ByteArray,
 	val x: Int? = null,
@@ -661,7 +660,6 @@ data class UsersAvatarCropBody(
 
 typealias UsersAvatarCropResponse = JsonElement
 
-@Serializable
 data class UsersBackgroundUploadBody(
 	val background: ByteArray,
 	val x: Int? = null,
@@ -684,7 +682,7 @@ typealias UsersBackgroundCropResponse = JsonElement
 
 @Serializable
 data class UsersFollowersParams(
-	val order: JsonElement? = null,
+	val order: String? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
 )
@@ -697,7 +695,7 @@ typealias UsersUnfollowResponse = JsonElement
 
 @Serializable
 data class UsersFollowingsParams(
-	val order: JsonElement? = null,
+	val order: String? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
 )
@@ -709,11 +707,11 @@ data class UsersLikesParams(
 	@SerialName("node_id")
 	val nodeId: Int? = null,
 	@SerialName("like_type")
-	val likeType: JsonElement? = null,
-	val type: JsonElement? = null,
+	val likeType: String? = null,
+	val type: String? = null,
 	val page: Int? = null,
 	@SerialName("content_type")
-	val contentType: JsonElement? = null,
+	val contentType: String? = null,
 	@SerialName("search_user_id")
 	val searchUserId: Int? = null,
 	val stats: Boolean? = null,
@@ -873,7 +871,7 @@ typealias ProfilePostsCommentsReportResponse = JsonElement
 
 @Serializable
 data class ConversationsListParams(
-	val folder: JsonElement? = null,
+	val folder: String? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
 )
@@ -926,7 +924,7 @@ data class ConversationsDeleteBody(
 	@SerialName("conversation_id")
 	val conversationId: Int,
 	@SerialName("delete_type")
-	val deleteType: JsonElement,
+	val deleteType: String,
 )
 
 typealias ConversationsDeleteResponse = JsonElement
@@ -952,7 +950,7 @@ typealias ConversationsGetResponse = JsonElement
 data class ConversationsMessagesListParams(
 	val page: Int? = null,
 	val limit: Int? = null,
-	val order: JsonElement? = null,
+	val order: String? = null,
 	val before: Int? = null,
 	val after: Int? = null,
 )
@@ -1027,7 +1025,7 @@ typealias ConversationsAlertsDisableResponse = JsonElement
 
 @Serializable
 data class NotificationsListParams(
-	val type: JsonElement? = null,
+	val type: String? = null,
 	val page: Int? = null,
 	val limit: Int? = null,
 )
@@ -1157,7 +1155,7 @@ typealias SearchResultsResponse = JsonElement
 
 // ─── BatchApi Types ────────────────────────────────────────
 
-typealias BatchExecuteBody = List<JsonElement>
+typealias BatchExecuteBody = List<JsonObject>
 
 typealias BatchExecuteResponse = JsonElement
 
@@ -1236,7 +1234,7 @@ typealias ChatboxReportResponse = JsonElement
 
 @Serializable
 data class ChatboxGetLeaderboardParams(
-	val duration: JsonElement? = null,
+	val duration: String? = null,
 )
 
 typealias ChatboxGetLeaderboardResponse = JsonElement
@@ -1272,7 +1270,8 @@ typealias FormsListResponse = JsonElement
 data class FormsCreateBody(
 	@SerialName("form_id")
 	val formId: String? = null,
-	val fields: JsonElement? = null,
+	val fields: JsonObject? = null,
 )
 
 typealias FormsCreateResponse = JsonElement
+

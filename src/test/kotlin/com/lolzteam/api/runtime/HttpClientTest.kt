@@ -104,7 +104,7 @@ class HttpClientTest {
 	}
 
 	@Test
-	fun `json body encoding`() = runTest {
+	fun `form-encoded body encoding`() = runTest {
 		var capturedBody: String? = null
 		var capturedContentType: String? = null
 		val engine = MockEngine { request ->
@@ -119,34 +119,15 @@ class HttpClientTest {
 
 		val body = buildJsonObject {
 			put("name", JsonPrimitive("test"))
-			put("value", JsonPrimitive(42))
+			put("value", JsonPrimitive("42"))
 		}
 		client.request(RequestOptions(method = "POST", path = "/test", body = body))
-		assertTrue(capturedContentType?.contains("application/json") == true, "Expected JSON content type, got: $capturedContentType")
-		assertTrue(capturedBody!!.contains("\"name\":\"test\""), "Expected name in body: $capturedBody")
-	}
-
-	@Test
-	fun `form-encoded body with multipart flag`() = runTest {
-		var capturedContentType: String? = null
-		val engine = MockEngine { request ->
-			capturedContentType = request.body.contentType?.toString()
-			respond("""{}""", headers = jsonHeaders())
-		}
-		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
-			httpClient = KtorHttpClient(engine) { expectSuccess = false },
-		)
-
-		val body = buildJsonObject {
-			put("field1", JsonPrimitive("value1"))
-			put("field2", JsonPrimitive("value2"))
-		}
-		client.request(RequestOptions(method = "POST", path = "/test", body = body, multipart = true))
 		assertTrue(
 			capturedContentType?.contains("application/x-www-form-urlencoded") == true,
 			"Expected form content type, got: $capturedContentType",
 		)
+		assertTrue(capturedBody!!.contains("name=test"), "Expected name=test in body: $capturedBody")
+		assertTrue(capturedBody!!.contains("value=42"), "Expected value=42 in body: $capturedBody")
 	}
 
 	@Test
