@@ -237,7 +237,7 @@ data class BodyExtractionResult(
 	val properties: List<BodyProperty>,
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
-	val isMultipart: Boolean = false,
+	val bodyEncoding: String = "form",
 )
 
 fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
@@ -247,7 +247,16 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 	val requestBody = derefShallow(rawRequestBody, spec) as? JsonObject ?: return empty
 	val content = requestBody["content"] as? JsonObject ?: return empty
 
-	val isMultipart = content["application/json"] == null && content.containsKey("multipart/form-data")
+	val hasForm = content.containsKey("application/x-www-form-urlencoded")
+	val hasMultipart = content.containsKey("multipart/form-data")
+	val hasJson = content.containsKey("application/json")
+
+	val bodyEncoding = when {
+		hasMultipart && !hasForm -> "multipart"
+		hasJson && !hasForm -> "json"
+		else -> "form"
+	}
+
 	val mediaType = (content["application/json"]
 		?: content["multipart/form-data"]
 		?: content["application/x-www-form-urlencoded"]) as? JsonObject
@@ -264,6 +273,7 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 			properties = emptyList(),
 			bodyIsArray = true,
 			bodyArrayItemType = itemType,
+			bodyEncoding = bodyEncoding,
 		)
 	}
 
@@ -309,7 +319,7 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 
 	return BodyExtractionResult(
 		properties = bodyProperties,
-		isMultipart = isMultipart,
+		bodyEncoding = bodyEncoding,
 	)
 }
 
@@ -340,7 +350,7 @@ data class MethodDefinition(
 	val responseType: String,
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
-	val isMultipart: Boolean = false,
+	val bodyEncoding: String = "form",
 )
 
 fun extractMethodDefinition(
@@ -387,6 +397,6 @@ fun extractMethodDefinition(
 		responseType = responseType,
 		bodyIsArray = if (isGet) false else body.bodyIsArray,
 		bodyArrayItemType = if (isGet) null else body.bodyArrayItemType,
-		isMultipart = if (isGet) false else body.isMultipart,
+		bodyEncoding = if (isGet) "form" else body.bodyEncoding,
 	)
 }

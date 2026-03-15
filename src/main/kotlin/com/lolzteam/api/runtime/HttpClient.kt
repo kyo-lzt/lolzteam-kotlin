@@ -11,8 +11,10 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
+import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.Parameters
+import io.ktor.http.content.TextContent
 import io.ktor.http.isSuccess
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -30,15 +32,17 @@ data class RequestOptions(
     val path: String,
     val query: JsonElement? = null,
     val body: JsonElement? = null,
-    val multipart: Boolean = false,
+    val bodyEncoding: String = "form",
     val byteArrayFields: Map<String, ByteArray> = emptyMap(),
+    val isSearch: Boolean = false,
 )
 
 class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = null) : Closeable {
-    private val baseUrl: String = (config.baseUrl ?: "https://api.zelenka.guru").trimEnd('/')
+    private val baseUrl: String = (config.baseUrl ?: throw ConfigException("baseUrl is required")).trimEnd('/')
     private val token: String = config.token
     private val retryConfig: RetryConfig = config.retry
     private val rateLimiter: RateLimiter? = config.rateLimit?.let { RateLimiter(it.requestsPerMinute) }
+    private val searchRateLimiter: RateLimiter? = config.searchRateLimit?.let { RateLimiter(it.requestsPerMinute) }
 
     internal val json: Json = Json {
         ignoreUnknownKeys = true
@@ -73,6 +77,9 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
 
     suspend fun request(options: RequestOptions): JsonElement {
         rateLimiter?.acquire()
+        if (options.isSearch) {
+            searchRateLimiter?.acquire()
+        }
         return withRetry(retryConfig) { execute(options) }
     }
 
@@ -88,23 +95,35 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                 method = HttpMethod.parse(options.method)
                 bearerAuth(token)
 
-                if (options.multipart && options.method != "GET") {
-                    setBody(MultiPartFormDataContent(formData {
-                        if (options.body != null) {
-                            flattenJsonToFormParts(options.body, this)
+                if (options.method != "GET") {
+                    when (options.bodyEncoding) {
+                        "multipart" -> {
+                            setBody(MultiPartFormDataContent(formData {
+                                if (options.body != null) {
+                                    flattenJsonToFormParts(options.body, this)
+                                }
+                                for ((name, bytes) in options.byteArrayFields) {
+                                    append(name, bytes, Headers.build {
+                                        append(HttpHeaders.ContentDisposition, "filename=\"$name\"")
+                                        append(HttpHeaders.ContentType, "application/octet-stream")
+                                    })
+                                }
+                            }))
                         }
-                        for ((name, bytes) in options.byteArrayFields) {
-                            append(name, bytes, Headers.build {
-                                append(HttpHeaders.ContentDisposition, "filename=\"$name\"")
-                                append(HttpHeaders.ContentType, "application/octet-stream")
-                            })
+                        "json" -> {
+                            if (options.body != null) {
+                                setBody(TextContent(options.body.toString(), ContentType.Application.Json))
+                            }
                         }
-                    }))
-                } else if (options.body != null && options.method != "GET") {
-                    val params = Parameters.build {
-                        flattenJsonToParams(options.body, this)
+                        else -> {
+                            if (options.body != null) {
+                                val params = Parameters.build {
+                                    flattenJsonToParams(options.body, this)
+                                }
+                                setBody(FormDataContent(params))
+                            }
+                        }
                     }
-                    setBody(FormDataContent(params))
                 }
             }
         } catch (e: Exception) {

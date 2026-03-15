@@ -17,6 +17,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -25,6 +26,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/steam",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -33,6 +35,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/fortnite",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -41,6 +44,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/mihoyo",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -49,6 +53,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/riot",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -57,6 +62,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/telegram",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -65,6 +71,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/supercell",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -73,6 +80,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/ea",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -81,6 +89,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/world-of-tanks",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -89,6 +98,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/wot-blitz",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -97,6 +107,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/gifts",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -105,6 +116,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/epicgames",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -113,6 +125,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/escape-from-tarkov",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -121,6 +134,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/socialclub",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -129,6 +143,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/uplay",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -137,6 +152,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/discord",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -145,6 +161,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/tiktok",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -153,6 +170,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/instagram",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -161,6 +179,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/battlenet",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -169,6 +188,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/chatgpt",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -177,6 +197,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/vpn",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -185,6 +206,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/roblox",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -193,6 +215,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/warface",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -201,6 +224,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/minecraft",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -209,6 +233,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/hytale",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -217,6 +242,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 			method = "GET",
 			path = "/category",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
+			isSearch = true,
 		))
 	}
 
@@ -224,6 +250,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/$categoryName/params",
+			isSearch = true,
 		))
 	}
 
@@ -231,6 +258,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/$categoryName/games",
+			isSearch = true,
 		))
 	}
 }
@@ -303,6 +331,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/$itemId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -311,6 +340,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/claims",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -319,6 +349,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/bulk/items",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 
@@ -351,6 +382,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/$itemId/edit",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -373,6 +405,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/note-save",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -381,6 +414,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/update-inventory",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -396,6 +430,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/auto-bump",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -476,6 +511,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/confirm-sda",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -505,6 +541,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/decline-video-recording",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -520,6 +557,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/change-password",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -535,6 +573,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -543,6 +582,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/$itemId/tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -551,6 +591,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/public-tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -559,6 +600,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/$itemId/public-tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -595,6 +637,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/change-owner",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -623,6 +666,7 @@ class ProfileApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/me",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -643,6 +687,7 @@ class CartApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/cart",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 
@@ -651,6 +696,7 @@ class CartApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/cart",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -663,6 +709,7 @@ class PurchasingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/fast-buy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -678,6 +725,7 @@ class PurchasingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/confirm-buy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -686,6 +734,7 @@ class PurchasingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/discount",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -712,6 +761,7 @@ class CustomDiscountsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -720,6 +770,7 @@ class CustomDiscountsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -728,6 +779,7 @@ class CustomDiscountsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -740,6 +792,7 @@ class PublishingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/item/fast-sell",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -748,6 +801,7 @@ class PublishingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/item/add",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -756,6 +810,7 @@ class PublishingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/goods/check",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -764,6 +819,7 @@ class PublishingApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/$itemId/external-account",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -784,6 +840,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/invoice",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -814,6 +871,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/balance/exchange",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -822,6 +880,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/balance/transfer",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -838,6 +897,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/balance/transfer/cancel",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -861,6 +921,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/balance/payout",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -880,6 +941,7 @@ class AutoPaymentsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/auto-payment",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -888,6 +950,7 @@ class AutoPaymentsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/auto-payment",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -907,6 +970,7 @@ class ProxyApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/proxy",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 
@@ -915,6 +979,7 @@ class ProxyApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/proxy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -927,6 +992,7 @@ class ImapApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/imap",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -935,6 +1001,7 @@ class ImapApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/imap",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -947,6 +1014,7 @@ class BatchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/batch",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -973,6 +1041,7 @@ class MarketClient(config: ClientConfig) : Closeable {
 		http = LolzteamHttpClient(config.copy(
 			baseUrl = config.baseUrl ?: "https://prod-api.lzt.market",
 			rateLimit = config.rateLimit ?: RateLimitConfig(requestsPerMinute = 120),
+			searchRateLimit = config.searchRateLimit ?: RateLimitConfig(requestsPerMinute = 20),
 		))
 		category = CategoryApi(http)
 		list = ListApi(http)

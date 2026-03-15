@@ -19,7 +19,7 @@ class OAuthApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/oauth/token",
 			body = http.json.encodeToJsonElement(serializer(), body),
-			multipart = true,
+			bodyEncoding = "multipart",
 		))
 	}
 }
@@ -92,6 +92,7 @@ class ForumsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/forums/$forumId/followers",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -122,6 +123,7 @@ class ForumsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/forums/feed/options",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -191,6 +193,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/threads",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -199,6 +202,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/contests",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 
@@ -207,6 +211,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/claims",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -223,6 +228,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/threads/$threadId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -231,6 +237,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/threads/$threadId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -239,6 +246,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/threads/$threadId/move",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -282,6 +290,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/threads/$threadId/followers",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -319,6 +328,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/threads/$threadId/poll/votes",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -362,6 +372,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/posts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -377,6 +388,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/posts/$postId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -385,6 +397,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/posts/$postId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -422,6 +435,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/posts/$postId/report",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -438,6 +452,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -446,6 +461,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -454,6 +470,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -462,6 +479,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/posts/comments/report",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -505,6 +523,7 @@ class UsersApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/users/$userId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -530,14 +549,14 @@ class UsersApi(private val http: LolzteamHttpClient) {
 				method = "POST",
 				path = "/users/$userId/avatar",
 				body = jsonBody,
-				multipart = true,
+				bodyEncoding = "multipart",
 				byteArrayFields = byteFields,
 			))
 		} else {
 			return http.request(RequestOptions(
 				method = "POST",
 				path = "/users/$userId/avatar",
-				multipart = true,
+				bodyEncoding = "multipart",
 			))
 		}
 	}
@@ -554,6 +573,7 @@ class UsersApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/users/$userId/avatar/crop",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -571,14 +591,14 @@ class UsersApi(private val http: LolzteamHttpClient) {
 				method = "POST",
 				path = "/users/$userId/background",
 				body = jsonBody,
-				multipart = true,
+				bodyEncoding = "multipart",
 				byteArrayFields = byteFields,
 			))
 		} else {
 			return http.request(RequestOptions(
 				method = "POST",
 				path = "/users/$userId/background",
-				multipart = true,
+				bodyEncoding = "multipart",
 			))
 		}
 	}
@@ -595,6 +615,7 @@ class UsersApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/users/$userId/background/crop",
 			body = http.json.encodeToJsonElement(serializer(), body),
+			bodyEncoding = "json",
 		))
 	}
 
@@ -726,6 +747,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/profile-posts/$profilePostId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -749,6 +771,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/profile-posts/$profilePostId/report",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -757,6 +780,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/profile-posts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -808,6 +832,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/profile-posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -816,6 +841,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/profile-posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -824,6 +850,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/profile-posts/comments",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -839,6 +866,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/profile-posts/comments/$commentId/report",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -859,6 +887,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -867,6 +896,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/conversations",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -875,6 +905,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/conversations",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -883,6 +914,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/start",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -891,6 +923,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/save",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -914,6 +947,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/$conversationId/messages",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -922,6 +956,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/search",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -937,6 +972,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/conversations/$conversationId/messages/$messageId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -952,6 +988,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/$conversationId/invite",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -960,6 +997,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/conversations/$conversationId/kick",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1043,6 +1081,7 @@ class NotificationsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/notifications/read",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -1090,6 +1129,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1098,6 +1138,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search/threads",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1106,6 +1147,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search/posts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1114,6 +1156,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search/users",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1122,6 +1165,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search/profile-posts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1130,6 +1174,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/search/tagged",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1150,6 +1195,7 @@ class BatchApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/batch",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -1178,6 +1224,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/chatbox/messages",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1186,6 +1233,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "PUT",
 			path = "/chatbox/messages",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1194,6 +1242,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/chatbox/messages",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1218,6 +1267,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/chatbox/messages/report",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1241,6 +1291,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/chatbox/ignore",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 
@@ -1249,6 +1300,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 			method = "DELETE",
 			path = "/chatbox/ignore",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }
@@ -1269,6 +1321,7 @@ class FormsApi(private val http: LolzteamHttpClient) {
 			method = "POST",
 			path = "/forms/save",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
+			bodyEncoding = "json",
 		))
 	}
 }

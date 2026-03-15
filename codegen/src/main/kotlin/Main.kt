@@ -11,6 +11,8 @@ data class ApiConfig(
 	val defaultBaseUrl: String,
 	val defaultRateLimit: Int,
 	val subPackage: String,
+	val defaultSearchRateLimit: Int? = null,
+	val searchGroups: Set<String> = emptySet(),
 )
 
 fun main() {
@@ -32,6 +34,8 @@ fun main() {
 			defaultBaseUrl = "https://prod-api.lzt.market",
 			defaultRateLimit = 120,
 			subPackage = "market",
+			defaultSearchRateLimit = 20,
+			searchGroups = setOf("category"),
 		),
 	)
 
@@ -67,6 +71,8 @@ fun main() {
 			defaultBaseUrl = config.defaultBaseUrl,
 			defaultRateLimit = config.defaultRateLimit,
 			subPackage = config.subPackage,
+			defaultSearchRateLimit = config.defaultSearchRateLimit,
+			searchGroups = config.searchGroups,
 		)
 		File(outDir, "${config.clientName}.kt").writeText(clientContent)
 		println("  ${config.clientName}.kt")

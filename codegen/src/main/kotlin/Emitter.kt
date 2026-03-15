@@ -119,7 +119,7 @@ private fun buildPathExpression(path: String): String {
 	return "\"$template\""
 }
 
-private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
+private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: Boolean = false): String {
 	val sb = StringBuilder()
 	val responseName = "${buildTypeName(group, method.methodName)}Response"
 
@@ -154,7 +154,8 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
 	val pathExpr = buildPathExpression(method.path)
 
 	val hasByteArrayFields = method.bodyProperties.any { it.type == "Blob" }
-	val isMultipart = method.isMultipart
+	val isMultipart = method.bodyEncoding == "multipart"
+	val isJsonBody = method.bodyEncoding == "json"
 
 	sb.appendLine("\tsuspend fun ${method.methodName}($argStr): $responseName {")
 
@@ -201,11 +202,15 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
 		if (serializableProps.isNotEmpty()) {
 			requestLines.add("$indent\tbody = jsonBody,")
 		}
-		requestLines.add("$indent\tmultipart = true,")
+		requestLines.add("$indent\tbodyEncoding = \"multipart\",")
 		requestLines.add("$indent\tbyteArrayFields = byteFields,")
 
 		if (hasQueryType) {
 			requestLines.add("$indent\tquery = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
+		}
+
+		if (isSearch) {
+			requestLines.add("$indent\tisSearch = true,")
 		}
 
 		requestLines.add("$indent))")
@@ -221,9 +226,12 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
 			sb.appendLine("\t\t\treturn http.request(RequestOptions(")
 			sb.appendLine("\t\t\t\tmethod = \"${method.httpMethod}\",")
 			sb.appendLine("\t\t\t\tpath = $pathExpr,")
-			sb.appendLine("\t\t\t\tmultipart = true,")
+			sb.appendLine("\t\t\t\tbodyEncoding = \"multipart\",")
 			if (hasQueryType) {
 				sb.appendLine("\t\t\t\tquery = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
+			}
+			if (isSearch) {
+				sb.appendLine("\t\t\t\tisSearch = true,")
 			}
 			sb.appendLine("\t\t\t))")
 			sb.appendLine("\t\t}")
@@ -238,20 +246,20 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
 		}
 
 		if (hasBodyType) {
-			if (isMultipart) {
-				if (method.bodyRequired) {
-					sb.appendLine("\t\t\tbody = http.json.encodeToJsonElement(serializer(), body),")
-				} else {
-					sb.appendLine("\t\t\tbody = body?.let { http.json.encodeToJsonElement(serializer(), it) },")
-				}
-				sb.appendLine("\t\t\tmultipart = true,")
+			if (method.bodyRequired) {
+				sb.appendLine("\t\t\tbody = http.json.encodeToJsonElement(serializer(), body),")
 			} else {
-				if (method.bodyRequired) {
-					sb.appendLine("\t\t\tbody = http.json.encodeToJsonElement(serializer(), body),")
-				} else {
-					sb.appendLine("\t\t\tbody = body?.let { http.json.encodeToJsonElement(serializer(), it) },")
-				}
+				sb.appendLine("\t\t\tbody = body?.let { http.json.encodeToJsonElement(serializer(), it) },")
 			}
+			if (isMultipart) {
+				sb.appendLine("\t\t\tbodyEncoding = \"multipart\",")
+			} else if (isJsonBody) {
+				sb.appendLine("\t\t\tbodyEncoding = \"json\",")
+			}
+		}
+
+		if (isSearch) {
+			sb.appendLine("\t\t\tisSearch = true,")
 		}
 
 		sb.appendLine("\t\t))")
@@ -261,15 +269,16 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition): String {
 	return sb.toString()
 }
 
-private fun emitGroupClass(group: ParsedGroup): String {
+private fun emitGroupClass(group: ParsedGroup, searchGroups: Set<String> = emptySet()): String {
 	val className = groupToClassName(group.groupName)
+	val isSearch = group.groupName in searchGroups
 	val sb = StringBuilder()
 
 	sb.appendLine("class $className(private val http: LolzteamHttpClient) {")
 
 	for (method in group.methods) {
 		sb.appendLine()
-		sb.appendLine(emitKotlinMethod(group.groupName, method))
+		sb.appendLine(emitKotlinMethod(group.groupName, method, isSearch = isSearch))
 	}
 
 	sb.appendLine("}")
@@ -285,12 +294,14 @@ fun emitKotlinClientFile(
 	defaultBaseUrl: String,
 	defaultRateLimit: Int,
 	subPackage: String,
+	defaultSearchRateLimit: Int? = null,
+	searchGroups: Set<String> = emptySet(),
 ): String {
 	val fullPackage = "$PACKAGE.$subPackage"
 	val sb = StringBuilder()
 
 	val needsMultipartBuilders = groups.any { g ->
-		g.methods.any { m -> m.isMultipart && m.bodyProperties.any { it.type == "Blob" } }
+		g.methods.any { m -> m.bodyEncoding == "multipart" && m.bodyProperties.any { it.type == "Blob" } }
 	}
 
 	sb.appendLine("// Auto-generated. Do not edit manually.")
@@ -312,7 +323,7 @@ fun emitKotlinClientFile(
 
 	// Group API classes
 	for (group in groups) {
-		sb.appendLine(emitGroupClass(group))
+		sb.appendLine(emitGroupClass(group, searchGroups))
 		sb.appendLine()
 	}
 
@@ -334,6 +345,9 @@ fun emitKotlinClientFile(
 	sb.appendLine("\t\thttp = LolzteamHttpClient(config.copy(")
 	sb.appendLine("\t\t\tbaseUrl = config.baseUrl ?: \"$defaultBaseUrl\",")
 	sb.appendLine("\t\t\trateLimit = config.rateLimit ?: RateLimitConfig(requestsPerMinute = $defaultRateLimit),")
+	if (defaultSearchRateLimit != null) {
+		sb.appendLine("\t\t\tsearchRateLimit = config.searchRateLimit ?: RateLimitConfig(requestsPerMinute = $defaultSearchRateLimit),")
+	}
 	sb.appendLine("\t\t))")
 
 	for (group in groups) {

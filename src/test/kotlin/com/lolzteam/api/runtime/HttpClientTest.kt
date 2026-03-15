@@ -28,7 +28,7 @@ class HttpClientTest {
 			respond("""{}""", headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "test-token", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "test-token", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -44,7 +44,7 @@ class HttpClientTest {
 			respond("""{}""", headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -65,7 +65,7 @@ class HttpClientTest {
 			respond("""{}""", headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -86,7 +86,7 @@ class HttpClientTest {
 			respond("""{}""", headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -113,7 +113,7 @@ class HttpClientTest {
 			respond("""{}""", headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -136,7 +136,7 @@ class HttpClientTest {
 			respond("""{"error": "rate limited"}""", status = HttpStatusCode.TooManyRequests, headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -151,7 +151,7 @@ class HttpClientTest {
 			respond("""{"error": "unauthorized"}""", status = HttpStatusCode.Unauthorized, headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -166,7 +166,7 @@ class HttpClientTest {
 			respond("""{"error": "not found"}""", status = HttpStatusCode.NotFound, headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -181,7 +181,7 @@ class HttpClientTest {
 			respond("""{"error": "server error"}""", status = HttpStatusCode.InternalServerError, headers = jsonHeaders())
 		}
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", retry = RetryConfig(maxRetries = 0)),
 			httpClient = KtorHttpClient(engine) { expectSuccess = false },
 		)
 
@@ -194,7 +194,7 @@ class HttpClientTest {
 	fun `proxy - rejects invalid URL`() {
 		assertFailsWith<ConfigException> {
 			LolzteamHttpClient(
-				ClientConfig(token = "t", proxy = ProxyConfig(url = "not a url"), retry = RetryConfig(maxRetries = 0)),
+				ClientConfig(token = "t", baseUrl = "https://example.com", proxy = ProxyConfig(url = "not a url"), retry = RetryConfig(maxRetries = 0)),
 			)
 		}
 	}
@@ -203,7 +203,7 @@ class HttpClientTest {
 	fun `proxy - rejects unsupported scheme`() {
 		assertFailsWith<ConfigException> {
 			LolzteamHttpClient(
-				ClientConfig(token = "t", proxy = ProxyConfig(url = "ftp://proxy:8080"), retry = RetryConfig(maxRetries = 0)),
+				ClientConfig(token = "t", baseUrl = "https://example.com", proxy = ProxyConfig(url = "ftp://proxy:8080"), retry = RetryConfig(maxRetries = 0)),
 			)
 		}
 	}
@@ -212,7 +212,7 @@ class HttpClientTest {
 	fun `proxy - rejects missing host`() {
 		assertFailsWith<ConfigException> {
 			LolzteamHttpClient(
-				ClientConfig(token = "t", proxy = ProxyConfig(url = "http://"), retry = RetryConfig(maxRetries = 0)),
+				ClientConfig(token = "t", baseUrl = "https://example.com", proxy = ProxyConfig(url = "http://"), retry = RetryConfig(maxRetries = 0)),
 			)
 		}
 	}
@@ -220,7 +220,7 @@ class HttpClientTest {
 	@Test
 	fun `proxy - accepts valid http proxy`() {
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", proxy = ProxyConfig(url = "http://proxy:8080"), retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", proxy = ProxyConfig(url = "http://proxy:8080"), retry = RetryConfig(maxRetries = 0)),
 		)
 		client.close()
 	}
@@ -228,7 +228,7 @@ class HttpClientTest {
 	@Test
 	fun `proxy - accepts valid socks5 proxy`() {
 		val client = LolzteamHttpClient(
-			ClientConfig(token = "t", proxy = ProxyConfig(url = "socks5://proxy:1080"), retry = RetryConfig(maxRetries = 0)),
+			ClientConfig(token = "t", baseUrl = "https://example.com", proxy = ProxyConfig(url = "socks5://proxy:1080"), retry = RetryConfig(maxRetries = 0)),
 		)
 		client.close()
 	}

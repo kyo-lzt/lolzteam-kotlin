@@ -9,6 +9,7 @@ data class ClientConfig(
     val proxy: ProxyConfig? = null,
     val retry: RetryConfig = RetryConfig(),
     val rateLimit: RateLimitConfig? = null,
+    val searchRateLimit: RateLimitConfig? = null,
 )
 
 data class ProxyConfig(val url: String)

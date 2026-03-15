@@ -67,4 +67,60 @@ class RetryTest {
 		}
 		assertEquals(3, attempts) // initial + 2 retries
 	}
+
+	@Test
+	fun `does not retry ServerException 500`() = runTest {
+		var attempts = 0
+		assertFailsWith<ServerException> {
+			withRetry(RetryConfig(maxRetries = 3, baseDelay = 10.milliseconds)) {
+				attempts++
+				throw ServerException(500, "internal", Headers.Empty)
+			}
+		}
+		assertEquals(1, attempts)
+	}
+
+	@Test
+	fun `does not retry NetworkException`() = runTest {
+		var attempts = 0
+		assertFailsWith<NetworkException> {
+			withRetry(RetryConfig(maxRetries = 3, baseDelay = 10.milliseconds)) {
+				attempts++
+				throw NetworkException(RuntimeException("timeout"))
+			}
+		}
+		assertEquals(1, attempts)
+	}
+
+	@Test
+	fun `retries on ServerException 503`() = runTest {
+		var attempts = 0
+		val result = withRetry(RetryConfig(maxRetries = 2, baseDelay = 10.milliseconds, maxDelay = 50.milliseconds)) {
+			attempts++
+			if (attempts < 2) throw ServerException(503, "unavailable", Headers.Empty)
+			"recovered"
+		}
+		assertEquals("recovered", result)
+		assertEquals(2, attempts)
+	}
+
+	@Test
+	fun `succeeds on first try`() = runTest {
+		val result = withRetry(RetryConfig(maxRetries = 3, baseDelay = 10.milliseconds)) {
+			42
+		}
+		assertEquals(42, result)
+	}
+
+	@Test
+	fun `does not retry HttpException 400`() = runTest {
+		var attempts = 0
+		assertFailsWith<HttpException> {
+			withRetry(RetryConfig(maxRetries = 3, baseDelay = 10.milliseconds)) {
+				attempts++
+				throw HttpException(400, "bad", Headers.Empty)
+			}
+		}
+		assertEquals(1, attempts)
+	}
 }
