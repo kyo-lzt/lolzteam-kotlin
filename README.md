@@ -55,6 +55,7 @@ Market API groups: `category`, `list`, `managing`, `profile`, `cart`, `purchasin
 ```kotlin
 val config = ClientConfig(
     token = "your_token",
+    baseUrl = "https://api.lolz.live",          // optional, per-client default
     proxy = ProxyConfig(url = "socks5://127.0.0.1:1080"),
     retry = RetryConfig(
         maxRetries = 5,             // default: 3
@@ -64,6 +65,13 @@ val config = ClientConfig(
     rateLimit = RateLimitConfig(
         requestsPerMinute = 200,    // default: 300 (Forum), 120 (Market)
     ),
+    searchRateLimit = RateLimitConfig(
+        requestsPerMinute = 30,     // default: 20 (Market)
+    ),
+    timeout = 30.seconds,           // optional, request timeout
+    onRetry = { info ->             // optional, called before each retry
+        println("Retry #${info.attempt} for ${info.method} ${info.path}")
+    },
 )
 ```
 
@@ -83,12 +91,12 @@ Delay formula: `min(baseDelay * 2^attempt + random(0, baseDelay), maxDelay)`
 
 ```kotlin
 // Disable retry
-val client = ForumClient(token = "...", retry = null)
+val config = ClientConfig(token = "...", retry = null)
 
 // onRetry callback
-val client = ForumClient(
+val config = ClientConfig(
     token = "...",
-    retry = RetryConfig(onRetry = { info -> println("Retry #${info.attempt}") }),
+    onRetry = { info -> println("Retry #${info.attempt}") },
 )
 ```
 
