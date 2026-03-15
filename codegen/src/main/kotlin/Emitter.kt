@@ -96,6 +96,7 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 		?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
 		?.toSet() ?: emptySet()
 
+	val nestedClasses = mutableListOf<String>()
 	val sb = StringBuilder()
 	sb.appendLine("@Serializable")
 	sb.appendLine("data class $className(")
@@ -103,7 +104,7 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 	val fields = props.map { (propName, propValue) ->
 		val required = propName in requiredSet
 		val propObj = propValue as? JsonObject
-		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec)
+		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
 		val nullable = if (required) "" else "?"
 		val default = if (required) "" else " = null"
 		val camelName = safeKotlinName(propName)
@@ -113,11 +114,25 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 
 	sb.appendLine(fields.joinToString("\n"))
 	sb.append(")")
+
+	// Append nested data classes after the parent
+	for (nested in nestedClasses) {
+		sb.appendLine()
+		sb.appendLine()
+		sb.append(nested)
+	}
+
 	return sb.toString()
 }
 
 /** Resolve a property schema to a Kotlin type, handling refs and primitives. */
-private fun resolvePropertyKotlinType(propObj: JsonObject?, rawSpec: JsonObject): String {
+private fun resolvePropertyKotlinType(
+	propObj: JsonObject?,
+	rawSpec: JsonObject,
+	parentTypeName: String? = null,
+	propName: String? = null,
+	nestedClasses: MutableList<String>? = null,
+): String {
 	if (propObj == null) return "JsonElement"
 
 	// Check for $ref
@@ -139,7 +154,18 @@ private fun resolvePropertyKotlinType(propObj: JsonObject?, rawSpec: JsonObject)
 		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
 			return "List<${componentNameToKotlin(itemRef.removePrefix("#/components/schemas/"))}>"
 		}
-		val resolvedItems = if (items != null) derefShallow(items, rawSpec) else null
+		// Inline object inside array items
+		val resolvedItems = if (items != null) derefShallow(items, rawSpec) as? JsonObject else null
+		if (resolvedItems != null) {
+			val itemProps = resolvedItems["properties"] as? JsonObject
+			if (itemProps != null && itemProps.isNotEmpty()
+				&& parentTypeName != null && propName != null && nestedClasses != null
+			) {
+				val nestedName = parentTypeName + snakeToPascal(sanitizeName(propName))
+				emitNestedDataClass(nestedName, resolvedItems, rawSpec, nestedClasses)
+				return "List<$nestedName>"
+			}
+		}
 		val itemType = schemaToTypeString(resolvedItems, rawSpec)
 		return "List<${tsTypeToKotlin(itemType)}>"
 	}
@@ -147,7 +173,12 @@ private fun resolvePropertyKotlinType(propObj: JsonObject?, rawSpec: JsonObject)
 	if (type == "object" || propObj.containsKey("properties")) {
 		val innerProps = propObj["properties"] as? JsonObject
 		if (innerProps == null || innerProps.isEmpty()) return "JsonObject"
-		return "JsonObject"  // inline objects → JsonObject for simplicity
+		if (parentTypeName != null && propName != null && nestedClasses != null) {
+			val nestedName = parentTypeName + snakeToPascal(sanitizeName(propName))
+			emitNestedDataClass(nestedName, propObj, rawSpec, nestedClasses)
+			return nestedName
+		}
+		return "JsonObject"
 	}
 
 	return when (type) {
@@ -159,6 +190,42 @@ private fun resolvePropertyKotlinType(propObj: JsonObject?, rawSpec: JsonObject)
 	}
 }
 
+/** Generate a nested @Serializable data class and add it to the nestedClasses list. */
+private fun emitNestedDataClass(
+	className: String,
+	schema: JsonObject,
+	rawSpec: JsonObject,
+	nestedClasses: MutableList<String>,
+) {
+	val props = schema["properties"] as? JsonObject ?: return
+	if (props.isEmpty()) return
+
+	val requiredSet = (schema["required"] as? JsonArray)
+		?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+		?.toSet() ?: emptySet()
+
+	val sb = StringBuilder()
+	sb.appendLine("@Serializable")
+	sb.appendLine("data class $className(")
+
+	val seenNames = mutableSetOf<String>()
+	val fields = props.mapNotNull { (propName, propValue) ->
+		val camelName = safeKotlinName(propName)
+		if (!seenNames.add(camelName)) return@mapNotNull null
+		val required = propName in requiredSet
+		val propObj = propValue as? JsonObject
+		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
+		val nullable = if (required) "" else "?"
+		val default = if (required) "" else " = null"
+		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
+		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+	}
+
+	sb.appendLine(fields.joinToString("\n"))
+	sb.append(")")
+	nestedClasses.add(sb.toString())
+}
+
 /** Emit a typed @Serializable data class for a response. */
 private fun emitResponseClass(
 	group: String,
@@ -167,16 +234,23 @@ private fun emitResponseClass(
 	rawSpec: JsonObject,
 ): String {
 	val typeName = "${buildTypeName(group, method.methodName)}Response"
+	val rawSchema = method.rawResponseSchema
 	val schema = method.responseSchema ?: return "typealias $typeName = JsonElement"
 
 	if (schema.properties.isEmpty()) return "typealias $typeName = JsonElement"
 
+	// Build a lookup from property name to raw JsonObject for inline type resolution
+	val rawProps = rawSchema?.get("properties") as? JsonObject
+
+	val nestedClasses = mutableListOf<String>()
 	val sb = StringBuilder()
 	sb.appendLine("@Serializable")
 	sb.appendLine("data class $typeName(")
 
 	val fields = schema.properties.map { prop ->
-		val kotlinType = responsePropertyToKotlinType(prop, typeName, componentSchemaNames)
+		val kotlinType = responsePropertyToKotlinType(
+			prop, typeName, componentSchemaNames, rawProps, rawSpec, nestedClasses,
+		)
 		val nullable = "?"
 		val default = " = null"
 		val camelName = safeKotlinName(prop.name)
@@ -186,6 +260,14 @@ private fun emitResponseClass(
 
 	sb.appendLine(fields.joinToString("\n"))
 	sb.append(")")
+
+	// Append nested data classes after the response class
+	for (nested in nestedClasses) {
+		sb.appendLine()
+		sb.appendLine()
+		sb.append(nested)
+	}
+
 	return sb.toString()
 }
 
@@ -193,6 +275,9 @@ private fun responsePropertyToKotlinType(
 	prop: ResponseProperty,
 	parentTypeName: String,
 	componentSchemaNames: Set<String>,
+	rawProps: JsonObject? = null,
+	rawSpec: JsonObject = JsonObject(emptyMap()),
+	nestedClasses: MutableList<String>? = null,
 ): String {
 	// Component schema ref
 	if (prop.componentRef != null) {
@@ -200,13 +285,28 @@ private fun responsePropertyToKotlinType(
 		return if (prop.isArray) "List<$kotlinName>" else kotlinName
 	}
 
-	// Array of non-ref type
+	// Array of non-ref type — try nested type generation for inline object items
 	if (prop.isArray) {
+		if (rawProps != null && nestedClasses != null) {
+			val rawPropObj = rawProps[prop.name] as? JsonObject
+			if (rawPropObj != null) {
+				val resolved = resolvePropertyKotlinType(rawPropObj, rawSpec, parentTypeName, prop.name, nestedClasses)
+				if (resolved != "List<${prop.type}>" && resolved != "JsonObject") {
+					return resolved
+				}
+			}
+		}
 		return "List<${prop.type}>"
 	}
 
-	// Inline object with properties → JsonObject (keeping it simple)
+	// Inline object with properties → generate nested data class
 	if (prop.type == "inline") {
+		if (rawProps != null && nestedClasses != null) {
+			val rawPropObj = rawProps[prop.name] as? JsonObject
+			if (rawPropObj != null) {
+				return resolvePropertyKotlinType(rawPropObj, rawSpec, parentTypeName, prop.name, nestedClasses)
+			}
+		}
 		return "JsonObject"
 	}
 

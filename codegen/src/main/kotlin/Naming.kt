@@ -39,7 +39,14 @@ fun buildTypeName(group: String, method: String): String =
 	capitalizeFirst(group) + capitalizeFirst(method)
 
 fun snakeToCamel(name: String): String =
-	name.replace(Regex("[_-]([a-zA-Z])")) { it.groupValues[1].uppercase() }
+	name.replace(Regex("[_.\\-]([a-zA-Z])")) { it.groupValues[1].uppercase() }
+
+fun snakeToPascal(name: String): String {
+	// Split on underscores, hyphens, and dots, then capitalize each segment
+	return name.split(Regex("[_\\-.]+"))
+		.filter { it.isNotEmpty() }
+		.joinToString("") { it[0].uppercaseChar() + it.substring(1) }
+}
 
 private fun lowercaseFirst(s: String): String =
 	if (s.isEmpty()) s else s[0].lowercaseChar() + s.substring(1)
@@ -55,8 +62,9 @@ private val KOTLIN_KEYWORDS = setOf(
 	"return", "when", "is", "in", "as", "by", "do",
 )
 
-/** Strip trailing [] from parameter names. */
-fun sanitizeName(name: String): String = name.removeSuffix("[]")
+/** Strip trailing [] and replace non-identifier characters from parameter names. */
+fun sanitizeName(name: String): String =
+	name.removeSuffix("[]").replace(Regex("[^a-zA-Z0-9_]"), "_")
 
 /** Convert a parameter name to a safe Kotlin identifier with backtick escaping. */
 fun safeKotlinName(name: String): String {

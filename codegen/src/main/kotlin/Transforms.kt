@@ -71,6 +71,16 @@ fun schemaToTypeString(schema: JsonElement?, spec: JsonObject): String {
 
 	if (schema !is JsonObject) return "unknown"
 
+	// Check type BEFORE enum — if type is a known non-string primitive with enum, return the primitive type
+	val typeElEarly = schema["type"]
+	val typeEarly = (typeElEarly as? JsonPrimitive)?.contentOrNull
+	if (typeEarly != null && typeEarly in listOf("integer", "number", "boolean")) {
+		val enumCheck = schema["enum"] as? JsonArray
+		if (enumCheck != null && enumCheck.isNotEmpty()) {
+			return primitiveType(typeEarly)
+		}
+	}
+
 	// enum → string literal union
 	val enumValues = schema["enum"] as? JsonArray
 	if (enumValues != null && enumValues.isNotEmpty()) {
@@ -144,8 +154,13 @@ private fun primitiveType(t: String): String = when (t) {
 
 /** Map intermediate type string to Kotlin type. */
 fun tsTypeToKotlin(tsType: String): String {
+	// allOf intersection types — handle separately from union
+	if (" & " in tsType) {
+		return "JsonElement"
+	}
+
 	// Union types
-	if (" | " in tsType || " & " in tsType) {
+	if (" | " in tsType) {
 		val parts = tsType.split(" | ").map { it.trim() }
 		val nonNull = parts.filter { it != "null" }
 		if (nonNull.size == 1 && "null" in parts) {
@@ -164,15 +179,21 @@ fun tsTypeToKotlin(tsType: String): String {
 		return "List<${tsTypeToKotlin(arrayMatch.groupValues[1])}>"
 	}
 
+	// Record<string, T> → Map<String, KotlinType>
+	val recordMatch = Regex("^Record<string, (.+)>$").find(tsType)
+	if (recordMatch != null) {
+		return "Map<String, ${tsTypeToKotlin(recordMatch.groupValues[1])}>"
+	}
+
 	// Inline objects
-	if (tsType.startsWith("{") || "Record<" in tsType) {
+	if (tsType.startsWith("{")) {
 		return "JsonObject"
 	}
 
 	return when (tsType) {
 		"string" -> "String"
 		"number" -> "Double"
-		"integer" -> "Int"
+		"integer" -> "Long"
 		"boolean" -> "Boolean"
 		"unknown" -> "JsonElement"
 		"Blob" -> "ByteArray"
@@ -457,6 +478,7 @@ data class MethodDefinition(
 	val bodyRequired: Boolean,
 	val responseType: String,
 	val responseSchema: ResponseSchema? = null,
+	val rawResponseSchema: JsonObject? = null,
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
 	val bodyEncoding: String = "form",
@@ -480,6 +502,17 @@ fun extractMethodDefinition(
 	val rawPathItem = rawPaths?.get(path) as? JsonObject
 	val rawOperation = rawPathItem?.get(httpMethod.lowercase()) as? JsonObject
 	val responseSchema = if (rawOperation != null) extractResponseSchema(rawOperation, rawSpec) else null
+
+	// Extract raw response schema JsonObject for nested type generation
+	val rawResponseSchema: JsonObject? = if (rawOperation != null) {
+		val rawResponses = rawOperation["responses"] as? JsonObject
+		val rawSuccess = rawResponses?.get("200") ?: rawResponses?.get("201")
+		val success = if (rawSuccess != null) derefShallow(rawSuccess, rawSpec) as? JsonObject else null
+		val content = success?.get("content") as? JsonObject
+		val jsonContent = content?.get("application/json") as? JsonObject
+		val rawSchema = jsonContent?.get("schema")
+		if (rawSchema != null) derefShallow(rawSchema, rawSpec) as? JsonObject else null
+	} else null
 
 	val isGet = httpMethod.uppercase() == "GET"
 
@@ -512,6 +545,7 @@ fun extractMethodDefinition(
 		bodyRequired = bodyRequired,
 		responseType = responseType,
 		responseSchema = responseSchema,
+		rawResponseSchema = rawResponseSchema,
 		bodyIsArray = if (isGet) false else body.bodyIsArray,
 		bodyArrayItemType = if (isGet) null else body.bodyArrayItemType,
 		bodyEncoding = if (isGet) "form" else body.bodyEncoding,

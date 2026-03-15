@@ -26,12 +26,12 @@ fun parseSpec(rawSpec: JsonObject): ParseResult {
 	val componentsObj = rawSpec["components"] as? JsonObject
 	val schemasObj = componentsObj?.get("schemas") as? JsonObject
 	val componentSchemas = linkedMapOf<String, JsonObject>()
+	// Store RAW schemas (preserving $ref pointers) — derefDeep destroys $ref info
+	// needed by resolvePropertyKotlinType to map $ref → named types
 	if (schemasObj != null) {
 		for ((name, schema) in schemasObj) {
 			val schemaObj = schema as? JsonObject ?: continue
-			// Deref the schema itself so its properties are resolved
-			val resolved = derefDeep(schemaObj, rawSpec) as? JsonObject ?: continue
-			componentSchemas[name] = resolved
+			componentSchemas[name] = schemaObj
 		}
 	}
 
