@@ -133,7 +133,13 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			"string" -> "String"
 			"number" -> "Double"
 			"boolean" -> "Boolean"
-			else -> tsTypeToKotlin(param.type)
+			else -> {
+				// Union types containing string (e.g. "string | integer") → String
+				// Path params are interpolated into URLs, so String is always safe
+				val parts = param.type.split(" | ").map { it.trim() }
+				if (parts.any { it == "string" }) "String"
+				else tsTypeToKotlin(param.type)
+			}
 		}
 		args.add("${snakeToCamel(param.name)}: $kotlinType")
 	}

@@ -510,7 +510,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun get(userId: JsonElement, params: UsersGetParams? = null): UsersGetResponse {
+	suspend fun get(userId: String, params: UsersGetParams? = null): UsersGetResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId",
@@ -518,7 +518,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun edit(userId: JsonElement, body: UsersEditBody? = null): UsersEditResponse {
+	suspend fun edit(userId: String, body: UsersEditBody? = null): UsersEditResponse {
 		return http.request(RequestOptions(
 			method = "PUT",
 			path = "/users/$userId",
@@ -527,7 +527,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun claims(userId: JsonElement, params: UsersClaimsParams? = null): UsersClaimsResponse {
+	suspend fun claims(userId: String, params: UsersClaimsParams? = null): UsersClaimsResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/claims",
@@ -535,7 +535,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun avatarUpload(userId: JsonElement, body: UsersAvatarUploadBody? = null): UsersAvatarUploadResponse {
+	suspend fun avatarUpload(userId: String, body: UsersAvatarUploadBody? = null): UsersAvatarUploadResponse {
 		if (body != null) {
 			val jsonBody = buildJsonObject {
 				body.x?.let { put("x", it) }
@@ -561,14 +561,14 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		}
 	}
 
-	suspend fun avatarDelete(userId: JsonElement): UsersAvatarDeleteResponse {
+	suspend fun avatarDelete(userId: String): UsersAvatarDeleteResponse {
 		return http.request(RequestOptions(
 			method = "DELETE",
 			path = "/users/$userId/avatar",
 		))
 	}
 
-	suspend fun avatarCrop(userId: JsonElement, body: UsersAvatarCropBody? = null): UsersAvatarCropResponse {
+	suspend fun avatarCrop(userId: String, body: UsersAvatarCropBody? = null): UsersAvatarCropResponse {
 		return http.request(RequestOptions(
 			method = "POST",
 			path = "/users/$userId/avatar/crop",
@@ -577,7 +577,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun backgroundUpload(userId: JsonElement, body: UsersBackgroundUploadBody? = null): UsersBackgroundUploadResponse {
+	suspend fun backgroundUpload(userId: String, body: UsersBackgroundUploadBody? = null): UsersBackgroundUploadResponse {
 		if (body != null) {
 			val jsonBody = buildJsonObject {
 				body.x?.let { put("x", it) }
@@ -603,14 +603,14 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		}
 	}
 
-	suspend fun backgroundDelete(userId: JsonElement): UsersBackgroundDeleteResponse {
+	suspend fun backgroundDelete(userId: String): UsersBackgroundDeleteResponse {
 		return http.request(RequestOptions(
 			method = "DELETE",
 			path = "/users/$userId/background",
 		))
 	}
 
-	suspend fun backgroundCrop(userId: JsonElement, body: UsersBackgroundCropBody): UsersBackgroundCropResponse {
+	suspend fun backgroundCrop(userId: String, body: UsersBackgroundCropBody): UsersBackgroundCropResponse {
 		return http.request(RequestOptions(
 			method = "POST",
 			path = "/users/$userId/background/crop",
@@ -619,7 +619,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun followers(userId: JsonElement, params: UsersFollowersParams? = null): UsersFollowersResponse {
+	suspend fun followers(userId: String, params: UsersFollowersParams? = null): UsersFollowersResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/followers",
@@ -627,21 +627,21 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun follow(userId: JsonElement): UsersFollowResponse {
+	suspend fun follow(userId: String): UsersFollowResponse {
 		return http.request(RequestOptions(
 			method = "POST",
 			path = "/users/$userId/followers",
 		))
 	}
 
-	suspend fun unfollow(userId: JsonElement): UsersUnfollowResponse {
+	suspend fun unfollow(userId: String): UsersUnfollowResponse {
 		return http.request(RequestOptions(
 			method = "DELETE",
 			path = "/users/$userId/followers",
 		))
 	}
 
-	suspend fun followings(userId: JsonElement, params: UsersFollowingsParams? = null): UsersFollowingsResponse {
+	suspend fun followings(userId: String, params: UsersFollowingsParams? = null): UsersFollowingsResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/followings",
@@ -649,7 +649,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun likes(userId: JsonElement, params: UsersLikesParams? = null): UsersLikesResponse {
+	suspend fun likes(userId: String, params: UsersLikesParams? = null): UsersLikesResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/likes",
@@ -665,14 +665,14 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun ignore(userId: JsonElement): UsersIgnoreResponse {
+	suspend fun ignore(userId: String): UsersIgnoreResponse {
 		return http.request(RequestOptions(
 			method = "POST",
 			path = "/users/$userId/ignore",
 		))
 	}
 
-	suspend fun ignoreEdit(userId: JsonElement, params: UsersIgnoreEditParams? = null): UsersIgnoreEditResponse {
+	suspend fun ignoreEdit(userId: String, params: UsersIgnoreEditParams? = null): UsersIgnoreEditResponse {
 		return http.request(RequestOptions(
 			method = "PUT",
 			path = "/users/$userId/ignore",
@@ -680,14 +680,14 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun unignore(userId: JsonElement): UsersUnignoreResponse {
+	suspend fun unignore(userId: String): UsersUnignoreResponse {
 		return http.request(RequestOptions(
 			method = "DELETE",
 			path = "/users/$userId/ignore",
 		))
 	}
 
-	suspend fun contents(userId: JsonElement, params: UsersContentsParams? = null): UsersContentsResponse {
+	suspend fun contents(userId: String, params: UsersContentsParams? = null): UsersContentsResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/timeline",
@@ -695,7 +695,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun trophies(userId: JsonElement): UsersTrophiesResponse {
+	suspend fun trophies(userId: String): UsersTrophiesResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/trophies",
@@ -727,7 +727,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
 
 public class ProfilePostsApi(private val http: LolzteamHttpClient) {
 
-	suspend fun list(userId: JsonElement, params: ProfilePostsListParams? = null): ProfilePostsListResponse {
+	suspend fun list(userId: String, params: ProfilePostsListParams? = null): ProfilePostsListResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/users/$userId/profile-posts",
@@ -1178,7 +1178,7 @@ public class SearchApi(private val http: LolzteamHttpClient) {
 		))
 	}
 
-	suspend fun results(searchId: JsonElement, params: SearchResultsParams? = null): SearchResultsResponse {
+	suspend fun results(searchId: String, params: SearchResultsParams? = null): SearchResultsResponse {
 		return http.request(RequestOptions(
 			method = "GET",
 			path = "/search/$searchId/results",

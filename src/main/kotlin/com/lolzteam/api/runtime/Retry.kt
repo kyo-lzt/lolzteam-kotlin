@@ -44,7 +44,7 @@ suspend fun <T> withRetry(
             val delayMs = computeDelay(attempt, config, e)
             if (onRetry != null && e is LolzteamException) {
                 onRetry(RetryInfo(
-                    attempt = attempt + 1,
+                    attempt = attempt,
                     delay = delayMs.milliseconds,
                     error = e,
                     method = method,
