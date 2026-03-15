@@ -33,7 +33,7 @@ jobs:
           distribution: temurin
           java-version: "17"
       - uses: gradle/actions/setup-gradle@v4
-      - run: ./gradlew detekt 2>/dev/null || true
+      - run: ./gradlew :codegen:build
 
   test:
     name: Tests
