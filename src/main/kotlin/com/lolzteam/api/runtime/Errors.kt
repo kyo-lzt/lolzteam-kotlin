@@ -38,7 +38,12 @@ class ServerException(
     responseHeaders: Headers,
 ) : HttpException(status, body, responseHeaders)
 
-class NetworkException(override val cause: Throwable) : LolzteamException(cause.message ?: "Network error", cause)
+class NetworkException(override val cause: Throwable) : LolzteamException(cause.message ?: "Network error", cause) {
+    val isTransient: Boolean
+        get() = cause is java.net.SocketTimeoutException ||
+                cause is java.net.ConnectException ||
+                cause is io.ktor.client.network.sockets.ConnectTimeoutException
+}
 
 class ConfigException(message: String) : LolzteamException(message)
 
@@ -46,6 +51,6 @@ fun createHttpException(status: Int, body: String?, headers: Headers): HttpExcep
     429 -> RateLimitException(body, headers)
     401, 403 -> AuthException(status, body, headers)
     404 -> NotFoundException(body, headers)
-    in 500..503 -> ServerException(status, body, headers)
+    in 500..504 -> ServerException(status, body, headers)
     else -> HttpException(status, body, headers)
 }

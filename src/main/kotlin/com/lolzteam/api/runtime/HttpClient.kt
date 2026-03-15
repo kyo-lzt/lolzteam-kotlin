@@ -2,6 +2,7 @@ package com.lolzteam.api.runtime
 
 import io.ktor.client.HttpClient as KtorHttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.forms.FormDataContent
 import io.ktor.client.request.forms.MultiPartFormDataContent
@@ -40,7 +41,8 @@ data class RequestOptions(
 class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = null) : Closeable {
     private val baseUrl: String = (config.baseUrl ?: throw ConfigException("baseUrl is required")).trimEnd('/')
     private val token: String = config.token
-    private val retryConfig: RetryConfig = config.retry
+    private val retryConfig: RetryConfig? = config.retry
+    private val onRetry: ((RetryInfo) -> Unit)? = config.onRetry
     private val rateLimiter: RateLimiter? = config.rateLimit?.let { RateLimiter(it.requestsPerMinute) }
     private val searchRateLimiter: RateLimiter? = config.searchRateLimit?.let { RateLimiter(it.requestsPerMinute) }
 
@@ -72,6 +74,11 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                 }
             }
             expectSuccess = false
+            if (config.timeout != null) {
+                install(HttpTimeout) {
+                    requestTimeoutMillis = config.timeout.inWholeMilliseconds
+                }
+            }
         }
     }
 
@@ -80,7 +87,10 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
         if (options.isSearch) {
             searchRateLimiter?.acquire()
         }
-        return withRetry(retryConfig) { execute(options) }
+        if (retryConfig == null) {
+            return execute(options)
+        }
+        return withRetry(retryConfig, options.method, options.path, onRetry) { execute(options) }
     }
 
     private suspend fun execute(options: RequestOptions): JsonElement {

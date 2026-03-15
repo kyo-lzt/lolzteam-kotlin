@@ -7,7 +7,8 @@ import kotlin.time.Duration.Companion.milliseconds
 
 private fun isRetryable(error: Throwable): Boolean = when (error) {
     is RateLimitException -> true
-    is ServerException -> error.status == 502 || error.status == 503
+    is ServerException -> error.status == 502 || error.status == 503 || error.status == 504
+    is NetworkException -> error.isTransient
     else -> false
 }
 
@@ -20,7 +21,13 @@ private fun computeDelay(attempt: Int, config: RetryConfig, error: Throwable): L
     return min(exponential + jitter, config.maxDelay.inWholeMilliseconds)
 }
 
-suspend fun <T> withRetry(config: RetryConfig, block: suspend () -> T): T {
+suspend fun <T> withRetry(
+    config: RetryConfig,
+    method: String,
+    path: String,
+    onRetry: ((RetryInfo) -> Unit)? = null,
+    block: suspend () -> T,
+): T {
     var lastError: Throwable? = null
     for (attempt in 0..config.maxRetries) {
         try {
@@ -31,6 +38,15 @@ suspend fun <T> withRetry(config: RetryConfig, block: suspend () -> T): T {
                 throw e
             }
             val delayMs = computeDelay(attempt, config, e)
+            if (onRetry != null && e is LolzteamException) {
+                onRetry(RetryInfo(
+                    attempt = attempt + 1,
+                    delay = delayMs.milliseconds,
+                    error = e,
+                    method = method,
+                    path = path,
+                ))
+            }
             delay(delayMs)
         }
     }

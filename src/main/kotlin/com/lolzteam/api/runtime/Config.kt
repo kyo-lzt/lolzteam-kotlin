@@ -3,13 +3,23 @@ package com.lolzteam.api.runtime
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
+data class RetryInfo(
+    val attempt: Int,
+    val delay: Duration,
+    val error: LolzteamException,
+    val method: String,
+    val path: String,
+)
+
 data class ClientConfig(
     val token: String,
     val baseUrl: String? = null,
     val proxy: ProxyConfig? = null,
-    val retry: RetryConfig = RetryConfig(),
+    val retry: RetryConfig? = RetryConfig(),
     val rateLimit: RateLimitConfig? = null,
     val searchRateLimit: RateLimitConfig? = null,
+    val timeout: Duration? = null,
+    val onRetry: ((RetryInfo) -> Unit)? = null,
 )
 
 data class ProxyConfig(val url: String)
