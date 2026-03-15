@@ -39,7 +39,7 @@ fun buildTypeName(group: String, method: String): String =
 	capitalizeFirst(group) + capitalizeFirst(method)
 
 fun snakeToCamel(name: String): String =
-	name.replace(Regex("_([a-z])")) { it.groupValues[1].uppercase() }
+	name.replace(Regex("[_-]([a-zA-Z])")) { it.groupValues[1].uppercase() }
 
 private fun lowercaseFirst(s: String): String =
 	if (s.isEmpty()) s else s[0].lowercaseChar() + s.substring(1)
@@ -68,5 +68,5 @@ fun safeKotlinName(name: String): String {
 fun needsSerialName(name: String): Boolean {
 	val sanitized = sanitizeName(name)
 	val camel = snakeToCamel(sanitized)
-	return name != camel || name != sanitized || camel.first().isDigit()
+	return name != camel || name != sanitized || camel.first().isDigit() || '-' in name
 }

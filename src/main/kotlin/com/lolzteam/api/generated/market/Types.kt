@@ -7,6 +7,473 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
+// ─── Component Schemas ────────────────────────────────────────
+
+@Serializable
+data class DiscountModel(
+	@SerialName("category_id")
+	val categoryId: Long,
+	@SerialName("discount_id")
+	val discountId: Long,
+	@SerialName("discount_percent")
+	val discountPercent: Long,
+	@SerialName("discount_user_id")
+	val discountUserId: Long,
+	@SerialName("max_price")
+	val maxPrice: Long,
+	@SerialName("min_price")
+	val minPrice: Long,
+	@SerialName("user_id")
+	val userId: Long,
+)
+
+@Serializable
+data class UserModel(
+	@SerialName("active_items_count")
+	val activeItemsCount: Long,
+	@SerialName("activity_visible")
+	val activityVisible: Boolean,
+	val age: Long,
+	val balance: String,
+	val balances: List<JsonObject>,
+	@SerialName("bump_item_period")
+	val bumpItemPeriod: Long,
+	@SerialName("can_edit")
+	val canEdit: Boolean,
+	@SerialName("can_follow")
+	val canFollow: Boolean,
+	@SerialName("can_ignore")
+	val canIgnore: Boolean,
+	@SerialName("can_post_profile")
+	val canPostProfile: Boolean,
+	@SerialName("can_view_profile")
+	val canViewProfile: Boolean,
+	@SerialName("can_view_profile_posts")
+	val canViewProfilePosts: Boolean,
+	@SerialName("can_warn")
+	val canWarn: Boolean,
+	@SerialName("contest_count")
+	val contestCount: Long,
+	@SerialName("conv_welcome_message")
+	val convWelcomeMessage: String,
+	val convertedBalance: Long,
+	val convertedDeposit: Long,
+	val convertedHold: Long,
+	val currency: String,
+	val currencyPhrase: String,
+	@SerialName("custom_account_download_format")
+	val customAccountDownloadFormat: String,
+	@SerialName("custom_fields")
+	val customFields: JsonObject,
+	@SerialName("custom_title")
+	val customTitle: String,
+	val deposit: Long,
+	val dob: JsonObject,
+	@SerialName("feedback_data")
+	val feedbackData: JsonObject,
+	val hold: String,
+	val homepage: String,
+	@SerialName("imap_data")
+	val imapData: JsonObject,
+	@SerialName("is_admin")
+	val isAdmin: Boolean,
+	@SerialName("is_banned")
+	val isBanned: Boolean,
+	@SerialName("is_followed")
+	val isFollowed: Boolean,
+	@SerialName("is_ignored")
+	val isIgnored: Boolean,
+	@SerialName("is_moderator")
+	val isModerator: Boolean,
+	@SerialName("is_staff")
+	val isStaff: Boolean,
+	@SerialName("is_super_admin")
+	val isSuperAdmin: Boolean,
+	@SerialName("joined_date")
+	val joinedDate: Long,
+	@SerialName("last_activity")
+	val lastActivity: Long,
+	@SerialName("like2_count")
+	val like2Count: Long,
+	@SerialName("like_count")
+	val likeCount: Long,
+	val location: String,
+	@SerialName("market_custom_title")
+	val marketCustomTitle: String,
+	@SerialName("max_discount_percent")
+	val maxDiscountPercent: Long,
+	@SerialName("message_count")
+	val messageCount: Long,
+	@SerialName("paid_mail_left")
+	val paidMailLeft: Long,
+	@SerialName("public_tags")
+	val publicTags: List<JsonObject>,
+	@SerialName("register_date")
+	val registerDate: Long,
+	val rendered: JsonObject,
+	@SerialName("restore_count")
+	val restoreCount: Long,
+	@SerialName("restore_data")
+	val restoreData: JsonObject,
+	@SerialName("short_link")
+	val shortLink: String,
+	@SerialName("sold_items_count")
+	val soldItemsCount: Long,
+	val tags: List<JsonObject>,
+	@SerialName("telegram_client")
+	val telegramClient: JsonObject,
+	@SerialName("trophy_points")
+	val trophyPoints: Long,
+	@SerialName("user_allow_ask_discount")
+	val userAllowAskDiscount: Boolean,
+	@SerialName("user_id")
+	val userId: Long,
+	@SerialName("user_title")
+	val userTitle: String,
+	val username: String,
+	@SerialName("view_url")
+	val viewUrl: String,
+	val visible: Boolean,
+	@SerialName("warning_points")
+	val warningPoints: Long,
+)
+
+@Serializable
+data class BalanceModel(
+	val balance: String,
+	@SerialName("balance_id")
+	val balanceId: Long,
+	@SerialName("custom_title")
+	val customTitle: JsonElement,
+	val fullTitle: String,
+	@SerialName("merchant_id")
+	val merchantId: Long,
+	val title: String,
+	val type: String,
+	@SerialName("user_id")
+	val userId: Long,
+)
+
+@Serializable
+data class ExtraModel(
+	val proxy: String? = null,
+	@SerialName("close_item")
+	val closeItem: Boolean? = null,
+	val region: String? = null,
+	val service: String? = null,
+	val system: String? = null,
+	val confirmationCode: String? = null,
+	val cookies: String? = null,
+	@SerialName("login_without_cookies")
+	val loginWithoutCookies: Boolean? = null,
+	@SerialName("cookie_login")
+	val cookieLogin: Boolean? = null,
+	@SerialName("mfa_file")
+	val mfaFile: String? = null,
+	@SerialName("dota2_mmr")
+	val dota2Mmr: Long? = null,
+	@SerialName("ea_games")
+	val eaGames: Boolean? = null,
+	@SerialName("uplay_games")
+	val uplayGames: Boolean? = null,
+	@SerialName("the_quarry")
+	val theQuarry: Boolean? = null,
+	val warframe: Boolean? = null,
+	val ark: Boolean? = null,
+	@SerialName("ark_ascended")
+	val arkAscended: Boolean? = null,
+	@SerialName("genshin_currency")
+	val genshinCurrency: Long? = null,
+	@SerialName("honkai_currency")
+	val honkaiCurrency: Long? = null,
+	@SerialName("zenless_currency")
+	val zenlessCurrency: Long? = null,
+	val password: String? = null,
+	val telegramClient: String? = null,
+	val telegramJson: String? = null,
+	val checkChannels: Boolean? = null,
+	val checkSpam: Boolean? = null,
+	val checkHypixelBan: Boolean? = null,
+)
+
+@Serializable
+data class ConfirmationCodeModel(
+	val item: JsonObject,
+	val codeData: JsonObject,
+)
+
+@Serializable
+data class ItemListModel(
+	val items: List<JsonObject>,
+	val totalItems: Long,
+	val totalItemsPrice: JsonElement,
+	val hasNextPage: Boolean,
+	val perPage: Long,
+	val page: Long,
+	val searchUrl: String,
+	val stickyItems: List<JsonObject>,
+	@SerialName("system_info")
+	val systemInfo: JsonObject,
+)
+
+@Serializable
+data class ItemFromListModel(
+	@SerialName("item_id")
+	val itemId: Long? = null,
+	@SerialName("item_state")
+	val itemState: String? = null,
+	@SerialName("category_id")
+	val categoryId: Long? = null,
+	@SerialName("published_date")
+	val publishedDate: Long? = null,
+	val title: String? = null,
+	val description: String? = null,
+	val price: Long? = null,
+	@SerialName("update_stat_date")
+	val updateStatDate: Long? = null,
+	@SerialName("refreshed_date")
+	val refreshedDate: Long? = null,
+	@SerialName("view_count")
+	val viewCount: Long? = null,
+	@SerialName("is_sticky")
+	val isSticky: Long? = null,
+	@SerialName("item_origin")
+	val itemOrigin: String? = null,
+	@SerialName("extended_guarantee")
+	val extendedGuarantee: Long? = null,
+	val nsb: Long? = null,
+	@SerialName("allow_ask_discount")
+	val allowAskDiscount: Long? = null,
+	@SerialName("title_en")
+	val titleEn: String? = null,
+	@SerialName("description_en")
+	val descriptionEn: String? = null,
+	@SerialName("item_domain")
+	val itemDomain: String? = null,
+	@SerialName("resale_item_origin")
+	val resaleItemOrigin: String? = null,
+	val isIgnored: Long? = null,
+	val guarantee: Boolean? = null,
+	val canViewLoginData: Boolean? = null,
+	val canUpdateItemStats: Boolean? = null,
+	val canViewEmailLoginData: Boolean? = null,
+	val showGetEmailCodeButton: Boolean? = null,
+	val canOpenItem: Boolean? = null,
+	val canCloseItem: Boolean? = null,
+	val canEditItem: Boolean? = null,
+	val canDeleteItem: Boolean? = null,
+	val canStickItem: Boolean? = null,
+	val canUnstickItem: Boolean? = null,
+	val bumpSettings: JsonObject? = null,
+	val canBumpItem: Boolean? = null,
+	val canBuyItem: Boolean? = null,
+	@SerialName("rub_price")
+	val rubPrice: Long? = null,
+	@SerialName("price_currency")
+	val priceCurrency: String? = null,
+	val canValidateAccount: Boolean? = null,
+	val canResellItemAfterPurchase: Boolean? = null,
+	val canViewAccountLink: Boolean? = null,
+	val itemOriginPhrase: String? = null,
+	val tags: List<String>? = null,
+	@SerialName("note_text")
+	val noteText: String? = null,
+	@SerialName("description_html")
+	val descriptionHtml: String? = null,
+	@SerialName("description_html_en")
+	val descriptionHtmlEn: String? = null,
+	val seller: JsonObject? = null,
+)
+
+@Serializable
+data class ItemModel(
+	@SerialName("item_id")
+	val itemId: Long,
+	@SerialName("item_state")
+	val itemState: String,
+	@SerialName("category_id")
+	val categoryId: Long,
+	@SerialName("published_date")
+	val publishedDate: Long,
+	val title: String,
+	val description: String,
+	val price: Long,
+	@SerialName("update_stat_date")
+	val updateStatDate: Long,
+	@SerialName("refreshed_date")
+	val refreshedDate: Long,
+	@SerialName("edit_date")
+	val editDate: Long,
+	@SerialName("pending_deletion_date")
+	val pendingDeletionDate: Long,
+	val login: String,
+	@SerialName("temp_email")
+	val tempEmail: String,
+	@SerialName("view_count")
+	val viewCount: Long,
+	@SerialName("is_sticky")
+	val isSticky: Long,
+	val information: String,
+	@SerialName("item_origin")
+	val itemOrigin: String,
+	@SerialName("extended_guarantee")
+	val extendedGuarantee: Long,
+	val nsb: Long,
+	@SerialName("allow_ask_discount")
+	val allowAskDiscount: Long,
+	@SerialName("title_en")
+	val titleEn: String,
+	@SerialName("description_en")
+	val descriptionEn: String,
+	@SerialName("information_en")
+	val informationEn: String,
+	@SerialName("email_type")
+	val emailType: String,
+	@SerialName("email_provider")
+	val emailProvider: String,
+	@SerialName("item_domain")
+	val itemDomain: String,
+	@SerialName("resale_item_origin")
+	val resaleItemOrigin: String,
+	@SerialName("note_text")
+	val noteText: String,
+	@SerialName("content_type")
+	val contentType: JsonElement,
+	@SerialName("content_id")
+	val contentId: JsonElement,
+	@SerialName("delete_date")
+	val deleteDate: Long,
+	@SerialName("delete_user_id")
+	val deleteUserId: Long,
+	@SerialName("delete_username")
+	val deleteUsername: String,
+	@SerialName("delete_reason")
+	val deleteReason: String,
+	@SerialName("user_allow_ask_discount")
+	val userAllowAskDiscount: Long,
+	@SerialName("max_discount_percent")
+	val maxDiscountPercent: Long,
+	@SerialName("market_custom_title")
+	val marketCustomTitle: String,
+	@SerialName("feedback_data")
+	val feedbackData: String,
+	@SerialName("buyer_display_icon_group_id")
+	val buyerDisplayIconGroupId: Long,
+	@SerialName("buyer_uniq_banner")
+	val buyerUniqBanner: String,
+	@SerialName("buyer_avatar_date")
+	val buyerAvatarDate: Long,
+	@SerialName("buyer_user_group_id")
+	val buyerUserGroupId: Long,
+	@SerialName("is_fave")
+	val isFave: JsonElement,
+	@SerialName("in_cart")
+	val inCart: JsonElement,
+	@SerialName("cart_price")
+	val cartPrice: JsonElement,
+	val canResellItem: Boolean,
+	val priceWithSellerFee: Double,
+	val guarantee: JsonObject,
+	val canViewLoginData: Boolean,
+	val canUpdateItemStats: Boolean,
+	val canReportItem: Boolean,
+	val canViewItemViews: Boolean,
+	val loginData: JsonObject,
+	val canViewEmailLoginData: Boolean,
+	val copyFormatData: JsonObject,
+	val showGetEmailCodeButton: Boolean,
+	val getEmailCodeDisplayLogin: JsonElement,
+	val buyer: JsonObject,
+	val isPersonalAccount: Boolean,
+	@SerialName("rub_price")
+	val rubPrice: Long,
+	@SerialName("price_currency")
+	val priceCurrency: String,
+	val priceWithSellerFeeLabel: String,
+	val canValidateAccount: Boolean,
+	val canResellItemAfterPurchase: Boolean,
+	val isSmallExf: Boolean,
+	@SerialName("account_last_activity")
+	val accountLastActivity: Long,
+	val canViewAccountLink: Boolean,
+	val accountLinks: List<JsonObject>,
+	val accountLink: String,
+	val imagePreviewLinks: List<String>,
+	val canChangePassword: Boolean,
+	val canChangeEmailPassword: Boolean,
+	val uniqueKeyExists: Boolean,
+	val itemOriginPhrase: String,
+	val visitorIsAuthor: Boolean,
+	val canAskDiscount: Boolean,
+	val tags: JsonObject,
+	val customFields: JsonObject,
+	val externalAuth: List<JsonElement>,
+	val isTrusted: Boolean,
+	val isBirthdayToday: Boolean,
+	val isIgnored: Boolean,
+	val deposit: Long,
+	val extraPrices: List<JsonObject>,
+	val canViewAccountLoginAndTempEmail: Boolean,
+	val bumpSettings: JsonObject,
+	val canCheckGuarantee: Boolean,
+	val canShareItem: Boolean,
+	val canCheckAiPrice: Boolean,
+	val aiPrice: Long,
+	val aiPriceCheckDate: Long,
+	val needToRequireVideoToViewLoginData: Boolean,
+	val canCheckAutoBuyPrice: Boolean,
+	val autoBuyPrice: Long,
+	val autoBuyPriceCheckDate: Long,
+	val descriptionHtml: String,
+	val descriptionEnHtml: String,
+	val descriptionPlain: String,
+	val descriptionEnPlain: String,
+	val seller: JsonObject,
+)
+
+@Serializable
+data class InvoiceModel(
+	@SerialName("additional_data")
+	val additionalData: String,
+	val amount: Long,
+	val comment: String,
+	@SerialName("expires_at")
+	val expiresAt: Long,
+	@SerialName("invoice_date")
+	val invoiceDate: Long,
+	@SerialName("invoice_id")
+	val invoiceId: Long,
+	@SerialName("is_test")
+	val isTest: Boolean,
+	@SerialName("merchant_id")
+	val merchantId: Long,
+	@SerialName("paid_date")
+	val paidDate: Long,
+	@SerialName("payer_user_id")
+	val payerUserId: Long,
+	@SerialName("payment_id")
+	val paymentId: String,
+	@SerialName("resend_attempts")
+	val resendAttempts: Long,
+	val status: String,
+	val url: String,
+	@SerialName("url_callback")
+	val urlCallback: String,
+	@SerialName("url_success")
+	val urlSuccess: String,
+	@SerialName("user_id")
+	val userId: Long,
+)
+
+@Serializable
+data class RespSystemInfo(
+	@SerialName("visitor_id")
+	val visitorId: Long,
+	val time: Long,
+	@SerialName("log_id")
+	val logId: Long,
+)
+
 // ─── CategoryApi Types ────────────────────────────────────────
 
 @Serializable
@@ -48,7 +515,19 @@ data class CategoryAllParams(
 	val parseSameItemIds: Boolean? = null,
 )
 
-typealias CategoryAllResponse = JsonElement
+@Serializable
+data class CategoryAllResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategorySteamParams(
@@ -272,7 +751,23 @@ data class CategorySteamParams(
 	val skipVacInv: Boolean? = null,
 )
 
-typealias CategorySteamResponse = JsonElement
+@Serializable
+data class CategorySteamResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryFortniteParams(
@@ -407,7 +902,23 @@ data class CategoryFortniteParams(
 	val notCountry: List<String>? = null,
 )
 
-typealias CategoryFortniteResponse = JsonElement
+@Serializable
+data class CategoryFortniteResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryMihoyoParams(
@@ -566,7 +1077,23 @@ data class CategoryMihoyoParams(
 	val daybreak: Int? = null,
 )
 
-typealias CategoryMihoyoResponse = JsonElement
+@Serializable
+data class CategoryMihoyoResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryRiotParams(
@@ -713,7 +1240,23 @@ data class CategoryRiotParams(
 	val lolRank: JsonElement? = null,
 )
 
-typealias CategoryRiotResponse = JsonElement
+@Serializable
+data class CategoryRiotResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryTelegramParams(
@@ -840,7 +1383,23 @@ data class CategoryTelegramParams(
 	val maxBotActiveUsers: Int? = null,
 )
 
-typealias CategoryTelegramResponse = JsonElement
+@Serializable
+data class CategoryTelegramResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategorySupercellParams(
@@ -980,7 +1539,23 @@ data class CategorySupercellParams(
 	val creationYearMax: Int? = null,
 )
 
-typealias CategorySupercellResponse = JsonElement
+@Serializable
+data class CategorySupercellResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryEaParams(
@@ -1059,7 +1634,23 @@ data class CategoryEaParams(
 	val transactions: String? = null,
 )
 
-typealias CategoryEaResponse = JsonElement
+@Serializable
+data class CategoryEaResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryWotParams(
@@ -1166,7 +1757,23 @@ data class CategoryWotParams(
 	val notCountry: List<String>? = null,
 )
 
-typealias CategoryWotResponse = JsonElement
+@Serializable
+data class CategoryWotResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryWotBlitzParams(
@@ -1273,7 +1880,23 @@ data class CategoryWotBlitzParams(
 	val notCountry: List<String>? = null,
 )
 
-typealias CategoryWotBlitzResponse = JsonElement
+@Serializable
+data class CategoryWotBlitzResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryGiftsParams(
@@ -1319,7 +1942,23 @@ data class CategoryGiftsParams(
 	val subscriptionPeriod: String? = null,
 )
 
-typealias CategoryGiftsResponse = JsonElement
+@Serializable
+data class CategoryGiftsResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryEpicGamesParams(
@@ -1390,7 +2029,23 @@ data class CategoryEpicGamesParams(
 	val hoursPlayedMax: JsonObject? = null,
 )
 
-typealias CategoryEpicGamesResponse = JsonElement
+@Serializable
+data class CategoryEpicGamesResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryEscapeFromTarkovParams(
@@ -1447,7 +2102,23 @@ data class CategoryEscapeFromTarkovParams(
 	val side: String? = null,
 )
 
-typealias CategoryEscapeFromTarkovResponse = JsonElement
+@Serializable
+data class CategoryEscapeFromTarkovResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategorySocialClubParams(
@@ -1503,7 +2174,23 @@ data class CategorySocialClubParams(
 	val game: List<String>? = null,
 )
 
-typealias CategorySocialClubResponse = JsonElement
+@Serializable
+data class CategorySocialClubResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryUplayParams(
@@ -1598,7 +2285,23 @@ data class CategoryUplayParams(
 	val regPeriod: String? = null,
 )
 
-typealias CategoryUplayResponse = JsonElement
+@Serializable
+data class CategoryUplayResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryDiscordParams(
@@ -1712,7 +2415,23 @@ data class CategoryDiscordParams(
 	val maxOrbs: Int? = null,
 )
 
-typealias CategoryDiscordResponse = JsonElement
+@Serializable
+data class CategoryDiscordResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryTikTokParams(
@@ -1781,7 +2500,23 @@ data class CategoryTikTokParams(
 	val email: String? = null,
 )
 
-typealias CategoryTikTokResponse = JsonElement
+@Serializable
+data class CategoryTikTokResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryInstagramParams(
@@ -1845,7 +2580,23 @@ data class CategoryInstagramParams(
 	val regPeriod: String? = null,
 )
 
-typealias CategoryInstagramResponse = JsonElement
+@Serializable
+data class CategoryInstagramResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryBattleNetParams(
@@ -1913,7 +2664,23 @@ data class CategoryBattleNetParams(
 	val balanceMax: Int? = null,
 )
 
-typealias CategoryBattleNetResponse = JsonElement
+@Serializable
+data class CategoryBattleNetResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryChatGPTParams(
@@ -1976,7 +2743,23 @@ data class CategoryChatGPTParams(
 	val openaiBalanceMax: Int? = null,
 )
 
-typealias CategoryChatGPTResponse = JsonElement
+@Serializable
+data class CategoryChatGPTResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryVpnParams(
@@ -2024,7 +2807,23 @@ data class CategoryVpnParams(
 	val autorenewal: String? = null,
 )
 
-typealias CategoryVpnResponse = JsonElement
+@Serializable
+data class CategoryVpnResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryRobloxParams(
@@ -2132,7 +2931,23 @@ data class CategoryRobloxParams(
 	val notAgeGroup: List<String>? = null,
 )
 
-typealias CategoryRobloxResponse = JsonElement
+@Serializable
+data class CategoryRobloxResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryWarfaceParams(
@@ -2191,7 +3006,23 @@ data class CategoryWarfaceParams(
 	val totalKreditsMax: Int? = null,
 )
 
-typealias CategoryWarfaceResponse = JsonElement
+@Serializable
+data class CategoryWarfaceResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryMinecraftParams(
@@ -2295,7 +3126,23 @@ data class CategoryMinecraftParams(
 	val minecoinsMax: Int? = null,
 )
 
-typealias CategoryMinecraftResponse = JsonElement
+@Serializable
+data class CategoryMinecraftResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryHytaleParams(
@@ -2342,7 +3189,23 @@ data class CategoryHytaleParams(
 	val profilesMax: Int? = null,
 )
 
-typealias CategoryHytaleResponse = JsonElement
+@Serializable
+data class CategoryHytaleResponse(
+	val items: List<JsonObject>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val wasCached: Boolean? = null,
+	val cacheTTL: Long? = null,
+	val lastModified: Long? = null,
+	val serverTime: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<JsonElement>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CategoryListParams(
@@ -2350,11 +3213,29 @@ data class CategoryListParams(
 	val topQueries: Boolean? = null,
 )
 
-typealias CategoryListResponse = JsonElement
+@Serializable
+data class CategoryListResponse(
+	val category: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias CategoryParamsResponse = JsonElement
+@Serializable
+data class CategoryParamsResponse(
+	val category: JsonObject? = null,
+	val params: List<JsonObject>? = null,
+	@SerialName("base_params")
+	val baseParams: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias CategoryGamesResponse = JsonElement
+@Serializable
+data class CategoryGamesResponse(
+	val games: List<JsonObject>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── ListApi Types ────────────────────────────────────────
 
@@ -2405,7 +3286,19 @@ data class ListUserParams(
 	val filterByDeleteDate: Boolean? = null,
 )
 
-typealias ListUserResponse = JsonElement
+@Serializable
+data class ListUserResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ListOrdersParams(
@@ -2433,7 +3326,19 @@ data class ListOrdersParams(
 	val nsbByMe: Boolean? = null,
 )
 
-typealias ListOrdersResponse = JsonElement
+@Serializable
+data class ListOrdersResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ListStatesParams(
@@ -2441,7 +3346,12 @@ data class ListStatesParams(
 	val userId: JsonElement? = null,
 )
 
-typealias ListStatesResponse = JsonElement
+@Serializable
+data class ListStatesResponse(
+	val userItemStates: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ListDownloadParams(
@@ -2513,7 +3423,19 @@ data class ListFavoritesParams(
 	val nsbByMe: Boolean? = null,
 )
 
-typealias ListFavoritesResponse = JsonElement
+@Serializable
+data class ListFavoritesResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ListViewedParams(
@@ -2536,7 +3458,19 @@ data class ListViewedParams(
 	val nsbByMe: Boolean? = null,
 )
 
-typealias ListViewedResponse = JsonElement
+@Serializable
+data class ListViewedResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── ManagingApi Types ────────────────────────────────────────
 
@@ -2546,14 +3480,44 @@ data class ManagingGetParams(
 	val parseSameItemIds: Boolean? = null,
 )
 
-typealias ManagingGetResponse = JsonElement
+@Serializable
+data class ManagingGetResponse(
+	val item: ItemModel? = null,
+	val canStickItem: Boolean? = null,
+	val canUnstickItem: Boolean? = null,
+	val canBuyItem: Boolean? = null,
+	val cannotBuyItemError: String? = null,
+	val canCloseItem: Boolean? = null,
+	val canOpenItem: Boolean? = null,
+	val canReportItem: Boolean? = null,
+	val canEditItem: Boolean? = null,
+	val canDeleteItem: Boolean? = null,
+	val canCancelConfirmedBuy: Boolean? = null,
+	val canViewItemHistory: Boolean? = null,
+	val faveCount: Boolean? = null,
+	val isVisibleItem: Boolean? = null,
+	val canViewLoginData: Boolean? = null,
+	val showToFavouritesButton: Boolean? = null,
+	val itemLink: String? = null,
+	val canChangeOwner: Boolean? = null,
+	val sameItemsIds: List<Int>? = null,
+	val sameItemsCount: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingDeleteBody(
 	val reason: String,
 )
 
-typealias ManagingDeleteResponse = JsonElement
+@Serializable
+data class ManagingDeleteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingCreateClaimBody(
@@ -2563,7 +3527,12 @@ data class ManagingCreateClaimBody(
 	val postBody: String,
 )
 
-typealias ManagingCreateClaimResponse = JsonElement
+@Serializable
+data class ManagingCreateClaimResponse(
+	val thread: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: JsonObject? = null,
+)
 
 @Serializable
 data class ManagingBulkGetBody(
@@ -2573,7 +3542,14 @@ data class ManagingBulkGetBody(
 	val parseSameItemIds: Boolean? = null,
 )
 
-typealias ManagingBulkGetResponse = JsonElement
+@Serializable
+data class ManagingBulkGetResponse(
+	val items: List<JsonObject>? = null,
+	@SerialName("left_item_id")
+	val leftItemId: List<Int>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingSteamInventoryValueParams(
@@ -2584,7 +3560,14 @@ data class ManagingSteamInventoryValueParams(
 	val ignoreCache: Boolean? = null,
 )
 
-typealias ManagingSteamInventoryValueResponse = JsonElement
+@Serializable
+data class ManagingSteamInventoryValueResponse(
+	val query: String? = null,
+	val data: JsonObject? = null,
+	val appId: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingSteamValueParams(
@@ -2596,7 +3579,14 @@ data class ManagingSteamValueParams(
 	val ignoreCache: Boolean? = null,
 )
 
-typealias ManagingSteamValueResponse = JsonElement
+@Serializable
+data class ManagingSteamValueResponse(
+	val query: String? = null,
+	val data: JsonObject? = null,
+	val appId: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingSteamPreviewParams(
@@ -2626,18 +3616,40 @@ data class ManagingEditBody(
 	val information: String? = null,
 )
 
-typealias ManagingEditResponse = JsonElement
+@Serializable
+data class ManagingEditResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingAIPriceResponse = JsonElement
+@Serializable
+data class ManagingAIPriceResponse(
+	val price: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingAutoBuyPriceResponse = JsonElement
+@Serializable
+data class ManagingAutoBuyPriceResponse(
+	val price: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingNoteBody(
 	val text: String? = null,
 )
 
-typealias ManagingNoteResponse = JsonElement
+@Serializable
+data class ManagingNoteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingSteamUpdateValueBody(
@@ -2647,31 +3659,76 @@ data class ManagingSteamUpdateValueBody(
 	val authorize: Boolean? = null,
 )
 
-typealias ManagingSteamUpdateValueResponse = JsonElement
+@Serializable
+data class ManagingSteamUpdateValueResponse(
+	val status: String? = null,
+	val item: ItemModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingBumpResponse = JsonElement
+@Serializable
+data class ManagingBumpResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingAutoBumpBody(
 	val hour: Int,
 )
 
-typealias ManagingAutoBumpResponse = JsonElement
+@Serializable
+data class ManagingAutoBumpResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingAutoBumpDisableResponse = JsonElement
+@Serializable
+data class ManagingAutoBumpDisableResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingOpenResponse = JsonElement
+@Serializable
+data class ManagingOpenResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingCloseResponse = JsonElement
+@Serializable
+data class ManagingCloseResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingImageParams(
 	val type: String,
 )
 
-typealias ManagingImageResponse = JsonElement
+@Serializable
+data class ManagingImageResponse(
+	val base64: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingEmailCodeResponse = JsonElement
+@Serializable
+data class ManagingEmailCodeResponse(
+	val item: ItemModel? = null,
+	val codeData: JsonObject? = null,
+)
 
 @Serializable
 data class ManagingGetLetters2Params(
@@ -2682,15 +3739,44 @@ data class ManagingGetLetters2Params(
 	val limit: Int? = null,
 )
 
-typealias ManagingGetLetters2Response = JsonElement
+@Serializable
+data class ManagingGetLetters2Response(
+	val email: String? = null,
+	val letters: List<JsonObject>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingSteamGetMafileResponse = JsonElement
+@Serializable
+data class ManagingSteamGetMafileResponse(
+	val maFile: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingSteamAddMafileResponse = JsonElement
+@Serializable
+data class ManagingSteamAddMafileResponse(
+	val status: String? = null,
+	val message: String? = null,
+	val item: ItemModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingSteamRemoveMafileResponse = JsonElement
+@Serializable
+data class ManagingSteamRemoveMafileResponse(
+	val status: String? = null,
+	val message: String? = null,
+	val item: ItemModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingSteamMafileCodeResponse = JsonElement
+@Serializable
+data class ManagingSteamMafileCodeResponse(
+	val item: ItemModel? = null,
+	val codeData: JsonObject? = null,
+)
 
 @Serializable
 data class ManagingSteamSDABody(
@@ -2698,13 +3784,35 @@ data class ManagingSteamSDABody(
 	val nonce: Int? = null,
 )
 
-typealias ManagingSteamSDAResponse = JsonElement
+@Serializable
+data class ManagingSteamSDAResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingTelegramCodeResponse = JsonElement
+@Serializable
+data class ManagingTelegramCodeResponse(
+	val item: ItemModel? = null,
+	val codes: JsonObject? = null,
+)
 
-typealias ManagingTelegramResetAuthResponse = JsonElement
+@Serializable
+data class ManagingTelegramResetAuthResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingRefuseGuaranteeResponse = JsonElement
+@Serializable
+data class ManagingRefuseGuaranteeResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingDeclineVideoRecordingBody(
@@ -2712,9 +3820,20 @@ data class ManagingDeclineVideoRecordingBody(
 	val iVoluntarilyAndWithFullAwarenessOfMyActionsWaiveAnyClaimsRegardingThisItem: Boolean,
 )
 
-typealias ManagingDeclineVideoRecordingResponse = JsonElement
+@Serializable
+data class ManagingDeclineVideoRecordingResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingCheckGuaranteeResponse = JsonElement
+@Serializable
+data class ManagingCheckGuaranteeResponse(
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingChangePasswordBody(
@@ -2722,9 +3841,18 @@ data class ManagingChangePasswordBody(
 	val Cancel: String? = null,
 )
 
-typealias ManagingChangePasswordResponse = JsonElement
+@Serializable
+data class ManagingChangePasswordResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("new_password")
+	val newPassword: String? = null,
+)
 
-typealias ManagingTempEmailPasswordResponse = JsonElement
+@Serializable
+data class ManagingTempEmailPasswordResponse(
+	val item: JsonObject? = null,
+)
 
 @Serializable
 data class ManagingTagBody(
@@ -2732,7 +3860,15 @@ data class ManagingTagBody(
 	val tagId: Int,
 )
 
-typealias ManagingTagResponse = JsonElement
+@Serializable
+data class ManagingTagResponse(
+	val itemId: Long? = null,
+	val tag: JsonObject? = null,
+	val addedTagId: Long? = null,
+	val deleteTags: List<Int>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingUntagBody(
@@ -2740,7 +3876,15 @@ data class ManagingUntagBody(
 	val tagId: Int,
 )
 
-typealias ManagingUntagResponse = JsonElement
+@Serializable
+data class ManagingUntagResponse(
+	val itemId: Long? = null,
+	val tag: JsonObject? = null,
+	val addedTagId: Long? = null,
+	val deleteTags: List<Int>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingPublicTagBody(
@@ -2748,7 +3892,15 @@ data class ManagingPublicTagBody(
 	val tagId: Int,
 )
 
-typealias ManagingPublicTagResponse = JsonElement
+@Serializable
+data class ManagingPublicTagResponse(
+	val itemId: Long? = null,
+	val tag: JsonObject? = null,
+	val addedTagId: Long? = null,
+	val deleteTags: List<Int>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingPublicUntagBody(
@@ -2756,15 +3908,47 @@ data class ManagingPublicUntagBody(
 	val tagId: Int,
 )
 
-typealias ManagingPublicUntagResponse = JsonElement
+@Serializable
+data class ManagingPublicUntagResponse(
+	val itemId: Long? = null,
+	val tag: JsonObject? = null,
+	val addedTagId: Long? = null,
+	val deleteTags: List<Int>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingFavoriteResponse = JsonElement
+@Serializable
+data class ManagingFavoriteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingUnfavoriteResponse = JsonElement
+@Serializable
+data class ManagingUnfavoriteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingStickResponse = JsonElement
+@Serializable
+data class ManagingStickResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias ManagingUnstickResponse = JsonElement
+@Serializable
+data class ManagingUnstickResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ManagingTransferBody(
@@ -2773,7 +3957,13 @@ data class ManagingTransferBody(
 	val secretAnswer: String,
 )
 
-typealias ManagingTransferResponse = JsonElement
+@Serializable
+data class ManagingTransferResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── ProfileApi Types ────────────────────────────────────────
 
@@ -2784,7 +3974,13 @@ data class ProfileClaimsParams(
 	val claimState: String? = null,
 )
 
-typealias ProfileClaimsResponse = JsonElement
+@Serializable
+data class ProfileClaimsResponse(
+	val claims: List<JsonObject>? = null,
+	val stats: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ProfileGetParams(
@@ -2792,7 +3988,12 @@ data class ProfileGetParams(
 	val fieldsInclude: JsonElement? = null,
 )
 
-typealias ProfileGetResponse = JsonElement
+@Serializable
+data class ProfileGetResponse(
+	val user: UserModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ProfileEditBody(
@@ -2820,7 +4021,13 @@ data class ProfileEditBody(
 	val clearTelegramClient: Boolean? = null,
 )
 
-typealias ProfileEditResponse = JsonElement
+@Serializable
+data class ProfileEditResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── CartApi Types ────────────────────────────────────────
 
@@ -2865,7 +4072,19 @@ data class CartGetParams(
 	val parseSameItemIds: Boolean? = null,
 )
 
-typealias CartGetResponse = JsonElement
+@Serializable
+data class CartGetResponse(
+	val items: List<ItemFromListModel>? = null,
+	val totalItems: Long? = null,
+	val totalItemsPrice: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val perPage: Long? = null,
+	val page: Long? = null,
+	val searchUrl: String? = null,
+	val stickyItems: List<ItemFromListModel>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CartAddBody(
@@ -2873,7 +4092,12 @@ data class CartAddBody(
 	val itemId: Int,
 )
 
-typealias CartAddResponse = JsonElement
+@Serializable
+data class CartAddResponse(
+	val success: Boolean? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CartDeleteBody(
@@ -2881,7 +4105,12 @@ data class CartDeleteBody(
 	val itemId: Int? = null,
 )
 
-typealias CartDeleteResponse = JsonElement
+@Serializable
+data class CartDeleteResponse(
+	val success: Boolean? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── PurchasingApi Types ────────────────────────────────────────
 
@@ -2892,9 +4121,22 @@ data class PurchasingFastBuyBody(
 	val balanceId: Int? = null,
 )
 
-typealias PurchasingFastBuyResponse = JsonElement
+@Serializable
+data class PurchasingFastBuyResponse(
+	val status: String? = null,
+	val item: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias PurchasingCheckResponse = JsonElement
+@Serializable
+data class PurchasingCheckResponse(
+	val status: String? = null,
+	val item: JsonObject? = null,
+	val requireVideoRecording: Boolean? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PurchasingConfirmBody(
@@ -2903,7 +4145,13 @@ data class PurchasingConfirmBody(
 	val balanceId: Int? = null,
 )
 
-typealias PurchasingConfirmResponse = JsonElement
+@Serializable
+data class PurchasingConfirmResponse(
+	val status: String? = null,
+	val item: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PurchasingDiscountRequestBody(
@@ -2912,13 +4160,31 @@ data class PurchasingDiscountRequestBody(
 	val message: String? = null,
 )
 
-typealias PurchasingDiscountRequestResponse = JsonElement
+@Serializable
+data class PurchasingDiscountRequestResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias PurchasingDiscountCancelResponse = JsonElement
+@Serializable
+data class PurchasingDiscountCancelResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── CustomDiscountsApi Types ────────────────────────────────────────
 
-typealias CustomDiscountsGetResponse = JsonElement
+@Serializable
+data class CustomDiscountsGetResponse(
+	val discounts: List<DiscountModel>? = null,
+	val total: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CustomDiscountsCreateBody(
@@ -2935,7 +4201,13 @@ data class CustomDiscountsCreateBody(
 	val currency: String? = null,
 )
 
-typealias CustomDiscountsCreateResponse = JsonElement
+@Serializable
+data class CustomDiscountsCreateResponse(
+	val discount: DiscountModel? = null,
+	val total: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CustomDiscountsEditBody(
@@ -2949,7 +4221,13 @@ data class CustomDiscountsEditBody(
 	val maxPrice: Double? = null,
 )
 
-typealias CustomDiscountsEditResponse = JsonElement
+@Serializable
+data class CustomDiscountsEditResponse(
+	val discounts: List<DiscountModel>? = null,
+	val total: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class CustomDiscountsDeleteBody(
@@ -2957,7 +4235,13 @@ data class CustomDiscountsDeleteBody(
 	val discountId: Int,
 )
 
-typealias CustomDiscountsDeleteResponse = JsonElement
+@Serializable
+data class CustomDiscountsDeleteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── PublishingApi Types ────────────────────────────────────────
 
@@ -2995,7 +4279,13 @@ data class PublishingFastSellBody(
 	val extra: JsonObject? = null,
 )
 
-typealias PublishingFastSellResponse = JsonElement
+@Serializable
+data class PublishingFastSellResponse(
+	val item: ItemModel? = null,
+	val itemLink: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PublishingAddBody(
@@ -3029,7 +4319,13 @@ data class PublishingAddBody(
 	val randomProxy: Boolean? = null,
 )
 
-typealias PublishingAddResponse = JsonElement
+@Serializable
+data class PublishingAddResponse(
+	val status: String? = null,
+	val item: ItemModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PublishingCheckBody(
@@ -3050,7 +4346,13 @@ data class PublishingCheckBody(
 	val extra: JsonObject? = null,
 )
 
-typealias PublishingCheckResponse = JsonElement
+@Serializable
+data class PublishingCheckResponse(
+	val status: String? = null,
+	val item: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PublishingExternalBody(
@@ -3061,7 +4363,13 @@ data class PublishingExternalBody(
 	val cookies: String? = null,
 )
 
-typealias PublishingExternalResponse = JsonElement
+@Serializable
+data class PublishingExternalResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── PaymentsApi Types ────────────────────────────────────────
 
@@ -3073,7 +4381,12 @@ data class PaymentsInvoiceGetParams(
 	val paymentId: String? = null,
 )
 
-typealias PaymentsInvoiceGetResponse = JsonElement
+@Serializable
+data class PaymentsInvoiceGetResponse(
+	val invoice: InvoiceModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsInvoiceCreateBody(
@@ -3099,7 +4412,12 @@ data class PaymentsInvoiceCreateBody(
 	val isTest: Boolean? = null,
 )
 
-typealias PaymentsInvoiceCreateResponse = JsonElement
+@Serializable
+data class PaymentsInvoiceCreateResponse(
+	val invoice: InvoiceModel? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsInvoiceListParams(
@@ -3111,11 +4429,32 @@ data class PaymentsInvoiceListParams(
 	val merchantId: Int? = null,
 )
 
-typealias PaymentsInvoiceListResponse = JsonElement
+@Serializable
+data class PaymentsInvoiceListResponse(
+	val invoices: List<InvoiceModel>? = null,
+	val count: Long? = null,
+	val page: Long? = null,
+	val perPage: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias PaymentsCurrencyResponse = JsonElement
+@Serializable
+data class PaymentsCurrencyResponse(
+	val currencyList: JsonObject? = null,
+	val lastUpdate: Long? = null,
+	val visitorCurrency: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias PaymentsBalanceListResponse = JsonElement
+@Serializable
+data class PaymentsBalanceListResponse(
+	val from: JsonObject? = null,
+	val to: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsBalanceExchangeBody(
@@ -3126,7 +4465,13 @@ data class PaymentsBalanceExchangeBody(
 	val amount: Int,
 )
 
-typealias PaymentsBalanceExchangeResponse = JsonElement
+@Serializable
+data class PaymentsBalanceExchangeResponse(
+	val from: JsonObject? = null,
+	val to: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsTransferBody(
@@ -3148,14 +4493,28 @@ data class PaymentsTransferBody(
 	val holdLengthOption: String? = null,
 )
 
-typealias PaymentsTransferResponse = JsonElement
+@Serializable
+data class PaymentsTransferResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsFeeParams(
 	val amount: Double? = null,
 )
 
-typealias PaymentsFeeResponse = JsonElement
+@Serializable
+data class PaymentsFeeResponse(
+	@SerialName("commission_percentage")
+	val commissionPercentage: Long? = null,
+	val spentCurrentMonth: Long? = null,
+	val calculator: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsCancelBody(
@@ -3163,7 +4522,13 @@ data class PaymentsCancelBody(
 	val paymentId: Int,
 )
 
-typealias PaymentsCancelResponse = JsonElement
+@Serializable
+data class PaymentsCancelResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsHistoryParams(
@@ -3188,9 +4553,31 @@ data class PaymentsHistoryParams(
 	val showPaymentStats: Boolean? = null,
 )
 
-typealias PaymentsHistoryResponse = JsonElement
+@Serializable
+data class PaymentsHistoryResponse(
+	val payments: JsonObject? = null,
+	val perPage: String? = null,
+	val page: Long? = null,
+	val pageNavLink: String? = null,
+	val pageNavParams: JsonObject? = null,
+	val periodLabel: String? = null,
+	val periodLabelPhrase: String? = null,
+	val filterDatesDefault: Boolean? = null,
+	val input: JsonObject? = null,
+	val paymentStats: JsonElement? = null,
+	val hasNextPage: Boolean? = null,
+	val lastOperationId: Long? = null,
+	val nextPageHref: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
-typealias PaymentsPayoutServicesResponse = JsonElement
+@Serializable
+data class PaymentsPayoutServicesResponse(
+	val systems: List<JsonObject>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class PaymentsPayoutBody(
@@ -3204,11 +4591,22 @@ data class PaymentsPayoutBody(
 	val extra: JsonObject? = null,
 )
 
-typealias PaymentsPayoutResponse = JsonElement
+@Serializable
+data class PaymentsPayoutResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── AutoPaymentsApi Types ────────────────────────────────────────
 
-typealias AutoPaymentsListResponse = JsonElement
+@Serializable
+data class AutoPaymentsListResponse(
+	val payments: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class AutoPaymentsCreateBody(
@@ -3222,7 +4620,15 @@ data class AutoPaymentsCreateBody(
 	val description: String? = null,
 )
 
-typealias AutoPaymentsCreateResponse = JsonElement
+@Serializable
+data class AutoPaymentsCreateResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("auto_payment_id")
+	val autoPaymentId: Long? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class AutoPaymentsDeleteBody(
@@ -3230,11 +4636,22 @@ data class AutoPaymentsDeleteBody(
 	val autoPaymentId: Int,
 )
 
-typealias AutoPaymentsDeleteResponse = JsonElement
+@Serializable
+data class AutoPaymentsDeleteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── ProxyApi Types ────────────────────────────────────────
 
-typealias ProxyGetResponse = JsonElement
+@Serializable
+data class ProxyGetResponse(
+	val proxies: List<JsonObject>? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ProxyAddBody(
@@ -3250,7 +4667,13 @@ data class ProxyAddBody(
 	val proxyRow: String? = null,
 )
 
-typealias ProxyAddResponse = JsonElement
+@Serializable
+data class ProxyAddResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ProxyDeleteBody(
@@ -3260,7 +4683,13 @@ data class ProxyDeleteBody(
 	val deleteAll: Boolean? = null,
 )
 
-typealias ProxyDeleteResponse = JsonElement
+@Serializable
+data class ProxyDeleteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── ImapApi Types ────────────────────────────────────────
 
@@ -3273,18 +4702,35 @@ data class ImapCreateBody(
 	val secure: Boolean,
 )
 
-typealias ImapCreateResponse = JsonElement
+@Serializable
+data class ImapCreateResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 @Serializable
 data class ImapDeleteBody(
 	val domain: String,
 )
 
-typealias ImapDeleteResponse = JsonElement
+@Serializable
+data class ImapDeleteResponse(
+	val status: String? = null,
+	val message: String? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 
 // ─── BatchApi Types ────────────────────────────────────────
 
 typealias BatchBatchBody = List<JsonObject>
 
-typealias BatchBatchResponse = JsonElement
+@Serializable
+data class BatchBatchResponse(
+	val jobs: JsonObject? = null,
+	@SerialName("system_info")
+	val systemInfo: RespSystemInfo? = null,
+)
 

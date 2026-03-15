@@ -15,15 +15,31 @@ data class ParsedGroup(
 data class ParseResult(
 	val groups: List<ParsedGroup>,
 	val baseUrl: String,
+	val componentSchemas: Map<String, JsonObject>,
+	val rawSpec: JsonObject,
 )
 
 private val HTTP_METHODS = listOf("get", "post", "put", "delete", "patch")
 
 fun parseSpec(rawSpec: JsonObject): ParseResult {
+	// Extract component schemas before dereferencing
+	val componentsObj = rawSpec["components"] as? JsonObject
+	val schemasObj = componentsObj?.get("schemas") as? JsonObject
+	val componentSchemas = linkedMapOf<String, JsonObject>()
+	if (schemasObj != null) {
+		for ((name, schema) in schemasObj) {
+			val schemaObj = schema as? JsonObject ?: continue
+			// Deref the schema itself so its properties are resolved
+			val resolved = derefDeep(schemaObj, rawSpec) as? JsonObject ?: continue
+			componentSchemas[name] = resolved
+		}
+	}
+
 	// Resolve all $refs first
 	val spec = derefDeep(rawSpec, rawSpec) as JsonObject
 
-	val paths = spec["paths"] as? JsonObject ?: return ParseResult(emptyList(), "https://localhost")
+	val paths = spec["paths"] as? JsonObject
+		?: return ParseResult(emptyList(), "https://localhost", componentSchemas, rawSpec)
 	val groupMap = linkedMapOf<String, MutableList<MethodDefinition>>()
 
 	for ((path, pathItem) in paths) {
@@ -41,6 +57,7 @@ fun parseSpec(rawSpec: JsonObject): ParseResult {
 				httpMethod = method,
 				path = path,
 				operation = operation,
+				rawSpec = rawSpec,
 			)
 
 			groupMap.getOrPut(group) { mutableListOf() }.add(methodDef)
@@ -53,5 +70,5 @@ fun parseSpec(rawSpec: JsonObject): ParseResult {
 	val firstServer = (servers?.firstOrNull() as? JsonObject)
 	val baseUrl = (firstServer?.get("url") as? JsonPrimitive)?.contentOrNull ?: "https://localhost"
 
-	return ParseResult(groups, baseUrl)
+	return ParseResult(groups, baseUrl, componentSchemas, rawSpec)
 }

@@ -60,7 +60,12 @@ fun main() {
 			}
 
 		// Write Types.kt
-		val typesContent = emitKotlinTypesFile(result.groups, config.subPackage)
+		val typesContent = emitKotlinTypesFile(
+			result.groups,
+			config.subPackage,
+			result.componentSchemas,
+			result.rawSpec,
+		)
 		File(outDir, "Types.kt").writeText(typesContent)
 		println("  Types.kt")
 

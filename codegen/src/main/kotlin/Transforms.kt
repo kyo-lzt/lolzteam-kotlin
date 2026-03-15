@@ -336,6 +336,114 @@ fun extractResponseType(operation: JsonObject, spec: JsonObject): String {
 	return schemaToTypeString(schema, spec)
 }
 
+// ─── Typed Response Extraction (ref-aware) ───────────────────────────────────
+
+/** A single property in a response schema, preserving $ref info. */
+data class ResponseProperty(
+	val name: String,
+	val type: String,
+	val componentRef: String?,
+	val isArray: Boolean,
+	val required: Boolean,
+	val inlineProperties: List<ResponseProperty>,
+)
+
+/** Full response schema for an operation. */
+data class ResponseSchema(
+	val properties: List<ResponseProperty>,
+)
+
+/** Extract response schema from the RAW (non-deref'd) operation, preserving $ref names. */
+fun extractResponseSchema(rawOperation: JsonObject, rawSpec: JsonObject): ResponseSchema? {
+	val responses = rawOperation["responses"] as? JsonObject ?: return null
+	val rawSuccess = responses["200"] ?: responses["201"] ?: return null
+	val success = derefShallow(rawSuccess, rawSpec) as? JsonObject ?: return null
+	val content = success["content"] as? JsonObject ?: return null
+	val jsonContent = content["application/json"] as? JsonObject ?: return null
+	val rawSchema = jsonContent["schema"] ?: return null
+	val schema = derefShallow(rawSchema, rawSpec) as? JsonObject ?: return null
+
+	val props = schema["properties"] as? JsonObject ?: return null
+	if (props.isEmpty()) return null
+
+	val requiredSet = (schema["required"] as? JsonArray)
+		?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+		?.toSet() ?: emptySet()
+
+	val result = mutableListOf<ResponseProperty>()
+	for ((name, propValue) in props) {
+		result.add(extractResponseProperty(name, propValue, name in requiredSet, rawSpec))
+	}
+
+	return ResponseSchema(result)
+}
+
+private fun extractResponseProperty(
+	name: String,
+	propValue: JsonElement,
+	required: Boolean,
+	rawSpec: JsonObject,
+): ResponseProperty {
+	if (propValue !is JsonObject) {
+		return ResponseProperty(name, "unknown", null, false, required, emptyList())
+	}
+
+	// Direct $ref to component schema
+	val ref = (propValue["\$ref"] as? JsonPrimitive)?.contentOrNull
+	if (ref != null && ref.startsWith("#/components/schemas/")) {
+		val schemaName = ref.removePrefix("#/components/schemas/")
+		return ResponseProperty(name, schemaName, schemaName, false, required, emptyList())
+	}
+
+	val typeEl = propValue["type"]
+	val type = (typeEl as? JsonPrimitive)?.contentOrNull
+
+	// Array with items referencing component schema
+	if (type == "array") {
+		val items = propValue["items"] as? JsonObject
+		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
+		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
+			val schemaName = itemRef.removePrefix("#/components/schemas/")
+			return ResponseProperty(name, schemaName, schemaName, true, required, emptyList())
+		}
+		// Array of inline objects or primitives
+		val resolvedItems = if (items != null) derefShallow(items, rawSpec) else null
+		val itemType = schemaToTypeString(resolvedItems, rawSpec)
+		val kotlinItemType = tsTypeToKotlin(itemType)
+		return ResponseProperty(name, kotlinItemType, null, true, required, emptyList())
+	}
+
+	// Inline object with properties
+	if (type == "object" || propValue.containsKey("properties")) {
+		val inlineProps = propValue["properties"] as? JsonObject
+		if (inlineProps != null && inlineProps.isNotEmpty()) {
+			val inlineRequiredSet = (propValue["required"] as? JsonArray)
+				?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+				?.toSet() ?: emptySet()
+			val children = inlineProps.map { (childName, childValue) ->
+				extractResponseProperty(childName, childValue, childName in inlineRequiredSet, rawSpec)
+			}
+			return ResponseProperty(name, "inline", null, false, required, children)
+		}
+		return ResponseProperty(name, "JsonObject", null, false, required, emptyList())
+	}
+
+	// Multi-type array: type: ['string', 'integer'] → JsonElement
+	if (typeEl is JsonArray) {
+		return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
+	}
+
+	// Primitive types
+	val kotlinType = when (type) {
+		"string" -> "String"
+		"integer" -> "Long"
+		"number" -> "Double"
+		"boolean" -> "Boolean"
+		else -> "JsonElement"
+	}
+	return ResponseProperty(name, kotlinType, null, false, required, emptyList())
+}
+
 // ─── Method Definition ───────────────────────────────────────────────────────
 
 data class MethodDefinition(
@@ -348,6 +456,7 @@ data class MethodDefinition(
 	val hasBody: Boolean,
 	val bodyRequired: Boolean,
 	val responseType: String,
+	val responseSchema: ResponseSchema? = null,
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
 	val bodyEncoding: String = "form",
@@ -359,11 +468,18 @@ fun extractMethodDefinition(
 	httpMethod: String,
 	path: String,
 	operation: JsonObject,
+	rawSpec: JsonObject = JsonObject(emptyMap()),
 ): MethodDefinition {
 	val spec = JsonObject(emptyMap())
 	val params = extractParameters(operation, spec)
 	val body = extractBody(operation, spec)
 	val responseType = extractResponseType(operation, spec)
+
+	// Extract typed response schema from raw spec (preserving $refs)
+	val rawPaths = rawSpec["paths"] as? JsonObject
+	val rawPathItem = rawPaths?.get(path) as? JsonObject
+	val rawOperation = rawPathItem?.get(httpMethod.lowercase()) as? JsonObject
+	val responseSchema = if (rawOperation != null) extractResponseSchema(rawOperation, rawSpec) else null
 
 	val isGet = httpMethod.uppercase() == "GET"
 
@@ -395,6 +511,7 @@ fun extractMethodDefinition(
 		hasBody = if (isGet) false else rawRequestBody != null,
 		bodyRequired = bodyRequired,
 		responseType = responseType,
+		responseSchema = responseSchema,
 		bodyIsArray = if (isGet) false else body.bodyIsArray,
 		bodyArrayItemType = if (isGet) null else body.bodyArrayItemType,
 		bodyEncoding = if (isGet) "form" else body.bodyEncoding,

@@ -1,5 +1,11 @@
 /** Emit Kotlin source files from parsed OpenAPI data. */
 
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
+
 private const val PACKAGE = "com.lolzteam.api.generated"
 
 // ─── Types File ───────────────────────────────────────────────────────────────
@@ -72,7 +78,147 @@ private fun emitResponseAlias(group: String, method: MethodDefinition): String {
 	return "typealias $typeName = JsonElement"
 }
 
-fun emitKotlinTypesFile(groups: List<ParsedGroup>, subPackage: String): String {
+/** Convert a component schema name (e.g. "Resp_SystemInfo") to PascalCase. */
+private fun componentNameToKotlin(name: String): String =
+	name.split("_").joinToString("") { part ->
+		if (part.isEmpty()) "" else part[0].uppercaseChar() + part.substring(1)
+	}
+
+/** Emit a @Serializable data class for a component schema. */
+fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObject): String {
+	val className = componentNameToKotlin(name)
+	val props = schema["properties"] as? JsonObject
+	if (props == null || props.isEmpty()) {
+		return "typealias $className = JsonObject"
+	}
+
+	val requiredSet = (schema["required"] as? JsonArray)
+		?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+		?.toSet() ?: emptySet()
+
+	val sb = StringBuilder()
+	sb.appendLine("@Serializable")
+	sb.appendLine("data class $className(")
+
+	val fields = props.map { (propName, propValue) ->
+		val required = propName in requiredSet
+		val propObj = propValue as? JsonObject
+		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec)
+		val nullable = if (required) "" else "?"
+		val default = if (required) "" else " = null"
+		val camelName = safeKotlinName(propName)
+		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
+		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+	}
+
+	sb.appendLine(fields.joinToString("\n"))
+	sb.append(")")
+	return sb.toString()
+}
+
+/** Resolve a property schema to a Kotlin type, handling refs and primitives. */
+private fun resolvePropertyKotlinType(propObj: JsonObject?, rawSpec: JsonObject): String {
+	if (propObj == null) return "JsonElement"
+
+	// Check for $ref
+	val ref = (propObj["\$ref"] as? JsonPrimitive)?.contentOrNull
+	if (ref != null && ref.startsWith("#/components/schemas/")) {
+		return componentNameToKotlin(ref.removePrefix("#/components/schemas/"))
+	}
+
+	val typeEl = propObj["type"]
+
+	// Multi-type
+	if (typeEl is JsonArray) return "JsonElement"
+
+	val type = (typeEl as? JsonPrimitive)?.contentOrNull
+
+	if (type == "array") {
+		val items = propObj["items"] as? JsonObject
+		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
+		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
+			return "List<${componentNameToKotlin(itemRef.removePrefix("#/components/schemas/"))}>"
+		}
+		val resolvedItems = if (items != null) derefShallow(items, rawSpec) else null
+		val itemType = schemaToTypeString(resolvedItems, rawSpec)
+		return "List<${tsTypeToKotlin(itemType)}>"
+	}
+
+	if (type == "object" || propObj.containsKey("properties")) {
+		val innerProps = propObj["properties"] as? JsonObject
+		if (innerProps == null || innerProps.isEmpty()) return "JsonObject"
+		return "JsonObject"  // inline objects → JsonObject for simplicity
+	}
+
+	return when (type) {
+		"string" -> "String"
+		"integer" -> "Long"
+		"number" -> "Double"
+		"boolean" -> "Boolean"
+		else -> "JsonElement"
+	}
+}
+
+/** Emit a typed @Serializable data class for a response. */
+private fun emitResponseClass(
+	group: String,
+	method: MethodDefinition,
+	componentSchemaNames: Set<String>,
+	rawSpec: JsonObject,
+): String {
+	val typeName = "${buildTypeName(group, method.methodName)}Response"
+	val schema = method.responseSchema ?: return "typealias $typeName = JsonElement"
+
+	if (schema.properties.isEmpty()) return "typealias $typeName = JsonElement"
+
+	val sb = StringBuilder()
+	sb.appendLine("@Serializable")
+	sb.appendLine("data class $typeName(")
+
+	val fields = schema.properties.map { prop ->
+		val kotlinType = responsePropertyToKotlinType(prop, typeName, componentSchemaNames)
+		val nullable = "?"
+		val default = " = null"
+		val camelName = safeKotlinName(prop.name)
+		val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
+		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+	}
+
+	sb.appendLine(fields.joinToString("\n"))
+	sb.append(")")
+	return sb.toString()
+}
+
+private fun responsePropertyToKotlinType(
+	prop: ResponseProperty,
+	parentTypeName: String,
+	componentSchemaNames: Set<String>,
+): String {
+	// Component schema ref
+	if (prop.componentRef != null) {
+		val kotlinName = componentNameToKotlin(prop.componentRef)
+		return if (prop.isArray) "List<$kotlinName>" else kotlinName
+	}
+
+	// Array of non-ref type
+	if (prop.isArray) {
+		return "List<${prop.type}>"
+	}
+
+	// Inline object with properties → JsonObject (keeping it simple)
+	if (prop.type == "inline") {
+		return "JsonObject"
+	}
+
+	return prop.type
+}
+
+fun emitKotlinTypesFile(
+	groups: List<ParsedGroup>,
+	subPackage: String,
+	componentSchemas: Map<String, JsonObject> = emptyMap(),
+	rawSpec: JsonObject = JsonObject(emptyMap()),
+): String {
 	val sb = StringBuilder()
 	val fullPackage = "$PACKAGE.$subPackage"
 
@@ -86,6 +232,22 @@ fun emitKotlinTypesFile(groups: List<ParsedGroup>, subPackage: String): String {
 	sb.appendLine("import kotlinx.serialization.json.JsonObject")
 	sb.appendLine()
 
+	// Emit component schema classes
+	if (componentSchemas.isNotEmpty()) {
+		sb.appendLine("// ─── Component Schemas ────────────────────────────────────────")
+		sb.appendLine()
+		val schemaClasses = componentSchemas.mapNotNull { (name, schema) ->
+			// Skip non-object schemas (e.g. UserIDModel which is a union type)
+			val props = schema["properties"] as? JsonObject
+			if (props == null || props.isEmpty()) return@mapNotNull null
+			emitComponentSchemaClass(name, schema, rawSpec)
+		}
+		sb.appendLine(schemaClasses.joinToString("\n\n"))
+		sb.appendLine()
+	}
+
+	val componentSchemaNames = componentSchemas.keys.toSet()
+
 	for (group in groups) {
 		val groupTypes = mutableListOf<String>()
 
@@ -96,7 +258,7 @@ fun emitKotlinTypesFile(groups: List<ParsedGroup>, subPackage: String): String {
 			val bodyType = emitBodyClass(group.groupName, method)
 			if (bodyType != null) groupTypes.add(bodyType)
 
-			groupTypes.add(emitResponseAlias(group.groupName, method))
+			groupTypes.add(emitResponseClass(group.groupName, method, componentSchemaNames, rawSpec))
 		}
 
 		if (groupTypes.isNotEmpty()) {
@@ -168,6 +330,11 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	val hasByteArrayFields = method.bodyProperties.any { it.type == "Blob" }
 	val isMultipart = method.bodyEncoding == "multipart"
 	val isJsonBody = method.bodyEncoding == "json"
+	val isTypedResponse = method.responseSchema != null
+
+	// For typed responses, wrap http.request() with deserialization
+	val returnPrefix = if (isTypedResponse) "return http.json.decodeFromJsonElement(serializer(), http.request(" else "return http.request("
+	val returnSuffix = if (isTypedResponse) "))" else ")"
 
 	sb.appendLine("\tsuspend fun ${method.methodName}($argStr): $responseName {")
 
@@ -208,7 +375,7 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 		buildLines.add("$indent}")
 
 		val requestLines = mutableListOf<String>()
-		requestLines.add("${indent}return http.request(RequestOptions(")
+		requestLines.add("${indent}${returnPrefix}RequestOptions(")
 		requestLines.add("$indent\tmethod = \"${method.httpMethod}\",")
 		requestLines.add("$indent\tpath = $pathExpr,")
 		if (serializableProps.isNotEmpty()) {
@@ -225,7 +392,7 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			requestLines.add("$indent\tisSearch = true,")
 		}
 
-		requestLines.add("$indent))")
+		requestLines.add("$indent)$returnSuffix")
 
 		if (method.bodyRequired) {
 			for (line in buildLines) sb.appendLine(line)
@@ -235,7 +402,7 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			for (line in buildLines) sb.appendLine(line)
 			for (line in requestLines) sb.appendLine(line)
 			sb.appendLine("\t\t} else {")
-			sb.appendLine("\t\t\treturn http.request(RequestOptions(")
+			sb.appendLine("\t\t\t${returnPrefix}RequestOptions(")
 			sb.appendLine("\t\t\t\tmethod = \"${method.httpMethod}\",")
 			sb.appendLine("\t\t\t\tpath = $pathExpr,")
 			sb.appendLine("\t\t\t\tbodyEncoding = \"multipart\",")
@@ -245,11 +412,11 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			if (isSearch) {
 				sb.appendLine("\t\t\t\tisSearch = true,")
 			}
-			sb.appendLine("\t\t\t))")
+			sb.appendLine("\t\t\t)$returnSuffix")
 			sb.appendLine("\t\t}")
 		}
 	} else {
-		sb.appendLine("\t\treturn http.request(RequestOptions(")
+		sb.appendLine("\t\t${returnPrefix}RequestOptions(")
 		sb.appendLine("\t\t\tmethod = \"${method.httpMethod}\",")
 		sb.appendLine("\t\t\tpath = $pathExpr,")
 
@@ -274,7 +441,7 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			sb.appendLine("\t\t\tisSearch = true,")
 		}
 
-		sb.appendLine("\t\t))")
+		sb.appendLine("\t\t)$returnSuffix")
 	}
 
 	sb.append("\t}")
@@ -325,6 +492,7 @@ fun emitKotlinClientFile(
 	sb.appendLine("import com.lolzteam.api.runtime.RateLimitConfig")
 	sb.appendLine("import com.lolzteam.api.runtime.RequestOptions")
 	sb.appendLine("import kotlinx.serialization.json.JsonElement")
+	sb.appendLine("import kotlinx.serialization.json.decodeFromJsonElement")
 	if (needsMultipartBuilders) {
 		sb.appendLine("import kotlinx.serialization.json.buildJsonObject")
 		sb.appendLine("import kotlinx.serialization.json.put")
