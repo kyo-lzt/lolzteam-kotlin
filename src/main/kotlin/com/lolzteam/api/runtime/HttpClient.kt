@@ -146,7 +146,11 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
             throw createHttpException(response.status.value, bodyText, response.headers)
         }
 
-        return json.parseToJsonElement(bodyText)
+        return try {
+            json.parseToJsonElement(bodyText)
+        } catch (e: Exception) {
+            throw NetworkException(e)
+        }
     }
 
     private fun buildQueryString(query: JsonElement?): String {

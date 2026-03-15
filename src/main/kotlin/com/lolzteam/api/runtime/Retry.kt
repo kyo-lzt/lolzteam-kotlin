@@ -34,8 +34,12 @@ suspend fun <T> withRetry(
             return block()
         } catch (e: Throwable) {
             lastError = e
-            if (!isRetryable(e) || attempt == config.maxRetries) {
+            if (!isRetryable(e)) {
                 throw e
+            }
+            if (attempt == config.maxRetries) {
+                if (attempt == 0) throw e
+                throw RetryExhaustedError(attempts = attempt + 1, lastError = e)
             }
             val delayMs = computeDelay(attempt, config, e)
             if (onRetry != null && e is LolzteamException) {
@@ -50,5 +54,5 @@ suspend fun <T> withRetry(
             delay(delayMs)
         }
     }
-    throw lastError!!
+    throw RetryExhaustedError(attempts = config.maxRetries + 1, lastError = lastError!!)
 }

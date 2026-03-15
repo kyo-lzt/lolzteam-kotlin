@@ -10,7 +10,7 @@ open class HttpException(
     val status: Int,
     val body: String?,
     val responseHeaders: Headers,
-) : LolzteamException("HTTP $status")
+) : LolzteamException("HTTP $status${body?.let { ": ${it.take(200)}" } ?: ""}")
 
 class RateLimitException(
     body: String?,
@@ -44,6 +44,11 @@ class NetworkException(override val cause: Throwable) : LolzteamException(cause.
                 cause is java.net.ConnectException ||
                 cause is io.ktor.client.network.sockets.ConnectTimeoutException
 }
+
+class RetryExhaustedError(
+    val attempts: Int,
+    val lastError: Throwable,
+) : LolzteamException("Request failed after $attempts attempts: ${lastError.message}", lastError)
 
 class ConfigException(message: String) : LolzteamException(message)
 

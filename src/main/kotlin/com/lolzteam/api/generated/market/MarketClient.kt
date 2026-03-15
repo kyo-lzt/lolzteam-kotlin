@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.serializer
 import java.io.Closeable
 
-class CategoryApi(private val http: LolzteamHttpClient) {
+public class CategoryApi(private val http: LolzteamHttpClient) {
 
 	suspend fun all(params: CategoryAllParams? = null): CategoryAllResponse {
 		return http.request(RequestOptions(
@@ -264,7 +264,7 @@ class CategoryApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ListApi(private val http: LolzteamHttpClient) {
+public class ListApi(private val http: LolzteamHttpClient) {
 
 	suspend fun user(params: ListUserParams? = null): ListUserResponse {
 		return http.request(RequestOptions(
@@ -316,7 +316,7 @@ class ListApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ManagingApi(private val http: LolzteamHttpClient) {
+public class ManagingApi(private val http: LolzteamHttpClient) {
 
 	suspend fun get(itemId: Int, params: ManagingGetParams? = null): ManagingGetResponse {
 		return http.request(RequestOptions(
@@ -643,7 +643,7 @@ class ManagingApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ProfileApi(private val http: LolzteamHttpClient) {
+public class ProfileApi(private val http: LolzteamHttpClient) {
 
 	suspend fun claims(params: ProfileClaimsParams? = null): ProfileClaimsResponse {
 		return http.request(RequestOptions(
@@ -672,7 +672,7 @@ class ProfileApi(private val http: LolzteamHttpClient) {
 }
 
 
-class CartApi(private val http: LolzteamHttpClient) {
+public class CartApi(private val http: LolzteamHttpClient) {
 
 	suspend fun get(params: CartGetParams? = null): CartGetResponse {
 		return http.request(RequestOptions(
@@ -702,7 +702,7 @@ class CartApi(private val http: LolzteamHttpClient) {
 }
 
 
-class PurchasingApi(private val http: LolzteamHttpClient) {
+public class PurchasingApi(private val http: LolzteamHttpClient) {
 
 	suspend fun fastBuy(itemId: Int, body: PurchasingFastBuyBody? = null): PurchasingFastBuyResponse {
 		return http.request(RequestOptions(
@@ -747,7 +747,7 @@ class PurchasingApi(private val http: LolzteamHttpClient) {
 }
 
 
-class CustomDiscountsApi(private val http: LolzteamHttpClient) {
+public class CustomDiscountsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun get(): CustomDiscountsGetResponse {
 		return http.request(RequestOptions(
@@ -785,7 +785,7 @@ class CustomDiscountsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class PublishingApi(private val http: LolzteamHttpClient) {
+public class PublishingApi(private val http: LolzteamHttpClient) {
 
 	suspend fun fastSell(body: PublishingFastSellBody? = null): PublishingFastSellResponse {
 		return http.request(RequestOptions(
@@ -825,7 +825,7 @@ class PublishingApi(private val http: LolzteamHttpClient) {
 }
 
 
-class PaymentsApi(private val http: LolzteamHttpClient) {
+public class PaymentsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun invoiceGet(params: PaymentsInvoiceGetParams? = null): PaymentsInvoiceGetResponse {
 		return http.request(RequestOptions(
@@ -927,7 +927,7 @@ class PaymentsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class AutoPaymentsApi(private val http: LolzteamHttpClient) {
+public class AutoPaymentsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(): AutoPaymentsListResponse {
 		return http.request(RequestOptions(
@@ -956,7 +956,7 @@ class AutoPaymentsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ProxyApi(private val http: LolzteamHttpClient) {
+public class ProxyApi(private val http: LolzteamHttpClient) {
 
 	suspend fun get(): ProxyGetResponse {
 		return http.request(RequestOptions(
@@ -985,7 +985,7 @@ class ProxyApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ImapApi(private val http: LolzteamHttpClient) {
+public class ImapApi(private val http: LolzteamHttpClient) {
 
 	suspend fun create(body: ImapCreateBody? = null): ImapCreateResponse {
 		return http.request(RequestOptions(
@@ -1007,7 +1007,7 @@ class ImapApi(private val http: LolzteamHttpClient) {
 }
 
 
-class BatchApi(private val http: LolzteamHttpClient) {
+public class BatchApi(private val http: LolzteamHttpClient) {
 
 	suspend fun batch(body: BatchBatchBody): BatchBatchResponse {
 		return http.request(RequestOptions(

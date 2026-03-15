@@ -126,9 +126,15 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	// Build argument list
 	val args = mutableListOf<String>()
 
-	// Path params
+	// Path params — use native Kotlin types instead of JsonElement
 	for (param in method.params.pathParams) {
-		val kotlinType = tsTypeToKotlin(param.type)
+		val kotlinType = when (param.type) {
+			"integer" -> "Int"
+			"string" -> "String"
+			"number" -> "Double"
+			"boolean" -> "Boolean"
+			else -> tsTypeToKotlin(param.type)
+		}
 		args.add("${snakeToCamel(param.name)}: $kotlinType")
 	}
 
@@ -274,7 +280,7 @@ private fun emitGroupClass(group: ParsedGroup, searchGroups: Set<String> = empty
 	val isSearch = group.groupName in searchGroups
 	val sb = StringBuilder()
 
-	sb.appendLine("class $className(private val http: LolzteamHttpClient) {")
+	sb.appendLine("public class $className(private val http: LolzteamHttpClient) {")
 
 	for (method in group.methods) {
 		sb.appendLine()

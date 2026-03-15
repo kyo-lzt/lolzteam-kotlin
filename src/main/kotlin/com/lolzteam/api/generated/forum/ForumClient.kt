@@ -12,7 +12,7 @@ import kotlinx.serialization.json.put
 import kotlinx.serialization.serializer
 import java.io.Closeable
 
-class OAuthApi(private val http: LolzteamHttpClient) {
+public class OAuthApi(private val http: LolzteamHttpClient) {
 
 	suspend fun token(body: OAuthTokenBody): OAuthTokenResponse {
 		return http.request(RequestOptions(
@@ -25,7 +25,7 @@ class OAuthApi(private val http: LolzteamHttpClient) {
 }
 
 
-class AssetsApi(private val http: LolzteamHttpClient) {
+public class AssetsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun css(params: AssetsCssParams? = null): AssetsCssResponse {
 		return http.request(RequestOptions(
@@ -37,7 +37,7 @@ class AssetsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class CategoriesApi(private val http: LolzteamHttpClient) {
+public class CategoriesApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: CategoriesListParams? = null): CategoriesListResponse {
 		return http.request(RequestOptions(
@@ -56,7 +56,7 @@ class CategoriesApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ForumsApi(private val http: LolzteamHttpClient) {
+public class ForumsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: ForumsListParams? = null): ForumsListResponse {
 		return http.request(RequestOptions(
@@ -129,7 +129,7 @@ class ForumsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class LinksApi(private val http: LolzteamHttpClient) {
+public class LinksApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(): LinksListResponse {
 		return http.request(RequestOptions(
@@ -147,7 +147,7 @@ class LinksApi(private val http: LolzteamHttpClient) {
 }
 
 
-class PagesApi(private val http: LolzteamHttpClient) {
+public class PagesApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: PagesListParams? = null): PagesListResponse {
 		return http.request(RequestOptions(
@@ -166,7 +166,7 @@ class PagesApi(private val http: LolzteamHttpClient) {
 }
 
 
-class NavigationApi(private val http: LolzteamHttpClient) {
+public class NavigationApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: NavigationListParams? = null): NavigationListResponse {
 		return http.request(RequestOptions(
@@ -178,7 +178,7 @@ class NavigationApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ThreadsApi(private val http: LolzteamHttpClient) {
+public class ThreadsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: ThreadsListParams? = null): ThreadsListResponse {
 		return http.request(RequestOptions(
@@ -357,7 +357,7 @@ class ThreadsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class PostsApi(private val http: LolzteamHttpClient) {
+public class PostsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: PostsListParams? = null): PostsListResponse {
 		return http.request(RequestOptions(
@@ -485,7 +485,7 @@ class PostsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class UsersApi(private val http: LolzteamHttpClient) {
+public class UsersApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: UsersListParams? = null): UsersListResponse {
 		return http.request(RequestOptions(
@@ -725,7 +725,7 @@ class UsersApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ProfilePostsApi(private val http: LolzteamHttpClient) {
+public class ProfilePostsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(userId: JsonElement, params: ProfilePostsListParams? = null): ProfilePostsListResponse {
 		return http.request(RequestOptions(
@@ -872,7 +872,7 @@ class ProfilePostsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ConversationsApi(private val http: LolzteamHttpClient) {
+public class ConversationsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: ConversationsListParams? = null): ConversationsListResponse {
 		return http.request(RequestOptions(
@@ -1059,7 +1059,7 @@ class ConversationsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class NotificationsApi(private val http: LolzteamHttpClient) {
+public class NotificationsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: NotificationsListParams? = null): NotificationsListResponse {
 		return http.request(RequestOptions(
@@ -1087,7 +1087,7 @@ class NotificationsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class TagsApi(private val http: LolzteamHttpClient) {
+public class TagsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun popular(): TagsPopularResponse {
 		return http.request(RequestOptions(
@@ -1122,7 +1122,7 @@ class TagsApi(private val http: LolzteamHttpClient) {
 }
 
 
-class SearchApi(private val http: LolzteamHttpClient) {
+public class SearchApi(private val http: LolzteamHttpClient) {
 
 	suspend fun all(body: SearchAllBody? = null): SearchAllResponse {
 		return http.request(RequestOptions(
@@ -1188,7 +1188,7 @@ class SearchApi(private val http: LolzteamHttpClient) {
 }
 
 
-class BatchApi(private val http: LolzteamHttpClient) {
+public class BatchApi(private val http: LolzteamHttpClient) {
 
 	suspend fun execute(body: BatchExecuteBody? = null): BatchExecuteResponse {
 		return http.request(RequestOptions(
@@ -1201,7 +1201,7 @@ class BatchApi(private val http: LolzteamHttpClient) {
 }
 
 
-class ChatboxApi(private val http: LolzteamHttpClient) {
+public class ChatboxApi(private val http: LolzteamHttpClient) {
 
 	suspend fun index(params: ChatboxIndexParams? = null): ChatboxIndexResponse {
 		return http.request(RequestOptions(
@@ -1306,7 +1306,7 @@ class ChatboxApi(private val http: LolzteamHttpClient) {
 }
 
 
-class FormsApi(private val http: LolzteamHttpClient) {
+public class FormsApi(private val http: LolzteamHttpClient) {
 
 	suspend fun list(params: FormsListParams? = null): FormsListResponse {
 		return http.request(RequestOptions(

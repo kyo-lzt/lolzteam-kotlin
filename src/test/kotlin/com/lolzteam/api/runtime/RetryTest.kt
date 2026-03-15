@@ -5,6 +5,7 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.milliseconds
 
 class RetryTest {
@@ -59,13 +60,15 @@ class RetryTest {
 	@Test
 	fun `throws after max retries exhausted`() = runTest {
 		var attempts = 0
-		assertFailsWith<RateLimitException> {
+		val error = assertFailsWith<RetryExhaustedError> {
 			withRetry(RetryConfig(maxRetries = 2, baseDelay = 10.milliseconds, maxDelay = 50.milliseconds), method = "GET", path = "/test") {
 				attempts++
 				throw RateLimitException("rate limited", Headers.Empty)
 			}
 		}
 		assertEquals(3, attempts) // initial + 2 retries
+		assertEquals(3, error.attempts)
+		assertTrue(error.lastError is RateLimitException)
 	}
 
 	@Test
