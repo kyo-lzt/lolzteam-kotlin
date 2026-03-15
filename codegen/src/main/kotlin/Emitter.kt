@@ -8,9 +8,44 @@ import kotlinx.serialization.json.jsonPrimitive
 
 private const val PACKAGE = "com.lolzteam.api.generated"
 
+/** Format a schema default value as a Kotlin literal matching the target type. */
+private fun formatKotlinDefault(value: String, kotlinType: String, enumValues: List<String>? = null): String {
+	// If this is an enum type, resolve to the enum variant
+	if (enumValues != null && kotlinType != "String" && kotlinType != "Long" && kotlinType != "Double" && kotlinType != "Boolean") {
+		val valueType = if (enumValues.all { it.toLongOrNull() != null }) "Long" else "String"
+		val variantName = enumVariantName(value, valueType)
+		return "$kotlinType.$variantName"
+	}
+	return when (kotlinType) {
+		"String" -> "\"$value\""
+		"Long" -> "${value}L"
+		"Double" -> if ('.' in value) value else "$value.0"
+		"Boolean" -> value
+		else -> "\"$value\""
+	}
+}
+
 // ─── Types File ───────────────────────────────────────────────────────────────
 
-private fun emitQueryParamsClass(group: String, method: MethodDefinition): String? {
+/** Resolve the Kotlin type for a param/body property, using enum lookup if available. */
+private fun resolveFieldType(
+	baseType: String,
+	paramName: String,
+	enumValues: List<String>?,
+	enumLookup: Map<Pair<String, List<String>>, String>,
+): String {
+	if (enumValues != null) {
+		val enumTypeName = enumLookup[Pair(paramName, enumValues)]
+		if (enumTypeName != null) return enumTypeName
+	}
+	return tsTypeToKotlin(baseType)
+}
+
+private fun emitQueryParamsClass(
+	group: String,
+	method: MethodDefinition,
+	enumLookup: Map<Pair<String, List<String>>, String> = emptyMap(),
+): String? {
 	if (method.params.queryParams.isEmpty()) return null
 
 	val typeName = "${buildTypeName(group, method.methodName)}Params"
@@ -18,14 +53,25 @@ private fun emitQueryParamsClass(group: String, method: MethodDefinition): Strin
 	sb.appendLine("@Serializable")
 	sb.appendLine("data class $typeName(")
 
-	val props = method.params.queryParams.map { param ->
-		val kotlinType = tsTypeToKotlin(param.type)
-		val nullable = if (param.required) "" else "?"
-		val fullType = "$kotlinType$nullable"
+	// Sort: required-no-default first, then fields with defaults
+	val sorted = method.params.queryParams.sortedBy { if (it.required && it.defaultValue == null) 0 else 1 }
+
+	val props = sorted.map { param ->
+		val kotlinType = resolveFieldType(param.type, param.name, param.enumValues, enumLookup)
+		val hasDefault = param.defaultValue != null
+		val needsNullable = !param.required && !hasDefault
+		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(param.name)
 		val serialName = if (needsSerialName(param.name)) "\t@SerialName(\"${param.name}\")\n" else ""
-		val default = if (param.required) "" else " = null"
-		"$serialName\tval $camelName: $fullType$default,"
+		val doc = if (hasDefault) "\t/** Default: ${param.defaultValue} */\n" else ""
+		val default = if (hasDefault) {
+			" = ${formatKotlinDefault(param.defaultValue!!, kotlinType, param.enumValues)}"
+		} else if (!param.required) {
+			" = null"
+		} else {
+			""
+		}
+		"$doc$serialName\tval $camelName: $fullType$default,"
 	}
 
 	sb.appendLine(props.joinToString("\n"))
@@ -33,10 +79,19 @@ private fun emitQueryParamsClass(group: String, method: MethodDefinition): Strin
 	return sb.toString()
 }
 
-private fun emitBodyClass(group: String, method: MethodDefinition): String? {
+private fun emitBodyClass(
+	group: String,
+	method: MethodDefinition,
+	enumLookup: Map<Pair<String, List<String>>, String> = emptyMap(),
+): String? {
 	if (!method.hasBody) return null
 
 	val typeName = "${buildTypeName(group, method.methodName)}Body"
+
+	// Discriminated union → sealed interface + data classes
+	if (method.discriminatedUnion != null) {
+		return emitDiscriminatedUnionBody(typeName, method, enumLookup)
+	}
 
 	// Array body → typealias
 	if (method.bodyIsArray) {
@@ -57,15 +112,30 @@ private fun emitBodyClass(group: String, method: MethodDefinition): String? {
 		sb.appendLine("data class $typeName(")
 	}
 
-	val props = method.bodyProperties.map { prop ->
-		val kotlinType = if (prop.type == "Blob") "ByteArray" else tsTypeToKotlin(prop.type)
-		val nullable = if (prop.required) "" else "?"
-		val fullType = "$kotlinType$nullable"
+	// Sort: required-no-default first, then fields with defaults
+	val sortedProps = method.bodyProperties.sortedBy { if (it.required && it.defaultValue == null) 0 else 1 }
+
+	val props = sortedProps.map { prop ->
+		val kotlinType = if (prop.type == "Blob") {
+			"ByteArray"
+		} else {
+			resolveFieldType(prop.type, prop.name, prop.enumValues, enumLookup)
+		}
+		val hasDefault = prop.defaultValue != null
+		val needsNullable = !prop.required && !hasDefault
+		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(prop.name)
 		val skipSerialName = hasByteArrayFields
 		val serialName = if (!skipSerialName && needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
-		val default = if (prop.required) "" else " = null"
-		"$serialName\tval $camelName: $fullType$default,"
+		val doc = if (hasDefault) "\t/** Default: ${prop.defaultValue} */\n" else ""
+		val default = if (hasDefault) {
+			" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
+		} else if (!prop.required) {
+			" = null"
+		} else {
+			""
+		}
+		"$doc$serialName\tval $camelName: $fullType$default,"
 	}
 
 	sb.appendLine(props.joinToString("\n"))
@@ -73,9 +143,73 @@ private fun emitBodyClass(group: String, method: MethodDefinition): String? {
 	return sb.toString()
 }
 
+private fun emitDiscriminatedUnionBody(
+	typeName: String,
+	method: MethodDefinition,
+	enumLookup: Map<Pair<String, List<String>>, String>,
+): String {
+	val union = method.discriminatedUnion!!
+	val sb = StringBuilder()
+
+	// Build variant class names
+	val variantNames = union.variants.map { variant ->
+		typeName + discriminatorValueToSuffix(variant.discriminatorValue)
+	}
+
+	// Sealed interface
+	sb.appendLine("@Serializable")
+	sb.appendLine("@JsonClassDiscriminator(\"${union.discriminatorProperty}\")")
+	sb.appendLine("sealed interface $typeName")
+
+	// Emit each variant data class
+	for ((i, variant) in union.variants.withIndex()) {
+		val variantClassName = variantNames[i]
+
+		sb.appendLine()
+		sb.appendLine("@Serializable")
+		sb.appendLine("@SerialName(\"${variant.discriminatorValue}\")")
+		sb.appendLine("data class $variantClassName(")
+
+		val props = variant.properties.map { prop ->
+			val kotlinType = resolveFieldType(prop.type, prop.name, prop.enumValues, enumLookup)
+			val hasDefault = prop.defaultValue != null
+			val needsNullable = !prop.required && !hasDefault
+			val fullType = if (needsNullable) "$kotlinType?" else kotlinType
+			val camelName = safeKotlinName(prop.name)
+			val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
+			val doc = if (hasDefault) "\t/** Default: ${prop.defaultValue} */\n" else ""
+			val default = if (hasDefault) {
+				" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
+			} else if (!prop.required) {
+				" = null"
+			} else {
+				""
+			}
+			"$doc$serialName\tval $camelName: $fullType$default,"
+		}
+
+		sb.appendLine(props.joinToString("\n"))
+		sb.append(") : $typeName")
+	}
+
+	return sb.toString()
+}
+
+/**
+ * Convert a discriminator value to a PascalCase suffix for the variant class name.
+ * e.g. "client_credentials" → "ClientCredentials", "1" → "V1"
+ */
+private fun discriminatorValueToSuffix(value: String): String {
+	if (value.matches(Regex("-?\\d+"))) {
+		return "V$value"
+	}
+	return snakeToPascal(value)
+}
+
 private fun emitResponseAlias(group: String, method: MethodDefinition): String {
 	val typeName = "${buildTypeName(group, method.methodName)}Response"
-	return "typealias $typeName = JsonElement"
+	val targetType = if (method.responseIsHtml) "String" else "JsonElement"
+	return "typealias $typeName = $targetType"
 }
 
 /** Convert a component schema name (e.g. "Resp_SystemInfo") to PascalCase. */
@@ -234,6 +368,9 @@ private fun emitResponseClass(
 	rawSpec: JsonObject,
 ): String {
 	val typeName = "${buildTypeName(group, method.methodName)}Response"
+
+	if (method.responseIsHtml) return "typealias $typeName = String"
+
 	val rawSchema = method.rawResponseSchema
 	val schema = method.responseSchema ?: return "typealias $typeName = JsonElement"
 
@@ -313,11 +450,69 @@ private fun responsePropertyToKotlinType(
 	return prop.type
 }
 
+/** Emit a single enum class definition. */
+private fun emitEnumClass(def: EnumDefinition): String {
+	val sb = StringBuilder()
+	sb.appendLine("@Serializable(with = ${def.typeName}Serializer::class)")
+	sb.appendLine("enum class ${def.typeName}(val value: ${def.valueType}) {")
+
+	val variants = def.values.mapIndexed { i, value ->
+		val variantName = enumVariantName(value, def.valueType)
+		val literal = if (def.valueType == "Long") value else "\"$value\""
+		val suffix = if (i < def.values.size - 1) "," else ";"
+		"\t$variantName($literal)$suffix"
+	}
+	sb.appendLine(variants.joinToString("\n"))
+
+	sb.appendLine("}")
+	return sb.toString()
+}
+
+/** Emit a KSerializer object for an enum class. */
+private fun emitEnumSerializer(def: EnumDefinition): String {
+	val sb = StringBuilder()
+	val name = def.typeName
+	val primitiveSerializer = if (def.valueType == "Long") {
+		"PrimitiveKind.LONG"
+	} else {
+		"PrimitiveKind.STRING"
+	}
+
+	sb.appendLine("internal object ${name}Serializer : KSerializer<$name> {")
+	sb.appendLine("\toverride val descriptor: SerialDescriptor =")
+	sb.appendLine("\t\tPrimitiveSerialDescriptor(\"$name\", $primitiveSerializer)")
+	sb.appendLine()
+
+	if (def.valueType == "Long") {
+		sb.appendLine("\toverride fun serialize(encoder: Encoder, value: $name) {")
+		sb.appendLine("\t\tencoder.encodeLong(value.value)")
+		sb.appendLine("\t}")
+		sb.appendLine()
+		sb.appendLine("\toverride fun deserialize(decoder: Decoder): $name {")
+		sb.appendLine("\t\tval v = decoder.decodeLong()")
+		sb.appendLine("\t\treturn $name.entries.first { it.value == v }")
+		sb.appendLine("\t}")
+	} else {
+		sb.appendLine("\toverride fun serialize(encoder: Encoder, value: $name) {")
+		sb.appendLine("\t\tencoder.encodeString(value.value)")
+		sb.appendLine("\t}")
+		sb.appendLine()
+		sb.appendLine("\toverride fun deserialize(decoder: Decoder): $name {")
+		sb.appendLine("\t\tval v = decoder.decodeString()")
+		sb.appendLine("\t\treturn $name.entries.first { it.value == v }")
+		sb.appendLine("\t}")
+	}
+
+	sb.appendLine("}")
+	return sb.toString()
+}
+
 fun emitKotlinTypesFile(
 	groups: List<ParsedGroup>,
 	subPackage: String,
 	componentSchemas: Map<String, JsonObject> = emptyMap(),
 	rawSpec: JsonObject = JsonObject(emptyMap()),
+	enumResult: EnumRegistry.BuildResult = EnumRegistry.BuildResult(emptyList(), emptyMap()),
 ): String {
 	val sb = StringBuilder()
 	val fullPackage = "$PACKAGE.$subPackage"
@@ -326,11 +521,31 @@ fun emitKotlinTypesFile(
 	sb.appendLine()
 	sb.appendLine("package $fullPackage")
 	sb.appendLine()
+	sb.appendLine("import kotlinx.serialization.KSerializer")
 	sb.appendLine("import kotlinx.serialization.SerialName")
 	sb.appendLine("import kotlinx.serialization.Serializable")
+	sb.appendLine("import kotlinx.serialization.descriptors.PrimitiveKind")
+	sb.appendLine("import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor")
+	sb.appendLine("import kotlinx.serialization.descriptors.SerialDescriptor")
+	sb.appendLine("import kotlinx.serialization.encoding.Decoder")
+	sb.appendLine("import kotlinx.serialization.encoding.Encoder")
+	sb.appendLine("import kotlinx.serialization.json.JsonClassDiscriminator")
 	sb.appendLine("import kotlinx.serialization.json.JsonElement")
 	sb.appendLine("import kotlinx.serialization.json.JsonObject")
+	sb.appendLine("import com.lolzteam.api.runtime.StringOrInt")
 	sb.appendLine()
+
+	// Emit enum classes
+	if (enumResult.definitions.isNotEmpty()) {
+		sb.appendLine("// ─── Enums ───────────────────────────────────────────────────────")
+		sb.appendLine()
+		for (def in enumResult.definitions) {
+			sb.appendLine(emitEnumClass(def))
+			sb.appendLine()
+			sb.appendLine(emitEnumSerializer(def))
+			sb.appendLine()
+		}
+	}
 
 	// Emit component schema classes
 	if (componentSchemas.isNotEmpty()) {
@@ -347,15 +562,16 @@ fun emitKotlinTypesFile(
 	}
 
 	val componentSchemaNames = componentSchemas.keys.toSet()
+	val enumLookup = enumResult.lookup
 
 	for (group in groups) {
 		val groupTypes = mutableListOf<String>()
 
 		for (method in group.methods) {
-			val queryType = emitQueryParamsClass(group.groupName, method)
+			val queryType = emitQueryParamsClass(group.groupName, method, enumLookup)
 			if (queryType != null) groupTypes.add(queryType)
 
-			val bodyType = emitBodyClass(group.groupName, method)
+			val bodyType = emitBodyClass(group.groupName, method, enumLookup)
 			if (bodyType != null) groupTypes.add(bodyType)
 
 			groupTypes.add(emitResponseClass(group.groupName, method, componentSchemaNames, rawSpec))
@@ -430,11 +646,17 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	val hasByteArrayFields = method.bodyProperties.any { it.type == "Blob" }
 	val isMultipart = method.bodyEncoding == "multipart"
 	val isJsonBody = method.bodyEncoding == "json"
-	val isTypedResponse = method.responseSchema != null
+	val isTypedResponse = method.responseSchema != null && !method.responseIsHtml
 
-	// For typed responses, wrap http.request() with deserialization
-	val returnPrefix = if (isTypedResponse) "return http.json.decodeFromJsonElement(serializer(), http.request(" else "return http.request("
-	val returnSuffix = if (isTypedResponse) "))" else ")"
+	// For HTML responses, use requestText(); for typed responses, wrap with deserialization
+	val returnPrefix = if (method.responseIsHtml) {
+		"return http.requestText("
+	} else if (isTypedResponse) {
+		"return http.json.decodeFromJsonElement(serializer(), http.request("
+	} else {
+		"return http.request("
+	}
+	val returnSuffix = if (method.responseIsHtml) ")" else if (isTypedResponse) "))" else ")"
 
 	sb.appendLine("\tsuspend fun ${method.methodName}($argStr): $responseName {")
 
@@ -575,6 +797,7 @@ fun emitKotlinClientFile(
 	subPackage: String,
 	defaultSearchRateLimit: Int? = null,
 	searchGroups: Set<String> = emptySet(),
+	enumLookup: Map<Pair<String, List<String>>, String> = emptyMap(),
 ): String {
 	val fullPackage = "$PACKAGE.$subPackage"
 	val sb = StringBuilder()

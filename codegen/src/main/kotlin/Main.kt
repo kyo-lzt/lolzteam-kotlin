@@ -48,6 +48,24 @@ fun main() {
 		val rawSpec = json.parseToJsonElement(rawText).jsonObject
 		val result = parseSpec(rawSpec)
 
+		// Build enum registry
+		val enumRegistry = EnumRegistry()
+		for (group in result.groups) {
+			for (method in group.methods) {
+				for (param in method.params.queryParams) {
+					if (param.enumValues != null) {
+						enumRegistry.register(param.name, param.enumValues, group.groupName)
+					}
+				}
+				for (prop in method.bodyProperties) {
+					if (prop.enumValues != null) {
+						enumRegistry.register(prop.name, prop.enumValues, group.groupName)
+					}
+				}
+			}
+		}
+		val enumResult = enumRegistry.build()
+
 		val outDir = File(config.outputDir)
 		outDir.mkdirs()
 
@@ -65,6 +83,7 @@ fun main() {
 			config.subPackage,
 			result.componentSchemas,
 			result.rawSpec,
+			enumResult,
 		)
 		File(outDir, "Types.kt").writeText(typesContent)
 		println("  Types.kt")
@@ -78,6 +97,7 @@ fun main() {
 			subPackage = config.subPackage,
 			defaultSearchRateLimit = config.defaultSearchRateLimit,
 			searchGroups = config.searchGroups,
+			enumLookup = enumResult.lookup,
 		)
 		File(outDir, "${config.clientName}.kt").writeText(clientContent)
 		println("  ${config.clientName}.kt")

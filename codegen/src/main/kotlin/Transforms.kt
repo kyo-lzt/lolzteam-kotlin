@@ -170,6 +170,11 @@ fun tsTypeToKotlin(tsType: String): String {
 		if (nonNull.isNotEmpty() && nonNull.all { it.startsWith("\"") && it.endsWith("\"") }) {
 			return "String"
 		}
+		// string | integer → StringOrInt
+		val nonNullSet = nonNull.toSet()
+		if (nonNullSet == setOf("string", "integer") || nonNullSet == setOf("integer", "string")) {
+			return if ("null" in parts) "StringOrInt?" else "StringOrInt"
+		}
 		return "JsonElement"
 	}
 
@@ -210,6 +215,8 @@ data class ParsedParameter(
 	val name: String,
 	val type: String,
 	val required: Boolean,
+	val enumValues: List<String>? = null,
+	val defaultValue: String? = null,
 )
 
 data class OperationParameters(
@@ -233,10 +240,15 @@ fun extractParameters(operation: JsonObject, spec: JsonObject): OperationParamet
 		val type = schemaToTypeString(schema, spec)
 		val required = (param["required"] as? JsonPrimitive)?.booleanOrNull ?: false
 
+		val enumValues = extractEnumValues(schema as? JsonObject)
+		val defaultValue = extractDefaultValue(schema)
+
 		val parsed = ParsedParameter(
 			name = name,
 			type = type,
 			required = if (inValue == "path") true else required,
+			enumValues = enumValues,
+			defaultValue = defaultValue,
 		)
 
 		if (inValue == "path") pathParams.add(parsed)
@@ -252,6 +264,20 @@ data class BodyProperty(
 	val name: String,
 	val type: String,
 	val required: Boolean,
+	val enumValues: List<String>? = null,
+	val defaultValue: String? = null,
+)
+
+data class OneOfVariant(
+	val discriminatorValue: String,
+	val title: String?,
+	val properties: List<BodyProperty>,
+)
+
+data class DiscriminatedUnion(
+	val discriminatorProperty: String,
+	val discriminatorType: String,
+	val variants: List<OneOfVariant>,
 )
 
 data class BodyExtractionResult(
@@ -259,6 +285,7 @@ data class BodyExtractionResult(
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
 	val bodyEncoding: String = "form",
+	val discriminatedUnion: DiscriminatedUnion? = null,
 )
 
 fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
@@ -303,6 +330,9 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 	// oneOf → merge all properties, mark all optional
 	val oneOf = schema["oneOf"] as? JsonArray
 	if (oneOf != null) {
+		// Try to detect discriminated union
+		val union = detectDiscriminatedUnion(oneOf, spec)
+
 		val allProps = mutableMapOf<String, JsonElement>()
 		for (variant in oneOf) {
 			val variantObj = variant as? JsonObject ?: continue
@@ -316,8 +346,15 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 				name = name,
 				type = schemaToTypeString(propSchema, spec),
 				required = false,
+				enumValues = extractEnumValues(propSchema as? JsonObject),
 			))
 		}
+
+		return BodyExtractionResult(
+			properties = bodyProperties,
+			bodyEncoding = bodyEncoding,
+			discriminatedUnion = union,
+		)
 	} else {
 		val properties = schema["properties"] as? JsonObject
 		if (properties != null) {
@@ -333,6 +370,8 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 					name = name,
 					type = type,
 					required = name in requiredSet,
+					enumValues = extractEnumValues(propObj),
+					defaultValue = extractDefaultValue(propSchema),
 				))
 			}
 		}
@@ -465,6 +504,110 @@ private fun extractResponseProperty(
 	return ResponseProperty(name, kotlinType, null, false, required, emptyList())
 }
 
+// ─── Discriminated Union Detection ────────────────────────────────────────────
+
+/**
+ * Detect if a oneOf array represents a discriminated union.
+ * Returns null if not a discriminated union.
+ */
+fun detectDiscriminatedUnion(oneOfArray: JsonArray, spec: JsonObject): DiscriminatedUnion? {
+	if (oneOfArray.size < 2) return null
+
+	// Find candidate discriminator: a property that in every variant has a single-value enum
+	var discriminatorProp: String? = null
+	var discriminatorType: String? = null
+
+	for ((i, element) in oneOfArray.withIndex()) {
+		val variant = element as? JsonObject ?: return null
+		val props = variant["properties"] as? JsonObject ?: return null
+
+		if (i == 0) {
+			// Find the first property with a single-value enum
+			for ((propName, propValue) in props) {
+				val propObj = propValue as? JsonObject ?: continue
+				val enumArr = propObj["enum"] as? JsonArray ?: continue
+				if (enumArr.size == 1) {
+					discriminatorProp = propName
+					discriminatorType = (propObj["type"] as? JsonPrimitive)?.contentOrNull ?: "string"
+					break
+				}
+			}
+			if (discriminatorProp == null) return null
+		} else {
+			// Verify the candidate exists in this variant with a single-value enum
+			val propObj = props[discriminatorProp] as? JsonObject ?: return null
+			val enumArr = propObj["enum"] as? JsonArray ?: return null
+			if (enumArr.size != 1) return null
+		}
+	}
+
+	val discProp = discriminatorProp ?: return null
+	val discType = discriminatorType ?: "string"
+
+	// Build variants
+	val variants = oneOfArray.map { element ->
+		val variant = element as JsonObject
+		val props = variant["properties"] as JsonObject
+		val title = (variant["title"] as? JsonPrimitive)?.contentOrNull
+
+		val discPropSchema = props[discProp] as JsonObject
+		val discValue = (discPropSchema["enum"] as JsonArray)[0].jsonPrimitive.content
+
+		// Collect required fields for this variant
+		val requiredSet = (variant["required"] as? JsonArray)
+			?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+			?.toSet() ?: emptySet()
+
+		// Collect properties excluding the discriminator
+		val variantProps = props.filterKeys { it != discProp }.map { (name, propSchema) ->
+			val propObj = propSchema as? JsonObject
+			val format = (propObj?.get("format") as? JsonPrimitive)?.contentOrNull
+			val type = if (format == "binary") "Blob" else schemaToTypeString(propSchema, spec)
+			BodyProperty(
+				name = name,
+				type = type,
+				required = name in requiredSet,
+				enumValues = extractEnumValues(propObj),
+				defaultValue = extractDefaultValue(propSchema),
+			)
+		}
+
+		OneOfVariant(
+			discriminatorValue = discValue,
+			title = title,
+			properties = variantProps,
+		)
+	}
+
+	return DiscriminatedUnion(
+		discriminatorProperty = discProp,
+		discriminatorType = discType,
+		variants = variants,
+	)
+}
+
+// ─── Enum Value Extraction ────────────────────────────────────────────────────
+
+/** Extract enum values from a parameter/property schema, if present. */
+fun extractEnumValues(schema: JsonObject?): List<String>? {
+	if (schema == null) return null
+	val enumArr = schema["enum"] as? JsonArray ?: return null
+	if (enumArr.isEmpty()) return null
+	return enumArr.mapNotNull { el ->
+		(el as? JsonPrimitive)?.content
+	}.ifEmpty { null }
+}
+
+// ─── Default Value Extraction ─────────────────────────────────────────────────
+
+/** Extract the "default" value from a schema element as a string, or null if absent. */
+fun extractDefaultValue(schema: JsonElement?): String? {
+	val obj = schema as? JsonObject ?: return null
+	val defaultNode = obj["default"] ?: return null
+	val prim = defaultNode as? JsonPrimitive ?: return null
+	return prim.content
+}
+
 // ─── Method Definition ───────────────────────────────────────────────────────
 
 data class MethodDefinition(
@@ -482,6 +625,8 @@ data class MethodDefinition(
 	val bodyIsArray: Boolean = false,
 	val bodyArrayItemType: String? = null,
 	val bodyEncoding: String = "form",
+	val discriminatedUnion: DiscriminatedUnion? = null,
+	val responseIsHtml: Boolean = false,
 )
 
 fun extractMethodDefinition(
@@ -518,9 +663,20 @@ fun extractMethodDefinition(
 
 	// GET requests can't have body — treat body properties as query params
 	val effectiveQueryParams = if (isGet) {
-		params.queryParams + body.properties.map { ParsedParameter(name = it.name, type = it.type, required = false) }
+		params.queryParams + body.properties.map {
+			ParsedParameter(name = it.name, type = it.type, required = false, enumValues = it.enumValues, defaultValue = it.defaultValue)
+		}
 	} else {
 		params.queryParams
+	}
+
+	// Detect text/html response
+	val responseIsHtml = run {
+		val responses = operation["responses"] as? JsonObject
+		val success = responses?.get("200") ?: responses?.get("201")
+		val successObj = if (success != null) derefShallow(success, spec) as? JsonObject else null
+		val content = successObj?.get("content") as? JsonObject
+		content?.containsKey("text/html") == true
 	}
 
 	val rawRequestBody = operation["requestBody"]
@@ -549,5 +705,7 @@ fun extractMethodDefinition(
 		bodyIsArray = if (isGet) false else body.bodyIsArray,
 		bodyArrayItemType = if (isGet) null else body.bodyArrayItemType,
 		bodyEncoding = if (isGet) "form" else body.bodyEncoding,
+		discriminatedUnion = if (isGet) null else body.discriminatedUnion,
+		responseIsHtml = responseIsHtml,
 	)
 }

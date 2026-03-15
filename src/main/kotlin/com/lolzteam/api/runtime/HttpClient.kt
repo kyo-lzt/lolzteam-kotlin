@@ -93,6 +93,17 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
         return withRetry(retryConfig, options.method, options.path, onRetry) { execute(options) }
     }
 
+    suspend fun requestText(options: RequestOptions): String {
+        rateLimiter?.acquire()
+        if (options.isSearch) {
+            searchRateLimiter?.acquire()
+        }
+        if (retryConfig == null) {
+            return executeText(options)
+        }
+        return withRetry(retryConfig, options.method, options.path, onRetry) { executeText(options) }
+    }
+
     private suspend fun execute(options: RequestOptions): JsonElement {
         var url = "$baseUrl${options.path}"
         val queryString = buildQueryString(options.query)
@@ -151,6 +162,31 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
         } catch (e: Exception) {
             throw NetworkException(e)
         }
+    }
+
+    private suspend fun executeText(options: RequestOptions): String {
+        var url = "$baseUrl${options.path}"
+        val queryString = buildQueryString(options.query)
+        if (queryString.isNotEmpty()) {
+            url += "?$queryString"
+        }
+
+        val response = try {
+            client.request(url) {
+                method = HttpMethod.parse(options.method)
+                bearerAuth(token)
+            }
+        } catch (e: Exception) {
+            throw NetworkException(e)
+        }
+
+        val bodyText = response.bodyAsText()
+
+        if (!response.status.isSuccess()) {
+            throw createHttpException(response.status.value, bodyText, response.headers)
+        }
+
+        return bodyText
     }
 
     private fun buildQueryString(query: JsonElement?): String {

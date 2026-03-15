@@ -2,10 +2,928 @@
 
 package com.lolzteam.api.generated.forum
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonClassDiscriminator
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import com.lolzteam.api.runtime.StringOrInt
+
+// ─── Enums ───────────────────────────────────────────────────────
+
+@Serializable(with = AllowInviteGroupSerializer::class)
+enum class AllowInviteGroup(val value: String) {
+	NONE("none"),
+	MEMBERS("members"),
+	FOLLOWED("followed");
+}
+
+
+internal object AllowInviteGroupSerializer : KSerializer<AllowInviteGroup> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AllowInviteGroup", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AllowInviteGroup) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AllowInviteGroup {
+		val v = decoder.decodeString()
+		return AllowInviteGroup.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AllowPostProfileSerializer::class)
+enum class AllowPostProfile(val value: String) {
+	NONE("none"),
+	MEMBERS("members"),
+	FOLLOWED("followed");
+}
+
+
+internal object AllowPostProfileSerializer : KSerializer<AllowPostProfile> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AllowPostProfile", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AllowPostProfile) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AllowPostProfile {
+		val v = decoder.decodeString()
+		return AllowPostProfile.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AllowReceiveNewsFeedSerializer::class)
+enum class AllowReceiveNewsFeed(val value: String) {
+	NONE("none"),
+	MEMBERS("members"),
+	FOLLOWED("followed");
+}
+
+
+internal object AllowReceiveNewsFeedSerializer : KSerializer<AllowReceiveNewsFeed> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AllowReceiveNewsFeed", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AllowReceiveNewsFeed) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AllowReceiveNewsFeed {
+		val v = decoder.decodeString()
+		return AllowReceiveNewsFeed.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AllowSendPersonalConversationSerializer::class)
+enum class AllowSendPersonalConversation(val value: String) {
+	NONE("none"),
+	MEMBERS("members"),
+	FOLLOWED("followed");
+}
+
+
+internal object AllowSendPersonalConversationSerializer : KSerializer<AllowSendPersonalConversation> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AllowSendPersonalConversation", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AllowSendPersonalConversation) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AllowSendPersonalConversation {
+		val v = decoder.decodeString()
+		return AllowSendPersonalConversation.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AllowViewProfileSerializer::class)
+enum class AllowViewProfile(val value: String) {
+	NONE("none"),
+	MEMBERS("members"),
+	FOLLOWED("followed");
+}
+
+
+internal object AllowViewProfileSerializer : KSerializer<AllowViewProfile> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AllowViewProfile", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AllowViewProfile) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AllowViewProfile {
+		val v = decoder.decodeString()
+		return AllowViewProfile.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategoriesOrderSerializer::class)
+enum class CategoriesOrder(val value: String) {
+	NATURAL("natural"),
+	LIST("list");
+}
+
+
+internal object CategoriesOrderSerializer : KSerializer<CategoriesOrder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategoriesOrder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategoriesOrder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategoriesOrder {
+		val v = decoder.decodeString()
+		return CategoriesOrder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ClaimStateSerializer::class)
+enum class ClaimState(val value: String) {
+	ACTIVE("active"),
+	SOLVED("solved"),
+	REJECTED("rejected"),
+	SETTLED("settled");
+}
+
+
+internal object ClaimStateSerializer : KSerializer<ClaimState> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ClaimState", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ClaimState) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ClaimState {
+		val v = decoder.decodeString()
+		return ClaimState.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ContentTypeSerializer::class)
+enum class ContentType(val value: String) {
+	POST("post"),
+	POST_COMMENT("post_comment"),
+	PROFILE_POST("profile_post"),
+	PROFILE_POST_COMMENT("profile_post_comment");
+}
+
+
+internal object ContentTypeSerializer : KSerializer<ContentType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ContentType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ContentType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ContentType {
+		val v = decoder.decodeString()
+		return ContentType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ContestTypeSerializer::class)
+enum class ContestType(val value: String) {
+	BY_FINISH_DATE("by_finish_date");
+}
+
+
+internal object ContestTypeSerializer : KSerializer<ContestType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ContestType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ContestType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ContestType {
+		val v = decoder.decodeString()
+		return ContestType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ConversationsOrderSerializer::class)
+enum class ConversationsOrder(val value: String) {
+	NATURAL("natural"),
+	NATURAL_REVERSE("natural_reverse");
+}
+
+
+internal object ConversationsOrderSerializer : KSerializer<ConversationsOrder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ConversationsOrder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ConversationsOrder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ConversationsOrder {
+		val v = decoder.decodeString()
+		return ConversationsOrder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CurrencySerializer::class)
+enum class Currency(val value: String) {
+	RUB("rub"),
+	UAH("uah"),
+	KZT("kzt"),
+	BYN("byn"),
+	USD("usd"),
+	EUR("eur"),
+	GBP("gbp"),
+	CNY("cny"),
+	TRY("try");
+}
+
+
+internal object CurrencySerializer : KSerializer<Currency> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Currency", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Currency) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Currency {
+		val v = decoder.decodeString()
+		return Currency.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = DeleteTypeSerializer::class)
+enum class DeleteType(val value: String) {
+	DELETE("delete"),
+	DELETE_IGNORE("delete_ignore");
+}
+
+
+internal object DeleteTypeSerializer : KSerializer<DeleteType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("DeleteType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: DeleteType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): DeleteType {
+		val v = decoder.decodeString()
+		return DeleteType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = DirectionSerializer::class)
+enum class Direction(val value: String) {
+	ASC("asc"),
+	DESC("desc");
+}
+
+
+internal object DirectionSerializer : KSerializer<Direction> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Direction", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Direction) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Direction {
+		val v = decoder.decodeString()
+		return Direction.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = DurationSerializer::class)
+enum class Duration(val value: String) {
+	DAY("day"),
+	WEEK("week"),
+	MONTH("month");
+}
+
+
+internal object DurationSerializer : KSerializer<Duration> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Duration", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Duration) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Duration {
+		val v = decoder.decodeString()
+		return Duration.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = FolderSerializer::class)
+enum class Folder(val value: String) {
+	ALL("all"),
+	UNREAD("unread"),
+	GROUPS("groups"),
+	MARKET("market"),
+	MARKET_REPLACEMENTS("market_replacements"),
+	STAFF("staff"),
+	GIVEAWAYS("giveaways"),
+	P2P("p2p");
+}
+
+
+internal object FolderSerializer : KSerializer<Folder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Folder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Folder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Folder {
+		val v = decoder.decodeString()
+		return Folder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = FormIdSerializer::class)
+enum class FormId(val value: Long) {
+	V3(3);
+}
+
+
+internal object FormIdSerializer : KSerializer<FormId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("FormId", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: FormId) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): FormId {
+		val v = decoder.decodeLong()
+		return FormId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = GenderSerializer::class)
+enum class Gender(val value: String) {
+	EMPTY(""),
+	MALE("male"),
+	FEMALE("female");
+}
+
+
+internal object GenderSerializer : KSerializer<Gender> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Gender", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Gender) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Gender {
+		val v = decoder.decodeString()
+		return Gender.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = GrantTypeSerializer::class)
+enum class GrantType(val value: String) {
+	PASSWORD("password");
+}
+
+
+internal object GrantTypeSerializer : KSerializer<GrantType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("GrantType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: GrantType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): GrantType {
+		val v = decoder.decodeString()
+		return GrantType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LanguageIdSerializer::class)
+enum class LanguageId(val value: Long) {
+	V1(1),
+	V2(2);
+}
+
+
+internal object LanguageIdSerializer : KSerializer<LanguageId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LanguageId", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: LanguageId) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LanguageId {
+		val v = decoder.decodeLong()
+		return LanguageId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LengthOptionSerializer::class)
+enum class LengthOption(val value: String) {
+	MINUTES("minutes"),
+	HOURS("hours"),
+	DAYS("days");
+}
+
+
+internal object LengthOptionSerializer : KSerializer<LengthOption> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LengthOption", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LengthOption) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LengthOption {
+		val v = decoder.decodeString()
+		return LengthOption.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LikeTypeSerializer::class)
+enum class LikeType(val value: String) {
+	LIKE("like"),
+	LIKE2("like2");
+}
+
+
+internal object LikeTypeSerializer : KSerializer<LikeType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LikeType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LikeType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LikeType {
+		val v = decoder.decodeString()
+		return LikeType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = NotificationsTypeSerializer::class)
+enum class NotificationsType(val value: String) {
+	MARKET("market"),
+	NOMARKET("nomarket");
+}
+
+
+internal object NotificationsTypeSerializer : KSerializer<NotificationsType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("NotificationsType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: NotificationsType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): NotificationsType {
+		val v = decoder.decodeString()
+		return NotificationsType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PayClaimSerializer::class)
+enum class PayClaim(val value: String) {
+	NOW("now"),
+	LATER("later");
+}
+
+
+internal object PayClaimSerializer : KSerializer<PayClaim> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PayClaim", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PayClaim) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PayClaim {
+		val v = decoder.decodeString()
+		return PayClaim.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PeriodSerializer::class)
+enum class Period(val value: String) {
+	DAY("day"),
+	WEEK("week"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object PeriodSerializer : KSerializer<Period> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Period", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Period) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Period {
+		val v = decoder.decodeString()
+		return Period.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PostsOrderSerializer::class)
+enum class PostsOrder(val value: String) {
+	NATURAL("natural"),
+	NATURAL_REVERSE("natural_reverse"),
+	POST_LIKES("post_likes"),
+	POST_LIKES_REVERSE("post_likes_reverse");
+}
+
+
+internal object PostsOrderSerializer : KSerializer<PostsOrder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PostsOrder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PostsOrder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PostsOrder {
+		val v = decoder.decodeString()
+		return PostsOrder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PrizeDataUpgradeSerializer::class)
+enum class PrizeDataUpgrade(val value: Long) {
+	V1(1),
+	V6(6),
+	V12(12),
+	V14(14),
+	V17(17),
+	V19(19),
+	V20(20),
+	V21(21),
+	V22(22);
+}
+
+
+internal object PrizeDataUpgradeSerializer : KSerializer<PrizeDataUpgrade> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PrizeDataUpgrade", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: PrizeDataUpgrade) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PrizeDataUpgrade {
+		val v = decoder.decodeLong()
+		return PrizeDataUpgrade.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PrizeTypeSerializer::class)
+enum class PrizeType(val value: String) {
+	MONEY("money"),
+	UPGRADES("upgrades");
+}
+
+
+internal object PrizeTypeSerializer : KSerializer<PrizeType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PrizeType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PrizeType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PrizeType {
+		val v = decoder.decodeString()
+		return PrizeType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ReplyGroupSerializer::class)
+enum class ReplyGroup(val value: Long) {
+	V0(0),
+	V2(2),
+	V21(21),
+	V22(22),
+	V23(23),
+	V60(60),
+	V351(351);
+}
+
+
+internal object ReplyGroupSerializer : KSerializer<ReplyGroup> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ReplyGroup", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: ReplyGroup) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ReplyGroup {
+		val v = decoder.decodeLong()
+		return ReplyGroup.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RoomIdSerializer::class)
+enum class RoomId(val value: Long) {
+	V1(1),
+	V2(2),
+	V3(3),
+	V4(4),
+	V13(13);
+}
+
+
+internal object RoomIdSerializer : KSerializer<RoomId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("RoomId", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: RoomId) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): RoomId {
+		val v = decoder.decodeLong()
+		return RoomId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = StateSerializer::class)
+enum class State(val value: String) {
+	ACTIVE("active"),
+	CLOSED("closed");
+}
+
+
+internal object StateSerializer : KSerializer<State> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("State", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: State) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): State {
+		val v = decoder.decodeString()
+		return State.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ThreadsOrderSerializer::class)
+enum class ThreadsOrder(val value: String) {
+	POST_DATE("post_date"),
+	LAST_POST_DATE("last_post_date"),
+	REPLY_COUNT("reply_count"),
+	REPLY_COUNT_ASC("reply_count_asc"),
+	FIRST_POST_LIKES("first_post_likes"),
+	VOTE_COUNT("vote_count");
+}
+
+
+internal object ThreadsOrderSerializer : KSerializer<ThreadsOrder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ThreadsOrder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ThreadsOrder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ThreadsOrder {
+		val v = decoder.decodeString()
+		return ThreadsOrder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TimezoneSerializer::class)
+enum class Timezone(val value: String) {
+	PACIFIC_MIDWAY("Pacific/Midway"),
+	PACIFIC_HONOLULU("Pacific/Honolulu"),
+	PACIFIC_MARQUESAS("Pacific/Marquesas"),
+	AMERICA_ANCHORAGE("America/Anchorage"),
+	AMERICA_LOS_ANGELES("America/Los_Angeles"),
+	AMERICA_SANTA_ISABEL("America/Santa_Isabel"),
+	AMERICA_TIJUANA("America/Tijuana"),
+	AMERICA_DENVER("America/Denver"),
+	AMERICA_CHIHUAHUA("America/Chihuahua"),
+	AMERICA_PHOENIX("America/Phoenix"),
+	AMERICA_CHICAGO("America/Chicago"),
+	AMERICA_BELIZE("America/Belize"),
+	AMERICA_MEXICO_CITY("America/Mexico_City"),
+	PACIFIC_EASTER("Pacific/Easter"),
+	AMERICA_NEW_YORK("America/New_York"),
+	AMERICA_HAVANA("America/Havana"),
+	AMERICA_BOGOTA("America/Bogota"),
+	AMERICA_CARACAS("America/Caracas"),
+	AMERICA_HALIFAX("America/Halifax"),
+	AMERICA_GOOSE_BAY("America/Goose_Bay"),
+	AMERICA_ASUNCION("America/Asuncion"),
+	AMERICA_SANTIAGO("America/Santiago"),
+	AMERICA_CUIABA("America/Cuiaba"),
+	AMERICA_LA_PAZ("America/La_Paz"),
+	AMERICA_ST_JOHNS("America/St_Johns"),
+	AMERICA_ARGENTINA_BUENOS_AIRES("America/Argentina/Buenos_Aires"),
+	AMERICA_ARGENTINA_SAN_LUIS("America/Argentina/San_Luis"),
+	AMERICA_ARGENTINA_MENDOZA("America/Argentina/Mendoza"),
+	ATLANTIC_STANLEY("Atlantic/Stanley"),
+	AMERICA_GODTHAB("America/Godthab"),
+	AMERICA_MONTEVIDEO("America/Montevideo"),
+	AMERICA_SAO_PAULO("America/Sao_Paulo"),
+	AMERICA_MIQUELON("America/Miquelon"),
+	AMERICA_NORONHA("America/Noronha"),
+	ATLANTIC_CAPE_VERDE("Atlantic/Cape_Verde"),
+	ATLANTIC_AZORES("Atlantic/Azores"),
+	EUROPE_LONDON("Europe/London"),
+	AFRICA_CASABLANCA("Africa/Casablanca"),
+	ATLANTIC_REYKJAVIK("Atlantic/Reykjavik"),
+	EUROPE_AMSTERDAM("Europe/Amsterdam"),
+	AFRICA_ALGIERS("Africa/Algiers"),
+	AFRICA_WINDHOEK("Africa/Windhoek"),
+	AFRICA_TUNIS("Africa/Tunis"),
+	EUROPE_ATHENS("Europe/Athens"),
+	AFRICA_JOHANNESBURG("Africa/Johannesburg"),
+	EUROPE_KALININGRAD("Europe/Kaliningrad"),
+	ASIA_AMMAN("Asia/Amman"),
+	ASIA_BEIRUT("Asia/Beirut"),
+	AFRICA_CAIRO("Africa/Cairo"),
+	ASIA_JERUSALEM("Asia/Jerusalem"),
+	ASIA_GAZA("Asia/Gaza"),
+	ASIA_DAMASCUS("Asia/Damascus"),
+	EUROPE_MOSCOW("Europe/Moscow"),
+	EUROPE_MINSK("Europe/Minsk"),
+	AFRICA_NAIROBI("Africa/Nairobi"),
+	ASIA_TEHRAN("Asia/Tehran"),
+	ASIA_DUBAI("Asia/Dubai"),
+	ASIA_YEREVAN("Asia/Yerevan"),
+	ASIA_BAKU("Asia/Baku"),
+	INDIAN_MAURITIUS("Indian/Mauritius"),
+	ASIA_KABUL("Asia/Kabul"),
+	ASIA_YEKATERINBURG("Asia/Yekaterinburg"),
+	ASIA_TASHKENT("Asia/Tashkent"),
+	ASIA_KOLKATA("Asia/Kolkata"),
+	ASIA_KATHMANDU("Asia/Kathmandu"),
+	ASIA_NOVOSIBIRSK("Asia/Novosibirsk"),
+	ASIA_DHAKA("Asia/Dhaka"),
+	ASIA_ALMATY("Asia/Almaty"),
+	ASIA_RANGOON("Asia/Rangoon"),
+	ASIA_KRASNOYARSK("Asia/Krasnoyarsk"),
+	ASIA_BANGKOK("Asia/Bangkok"),
+	ASIA_IRKUTSK("Asia/Irkutsk"),
+	ASIA_HONG_KONG("Asia/Hong_Kong"),
+	ASIA_SINGAPORE("Asia/Singapore"),
+	AUSTRALIA_PERTH("Australia/Perth"),
+	ASIA_YAKUTSK("Asia/Yakutsk"),
+	ASIA_TOKYO("Asia/Tokyo"),
+	ASIA_SEOUL("Asia/Seoul"),
+	AUSTRALIA_ADELAIDE("Australia/Adelaide"),
+	AUSTRALIA_DARWIN("Australia/Darwin"),
+	ASIA_VLADIVOSTOK("Asia/Vladivostok"),
+	ASIA_MAGADAN("Asia/Magadan"),
+	AUSTRALIA_BRISBANE("Australia/Brisbane"),
+	AUSTRALIA_SYDNEY("Australia/Sydney"),
+	PACIFIC_NOUMEA("Pacific/Noumea"),
+	PACIFIC_NORFOLK("Pacific/Norfolk"),
+	ASIA_ANADYR("Asia/Anadyr"),
+	PACIFIC_AUCKLAND("Pacific/Auckland"),
+	PACIFIC_FIJI("Pacific/Fiji"),
+	PACIFIC_CHATHAM("Pacific/Chatham"),
+	PACIFIC_TONGATAPU("Pacific/Tongatapu"),
+	PACIFIC_APIA("Pacific/Apia"),
+	PACIFIC_KIRITIMATI("Pacific/Kiritimati");
+}
+
+
+internal object TimezoneSerializer : KSerializer<Timezone> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Timezone", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Timezone) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Timezone {
+		val v = decoder.decodeString()
+		return Timezone.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TransferTypeSerializer::class)
+enum class TransferType(val value: String) {
+	GUARANTOR("guarantor"),
+	SAFE("safe"),
+	NOTSAFE("notsafe");
+}
+
+
+internal object TransferTypeSerializer : KSerializer<TransferType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("TransferType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: TransferType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): TransferType {
+		val v = decoder.decodeString()
+		return TransferType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = UsersOrderSerializer::class)
+enum class UsersOrder(val value: String) {
+	NATURAL("natural"),
+	FOLLOW_DATE("follow_date"),
+	FOLLOW_DATE_REVERSE("follow_date_reverse");
+}
+
+
+internal object UsersOrderSerializer : KSerializer<UsersOrder> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("UsersOrder", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: UsersOrder) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): UsersOrder {
+		val v = decoder.decodeString()
+		return UsersOrder.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = UsersTypeSerializer::class)
+enum class UsersType(val value: String) {
+	GOTTEN("gotten"),
+	GIVEN("given");
+}
+
+
+internal object UsersTypeSerializer : KSerializer<UsersType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("UsersType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: UsersType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): UsersType {
+		val v = decoder.decodeString()
+		return UsersType.entries.first { it.value == v }
+	}
+}
+
 
 // ─── Component Schemas ────────────────────────────────────────
 
@@ -1103,22 +2021,51 @@ data class RespSystemInfo(
 // ─── OAuthApi Types ────────────────────────────────────────
 
 @Serializable
-data class OAuthTokenBody(
-	@SerialName("grant_type")
-	val grantType: String? = null,
+@JsonClassDiscriminator("grant_type")
+sealed interface OAuthTokenBody
+
+@Serializable
+@SerialName("client_credentials")
+data class OAuthTokenBodyClientCredentials(
 	@SerialName("client_id")
-	val clientId: String? = null,
+	val clientId: String,
 	@SerialName("client_secret")
-	val clientSecret: String? = null,
-	val scope: JsonElement? = null,
-	val code: String? = null,
+	val clientSecret: String,
+	val scope: JsonElement,
+) : OAuthTokenBody
+@Serializable
+@SerialName("authorization_code")
+data class OAuthTokenBodyAuthorizationCode(
+	val code: String,
+	@SerialName("client_id")
+	val clientId: String,
+	@SerialName("client_secret")
+	val clientSecret: String,
 	@SerialName("redirect_uri")
-	val redirectUri: String? = null,
+	val redirectUri: String,
+	val scope: JsonElement,
+) : OAuthTokenBody
+@Serializable
+@SerialName("refresh_token")
+data class OAuthTokenBodyRefreshToken(
 	@SerialName("refresh_token")
-	val refreshToken: String? = null,
-	val username: String? = null,
-	val password: String? = null,
-)
+	val refreshToken: String,
+	@SerialName("client_id")
+	val clientId: String,
+	@SerialName("client_secret")
+	val clientSecret: String,
+) : OAuthTokenBody
+@Serializable
+@SerialName("password")
+data class OAuthTokenBodyPassword(
+	val username: String,
+	val password: String,
+	@SerialName("client_id")
+	val clientId: String,
+	@SerialName("client_secret")
+	val clientSecret: String,
+	val scope: JsonElement,
+) : OAuthTokenBody
 
 @Serializable
 data class OAuthTokenResponse(
@@ -1155,7 +2102,7 @@ data class CategoriesListParams(
 	val parentCategoryId: Long? = null,
 	@SerialName("parent_forum_id")
 	val parentForumId: Long? = null,
-	val order: String? = null,
+	val order: CategoriesOrder? = null,
 )
 
 @Serializable
@@ -1240,7 +2187,7 @@ data class ForumsListParams(
 	val parentCategoryId: Long? = null,
 	@SerialName("parent_forum_id")
 	val parentForumId: Long? = null,
-	val order: String? = null,
+	val order: CategoriesOrder? = null,
 )
 
 @Serializable
@@ -1702,7 +2649,7 @@ data class LinksGetResponse(
 data class PagesListParams(
 	@SerialName("parent_page_id")
 	val parentPageId: Long? = null,
-	val order: String? = null,
+	val order: CategoriesOrder? = null,
 )
 
 @Serializable
@@ -1841,8 +2788,8 @@ data class ThreadsListParams(
 	@SerialName("forum_id")
 	val forumId: Long? = null,
 	val tab: String? = null,
-	val state: String? = null,
-	val period: String? = null,
+	val state: State? = null,
+	val period: Period? = null,
 	val title: String? = null,
 	@SerialName("title_only")
 	val titleOnly: Boolean? = null,
@@ -1857,8 +2804,8 @@ data class ThreadsListParams(
 	val threadTagId: Long? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
-	val order: String? = null,
-	val direction: String? = null,
+	val order: ThreadsOrder? = null,
+	val direction: Direction? = null,
 	@SerialName("thread_create_date")
 	val threadCreateDate: Long? = null,
 	@SerialName("thread_update_date")
@@ -1951,8 +2898,9 @@ data class ThreadsCreateBody(
 	val hideContacts: Boolean? = null,
 	@SerialName("allow_ask_hidden_content")
 	val allowAskHiddenContent: Boolean? = null,
+	/** Default: 2 */
 	@SerialName("reply_group")
-	val replyGroup: Long? = null,
+	val replyGroup: ReplyGroup = ReplyGroup.V2,
 	@SerialName("comment_ignore_group")
 	val commentIgnoreGroup: Boolean? = null,
 	@SerialName("dont_alert_followers")
@@ -1980,17 +2928,22 @@ data class ThreadsCreateResponse(
 data class ThreadsCreateContestBody(
 	@SerialName("post_body")
 	val postBody: String,
+	@SerialName("prize_type")
+	val prizeType: PrizeType,
+	@SerialName("require_like_count")
+	val requireLikeCount: Long,
+	@SerialName("require_total_like_count")
+	val requireTotalLikeCount: Long,
 	val title: String? = null,
 	@SerialName("title_en")
 	val titleEn: String? = null,
+	/** Default: by_finish_date */
 	@SerialName("contest_type")
-	val contestType: String,
+	val contestType: ContestType = ContestType.BY_FINISH_DATE,
 	@SerialName("length_value")
 	val lengthValue: Long? = null,
 	@SerialName("length_option")
-	val lengthOption: String? = null,
-	@SerialName("prize_type")
-	val prizeType: String,
+	val lengthOption: LengthOption? = null,
 	@SerialName("count_winners")
 	val countWinners: Long? = null,
 	@SerialName("prize_data_money")
@@ -2000,16 +2953,13 @@ data class ThreadsCreateContestBody(
 	@SerialName("prize_data_places")
 	val prizeDataPlaces: List<Double>? = null,
 	@SerialName("prize_data_upgrade")
-	val prizeDataUpgrade: Long? = null,
-	@SerialName("require_like_count")
-	val requireLikeCount: Long,
-	@SerialName("require_total_like_count")
-	val requireTotalLikeCount: Long,
+	val prizeDataUpgrade: PrizeDataUpgrade? = null,
 	@SerialName("secret_answer")
 	val secretAnswer: String? = null,
 	val tags: List<String>? = null,
+	/** Default: 2 */
 	@SerialName("reply_group")
-	val replyGroup: Long? = null,
+	val replyGroup: ReplyGroup = ReplyGroup.V2,
 	@SerialName("comment_ignore_group")
 	val commentIgnoreGroup: Boolean? = null,
 	@SerialName("dont_alert_followers")
@@ -2043,17 +2993,19 @@ data class ThreadsClaimBody(
 	val asResponder: String,
 	@SerialName("as_is_market_deal")
 	val asIsMarketDeal: Boolean,
+	@SerialName("as_amount")
+	val asAmount: Double,
+	@SerialName("transfer_type")
+	val transferType: TransferType,
+	@SerialName("post_body")
+	val postBody: String,
 	@SerialName("as_market_item_id")
 	val asMarketItemId: Long? = null,
 	@SerialName("as_data")
 	val asData: String? = null,
-	@SerialName("as_amount")
-	val asAmount: Double,
-	val currency: String? = null,
-	@SerialName("transfer_type")
-	val transferType: String,
+	val currency: Currency? = null,
 	@SerialName("pay_claim")
-	val payClaim: String? = null,
+	val payClaim: PayClaim? = null,
 	@SerialName("as_funds_receipt")
 	val asFundsReceipt: String? = null,
 	@SerialName("as_tg_login_screenshot")
@@ -2063,8 +3015,9 @@ data class ThreadsClaimBody(
 	val hideContacts: Boolean? = null,
 	@SerialName("allow_ask_hidden_content")
 	val allowAskHiddenContent: Boolean? = null,
+	/** Default: 2 */
 	@SerialName("reply_group")
-	val replyGroup: Long? = null,
+	val replyGroup: ReplyGroup = ReplyGroup.V2,
 	@SerialName("comment_ignore_group")
 	val commentIgnoreGroup: Boolean? = null,
 	@SerialName("dont_alert_followers")
@@ -2079,8 +3032,6 @@ data class ThreadsClaimBody(
 	val watchThread: Boolean? = null,
 	@SerialName("watch_thread_email")
 	val watchThreadEmail: Boolean? = null,
-	@SerialName("post_body")
-	val postBody: String,
 )
 
 @Serializable
@@ -2118,7 +3069,7 @@ data class ThreadsEditBody(
 	@SerialName("allow_ask_hidden_content")
 	val allowAskHiddenContent: Boolean? = null,
 	@SerialName("reply_group")
-	val replyGroup: Long? = null,
+	val replyGroup: ReplyGroup? = null,
 	@SerialName("comment_ignore_group")
 	val commentIgnoreGroup: Boolean? = null,
 )
@@ -3056,7 +4007,7 @@ data class PostsListParams(
 	val pageOfPostId: Long? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
-	val order: String? = null,
+	val order: PostsOrder? = null,
 )
 
 @Serializable
@@ -3464,9 +4415,9 @@ data class UsersEditBody(
 	@SerialName("short_link")
 	val shortLink: String? = null,
 	@SerialName("language_id")
-	val languageId: Long? = null,
-	val gender: String? = null,
-	val timezone: String? = null,
+	val languageId: LanguageId? = null,
+	val gender: Gender? = null,
+	val timezone: Timezone? = null,
 	@SerialName("receive_admin_email")
 	val receiveAdminEmail: Boolean? = null,
 	@SerialName("activity_visible")
@@ -3478,15 +4429,15 @@ data class UsersEditBody(
 	@SerialName("hide_username_change_logs")
 	val hideUsernameChangeLogs: Boolean? = null,
 	@SerialName("allow_view_profile")
-	val allowViewProfile: String? = null,
+	val allowViewProfile: AllowViewProfile? = null,
 	@SerialName("allow_post_profile")
-	val allowPostProfile: String? = null,
+	val allowPostProfile: AllowPostProfile? = null,
 	@SerialName("allow_send_personal_conversation")
-	val allowSendPersonalConversation: String? = null,
+	val allowSendPersonalConversation: AllowSendPersonalConversation? = null,
 	@SerialName("allow_invite_group")
-	val allowInviteGroup: String? = null,
+	val allowInviteGroup: AllowInviteGroup? = null,
 	@SerialName("allow_receive_news_feed")
-	val allowReceiveNewsFeed: String? = null,
+	val allowReceiveNewsFeed: AllowReceiveNewsFeed? = null,
 	val alert: Map<String, Boolean>? = null,
 	val fields: JsonObject? = null,
 )
@@ -3501,9 +4452,9 @@ data class UsersEditResponse(
 
 @Serializable
 data class UsersClaimsParams(
-	val type: String? = null,
+	val type: NotificationsType? = null,
 	@SerialName("claim_state")
-	val claimState: String? = null,
+	val claimState: ClaimState? = null,
 )
 
 @Serializable
@@ -3634,7 +4585,7 @@ data class UsersBackgroundCropResponse(
 
 @Serializable
 data class UsersFollowersParams(
-	val order: String? = null,
+	val order: UsersOrder? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 )
@@ -3761,7 +4712,7 @@ data class UsersUnfollowResponse(
 
 @Serializable
 data class UsersFollowingsParams(
-	val order: String? = null,
+	val order: UsersOrder? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 )
@@ -3886,11 +4837,13 @@ data class UsersLikesParams(
 	@SerialName("node_id")
 	val nodeId: Long? = null,
 	@SerialName("like_type")
-	val likeType: String? = null,
-	val type: String? = null,
+	val likeType: LikeType? = null,
+	/** Default: gotten */
+	val type: UsersType = UsersType.GOTTEN,
 	val page: Long? = null,
+	/** Default: post */
 	@SerialName("content_type")
-	val contentType: String? = null,
+	val contentType: ContentType = ContentType.POST,
 	@SerialName("search_user_id")
 	val searchUserId: Long? = null,
 	val stats: Boolean? = null,
@@ -4466,7 +5419,7 @@ data class ProfilePostsReportResponse(
 @Serializable
 data class ProfilePostsCreateBody(
 	@SerialName("user_id")
-	val userId: JsonElement,
+	val userId: StringOrInt,
 	@SerialName("post_body")
 	val postBody: String,
 )
@@ -4814,7 +5767,7 @@ data class ProfilePostsCommentsReportResponse(
 
 @Serializable
 data class ConversationsListParams(
-	val folder: String? = null,
+	val folder: Folder? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 )
@@ -4849,8 +5802,9 @@ data class ConversationsCreateBody(
 	@SerialName("recipient_id")
 	val recipientId: Long? = null,
 	val recipients: List<String>? = null,
+	/** Default: false */
 	@SerialName("is_group")
-	val isGroup: Boolean? = null,
+	val isGroup: Boolean = false,
 	val title: String? = null,
 	@SerialName("open_invite")
 	val openInvite: Boolean? = null,
@@ -4900,7 +5854,7 @@ data class ConversationsDeleteBody(
 	@SerialName("conversation_id")
 	val conversationId: Long,
 	@SerialName("delete_type")
-	val deleteType: String,
+	val deleteType: DeleteType,
 )
 
 @Serializable
@@ -4914,7 +5868,7 @@ data class ConversationsDeleteResponse(
 @Serializable
 data class ConversationsStartBody(
 	@SerialName("user_id")
-	val userId: JsonElement,
+	val userId: StringOrInt,
 )
 
 @Serializable
@@ -4948,7 +5902,7 @@ data class ConversationsGetResponse(
 data class ConversationsMessagesListParams(
 	val page: Long? = null,
 	val limit: Long? = null,
-	val order: String? = null,
+	val order: ConversationsOrder? = null,
 	val before: Long? = null,
 	val after: Long? = null,
 )
@@ -4972,10 +5926,10 @@ data class ConversationsMessagesListResponseLinks(
 
 @Serializable
 data class ConversationsMessagesCreateBody(
-	@SerialName("reply_message_id")
-	val replyMessageId: Long? = null,
 	@SerialName("message_body")
 	val messageBody: String,
+	@SerialName("reply_message_id")
+	val replyMessageId: Long? = null,
 )
 
 @Serializable
@@ -5125,7 +6079,7 @@ data class ConversationsAlertsDisableResponse(
 
 @Serializable
 data class NotificationsListParams(
-	val type: String? = null,
+	val type: NotificationsType? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 )
@@ -5541,7 +6495,7 @@ data class SearchAllBody(
 	@SerialName("forum_id")
 	val forumId: Long? = null,
 	@SerialName("user_id")
-	val userId: JsonElement? = null,
+	val userId: StringOrInt? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 )
@@ -5849,7 +6803,7 @@ data class SearchThreadsBody(
 	@SerialName("forum_id")
 	val forumId: Long? = null,
 	@SerialName("user_id")
-	val userId: JsonElement? = null,
+	val userId: StringOrInt? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 	@SerialName("data_limit")
@@ -6073,7 +7027,7 @@ data class SearchPostsBody(
 	@SerialName("forum_id")
 	val forumId: Long? = null,
 	@SerialName("user_id")
-	val userId: JsonElement? = null,
+	val userId: StringOrInt? = null,
 	val page: Long? = null,
 	val limit: Long? = null,
 	@SerialName("data_limit")
@@ -6897,7 +7851,7 @@ data class BatchExecuteResponseJobs(
 @Serializable
 data class ChatboxIndexParams(
 	@SerialName("room_id")
-	val roomId: Long? = null,
+	val roomId: RoomId? = null,
 )
 
 @Serializable
@@ -7004,7 +7958,7 @@ data class ChatboxIndexResponseRoomsOnline(
 @Serializable
 data class ChatboxGetMessagesParams(
 	@SerialName("room_id")
-	val roomId: Long,
+	val roomId: RoomId,
 	@SerialName("before_message_id")
 	val beforeMessageId: Long? = null,
 )
@@ -7019,10 +7973,10 @@ data class ChatboxGetMessagesResponse(
 @Serializable
 data class ChatboxPostMessageBody(
 	@SerialName("room_id")
-	val roomId: Long,
+	val roomId: RoomId,
+	val message: String,
 	@SerialName("reply_message_id")
 	val replyMessageId: Long? = null,
-	val message: String,
 )
 
 @Serializable
@@ -7063,7 +8017,7 @@ data class ChatboxDeleteMessageResponse(
 @Serializable
 data class ChatboxOnlineParams(
 	@SerialName("room_id")
-	val roomId: Long,
+	val roomId: RoomId,
 )
 
 @Serializable
@@ -7177,7 +8131,7 @@ data class ChatboxReportResponse(
 
 @Serializable
 data class ChatboxGetLeaderboardParams(
-	val duration: String? = null,
+	val duration: Duration? = null,
 )
 
 @Serializable
@@ -7320,7 +8274,7 @@ data class ChatboxGetIgnoreResponseIgnored(
 @Serializable
 data class ChatboxPostIgnoreBody(
 	@SerialName("user_id")
-	val userId: JsonElement,
+	val userId: StringOrInt,
 )
 
 @Serializable
@@ -7334,7 +8288,7 @@ data class ChatboxPostIgnoreResponse(
 @Serializable
 data class ChatboxDeleteIgnoreBody(
 	@SerialName("user_id")
-	val userId: JsonElement,
+	val userId: StringOrInt,
 )
 
 @Serializable
@@ -7391,11 +8345,19 @@ data class FormsListResponseForms(
 )
 
 @Serializable
-data class FormsCreateBody(
-	@SerialName("form_id")
-	val formId: Long? = null,
-	val fields: JsonObject? = null,
-)
+@JsonClassDiscriminator("form_id")
+sealed interface FormsCreateBody
+
+@Serializable
+@SerialName("1")
+data class FormsCreateBodyV1(
+	val fields: JsonObject,
+) : FormsCreateBody
+@Serializable
+@SerialName("3")
+data class FormsCreateBodyV3(
+	val fields: JsonObject,
+) : FormsCreateBody
 
 @Serializable
 data class FormsCreateResponse(

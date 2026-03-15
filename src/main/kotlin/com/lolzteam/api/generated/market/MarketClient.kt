@@ -292,7 +292,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
 	}
 
 	suspend fun download(type: String, params: ListDownloadParams? = null): ListDownloadResponse {
-		return http.request(RequestOptions(
+		return http.requestText(RequestOptions(
 			method = "GET",
 			path = "/user/$type/download",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -371,7 +371,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
 	}
 
 	suspend fun steamPreview(itemId: Int, params: ManagingSteamPreviewParams? = null): ManagingSteamPreviewResponse {
-		return http.request(RequestOptions(
+		return http.requestText(RequestOptions(
 			method = "GET",
 			path = "/$itemId/steam-preview",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },

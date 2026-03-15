@@ -2,10 +2,2408 @@
 
 package com.lolzteam.api.generated.market
 
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonClassDiscriminator
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import com.lolzteam.api.runtime.StringOrInt
+
+// ─── Enums ───────────────────────────────────────────────────────
+
+@Serializable(with = AgeVerifiedSerializer::class)
+enum class AgeVerified(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object AgeVerifiedSerializer : KSerializer<AgeVerified> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AgeVerified", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: AgeVerified) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AgeVerified {
+		val v = decoder.decodeString()
+		return AgeVerified.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AppIdSerializer::class)
+enum class AppId(val value: Long) {
+	V730(730),
+	V578080(578080),
+	V753(753),
+	V570(570),
+	V440(440),
+	V252490(252490),
+	V304930(304930),
+	V232090(232090),
+	V322330(322330);
+}
+
+
+internal object AppIdSerializer : KSerializer<AppId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("AppId", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: AppId) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): AppId {
+		val v = decoder.decodeLong()
+		return AppId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = AutorenewalSerializer::class)
+enum class Autorenewal(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object AutorenewalSerializer : KSerializer<Autorenewal> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Autorenewal", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Autorenewal) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Autorenewal {
+		val v = decoder.decodeString()
+		return Autorenewal.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BedrockSerializer::class)
+enum class Bedrock(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object BedrockSerializer : KSerializer<Bedrock> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Bedrock", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Bedrock) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Bedrock {
+		val v = decoder.decodeString()
+		return Bedrock.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BillingSerializer::class)
+enum class Billing(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object BillingSerializer : KSerializer<Billing> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Billing", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Billing) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Billing {
+		val v = decoder.decodeString()
+		return Billing.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BirthdayAfterPeriodSerializer::class)
+enum class BirthdayAfterPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object BirthdayAfterPeriodSerializer : KSerializer<BirthdayAfterPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("BirthdayAfterPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: BirthdayAfterPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): BirthdayAfterPeriod {
+		val v = decoder.decodeString()
+		return BirthdayAfterPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BirthdayPeriodSerializer::class)
+enum class BirthdayPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object BirthdayPeriodSerializer : KSerializer<BirthdayPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("BirthdayPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: BirthdayPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): BirthdayPeriod {
+		val v = decoder.decodeString()
+		return BirthdayPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BpSerializer::class)
+enum class Bp(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object BpSerializer : KSerializer<Bp> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Bp", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Bp) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Bp {
+		val v = decoder.decodeString()
+		return Bp.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = BrawlPassSerializer::class)
+enum class BrawlPass(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object BrawlPassSerializer : KSerializer<BrawlPass> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("BrawlPass", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: BrawlPass) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): BrawlPass {
+		val v = decoder.decodeString()
+		return BrawlPass.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CanChangeDetailsSerializer::class)
+enum class CanChangeDetails(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object CanChangeDetailsSerializer : KSerializer<CanChangeDetails> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CanChangeDetails", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CanChangeDetails) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CanChangeDetails {
+		val v = decoder.decodeString()
+		return CanChangeDetails.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CancelSerializer::class)
+enum class Cancel(val value: Long) {
+	V1(1);
+}
+
+
+internal object CancelSerializer : KSerializer<Cancel> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Cancel", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: Cancel) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Cancel {
+		val v = decoder.decodeLong()
+		return Cancel.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategoryEg1Serializer::class)
+enum class CategoryEg1(val value: Long) {
+	V0(0),
+	V1(1);
+}
+
+
+internal object CategoryEg1Serializer : KSerializer<CategoryEg1> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategoryEg1", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: CategoryEg1) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategoryEg1 {
+		val v = decoder.decodeLong()
+		return CategoryEg1.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategoryEg2Serializer::class)
+enum class CategoryEg2(val value: Long) {
+	Neg1(-1),
+	V0(0),
+	V1(1);
+}
+
+
+internal object CategoryEg2Serializer : KSerializer<CategoryEg2> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategoryEg2", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: CategoryEg2) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategoryEg2 {
+		val v = decoder.decodeLong()
+		return CategoryEg2.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategoryEg3Serializer::class)
+enum class CategoryEg3(val value: Long) {
+	Neg1(-1),
+	V0(0),
+	V1(1),
+	V2(2);
+}
+
+
+internal object CategoryEg3Serializer : KSerializer<CategoryEg3> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategoryEg3", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: CategoryEg3) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategoryEg3 {
+		val v = decoder.decodeLong()
+		return CategoryEg3.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategoryIdSerializer::class)
+enum class CategoryId(val value: Long) {
+	V1(1),
+	V3(3),
+	V4(4),
+	V5(5),
+	V6(6),
+	V7(7),
+	V8(8),
+	V9(9),
+	V10(10),
+	V11(11),
+	V12(12),
+	V13(13),
+	V14(14),
+	V15(15),
+	V16(16),
+	V17(17),
+	V18(18),
+	V19(19),
+	V20(20),
+	V22(22),
+	V24(24),
+	V28(28),
+	V30(30),
+	V31(31);
+}
+
+
+internal object CategoryIdSerializer : KSerializer<CategoryId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategoryId", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: CategoryId) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategoryId {
+		val v = decoder.decodeLong()
+		return CategoryId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategorySubscription1Serializer::class)
+enum class CategorySubscription1(val value: String) {
+	EA_PLAY("EA Play"),
+	EA_PLAY_PRO("EA Play Pro");
+}
+
+
+internal object CategorySubscription1Serializer : KSerializer<CategorySubscription1> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategorySubscription1", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategorySubscription1) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategorySubscription1 {
+		val v = decoder.decodeString()
+		return CategorySubscription1.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategorySubscription2Serializer::class)
+enum class CategorySubscription2(val value: String) {
+	PC_GAME_PASS("PC Game Pass"),
+	XBOX_GAME_PASS_ULTIMATE("Xbox Game Pass Ultimate");
+}
+
+
+internal object CategorySubscription2Serializer : KSerializer<CategorySubscription2> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategorySubscription2", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategorySubscription2) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategorySubscription2 {
+		val v = decoder.decodeString()
+		return CategorySubscription2.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategorySubscription3Serializer::class)
+enum class CategorySubscription3(val value: String) {
+	BASIC("basic"),
+	PREMIUM("premium"),
+	PREMIUM_ANYWHERE("premiumAnywhere");
+}
+
+
+internal object CategorySubscription3Serializer : KSerializer<CategorySubscription3> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategorySubscription3", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategorySubscription3) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategorySubscription3 {
+		val v = decoder.decodeString()
+		return CategorySubscription3.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategorySubscription4Serializer::class)
+enum class CategorySubscription4(val value: String) {
+	DISCORD_NITRO("discord_nitro"),
+	DISCORD_NITRO_BASIC("discord_nitro_basic"),
+	DISCORD_NITRO_TRIAL("discord_nitro_trial"),
+	TELEGRAM_PREMIUM("telegram_premium");
+}
+
+
+internal object CategorySubscription4Serializer : KSerializer<CategorySubscription4> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategorySubscription4", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategorySubscription4) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategorySubscription4 {
+		val v = decoder.decodeString()
+		return CategorySubscription4.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CategorySubscription5Serializer::class)
+enum class CategorySubscription5(val value: String) {
+	ROBLOX_PREMIUM1000("RobloxPremium1000"),
+	ROBLOX_PREMIUM100012_MONTHS("RobloxPremium100012Months"),
+	ROBLOX_PREMIUM1000_ONE_MONTH("RobloxPremium1000OneMonth"),
+	ROBLOX_PREMIUM2200("RobloxPremium2200"),
+	ROBLOX_PREMIUM2200_ONE_MONTH("RobloxPremium2200OneMonth"),
+	ROBLOX_PREMIUM450("RobloxPremium450"),
+	ROBLOX_PREMIUM450_ONE_MONTH("RobloxPremium450OneMonth");
+}
+
+
+internal object CategorySubscription5Serializer : KSerializer<CategorySubscription5> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CategorySubscription5", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CategorySubscription5) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CategorySubscription5 {
+		val v = decoder.decodeString()
+		return CategorySubscription5.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ChangeEmailSerializer::class)
+enum class ChangeEmail(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ChangeEmailSerializer : KSerializer<ChangeEmail> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ChangeEmail", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ChangeEmail) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ChangeEmail {
+		val v = decoder.decodeString()
+		return ChangeEmail.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ChangeNicknameSerializer::class)
+enum class ChangeNickname(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ChangeNicknameSerializer : KSerializer<ChangeNickname> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ChangeNickname", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ChangeNickname) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ChangeNickname {
+		val v = decoder.decodeString()
+		return ChangeNickname.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ChangeableFnSerializer::class)
+enum class ChangeableFn(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ChangeableFnSerializer : KSerializer<ChangeableFn> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ChangeableFn", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ChangeableFn) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ChangeableFn {
+		val v = decoder.decodeString()
+		return ChangeableFn.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ClaimStateSerializer::class)
+enum class ClaimState(val value: String) {
+	ACTIVE("active"),
+	SOLVED("solved"),
+	REJECTED("rejected"),
+	SETTLED("settled");
+}
+
+
+internal object ClaimStateSerializer : KSerializer<ClaimState> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ClaimState", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ClaimState) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ClaimState {
+		val v = decoder.decodeString()
+		return ClaimState.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ClanSerializer::class)
+enum class Clan(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ClanSerializer : KSerializer<Clan> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Clan", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Clan) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Clan {
+		val v = decoder.decodeString()
+		return Clan.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ClansSerializer::class)
+enum class Clans(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ClansSerializer : KSerializer<Clans> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Clans", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Clans) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Clans {
+		val v = decoder.decodeString()
+		return Clans.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ClashPassSerializer::class)
+enum class ClashPass(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ClashPassSerializer : KSerializer<ClashPass> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ClashPass", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ClashPass) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ClashPass {
+		val v = decoder.decodeString()
+		return ClashPass.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CookieLoginSerializer::class)
+enum class CookieLogin(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object CookieLoginSerializer : KSerializer<CookieLogin> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("CookieLogin", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: CookieLogin) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): CookieLogin {
+		val v = decoder.decodeString()
+		return CookieLogin.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CookiesSerializer::class)
+enum class Cookies(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object CookiesSerializer : KSerializer<Cookies> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Cookies", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Cookies) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Cookies {
+		val v = decoder.decodeString()
+		return Cookies.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = Cs2MapRankSerializer::class)
+enum class Cs2MapRank(val value: Long) {
+	V1(1),
+	V2(2),
+	V3(3),
+	V4(4),
+	V5(5),
+	V6(6),
+	V7(7),
+	V8(8),
+	V9(9),
+	V10(10),
+	V11(11),
+	V12(12),
+	V13(13);
+}
+
+
+internal object Cs2MapRankSerializer : KSerializer<Cs2MapRank> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Cs2MapRank", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: Cs2MapRank) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Cs2MapRank {
+		val v = decoder.decodeLong()
+		return Cs2MapRank.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = CurrencySerializer::class)
+enum class Currency(val value: String) {
+	RUB("rub"),
+	UAH("uah"),
+	KZT("kzt"),
+	BYN("byn"),
+	USD("usd"),
+	EUR("eur"),
+	GBP("gbp"),
+	CNY("cny"),
+	TRY("try"),
+	JPY("jpy"),
+	BRL("brl");
+}
+
+
+internal object CurrencySerializer : KSerializer<Currency> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Currency", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Currency) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Currency {
+		val v = decoder.decodeString()
+		return Currency.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = D2LastMatchDatePeriodSerializer::class)
+enum class D2LastMatchDatePeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object D2LastMatchDatePeriodSerializer : KSerializer<D2LastMatchDatePeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("D2LastMatchDatePeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: D2LastMatchDatePeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): D2LastMatchDatePeriod {
+		val v = decoder.decodeString()
+		return D2LastMatchDatePeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = DaySerializer::class)
+enum class Day(val value: Long) {
+	V0(0),
+	V1(1),
+	V2(2),
+	V3(3),
+	V4(4),
+	V5(5),
+	V6(6),
+	V7(7),
+	V8(8),
+	V9(9),
+	V10(10),
+	V11(11),
+	V12(12),
+	V13(13),
+	V14(14),
+	V15(15),
+	V16(16),
+	V17(17),
+	V18(18),
+	V19(19),
+	V20(20),
+	V21(21),
+	V22(22),
+	V23(23),
+	V24(24),
+	V25(25),
+	V26(26),
+	V27(27),
+	V28(28);
+}
+
+
+internal object DaySerializer : KSerializer<Day> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Day", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: Day) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Day {
+		val v = decoder.decodeLong()
+		return Day.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = DungeonsSerializer::class)
+enum class Dungeons(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object DungeonsSerializer : KSerializer<Dungeons> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Dungeons", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Dungeons) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Dungeons {
+		val v = decoder.decodeString()
+		return Dungeons.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = EaSerializer::class)
+enum class Ea(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object EaSerializer : KSerializer<Ea> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Ea", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Ea) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Ea {
+		val v = decoder.decodeString()
+		return Ea.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = EditBtagSerializer::class)
+enum class EditBtag(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object EditBtagSerializer : KSerializer<EditBtag> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("EditBtag", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: EditBtag) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): EditBtag {
+		val v = decoder.decodeString()
+		return EditBtag.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = EmailSerializer::class)
+enum class Email(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object EmailSerializer : KSerializer<Email> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Email", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Email) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Email {
+		val v = decoder.decodeString()
+		return Email.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = EmailTypeSerializer::class)
+enum class EmailType(val value: String) {
+	NATIVE("native"),
+	AUTOREG("autoreg");
+}
+
+
+internal object EmailTypeSerializer : KSerializer<EmailType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("EmailType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: EmailType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): EmailType {
+		val v = decoder.decodeString()
+		return EmailType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ExtendedGuaranteeSerializer::class)
+enum class ExtendedGuarantee(val value: Long) {
+	Neg1(-1),
+	V0(0),
+	V1(1);
+}
+
+
+internal object ExtendedGuaranteeSerializer : KSerializer<ExtendedGuarantee> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ExtendedGuarantee", PrimitiveKind.LONG)
+
+	override fun serialize(encoder: Encoder, value: ExtendedGuarantee) {
+		encoder.encodeLong(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ExtendedGuarantee {
+		val v = decoder.decodeLong()
+		return ExtendedGuarantee.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = FormatSerializer::class)
+enum class Format(val value: String) {
+	SHORT("short"),
+	CUSTOM("custom"),
+	MFA_FILE_STEAM_ID("mfa_file_steam_id"),
+	MFA_FILE_LOGIN("mfa_file_login");
+}
+
+
+internal object FormatSerializer : KSerializer<Format> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Format", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Format) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Format {
+		val v = decoder.decodeString()
+		return Format.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = GameDonationsSerializer::class)
+enum class GameDonations(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object GameDonationsSerializer : KSerializer<GameDonations> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("GameDonations", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: GameDonations) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): GameDonations {
+		val v = decoder.decodeString()
+		return GameDonations.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = GiftsSerializer::class)
+enum class Gifts(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object GiftsSerializer : KSerializer<Gifts> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Gifts", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Gifts) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Gifts {
+		val v = decoder.decodeString()
+		return Gifts.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HasActivatedKeysSerializer::class)
+enum class HasActivatedKeys(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HasActivatedKeysSerializer : KSerializer<HasActivatedKeys> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HasActivatedKeys", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HasActivatedKeys) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HasActivatedKeys {
+		val v = decoder.decodeString()
+		return HasActivatedKeys.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HasBanSerializer::class)
+enum class HasBan(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HasBanSerializer : KSerializer<HasBan> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HasBan", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HasBan) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HasBan {
+		val v = decoder.decodeString()
+		return HasBan.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HasFaceitSerializer::class)
+enum class HasFaceit(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HasFaceitSerializer : KSerializer<HasFaceit> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HasFaceit", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HasFaceit) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HasFaceit {
+		val v = decoder.decodeString()
+		return HasFaceit.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HoldLengthOptionSerializer::class)
+enum class HoldLengthOption(val value: String) {
+	HOUR("hour"),
+	DAY("day"),
+	WEEK("week"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object HoldLengthOptionSerializer : KSerializer<HoldLengthOption> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HoldLengthOption", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HoldLengthOption) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HoldLengthOption {
+		val v = decoder.decodeString()
+		return HoldLengthOption.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HypixelBanSerializer::class)
+enum class HypixelBan(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HypixelBanSerializer : KSerializer<HypixelBan> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HypixelBan", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HypixelBan) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HypixelBan {
+		val v = decoder.decodeString()
+		return HypixelBan.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HypixelBanParsedSerializer::class)
+enum class HypixelBanParsed(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HypixelBanParsedSerializer : KSerializer<HypixelBanParsed> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HypixelBanParsed", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HypixelBanParsed) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HypixelBanParsed {
+		val v = decoder.decodeString()
+		return HypixelBanParsed.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = HypixelSkyblockApiEnabledSerializer::class)
+enum class HypixelSkyblockApiEnabled(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object HypixelSkyblockApiEnabledSerializer : KSerializer<HypixelSkyblockApiEnabled> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("HypixelSkyblockApiEnabled", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: HypixelSkyblockApiEnabled) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): HypixelSkyblockApiEnabled {
+		val v = decoder.decodeString()
+		return HypixelSkyblockApiEnabled.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = JavaSerializer::class)
+enum class Java(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object JavaSerializer : KSerializer<Java> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Java", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Java) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Java {
+		val v = decoder.decodeString()
+		return Java.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LastLoginHypixelPeriodSerializer::class)
+enum class LastLoginHypixelPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object LastLoginHypixelPeriodSerializer : KSerializer<LastLoginHypixelPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LastLoginHypixelPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LastLoginHypixelPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LastLoginHypixelPeriod {
+		val v = decoder.decodeString()
+		return LastLoginHypixelPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LastTransDatePeriodSerializer::class)
+enum class LastTransDatePeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object LastTransDatePeriodSerializer : KSerializer<LastTransDatePeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LastTransDatePeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LastTransDatePeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LastTransDatePeriod {
+		val v = decoder.decodeString()
+		return LastTransDatePeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LastTransDatePeriodLaterSerializer::class)
+enum class LastTransDatePeriodLater(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object LastTransDatePeriodLaterSerializer : KSerializer<LastTransDatePeriodLater> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LastTransDatePeriodLater", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LastTransDatePeriodLater) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LastTransDatePeriodLater {
+		val v = decoder.decodeString()
+		return LastTransDatePeriodLater.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LegendsSerializer::class)
+enum class Legends(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object LegendsSerializer : KSerializer<Legends> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Legends", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Legends) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Legends {
+		val v = decoder.decodeString()
+		return Legends.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LimitSerializer::class)
+enum class Limit(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object LimitSerializer : KSerializer<Limit> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Limit", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Limit) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Limit {
+		val v = decoder.decodeString()
+		return Limit.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = LoginWithoutCookiesSerializer::class)
+enum class LoginWithoutCookies(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object LoginWithoutCookiesSerializer : KSerializer<LoginWithoutCookies> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("LoginWithoutCookies", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: LoginWithoutCookies) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): LoginWithoutCookies {
+		val v = decoder.decodeString()
+		return LoginWithoutCookies.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = MafileSerializer::class)
+enum class Mafile(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object MafileSerializer : KSerializer<Mafile> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Mafile", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Mafile) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Mafile {
+		val v = decoder.decodeString()
+		return Mafile.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ManagingItemOriginSerializer::class)
+enum class ManagingItemOrigin(val value: String) {
+	BRUTE("brute"),
+	PHISHING("phishing"),
+	STEALER("stealer"),
+	PERSONAL("personal"),
+	RESALE("resale"),
+	AUTOREG("autoreg"),
+	DUMMY("dummy");
+}
+
+
+internal object ManagingItemOriginSerializer : KSerializer<ManagingItemOrigin> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ManagingItemOrigin", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ManagingItemOrigin) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ManagingItemOrigin {
+		val v = decoder.decodeString()
+		return ManagingItemOrigin.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ManagingType1Serializer::class)
+enum class ManagingType1(val value: String) {
+	PROFILES("profiles"),
+	GAMES("games");
+}
+
+
+internal object ManagingType1Serializer : KSerializer<ManagingType1> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ManagingType1", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ManagingType1) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ManagingType1 {
+		val v = decoder.decodeString()
+		return ManagingType1.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ManagingType2Serializer::class)
+enum class ManagingType2(val value: String) {
+	SKINS("skins"),
+	PICKAXES("pickaxes"),
+	DANCES("dances"),
+	GLIDERS("gliders"),
+	WEAPONS("weapons"),
+	AGENTS("agents"),
+	BUDDIES("buddies");
+}
+
+
+internal object ManagingType2Serializer : KSerializer<ManagingType2> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ManagingType2", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ManagingType2) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ManagingType2 {
+		val v = decoder.decodeString()
+		return ManagingType2.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = MmBanSerializer::class)
+enum class MmBan(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object MmBanSerializer : KSerializer<MmBan> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("MmBan", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: MmBan) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): MmBan {
+		val v = decoder.decodeString()
+		return MmBan.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = NitroSerializer::class)
+enum class Nitro(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object NitroSerializer : KSerializer<Nitro> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Nitro", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Nitro) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Nitro {
+		val v = decoder.decodeString()
+		return Nitro.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = NitroPeriodSerializer::class)
+enum class NitroPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object NitroPeriodSerializer : KSerializer<NitroPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("NitroPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: NitroPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): NitroPeriod {
+		val v = decoder.decodeString()
+		return NitroPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = NoBansSerializer::class)
+enum class NoBans(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object NoBansSerializer : KSerializer<NoBans> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("NoBans", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: NoBans) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): NoBans {
+		val v = decoder.decodeString()
+		return NoBans.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = NotEmailProviderSerializer::class)
+enum class NotEmailProvider(val value: String) {
+	OTHER("other"),
+	RAMBLER("rambler"),
+	OUTLOOK("outlook"),
+	FIRSTMAIL("firstmail"),
+	NOTLETTERS("notletters"),
+	MAIL_RU("mail_ru");
+}
+
+
+internal object NotEmailProviderSerializer : KSerializer<NotEmailProvider> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("NotEmailProvider", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: NotEmailProvider) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): NotEmailProvider {
+		val v = decoder.decodeString()
+		return NotEmailProvider.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = OrderBySerializer::class)
+enum class OrderBy(val value: String) {
+	PRICE_TO_UP("price_to_up"),
+	PRICE_TO_DOWN("price_to_down"),
+	PDATE_TO_DOWN("pdate_to_down"),
+	PDATE_TO_UP("pdate_to_up"),
+	PDATE_TO_DOWN_UPLOAD("pdate_to_down_upload"),
+	PDATE_TO_UP_UPLOAD("pdate_to_up_upload"),
+	EDATE_TO_UP("edate_to_up"),
+	EDATE_TO_DOWN("edate_to_down"),
+	DDATE_TO_UP("ddate_to_up"),
+	DDATE_TO_DOWN("ddate_to_down");
+}
+
+
+internal object OrderBySerializer : KSerializer<OrderBy> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("OrderBy", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: OrderBy) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): OrderBy {
+		val v = decoder.decodeString()
+		return OrderBy.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ParentControlSerializer::class)
+enum class ParentControl(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object ParentControlSerializer : KSerializer<ParentControl> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ParentControl", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ParentControl) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ParentControl {
+		val v = decoder.decodeString()
+		return ParentControl.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PasswordSerializer::class)
+enum class Password(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object PasswordSerializer : KSerializer<Password> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Password", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Password) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Password {
+		val v = decoder.decodeString()
+		return Password.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PaymentsTypeSerializer::class)
+enum class PaymentsType(val value: String) {
+	PAID_ITEM("paid_item"),
+	SOLD_ITEM("sold_item"),
+	WITHDRAWAL_BALANCE("withdrawal_balance"),
+	REFILLED_BALANCE("refilled_balance"),
+	INTERNAL_PURCHASE("internal_purchase"),
+	MONEY_TRANSFER("money_transfer"),
+	RECEIVING_MONEY("receiving_money"),
+	CLAIM_HOLD("claim_hold"),
+	INSURANCE_DEPOSIT("insurance_deposit"),
+	PAID_MAIL("paid_mail"),
+	CONTEST("contest"),
+	INVOICE("invoice"),
+	BALANCE_EXCHANGE("balance_exchange");
+}
+
+
+internal object PaymentsTypeSerializer : KSerializer<PaymentsType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PaymentsType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PaymentsType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PaymentsType {
+		val v = decoder.decodeString()
+		return PaymentsType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PremiumSerializer::class)
+enum class Premium(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object PremiumSerializer : KSerializer<Premium> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Premium", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Premium) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Premium {
+		val v = decoder.decodeString()
+		return Premium.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PremiumExpirationPeriodSerializer::class)
+enum class PremiumExpirationPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object PremiumExpirationPeriodSerializer : KSerializer<PremiumExpirationPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PremiumExpirationPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PremiumExpirationPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PremiumExpirationPeriod {
+		val v = decoder.decodeString()
+		return PremiumExpirationPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ProfileTypeSerializer::class)
+enum class ProfileType(val value: String) {
+	MARKET("market"),
+	NOMARKET("nomarket");
+}
+
+
+internal object ProfileTypeSerializer : KSerializer<ProfileType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ProfileType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ProfileType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ProfileType {
+		val v = decoder.decodeString()
+		return ProfileType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PsnConnectedSerializer::class)
+enum class PsnConnected(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object PsnConnectedSerializer : KSerializer<PsnConnected> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PsnConnected", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PsnConnected) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PsnConnected {
+		val v = decoder.decodeString()
+		return PsnConnected.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PsnLinkableSerializer::class)
+enum class PsnLinkable(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object PsnLinkableSerializer : KSerializer<PsnLinkable> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PsnLinkable", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PsnLinkable) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PsnLinkable {
+		val v = decoder.decodeString()
+		return PsnLinkable.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PublishingItemOriginSerializer::class)
+enum class PublishingItemOrigin(val value: String) {
+	BRUTE("brute"),
+	PHISHING("phishing"),
+	STEALER("stealer"),
+	PERSONAL("personal"),
+	RESALE("resale"),
+	AUTOREG("autoreg"),
+	DUMMY("dummy"),
+	SELF_REGISTRATION("self_registration");
+}
+
+
+internal object PublishingItemOriginSerializer : KSerializer<PublishingItemOrigin> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PublishingItemOrigin", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PublishingItemOrigin) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PublishingItemOrigin {
+		val v = decoder.decodeString()
+		return PublishingItemOrigin.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PublishingTypeSerializer::class)
+enum class PublishingType(val value: String) {
+	SOCIALCLUB("socialclub");
+}
+
+
+internal object PublishingTypeSerializer : KSerializer<PublishingType> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("PublishingType", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: PublishingType) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): PublishingType {
+		val v = decoder.decodeString()
+		return PublishingType.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = PveSerializer::class)
+enum class Pve(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object PveSerializer : KSerializer<Pve> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Pve", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Pve) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Pve {
+		val v = decoder.decodeString()
+		return Pve.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = R6BanSerializer::class)
+enum class R6Ban(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object R6BanSerializer : KSerializer<R6Ban> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("R6Ban", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: R6Ban) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): R6Ban {
+		val v = decoder.decodeString()
+		return R6Ban.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RealIdSerializer::class)
+enum class RealId(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object RealIdSerializer : KSerializer<RealId> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("RealId", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: RealId) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): RealId {
+		val v = decoder.decodeString()
+		return RealId.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RegPeriodSerializer::class)
+enum class RegPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object RegPeriodSerializer : KSerializer<RegPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("RegPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: RegPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): RegPeriod {
+		val v = decoder.decodeString()
+		return RegPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RegionSerializer::class)
+enum class Region(val value: String) {
+	AF("af"),
+	AS("as"),
+	CIS("cis"),
+	EU("eu"),
+	ME("me"),
+	OC("oc"),
+	US("us");
+}
+
+
+internal object RegionSerializer : KSerializer<Region> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Region", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Region) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Region {
+		val v = decoder.decodeString()
+		return Region.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RoyalePassSerializer::class)
+enum class RoyalePass(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object RoyalePassSerializer : KSerializer<RoyalePass> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("RoyalePass", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: RoyalePass) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): RoyalePass {
+		val v = decoder.decodeString()
+		return RoyalePass.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = RtSerializer::class)
+enum class Rt(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object RtSerializer : KSerializer<Rt> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Rt", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Rt) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Rt {
+		val v = decoder.decodeString()
+		return Rt.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = ShowSerializer::class)
+enum class Show(val value: String) {
+	ACTIVE("active"),
+	PAID("paid"),
+	DELETED("deleted"),
+	AWAITING("awaiting"),
+	CLOSED("closed"),
+	DISCOUNT_REQUEST("discount_request"),
+	STICKIED("stickied"),
+	PRE_ACTIVE("pre_active");
+}
+
+
+internal object ShowSerializer : KSerializer<Show> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Show", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Show) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Show {
+		val v = decoder.decodeString()
+		return Show.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = SideSerializer::class)
+enum class Side(val value: String) {
+	BEAR("Bear"),
+	SAVAGE("Savage");
+}
+
+
+internal object SideSerializer : KSerializer<Side> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Side", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Side) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Side {
+		val v = decoder.decodeString()
+		return Side.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = SpamSerializer::class)
+enum class Spam(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object SpamSerializer : KSerializer<Spam> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Spam", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Spam) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Spam {
+		val v = decoder.decodeString()
+		return Spam.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = StatusSerializer::class)
+enum class Status(val value: String) {
+	PAID("paid"),
+	NOT_PAID("not_paid");
+}
+
+
+internal object StatusSerializer : KSerializer<Status> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Status", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Status) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Status {
+		val v = decoder.decodeString()
+		return Status.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = SteamConnectedSerializer::class)
+enum class SteamConnected(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object SteamConnectedSerializer : KSerializer<SteamConnected> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("SteamConnected", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: SteamConnected) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): SteamConnected {
+		val v = decoder.decodeString()
+		return SteamConnected.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = SubscriptionPeriodSerializer::class)
+enum class SubscriptionPeriod(val value: String) {
+	DAY("day"),
+	MONTH("month"),
+	YEAR("year");
+}
+
+
+internal object SubscriptionPeriodSerializer : KSerializer<SubscriptionPeriod> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("SubscriptionPeriod", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: SubscriptionPeriod) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): SubscriptionPeriod {
+		val v = decoder.decodeString()
+		return SubscriptionPeriod.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TelSerializer::class)
+enum class Tel(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object TelSerializer : KSerializer<Tel> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Tel", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Tel) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Tel {
+		val v = decoder.decodeString()
+		return Tel.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TempEmailSerializer::class)
+enum class TempEmail(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object TempEmailSerializer : KSerializer<TempEmail> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("TempEmail", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: TempEmail) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): TempEmail {
+		val v = decoder.decodeString()
+		return TempEmail.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TradeBanSerializer::class)
+enum class TradeBan(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object TradeBanSerializer : KSerializer<TradeBan> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("TradeBan", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: TradeBan) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): TradeBan {
+		val v = decoder.decodeString()
+		return TradeBan.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TradeLimitSerializer::class)
+enum class TradeLimit(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object TradeLimitSerializer : KSerializer<TradeLimit> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("TradeLimit", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: TradeLimit) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): TradeLimit {
+		val v = decoder.decodeString()
+		return TradeLimit.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = TransactionsSerializer::class)
+enum class Transactions(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object TransactionsSerializer : KSerializer<Transactions> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Transactions", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Transactions) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Transactions {
+		val v = decoder.decodeString()
+		return Transactions.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = V2faSerializer::class)
+enum class V2fa(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object V2faSerializer : KSerializer<V2fa> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("V2fa", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: V2fa) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): V2fa {
+		val v = decoder.decodeString()
+		return V2fa.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = VerifiedSerializer::class)
+enum class Verified(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object VerifiedSerializer : KSerializer<Verified> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Verified", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Verified) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Verified {
+		val v = decoder.decodeString()
+		return Verified.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = VoiceSerializer::class)
+enum class Voice(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object VoiceSerializer : KSerializer<Voice> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Voice", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Voice) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Voice {
+		val v = decoder.decodeString()
+		return Voice.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = XboxConnectedSerializer::class)
+enum class XboxConnected(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object XboxConnectedSerializer : KSerializer<XboxConnected> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("XboxConnected", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: XboxConnected) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): XboxConnected {
+		val v = decoder.decodeString()
+		return XboxConnected.entries.first { it.value == v }
+	}
+}
+
+
+@Serializable(with = XboxLinkableSerializer::class)
+enum class XboxLinkable(val value: String) {
+	YES("yes"),
+	NO("no"),
+	NOMATTER("nomatter");
+}
+
+
+internal object XboxLinkableSerializer : KSerializer<XboxLinkable> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("XboxLinkable", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: XboxLinkable) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): XboxLinkable {
+		val v = decoder.decodeString()
+		return XboxLinkable.entries.first { it.value == v }
+	}
+}
+
 
 // ─── Component Schemas ────────────────────────────────────────
 
@@ -806,7 +3204,7 @@ data class CategoryAllParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -827,13 +3225,13 @@ data class CategoryAllParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 )
@@ -859,7 +3257,7 @@ data class CategorySteamParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -880,7 +3278,7 @@ data class CategorySteamParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_type[]")
@@ -888,7 +3286,7 @@ data class CategorySteamParams(
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("item_domain")
@@ -899,22 +3297,23 @@ data class CategorySteamParams(
 	val hoursPlayed: Map<String, Long>? = null,
 	@SerialName("hours_played_max")
 	val hoursPlayedMax: Map<String, Long>? = null,
-	val eg: Long? = null,
+	val eg: CategoryEg2? = null,
 	@SerialName("vac[]")
 	val vac: List<Long>? = null,
 	@SerialName("vac_skip_game_check")
 	val vacSkipGameCheck: Boolean? = null,
-	val rt: String? = null,
+	/** Default: no */
+	val rt: Rt = Rt.NO,
 	@SerialName("trade_ban")
-	val tradeBan: String? = null,
+	val tradeBan: TradeBan? = null,
 	@SerialName("trade_limit")
-	val tradeLimit: String? = null,
+	val tradeLimit: TradeLimit? = null,
 	val daybreak: Long? = null,
-	val limit: String? = null,
-	val mafile: String? = null,
+	val limit: Limit? = null,
+	val mafile: Mafile? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	val lmin: Long? = null,
 	val lmax: Long? = null,
 	val rmin: Long? = null,
@@ -926,7 +3325,7 @@ data class CategorySteamParams(
 	@SerialName("no_vac")
 	val noVac: Boolean? = null,
 	@SerialName("mm_ban")
-	val mmBan: String? = null,
+	val mmBan: MmBan? = null,
 	@SerialName("balance_min")
 	val balanceMin: Long? = null,
 	@SerialName("balance_max")
@@ -1004,11 +3403,11 @@ data class CategorySteamParams(
 	@SerialName("last_trans_date")
 	val lastTransDate: Long? = null,
 	@SerialName("last_trans_date_period")
-	val lastTransDatePeriod: String? = null,
+	val lastTransDatePeriod: LastTransDatePeriod? = null,
 	@SerialName("last_trans_date_later")
 	val lastTransDateLater: Long? = null,
 	@SerialName("last_trans_date_period_later")
-	val lastTransDatePeriodLater: String? = null,
+	val lastTransDatePeriodLater: LastTransDatePeriodLater? = null,
 	@SerialName("no_trans")
 	val noTrans: Boolean? = null,
 	val trans: Boolean? = null,
@@ -1033,19 +3432,19 @@ data class CategorySteamParams(
 	@SerialName("purchase_max")
 	val purchaseMax: Double? = null,
 	@SerialName("has_activated_keys")
-	val hasActivatedKeys: String? = null,
+	val hasActivatedKeys: HasActivatedKeys? = null,
 	@SerialName("elo_min")
 	val eloMin: Long? = null,
 	@SerialName("elo_max")
 	val eloMax: Long? = null,
 	@SerialName("cs2_map_rank")
-	val cs2MapRank: Long? = null,
+	val cs2MapRank: Cs2MapRank? = null,
 	@SerialName("cs2_map_rmin")
 	val cs2MapRmin: Long? = null,
 	@SerialName("cs2_map_rmax")
 	val cs2MapRmax: Long? = null,
 	@SerialName("has_faceit")
-	val hasFaceit: String? = null,
+	val hasFaceit: HasFaceit? = null,
 	@SerialName("faceit_csgo_lvl_min")
 	val faceitCsgoLvlMin: Long? = null,
 	@SerialName("faceit_csgo_lvl_max")
@@ -1061,7 +3460,7 @@ data class CategorySteamParams(
 	@SerialName("d2_last_match_date")
 	val d2LastMatchDate: Long? = null,
 	@SerialName("d2_last_match_date_period")
-	val d2LastMatchDatePeriod: String? = null,
+	val d2LastMatchDatePeriod: D2LastMatchDatePeriod? = null,
 	@SerialName("cards_min")
 	val cardsMin: Long? = null,
 	@SerialName("cards_max")
@@ -1415,7 +3814,7 @@ data class CategoryFortniteParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -1436,7 +3835,7 @@ data class CategoryFortniteParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
@@ -1444,14 +3843,14 @@ data class CategoryFortniteParams(
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("temp_email")
-	val tempEmail: String? = null,
+	val tempEmail: TempEmail? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val eg: Long? = null,
+	val eg: CategoryEg3? = null,
 	val smin: Long? = null,
 	val smax: Long? = null,
 	val vbmin: Long? = null,
@@ -1465,7 +3864,7 @@ data class CategoryFortniteParams(
 	@SerialName("dance[]")
 	val dance: JsonElement? = null,
 	@SerialName("change_email")
-	val changeEmail: String? = null,
+	val changeEmail: ChangeEmail? = null,
 	@SerialName("platform[]")
 	val platform: JsonElement? = null,
 	@SerialName("skins_shop_min")
@@ -1500,7 +3899,7 @@ data class CategoryFortniteParams(
 	val glidersShopVbmin: Long? = null,
 	@SerialName("gliders_shop_vbmax")
 	val glidersShopVbmax: Long? = null,
-	val bp: String? = null,
+	val bp: Bp? = null,
 	val lmin: Long? = null,
 	val lmax: Long? = null,
 	@SerialName("bp_lmin")
@@ -1510,19 +3909,19 @@ data class CategoryFortniteParams(
 	@SerialName("last_trans_date")
 	val lastTransDate: Long? = null,
 	@SerialName("last_trans_date_period")
-	val lastTransDatePeriod: String? = null,
+	val lastTransDatePeriod: LastTransDatePeriod? = null,
 	@SerialName("no_trans")
 	val noTrans: Boolean? = null,
 	@SerialName("xbox_linkable")
-	val xboxLinkable: String? = null,
+	val xboxLinkable: XboxLinkable? = null,
 	@SerialName("psn_linkable")
-	val psnLinkable: String? = null,
+	val psnLinkable: PsnLinkable? = null,
 	val daybreak: Long? = null,
 	@SerialName("rl_purchases")
 	val rlPurchases: Boolean? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("refund_credits_min")
 	val refundCreditsMin: Long? = null,
 	@SerialName("refund_credits_max")
@@ -1812,7 +4211,7 @@ data class CategoryMihoyoParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -1833,21 +4232,21 @@ data class CategoryMihoyoParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val email: String? = null,
-	val ea: String? = null,
+	val email: Email? = null,
+	val ea: Ea? = null,
 	val region: JsonElement? = null,
 	@SerialName("not_region")
 	val notRegion: JsonElement? = null,
@@ -2389,7 +4788,7 @@ data class CategoryRiotParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -2410,13 +4809,13 @@ data class CategoryRiotParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -2509,8 +4908,8 @@ data class CategoryRiotParams(
 	val riotMin: Long? = null,
 	@SerialName("riot_max")
 	val riotMax: Long? = null,
-	val email: String? = null,
-	val tel: String? = null,
+	val email: Email? = null,
+	val tel: Tel? = null,
 	@SerialName("valorant_knife_min")
 	val valorantKnifeMin: Long? = null,
 	@SerialName("valorant_knife_max")
@@ -2764,7 +5163,7 @@ data class CategoryTelegramParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -2785,22 +5184,22 @@ data class CategoryTelegramParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val spam: String? = null,
-	val password: String? = null,
-	val premium: String? = null,
+	val spam: Spam? = null,
+	val password: Password? = null,
+	val premium: Premium? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Long? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: String? = null,
+	val premiumExpirationPeriod: PremiumExpirationPeriod? = null,
 	@SerialName("country[]")
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
@@ -2840,11 +5239,11 @@ data class CategoryTelegramParams(
 	val maxStars: Long? = null,
 	val birthday: Long? = null,
 	@SerialName("birthday_period")
-	val birthdayPeriod: String? = null,
+	val birthdayPeriod: BirthdayPeriod? = null,
 	@SerialName("birthday_after")
 	val birthdayAfter: Long? = null,
 	@SerialName("birthday_after_period")
-	val birthdayAfterPeriod: String? = null,
+	val birthdayAfterPeriod: BirthdayAfterPeriod? = null,
 	@SerialName("min_id")
 	val minId: Long? = null,
 	@SerialName("max_id")
@@ -2871,7 +5270,7 @@ data class CategoryTelegramParams(
 	val dcId: List<Long>? = null,
 	@SerialName("not_dc_id[]")
 	val notDcId: List<Long>? = null,
-	val email: String? = null,
+	val email: Email? = null,
 	@SerialName("min_bots")
 	val minBots: Long? = null,
 	@SerialName("max_bots")
@@ -3060,7 +5459,7 @@ data class CategorySupercellParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -3081,13 +5480,13 @@ data class CategorySupercellParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	val daybreak: Long? = null,
@@ -3095,8 +5494,8 @@ data class CategorySupercellParams(
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val eg: Long? = null,
-	val tel: String? = null,
+	val eg: CategoryEg3? = null,
+	val tel: Tel? = null,
 	@SerialName("brawl_level_min")
 	val brawlLevelMin: Long? = null,
 	@SerialName("brawl_level_max")
@@ -3110,7 +5509,7 @@ data class CategorySupercellParams(
 	@SerialName("brawl_wins_max")
 	val brawlWinsMax: Long? = null,
 	@SerialName("brawl_pass")
-	val brawlPass: String? = null,
+	val brawlPass: BrawlPass? = null,
 	@SerialName("brawler[]")
 	val brawler: JsonElement? = null,
 	@SerialName("brawlers_min")
@@ -3138,7 +5537,7 @@ data class CategorySupercellParams(
 	@SerialName("king_level_max")
 	val kingLevelMax: Long? = null,
 	@SerialName("royale_pass")
-	val royalePass: String? = null,
+	val royalePass: RoyalePass? = null,
 	@SerialName("clash_level_min")
 	val clashLevelMin: Long? = null,
 	@SerialName("clash_level_max")
@@ -3152,7 +5551,7 @@ data class CategorySupercellParams(
 	@SerialName("clash_wins_max")
 	val clashWinsMax: Long? = null,
 	@SerialName("clash_pass")
-	val clashPass: String? = null,
+	val clashPass: ClashPass? = null,
 	@SerialName("total_heroes_level_min")
 	val totalHeroesLevelMin: Long? = null,
 	@SerialName("total_heroes_level_max")
@@ -3396,7 +5795,7 @@ data class CategoryEaParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -3417,13 +5816,13 @@ data class CategoryEaParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -3447,23 +5846,23 @@ data class CategoryEaParams(
 	@SerialName("al_level_max")
 	val alLevelMax: Long? = null,
 	@SerialName("has_ban")
-	val hasBan: String? = null,
+	val hasBan: HasBan? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: String? = null,
+	val xboxConnected: XboxConnected? = null,
 	@SerialName("steam_connected")
-	val steamConnected: String? = null,
+	val steamConnected: SteamConnected? = null,
 	@SerialName("psn_connected")
-	val psnConnected: String? = null,
-	val subscription: String? = null,
+	val psnConnected: PsnConnected? = null,
+	val subscription: CategorySubscription1? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
 	@SerialName("hours_played")
 	val hoursPlayed: Map<String, Long>? = null,
 	@SerialName("hours_played_max")
 	val hoursPlayedMax: Map<String, Long>? = null,
-	val transactions: String? = null,
+	val transactions: Transactions? = null,
 )
 
 @Serializable
@@ -3665,7 +6064,7 @@ data class CategoryWotParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -3686,20 +6085,20 @@ data class CategoryWotParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	val daybreak: Long? = null,
 	@SerialName("battles_min")
 	val battlesMin: Long? = null,
@@ -3735,12 +6134,12 @@ data class CategoryWotParams(
 	val region: JsonElement? = null,
 	@SerialName("not_region[]")
 	val notRegion: JsonElement? = null,
-	val premium: String? = null,
+	val premium: Premium? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Long? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: String? = null,
-	val clan: String? = null,
+	val premiumExpirationPeriod: PremiumExpirationPeriod? = null,
+	val clan: Clan? = null,
 	@SerialName("clan_role[]")
 	val clanRole: JsonElement? = null,
 	@SerialName("not_clan_role[]")
@@ -3967,7 +6366,7 @@ data class CategoryWotBlitzParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -3988,20 +6387,20 @@ data class CategoryWotBlitzParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	val daybreak: Long? = null,
 	@SerialName("battles_min")
 	val battlesMin: Long? = null,
@@ -4037,12 +6436,12 @@ data class CategoryWotBlitzParams(
 	val region: JsonElement? = null,
 	@SerialName("not_region[]")
 	val notRegion: JsonElement? = null,
-	val premium: String? = null,
+	val premium: Premium? = null,
 	@SerialName("premium_expiration")
 	val premiumExpiration: Long? = null,
 	@SerialName("premium_expiration_period")
-	val premiumExpirationPeriod: String? = null,
-	val clan: String? = null,
+	val premiumExpirationPeriod: PremiumExpirationPeriod? = null,
+	val clan: Clan? = null,
 	@SerialName("clan_role[]")
 	val clanRole: JsonElement? = null,
 	@SerialName("not_clan_role[]")
@@ -6323,7 +8722,7 @@ data class CategoryGiftsParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -6344,20 +8743,20 @@ data class CategoryGiftsParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val subscription: String? = null,
+	val subscription: CategorySubscription4? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
 )
 
 @Serializable
@@ -6505,7 +8904,7 @@ data class CategoryEpicGamesParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -6526,24 +8925,24 @@ data class CategoryEpicGamesParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val eg: Long? = null,
+	val eg: CategoryEg3? = null,
 	@SerialName("game[]")
 	val game: List<String>? = null,
 	@SerialName("change_email")
-	val changeEmail: String? = null,
+	val changeEmail: ChangeEmail? = null,
 	@SerialName("rl_purchases")
 	val rlPurchases: Boolean? = null,
 	@SerialName("balance_min")
@@ -6773,7 +9172,7 @@ data class CategoryEscapeFromTarkovParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -6794,31 +9193,31 @@ data class CategoryEscapeFromTarkovParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val region: String? = null,
+	val region: Region? = null,
 	@SerialName("version[]")
 	val version: JsonElement? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("level_min")
 	val levelMin: Long? = null,
 	@SerialName("level_max")
 	val levelMax: Long? = null,
-	val pve: String? = null,
-	val side: String? = null,
+	val pve: Pve? = null,
+	val side: Side? = null,
 )
 
 @Serializable
@@ -7004,7 +9403,7 @@ data class CategorySocialClubParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -7025,13 +9424,13 @@ data class CategorySocialClubParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	val daybreak: Long? = null,
@@ -7227,7 +9626,7 @@ data class CategoryUplayParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -7248,13 +9647,13 @@ data class CategoryUplayParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -7270,11 +9669,11 @@ data class CategoryUplayParams(
 	val daybreak: Long? = null,
 	val gmin: Long? = null,
 	val gmax: Long? = null,
-	val subscription: String? = null,
+	val subscription: CategorySubscription3? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
 	@SerialName("r6_level_min")
 	val r6LevelMin: Long? = null,
 	@SerialName("r6_level_max")
@@ -7288,7 +9687,7 @@ data class CategoryUplayParams(
 	@SerialName("r6_operators_max")
 	val r6OperatorsMax: Long? = null,
 	@SerialName("r6_ban")
-	val r6Ban: String? = null,
+	val r6Ban: R6Ban? = null,
 	@SerialName("r6_smin")
 	val r6Smin: Long? = null,
 	@SerialName("r6_smax")
@@ -7298,19 +9697,19 @@ data class CategoryUplayParams(
 	@SerialName("r6_operator[]")
 	val r6Operator: List<String>? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: String? = null,
+	val xboxConnected: XboxConnected? = null,
 	@SerialName("psn_connected")
-	val psnConnected: String? = null,
+	val psnConnected: PsnConnected? = null,
 	@SerialName("steam_connected")
-	val steamConnected: String? = null,
+	val steamConnected: SteamConnected? = null,
 	@SerialName("balance_min")
 	val balanceMin: Double? = null,
 	@SerialName("balance_max")
 	val balanceMax: Double? = null,
-	val transactions: String? = null,
+	val transactions: Transactions? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 )
 
 @Serializable
@@ -7526,7 +9925,7 @@ data class CategoryDiscordParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -7547,34 +9946,34 @@ data class CategoryDiscordParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: String? = null,
-	val nitro: String? = null,
+	val tel: Tel? = null,
+	val nitro: Nitro? = null,
 	@SerialName("nitro_type[]")
 	val nitroType: JsonElement? = null,
 	@SerialName("nitro_length")
 	val nitroLength: Long? = null,
 	@SerialName("nitro_period")
-	val nitroPeriod: String? = null,
+	val nitroPeriod: NitroPeriod? = null,
 	@SerialName("boosts_min")
 	val boostsMin: Long? = null,
 	@SerialName("boosts_max")
 	val boostsMax: Long? = null,
-	val billing: String? = null,
-	val gifts: String? = null,
-	val transactions: String? = null,
+	val billing: Billing? = null,
+	val gifts: Gifts? = null,
+	val transactions: Transactions? = null,
 	@SerialName("badge[]")
 	val badge: JsonElement? = null,
 	@SerialName("condition[]")
@@ -7593,12 +9992,12 @@ data class CategoryDiscordParams(
 	val maxAdmin: Long? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("language[]")
 	val language: List<String>? = null,
 	@SerialName("not_language[]")
 	val notLanguage: List<String>? = null,
-	val clans: String? = null,
+	val clans: Clans? = null,
 	@SerialName("min_admin_clans")
 	val minAdminClans: Long? = null,
 	@SerialName("max_admin_clans")
@@ -7616,7 +10015,7 @@ data class CategoryDiscordParams(
 	@SerialName("max_servers")
 	val maxServers: Long? = null,
 	@SerialName("2fa")
-	val `2fa`: String? = null,
+	val `2fa`: V2fa? = null,
 	@SerialName("min_full_credits")
 	val minFullCredits: Long? = null,
 	@SerialName("max_full_credits")
@@ -7797,7 +10196,7 @@ data class CategoryTikTokParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -7818,23 +10217,23 @@ data class CategoryTikTokParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("followers_min")
 	val followersMin: Long? = null,
 	@SerialName("followers_max")
@@ -7852,9 +10251,9 @@ data class CategoryTikTokParams(
 	@SerialName("coins_max")
 	val coinsMax: Long? = null,
 	@SerialName("cookie_login")
-	val cookieLogin: String? = null,
-	val verified: String? = null,
-	val email: String? = null,
+	val cookieLogin: CookieLogin? = null,
+	val verified: Verified? = null,
+	val email: Email? = null,
 )
 
 @Serializable
@@ -8043,7 +10442,7 @@ data class CategoryInstagramParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -8064,27 +10463,27 @@ data class CategoryInstagramParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	@SerialName("country[]")
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
-	val cookies: String? = null,
+	val cookies: Cookies? = null,
 	@SerialName("login_without_cookies")
-	val loginWithoutCookies: String? = null,
+	val loginWithoutCookies: LoginWithoutCookies? = null,
 	@SerialName("followers_min")
 	val followersMin: Long? = null,
 	@SerialName("followers_max")
@@ -8095,7 +10494,7 @@ data class CategoryInstagramParams(
 	val postMax: Long? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 )
 
 @Serializable
@@ -8265,7 +10664,7 @@ data class CategoryBattleNetParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -8286,20 +10685,20 @@ data class CategoryBattleNetParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
 	val emailType: JsonElement? = null,
 	@SerialName("item_domain")
 	val itemDomain: String? = null,
-	val eg: Long? = null,
+	val eg: CategoryEg1? = null,
 	@SerialName("game[]")
 	val game: List<Long>? = null,
 	val daybreak: Long? = null,
@@ -8307,17 +10706,17 @@ data class CategoryBattleNetParams(
 	val country: List<String>? = null,
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	@SerialName("edit_btag")
-	val editBtag: String? = null,
+	val editBtag: EditBtag? = null,
 	@SerialName("changeable_fn")
-	val changeableFn: String? = null,
+	val changeableFn: ChangeableFn? = null,
 	@SerialName("real_id")
-	val realId: String? = null,
+	val realId: RealId? = null,
 	@SerialName("parent_control")
-	val parentControl: String? = null,
+	val parentControl: ParentControl? = null,
 	@SerialName("no_bans")
-	val noBans: String? = null,
+	val noBans: NoBans? = null,
 	@SerialName("balance_min")
 	val balanceMin: Long? = null,
 	@SerialName("balance_max")
@@ -8534,7 +10933,7 @@ data class CategoryChatGPTParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -8555,13 +10954,13 @@ data class CategoryChatGPTParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("email_type[]")
@@ -8573,13 +10972,13 @@ data class CategoryChatGPTParams(
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
-	val autorenewal: String? = null,
-	val tel: String? = null,
-	val transactions: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
+	val autorenewal: Autorenewal? = null,
+	val tel: Tel? = null,
+	val transactions: Transactions? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("openai_tier[]")
 	val openaiTier: JsonElement? = null,
 	@SerialName("openai_balance_min")
@@ -8751,7 +11150,7 @@ data class CategoryVpnParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -8772,13 +11171,13 @@ data class CategoryVpnParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("service[]")
@@ -8786,8 +11185,8 @@ data class CategoryVpnParams(
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
-	val autorenewal: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
+	val autorenewal: Autorenewal? = null,
 )
 
 @Serializable
@@ -8938,7 +11337,7 @@ data class CategoryRobloxParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -8959,16 +11358,16 @@ data class CategoryRobloxParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val email: String? = null,
+	val email: Email? = null,
 	@SerialName("robux_min")
 	val robuxMin: Long? = null,
 	@SerialName("robux_max")
@@ -8986,20 +11385,20 @@ data class CategoryRobloxParams(
 	val notCountry: List<String>? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
-	val subscription: String? = null,
+	val regPeriod: RegPeriod? = null,
+	val subscription: CategorySubscription5? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
-	val autorenewal: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
+	val autorenewal: Autorenewal? = null,
 	@SerialName("xbox_connected")
-	val xboxConnected: String? = null,
+	val xboxConnected: XboxConnected? = null,
 	@SerialName("psn_connected")
-	val psnConnected: String? = null,
-	val verified: String? = null,
+	val psnConnected: PsnConnected? = null,
+	val verified: Verified? = null,
 	@SerialName("age_verified")
-	val ageVerified: String? = null,
+	val ageVerified: AgeVerified? = null,
 	@SerialName("incoming_robux_total_min")
 	val incomingRobuxTotalMin: Long? = null,
 	@SerialName("incoming_robux_total_max")
@@ -9013,7 +11412,7 @@ data class CategoryRobloxParams(
 	@SerialName("gamepass_max")
 	val gamepassMax: Long? = null,
 	@SerialName("game_donations")
-	val gameDonations: String? = null,
+	val gameDonations: GameDonations? = null,
 	@SerialName("inv_min")
 	val invMin: Long? = null,
 	@SerialName("inv_max")
@@ -9030,7 +11429,7 @@ data class CategoryRobloxParams(
 	val offsaleMin: Long? = null,
 	@SerialName("offsale_max")
 	val offsaleMax: Long? = null,
-	val voice: String? = null,
+	val voice: Voice? = null,
 	@SerialName("age_group[]")
 	val ageGroup: List<String>? = null,
 	@SerialName("not_age_group[]")
@@ -9242,7 +11641,7 @@ data class CategoryWarfaceParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -9263,13 +11662,13 @@ data class CategoryWarfaceParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("rank_min")
@@ -9280,7 +11679,7 @@ data class CategoryWarfaceParams(
 	val bonusRankMin: Long? = null,
 	@SerialName("bonus_rank_max")
 	val bonusRankMax: Long? = null,
-	val tel: String? = null,
+	val tel: Tel? = null,
 	val daybreak: Long? = null,
 	@SerialName("kredits_min")
 	val kreditsMin: Long? = null,
@@ -9468,7 +11867,7 @@ data class CategoryMinecraftParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -9489,27 +11888,27 @@ data class CategoryMinecraftParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
-	val subscription: String? = null,
+	val subscription: CategorySubscription2? = null,
 	@SerialName("subscription_length")
 	val subscriptionLength: Long? = null,
 	@SerialName("subscription_period")
-	val subscriptionPeriod: String? = null,
-	val autorenewal: String? = null,
-	val java: String? = null,
-	val bedrock: String? = null,
-	val dungeons: String? = null,
-	val legends: String? = null,
+	val subscriptionPeriod: SubscriptionPeriod? = null,
+	val autorenewal: Autorenewal? = null,
+	val java: Java? = null,
+	val bedrock: Bedrock? = null,
+	val dungeons: Dungeons? = null,
+	val legends: Legends? = null,
 	@SerialName("change_nickname")
-	val changeNickname: String? = null,
+	val changeNickname: ChangeNickname? = null,
 	@SerialName("capes[]")
 	val capes: List<String>? = null,
 	@SerialName("capes_min")
@@ -9521,9 +11920,9 @@ data class CategoryMinecraftParams(
 	@SerialName("not_country[]")
 	val notCountry: List<String>? = null,
 	@SerialName("hypixel_ban")
-	val hypixelBan: String? = null,
+	val hypixelBan: HypixelBan? = null,
 	@SerialName("hypixel_skyblock_api_enabled")
-	val hypixelSkyblockApiEnabled: String? = null,
+	val hypixelSkyblockApiEnabled: HypixelSkyblockApiEnabled? = null,
 	@SerialName("rank_hypixel[]")
 	val rankHypixel: JsonElement? = null,
 	@SerialName("level_hypixel_min")
@@ -9544,19 +11943,19 @@ data class CategoryMinecraftParams(
 	val netWorthHypixelSkyblockMax: Long? = null,
 	val reg: Long? = null,
 	@SerialName("reg_period")
-	val regPeriod: String? = null,
+	val regPeriod: RegPeriod? = null,
 	@SerialName("last_login_hypixel")
 	val lastLoginHypixel: Long? = null,
 	@SerialName("last_login_hypixel_period")
-	val lastLoginHypixelPeriod: String? = null,
+	val lastLoginHypixelPeriod: LastLoginHypixelPeriod? = null,
 	@SerialName("can_change_details")
-	val canChangeDetails: String? = null,
+	val canChangeDetails: CanChangeDetails? = null,
 	@SerialName("nickname_length_min")
 	val nicknameLengthMin: Long? = null,
 	@SerialName("nickname_length_max")
 	val nicknameLengthMax: Long? = null,
 	@SerialName("hypixel_ban_parsed")
-	val hypixelBanParsed: String? = null,
+	val hypixelBanParsed: HypixelBanParsed? = null,
 	@SerialName("minecoins_min")
 	val minecoinsMin: Long? = null,
 	@SerialName("minecoins_max")
@@ -9759,7 +12158,7 @@ data class CategoryHytaleParams(
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -9780,13 +12179,13 @@ data class CategoryHytaleParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 	@SerialName("edition[]")
@@ -10127,9 +12526,9 @@ data class ListUserParams(
 	@SerialName("user_id")
 	val userId: Long? = null,
 	@SerialName("category_id")
-	val categoryId: Long? = null,
+	val categoryId: CategoryId? = null,
 	val page: Long? = null,
-	val show: String? = null,
+	val show: Show? = null,
 	@SerialName("delete_reason")
 	val deleteReason: String? = null,
 	val title: String? = null,
@@ -10141,7 +12540,7 @@ data class ListUserParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -10188,9 +12587,9 @@ data class ListOrdersParams(
 	@SerialName("user_id")
 	val userId: Long? = null,
 	@SerialName("category_id")
-	val categoryId: Long? = null,
+	val categoryId: CategoryId? = null,
 	val page: Long? = null,
-	val show: String? = null,
+	val show: Show? = null,
 	val title: String? = null,
 	val pmin: Long? = null,
 	val pmax: Long? = null,
@@ -10200,7 +12599,7 @@ data class ListOrdersParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -10226,7 +12625,7 @@ data class ListOrdersResponse(
 @Serializable
 data class ListStatesParams(
 	@SerialName("user_id")
-	val userId: JsonElement? = null,
+	val userId: StringOrInt? = null,
 )
 
 @Serializable
@@ -10380,13 +12779,13 @@ data class ListStatesResponseUserItemStates(
 
 @Serializable
 data class ListDownloadParams(
-	val format: String? = null,
+	val format: Format? = null,
 	@SerialName("custom_format")
 	val customFormat: String? = null,
 	@SerialName("category_id")
-	val categoryId: Long? = null,
+	val categoryId: CategoryId? = null,
 	val page: Long? = null,
-	val show: String? = null,
+	val show: Show? = null,
 	@SerialName("delete_reason")
 	val deleteReason: String? = null,
 	val title: String? = null,
@@ -10397,7 +12796,7 @@ data class ListDownloadParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -10425,12 +12824,12 @@ data class ListDownloadParams(
 	val filterByDeleteDate: Boolean? = null,
 )
 
-typealias ListDownloadResponse = JsonElement
+typealias ListDownloadResponse = String
 
 @Serializable
 data class ListFavoritesParams(
 	val page: Long? = null,
-	val show: String? = null,
+	val show: Show? = null,
 	val title: String? = null,
 	val pmin: Long? = null,
 	val pmax: Long? = null,
@@ -10439,7 +12838,7 @@ data class ListFavoritesParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -10465,7 +12864,7 @@ data class ListFavoritesResponse(
 @Serializable
 data class ListViewedParams(
 	val page: Long? = null,
-	val show: String? = null,
+	val show: Show? = null,
 	val title: String? = null,
 	val pmin: Long? = null,
 	val pmax: Long? = null,
@@ -10474,7 +12873,7 @@ data class ListViewedParams(
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	val sb: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
@@ -10810,8 +13209,8 @@ data class ManagingBulkGetResponseItems(
 @Serializable
 data class ManagingSteamInventoryValueParams(
 	@SerialName("app_id")
-	val appId: Long? = null,
-	val currency: String? = null,
+	val appId: AppId? = null,
+	val currency: Currency? = null,
 	@SerialName("ignore_cache")
 	val ignoreCache: Boolean? = null,
 )
@@ -10876,8 +13275,8 @@ data class ManagingSteamInventoryValueResponseData(
 data class ManagingSteamValueParams(
 	val link: String,
 	@SerialName("app_id")
-	val appId: Long? = null,
-	val currency: String? = null,
+	val appId: AppId? = null,
+	val currency: Currency? = null,
 	@SerialName("ignore_cache")
 	val ignoreCache: Boolean? = null,
 )
@@ -10940,10 +13339,10 @@ data class ManagingSteamValueResponseData(
 
 @Serializable
 data class ManagingSteamPreviewParams(
-	val type: String? = null,
+	val type: ManagingType1? = null,
 )
 
-typealias ManagingSteamPreviewResponse = JsonElement
+typealias ManagingSteamPreviewResponse = String
 
 @Serializable
 data class ManagingEditBody(
@@ -10951,13 +13350,13 @@ data class ManagingEditBody(
 	@SerialName("title_en")
 	val titleEn: String? = null,
 	val price: Long? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("item_origin")
-	val itemOrigin: String? = null,
+	val itemOrigin: ManagingItemOrigin? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: String? = null,
+	val emailType: EmailType? = null,
 	@SerialName("allow_ask_discount")
 	val allowAskDiscount: Boolean? = null,
 	@SerialName("proxy_id")
@@ -11005,7 +13404,7 @@ data class ManagingNoteResponse(
 data class ManagingSteamUpdateValueBody(
 	val all: Boolean? = null,
 	@SerialName("app_id")
-	val appId: Long? = null,
+	val appId: AppId? = null,
 	val authorize: Boolean? = null,
 )
 
@@ -11064,7 +13463,7 @@ data class ManagingCloseResponse(
 
 @Serializable
 data class ManagingImageParams(
-	val type: String,
+	val type: ManagingType2,
 )
 
 @Serializable
@@ -11248,7 +13647,7 @@ data class ManagingCheckGuaranteeResponse(
 @Serializable
 data class ManagingChangePasswordBody(
 	@SerialName("_cancel")
-	val Cancel: Long? = null,
+	val Cancel: Cancel? = null,
 )
 
 @Serializable
@@ -11424,9 +13823,9 @@ data class ManagingTransferResponse(
 
 @Serializable
 data class ProfileClaimsParams(
-	val type: String? = null,
+	val type: ProfileType? = null,
 	@SerialName("claim_state")
-	val claimState: String? = null,
+	val claimState: ClaimState? = null,
 )
 
 @Serializable
@@ -11604,13 +14003,13 @@ data class ProfileEditResponse(
 @Serializable
 data class CartGetParams(
 	@SerialName("category_id")
-	val categoryId: Long? = null,
+	val categoryId: CategoryId? = null,
 	val page: Long? = null,
 	val pmin: Long? = null,
 	val pmax: Long? = null,
 	val title: String? = null,
 	@SerialName("order_by")
-	val orderBy: String? = null,
+	val orderBy: OrderBy? = null,
 	@SerialName("tag_id[]")
 	val tagId: List<Long>? = null,
 	@SerialName("not_tag_id[]")
@@ -11631,13 +14030,13 @@ data class CartGetParams(
 	val nsbByMe: Boolean? = null,
 	@SerialName("sb_by_me")
 	val sbByMe: Boolean? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: Boolean? = null,
 	@SerialName("email_provider[]")
 	val emailProvider: JsonElement? = null,
 	@SerialName("not_email_provider[]")
-	val notEmailProvider: String? = null,
+	val notEmailProvider: NotEmailProvider? = null,
 	@SerialName("parse_same_item_ids")
 	val parseSameItemIds: Boolean? = null,
 )
@@ -12194,14 +14593,14 @@ data class CustomDiscountsCreateBody(
 	@SerialName("user_id")
 	val userId: Long,
 	@SerialName("category_id")
-	val categoryId: Long,
+	val categoryId: CategoryId,
 	@SerialName("discount_percent")
 	val discountPercent: Double,
 	@SerialName("min_price")
 	val minPrice: Double,
 	@SerialName("max_price")
 	val maxPrice: Double? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 )
 
 @Serializable
@@ -12250,17 +14649,17 @@ data class CustomDiscountsDeleteResponse(
 
 @Serializable
 data class PublishingFastSellBody(
+	val price: Double,
+	@SerialName("category_id")
+	val categoryId: CategoryId,
+	val currency: Currency,
+	@SerialName("item_origin")
+	val itemOrigin: PublishingItemOrigin,
 	val title: String? = null,
 	@SerialName("title_en")
 	val titleEn: String? = null,
-	val price: Double,
-	@SerialName("category_id")
-	val categoryId: Long,
-	val currency: String,
-	@SerialName("item_origin")
-	val itemOrigin: String,
 	@SerialName("extended_guarantee")
-	val extendedGuarantee: Long? = null,
+	val extendedGuarantee: ExtendedGuarantee? = null,
 	@SerialName("allow_ask_discount")
 	val allowAskDiscount: Boolean? = null,
 	@SerialName("proxy_id")
@@ -12278,7 +14677,7 @@ data class PublishingFastSellBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: String? = null,
+	val emailType: EmailType? = null,
 	val extra: JsonObject? = null,
 )
 
@@ -12292,17 +14691,17 @@ data class PublishingFastSellResponse(
 
 @Serializable
 data class PublishingAddBody(
+	val price: Double,
+	@SerialName("category_id")
+	val categoryId: CategoryId,
+	val currency: Currency,
+	@SerialName("item_origin")
+	val itemOrigin: PublishingItemOrigin,
 	val title: String? = null,
 	@SerialName("title_en")
 	val titleEn: String? = null,
-	val price: Double,
-	@SerialName("category_id")
-	val categoryId: Long,
-	val currency: String,
-	@SerialName("item_origin")
-	val itemOrigin: String,
 	@SerialName("extended_guarantee")
-	val extendedGuarantee: Long? = null,
+	val extendedGuarantee: ExtendedGuarantee? = null,
 	val description: String? = null,
 	val information: String? = null,
 	val forceTempEmail: Boolean? = null,
@@ -12313,7 +14712,7 @@ data class PublishingAddBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: String? = null,
+	val emailType: EmailType? = null,
 	@SerialName("allow_ask_discount")
 	val allowAskDiscount: Boolean? = null,
 	@SerialName("proxy_id")
@@ -12345,7 +14744,7 @@ data class PublishingCheckBody(
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
 	@SerialName("email_type")
-	val emailType: String? = null,
+	val emailType: EmailType? = null,
 	val extra: JsonObject? = null,
 )
 
@@ -12584,7 +14983,7 @@ data class PublishingCheckResponseItem(
 
 @Serializable
 data class PublishingExternalBody(
-	val type: String,
+	val type: PublishingType,
 	val login: String? = null,
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
@@ -12618,22 +15017,23 @@ data class PaymentsInvoiceGetResponse(
 
 @Serializable
 data class PaymentsInvoiceCreateBody(
-	val currency: String,
+	val currency: Currency,
 	val amount: Double,
 	@SerialName("payment_id")
 	val paymentId: String,
 	val comment: String,
 	@SerialName("url_success")
 	val urlSuccess: String,
-	@SerialName("url_callback")
-	val urlCallback: String? = null,
 	@SerialName("merchant_id")
 	val merchantId: Long,
+	@SerialName("url_callback")
+	val urlCallback: String? = null,
 	@SerialName("required_telegram_id")
 	val requiredTelegramId: Long? = null,
 	@SerialName("required_telegram_username")
 	val requiredTelegramUsername: String? = null,
-	val lifetime: Double? = null,
+	/** Default: 3600 */
+	val lifetime: Double = 3600.0,
 	@SerialName("additional_data")
 	val additionalData: String? = null,
 	@SerialName("is_test")
@@ -12650,8 +15050,8 @@ data class PaymentsInvoiceCreateResponse(
 @Serializable
 data class PaymentsInvoiceListParams(
 	val page: Long? = null,
-	val currency: String? = null,
-	val status: String? = null,
+	val currency: Currency? = null,
+	val status: Status? = null,
 	val amount: Double? = null,
 	@SerialName("merchant_id")
 	val merchantId: Long? = null,
@@ -13289,11 +15689,11 @@ data class PaymentsBalanceExchangeResponseTo(
 
 @Serializable
 data class PaymentsTransferBody(
+	val amount: Long,
+	val currency: Currency,
 	@SerialName("user_id")
 	val userId: Long? = null,
 	val username: String? = null,
-	val amount: Long,
-	val currency: String,
 	val comment: String? = null,
 	@SerialName("telegram_deal")
 	val telegramDeal: Boolean? = null,
@@ -13304,7 +15704,7 @@ data class PaymentsTransferBody(
 	@SerialName("hold_length_value")
 	val holdLengthValue: Long? = null,
 	@SerialName("hold_length_option")
-	val holdLengthOption: String? = null,
+	val holdLengthOption: HoldLengthOption? = null,
 )
 
 @Serializable
@@ -13353,10 +15753,10 @@ data class PaymentsCancelResponse(
 
 @Serializable
 data class PaymentsHistoryParams(
-	val type: String? = null,
+	val type: PaymentsType? = null,
 	val pmin: Long? = null,
 	val pmax: Long? = null,
-	val currency: String? = null,
+	val currency: Currency? = null,
 	val page: Long? = null,
 	@SerialName("operation_id_lt")
 	val operationIdLt: Long? = null,
@@ -13672,7 +16072,7 @@ data class PaymentsPayoutBody(
 	val paymentSystem: String,
 	val wallet: String,
 	val amount: Double,
-	val currency: String,
+	val currency: Currency,
 	@SerialName("include_fee")
 	val includeFee: Boolean? = null,
 	val extra: JsonObject? = null,
@@ -13804,13 +16204,13 @@ data class AutoPaymentsListResponsePayments(
 
 @Serializable
 data class AutoPaymentsCreateBody(
-	@SerialName("secret_answer")
-	val secretAnswer: String? = null,
 	@SerialName("username_receiver")
 	val usernameReceiver: String,
-	val day: Long,
+	val day: Day,
 	val amount: Double,
-	val currency: String? = null,
+	@SerialName("secret_answer")
+	val secretAnswer: String? = null,
+	val currency: Currency? = null,
 	val description: String? = null,
 )
 
