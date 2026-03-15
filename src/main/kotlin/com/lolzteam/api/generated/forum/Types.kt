@@ -2928,6 +2928,9 @@ data class ThreadsCreateResponse(
 data class ThreadsCreateContestBody(
 	@SerialName("post_body")
 	val postBody: String,
+	/** Default: by_finish_date */
+	@SerialName("contest_type")
+	val contestType: ContestType,
 	@SerialName("prize_type")
 	val prizeType: PrizeType,
 	@SerialName("require_like_count")
@@ -2937,9 +2940,6 @@ data class ThreadsCreateContestBody(
 	val title: String? = null,
 	@SerialName("title_en")
 	val titleEn: String? = null,
-	/** Default: by_finish_date */
-	@SerialName("contest_type")
-	val contestType: ContestType = ContestType.BY_FINISH_DATE,
 	@SerialName("length_value")
 	val lengthValue: Long? = null,
 	@SerialName("length_option")

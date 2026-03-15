@@ -53,17 +53,17 @@ private fun emitQueryParamsClass(
 	sb.appendLine("@Serializable")
 	sb.appendLine("data class $typeName(")
 
-	// Sort: required-no-default first, then fields with defaults
-	val sorted = method.params.queryParams.sortedBy { if (it.required && it.defaultValue == null) 0 else 1 }
+	// Sort: required first, then optional
+	val sorted = method.params.queryParams.sortedBy { if (it.required) 0 else 1 }
 
 	val props = sorted.map { param ->
 		val kotlinType = resolveFieldType(param.type, param.name, param.enumValues, enumLookup)
-		val hasDefault = param.defaultValue != null
+		val hasDefault = param.defaultValue != null && !param.required
 		val needsNullable = !param.required && !hasDefault
 		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(param.name)
 		val serialName = if (needsSerialName(param.name)) "\t@SerialName(\"${param.name}\")\n" else ""
-		val doc = if (hasDefault) "\t/** Default: ${param.defaultValue} */\n" else ""
+		val doc = if (param.defaultValue != null) "\t/** Default: ${param.defaultValue} */\n" else ""
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(param.defaultValue!!, kotlinType, param.enumValues)}"
 		} else if (!param.required) {
@@ -112,8 +112,8 @@ private fun emitBodyClass(
 		sb.appendLine("data class $typeName(")
 	}
 
-	// Sort: required-no-default first, then fields with defaults
-	val sortedProps = method.bodyProperties.sortedBy { if (it.required && it.defaultValue == null) 0 else 1 }
+	// Sort: required first, then optional
+	val sortedProps = method.bodyProperties.sortedBy { if (it.required) 0 else 1 }
 
 	val props = sortedProps.map { prop ->
 		val kotlinType = if (prop.type == "Blob") {
@@ -121,13 +121,13 @@ private fun emitBodyClass(
 		} else {
 			resolveFieldType(prop.type, prop.name, prop.enumValues, enumLookup)
 		}
-		val hasDefault = prop.defaultValue != null
+		val hasDefault = prop.defaultValue != null && !prop.required
 		val needsNullable = !prop.required && !hasDefault
 		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(prop.name)
 		val skipSerialName = hasByteArrayFields
 		val serialName = if (!skipSerialName && needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
-		val doc = if (hasDefault) "\t/** Default: ${prop.defaultValue} */\n" else ""
+		val doc = if (prop.defaultValue != null) "\t/** Default: ${prop.defaultValue} */\n" else ""
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
 		} else if (!prop.required) {
