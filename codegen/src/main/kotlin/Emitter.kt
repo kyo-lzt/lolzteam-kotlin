@@ -871,6 +871,11 @@ fun emitKotlinClientFile(
 	sb.appendLine("\t\thttp.close()")
 	sb.appendLine("\t}")
 
+	sb.appendLine()
+	sb.appendLine("\tcompanion object {")
+	sb.appendLine("\t\tfun create(token: String): $clientName = $clientName(ClientConfig(token = token))")
+	sb.appendLine("\t}")
+
 	sb.appendLine("}")
 	sb.appendLine()
 

@@ -18,7 +18,7 @@ data class ClientConfig(
     val retry: RetryConfig? = RetryConfig(),
     val rateLimit: RateLimitConfig? = null,
     val searchRateLimit: RateLimitConfig? = null,
-    val timeout: Duration? = null,
+    val timeout: Duration = 30.seconds,
     val onRetry: ((RetryInfo) -> Unit)? = null,
 )
 

@@ -5,14 +5,19 @@ import kotlin.math.min
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 
-private fun isRetryable(error: Throwable): Boolean = when (error) {
-    is RateLimitException -> true
-    is ServerException -> error.status == 502 || error.status == 503 || error.status == 504
-    is NetworkException -> error.isTransient
-    else -> false
-}
+private fun isRetryable(error: Throwable): Boolean =
+    when (error) {
+        is RateLimitException -> true
+        is ServerException -> error.status == 502 || error.status == 503 || error.status == 504
+        is NetworkException -> error.isTransient
+        else -> false
+    }
 
-private fun computeDelay(attempt: Int, config: RetryConfig, error: Throwable): Long {
+private fun computeDelay(
+    attempt: Int,
+    config: RetryConfig,
+    error: Throwable,
+): Long {
     if (error is RateLimitException && error.retryAfter != null) {
         return min(error.retryAfter.inWholeMilliseconds, config.maxDelay.inWholeMilliseconds)
     }
@@ -43,13 +48,15 @@ suspend fun <T> withRetry(
             }
             val delayMs = computeDelay(attempt, config, e)
             if (onRetry != null && e is LolzteamException) {
-                onRetry(RetryInfo(
-                    attempt = attempt,
-                    delay = delayMs.milliseconds,
-                    error = e,
-                    method = method,
-                    path = path,
-                ))
+                onRetry(
+                    RetryInfo(
+                        attempt = attempt + 1,
+                        delay = delayMs.milliseconds,
+                        error = e,
+                        method = method,
+                        path = path,
+                    ),
+                )
             }
             delay(delayMs)
         }

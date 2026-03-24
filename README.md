@@ -29,14 +29,13 @@ cd lolzteam-kotlin
 ## Usage
 
 ```kotlin
-import com.lolzteam.api.runtime.ClientConfig
 import com.lolzteam.api.generated.forum.ForumClient
 import com.lolzteam.api.generated.market.MarketClient
 
 suspend fun main() {
-    val config = ClientConfig(token = "your_token")
-    val forum = ForumClient(config)
-    val market = MarketClient(config)
+    // Быстрый старт — достаточно передать токен
+    val forum = ForumClient.create("your_token")
+    val market = MarketClient.create("your_token")
 
     val threads = forum.threads.list()
     val items = market.category.all()
@@ -55,7 +54,7 @@ Market API groups: `category`, `list`, `managing`, `profile`, `cart`, `purchasin
 ```kotlin
 val config = ClientConfig(
     token = "your_token",
-    baseUrl = "https://api.lolz.live",          // optional, per-client default
+    baseUrl = "https://prod-api.lolz.live",      // optional, per-client default
     proxy = ProxyConfig(url = "socks5://127.0.0.1:1080"),
     retry = RetryConfig(
         maxRetries = 5,             // default: 3
@@ -68,7 +67,7 @@ val config = ClientConfig(
     searchRateLimit = RateLimitConfig(
         requestsPerMinute = 30,     // default: 20 (Market)
     ),
-    timeout = 30.seconds,           // optional, request timeout
+    timeout = 60.seconds,           // default: 30s
     onRetry = { info ->             // optional, called before each retry
         println("Retry #${info.attempt} for ${info.method} ${info.path}")
     },
@@ -143,7 +142,8 @@ LolzteamException (sealed)
 │   ├── NotFoundException     (404)
 │   └── ServerException       (500, 502, 503)
 ├── NetworkException
-└── ConfigException
+├── ConfigException
+└── RetryExhaustedException
 ```
 
 ## Rate Limits

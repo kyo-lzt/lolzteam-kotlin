@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
     `maven-publish`
 }
 
 group = "com.lolzteam"
-version = "0.1.0"
+version = findProperty("version") as String? ?: "0.0.0-dev"
 
 java {
     toolchain {
@@ -34,6 +35,9 @@ tasks.test {
     useJUnitPlatform()
 }
 
+ktlint {
+}
+
 kotlin {
     compilerOptions {
         allWarningsAsErrors.set(true)
@@ -48,7 +52,7 @@ publishing {
             pom {
                 name.set("lolzteam-api")
                 description.set("Kotlin API wrapper for Lolzteam Forum and Market")
-                url.set("https://github.com/lolzteam/api-wrapper")
+                url.set("https://github.com/kyo-lzt/lolzteam-kotlin")
                 licenses {
                     license {
                         name.set("MIT")
