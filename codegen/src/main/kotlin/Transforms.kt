@@ -327,25 +327,34 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 
 	val bodyProperties = mutableListOf<BodyProperty>()
 
-	// oneOf → merge all properties, mark all optional
+	// oneOf → merge all properties; required only if required in ALL variants that contain it
 	val oneOf = schema["oneOf"] as? JsonArray
 	if (oneOf != null) {
 		// Try to detect discriminated union
 		val union = detectDiscriminatedUnion(oneOf, spec)
 
 		val allProps = mutableMapOf<String, JsonElement>()
+		val variantRequiredSets = mutableListOf<Pair<Set<String>, Set<String>>>() // (propNames, requiredNames)
 		for (variant in oneOf) {
 			val variantObj = variant as? JsonObject ?: continue
 			val variantProps = variantObj["properties"] as? JsonObject ?: continue
+			val variantRequired = (variantObj["required"] as? JsonArray)
+				?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+				?.toSet() ?: emptySet()
+			variantRequiredSets.add(variantProps.keys to variantRequired)
 			for ((name, propSchema) in variantProps) {
 				allProps[name] = propSchema
 			}
 		}
 		for ((name, propSchema) in allProps) {
+			// A field is required only if present AND required in ALL variants
+			val requiredInAll = variantRequiredSets.all { (propNames, requiredNames) ->
+				name !in propNames || name in requiredNames
+			}
 			bodyProperties.add(BodyProperty(
 				name = name,
 				type = schemaToTypeString(propSchema, spec),
-				required = false,
+				required = requiredInAll,
 				enumValues = extractEnumValues(propSchema as? JsonObject),
 			))
 		}

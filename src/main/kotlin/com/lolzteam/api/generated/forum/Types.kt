@@ -2070,11 +2070,11 @@ data class OAuthTokenBodyPassword(
 @Serializable
 data class OAuthTokenResponse(
 	@SerialName("access_token")
-	val accessToken: String? = null,
+	val accessToken: String,
 	@SerialName("token_type")
-	val tokenType: String? = null,
+	val tokenType: String,
 	@SerialName("expires_in")
-	val expiresIn: Long? = null,
+	val expiresIn: Long,
 	@SerialName("refresh_token")
 	val refreshToken: String? = null,
 	val scope: String? = null,
@@ -2089,9 +2089,9 @@ data class AssetsCssParams(
 
 @Serializable
 data class AssetsCssResponse(
-	val contents: String? = null,
+	val contents: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 // ─── CategoriesApi Types ────────────────────────────────────────
@@ -2107,11 +2107,11 @@ data class CategoriesListParams(
 
 @Serializable
 data class CategoriesListResponse(
-	val categories: List<CategoriesListResponseCategories>? = null,
+	val categories: List<CategoriesListResponseCategories>,
 	@SerialName("categories_total")
-	val categoriesTotal: Long? = null,
+	val categoriesTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2145,9 +2145,9 @@ data class CategoriesListResponseCategories(
 
 @Serializable
 data class CategoriesGetResponse(
-	val category: CategoriesGetResponseCategory? = null,
+	val category: CategoriesGetResponseCategory,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2192,12 +2192,12 @@ data class ForumsListParams(
 
 @Serializable
 data class ForumsListResponse(
-	val forums: List<ForumsListResponseForums>? = null,
+	val forums: List<ForumsListResponseForums>,
 	@SerialName("forums_total")
-	val forumsTotal: Long? = null,
-	val tabs: List<ForumsListResponseTabs>? = null,
+	val forumsTotal: Long,
+	val tabs: List<ForumsListResponseTabs>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2275,10 +2275,10 @@ data class ForumsListResponseTabs(
 
 @Serializable
 data class ForumsGroupedResponse(
-	val data: ForumsGroupedResponseData? = null,
-	val tabs: List<ForumsGroupedResponseTabs>? = null,
+	val data: ForumsGroupedResponseData,
+	val tabs: List<ForumsGroupedResponseTabs>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2348,9 +2348,9 @@ data class ForumsGroupedResponseTabs(
 
 @Serializable
 data class ForumsGetResponse(
-	val forum: ForumsGetResponseForum? = null,
+	val forum: ForumsGetResponseForum,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2421,9 +2421,9 @@ data class ForumsGetResponseForum(
 
 @Serializable
 data class ForumsFollowersResponse(
-	val users: List<ForumsFollowersResponseUsers>? = null,
+	val users: List<ForumsFollowersResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2475,9 +2475,9 @@ data class ForumsFollowedParams(
 
 @Serializable
 data class ForumsFollowedResponse(
-	val forums: List<ForumsFollowedResponseForums>? = null,
+	val forums: List<ForumsFollowedResponseForums>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2556,14 +2556,14 @@ data class ForumsFollowedResponseForums(
 
 @Serializable
 data class ForumsGetFeedOptionsResponse(
-	val forums: List<ForumsGetFeedOptionsResponseForums>? = null,
+	val forums: List<ForumsGetFeedOptionsResponseForums>,
 	@SerialName("excluded_forums_ids")
-	val excludedForumsIds: List<Long>? = null,
+	val excludedForumsIds: List<Long>,
 	@SerialName("default_excluded_forums_ids")
-	val defaultExcludedForumsIds: List<Long>? = null,
-	val keywords: String? = null,
+	val defaultExcludedForumsIds: List<Long>,
+	val keywords: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2628,19 +2628,19 @@ data class ForumsEditFeedOptionsResponse(
 @Serializable
 data class LinksListResponse(
 	@SerialName("link-forums")
-	val linkForums: List<RespLinkModel>? = null,
+	val linkForums: List<RespLinkModel>,
 	@SerialName("link-forums_total")
-	val linkForumsTotal: Long? = null,
+	val linkForumsTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class LinksGetResponse(
 	@SerialName("link-forum")
-	val linkForum: RespLinkModel? = null,
+	val linkForum: RespLinkModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 // ─── PagesApi Types ────────────────────────────────────────
@@ -2654,11 +2654,11 @@ data class PagesListParams(
 
 @Serializable
 data class PagesListResponse(
-	val pages: List<PagesListResponsePages>? = null,
+	val pages: List<PagesListResponsePages>,
 	@SerialName("pages_total")
-	val pagesTotal: Long? = null,
+	val pagesTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2690,9 +2690,9 @@ data class PagesListResponsePages(
 
 @Serializable
 data class PagesGetResponse(
-	val page: PagesGetResponsePage? = null,
+	val page: PagesGetResponsePage,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2735,11 +2735,11 @@ data class NavigationListParams(
 
 @Serializable
 data class NavigationListResponse(
-	val elements: List<NavigationListResponseElements>? = null,
+	val elements: List<NavigationListResponseElements>,
 	@SerialName("elements_count")
-	val elementsCount: Long? = null,
+	val elementsCount: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2816,13 +2816,13 @@ data class ThreadsListParams(
 
 @Serializable
 data class ThreadsListResponse(
-	val threads: List<RespThreadModel>? = null,
-	val forum: ThreadsListResponseForum? = null,
+	val threads: List<RespThreadModel>,
+	val forum: ThreadsListResponseForum,
 	@SerialName("threads_total")
-	val threadsTotal: Long? = null,
-	val links: ThreadsListResponseLinks? = null,
+	val threadsTotal: Long,
+	val links: ThreadsListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2919,9 +2919,9 @@ data class ThreadsCreateBody(
 
 @Serializable
 data class ThreadsCreateResponse(
-	val thread: RespThreadModel? = null,
+	val thread: RespThreadModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -2982,9 +2982,9 @@ data class ThreadsCreateContestBody(
 
 @Serializable
 data class ThreadsCreateContestResponse(
-	val thread: RespThreadModel? = null,
+	val thread: RespThreadModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3036,9 +3036,9 @@ data class ThreadsClaimBody(
 
 @Serializable
 data class ThreadsClaimResponse(
-	val thread: RespThreadModel? = null,
+	val thread: RespThreadModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3049,9 +3049,9 @@ data class ThreadsGetParams(
 
 @Serializable
 data class ThreadsGetResponse(
-	val thread: RespThreadModel? = null,
+	val thread: RespThreadModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3076,9 +3076,9 @@ data class ThreadsEditBody(
 
 @Serializable
 data class ThreadsEditResponse(
-	val thread: RespThreadModel? = null,
+	val thread: RespThreadModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3119,18 +3119,18 @@ data class ThreadsMoveResponse(
 
 @Serializable
 data class ThreadsBumpResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class ThreadsHideResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3151,9 +3151,9 @@ data class ThreadsUnstarResponse(
 
 @Serializable
 data class ThreadsFollowersResponse(
-	val users: List<ThreadsFollowersResponseUsers>? = null,
+	val users: List<ThreadsFollowersResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3200,11 +3200,11 @@ data class ThreadsFollowedParams(
 
 @Serializable
 data class ThreadsFollowedResponse(
-	val threads: List<ThreadsFollowedResponseThreads>? = null,
+	val threads: List<ThreadsFollowedResponseThreads>,
 	@SerialName("threads_total")
-	val threadsTotal: Long? = null,
+	val threadsTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3438,11 +3438,11 @@ data class ThreadsFollowedResponseThreads(
 
 @Serializable
 data class ThreadsNavigationResponse(
-	val elements: List<ThreadsNavigationResponseElements>? = null,
+	val elements: List<ThreadsNavigationResponseElements>,
 	@SerialName("elements_count")
-	val elementsCount: Long? = null,
+	val elementsCount: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3488,9 +3488,9 @@ data class ThreadsNavigationResponseElements(
 
 @Serializable
 data class ThreadsPollGetResponse(
-	val poll: ThreadsPollGetResponsePoll? = null,
+	val poll: ThreadsPollGetResponsePoll,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3560,10 +3560,10 @@ data class ThreadsUnreadParams(
 
 @Serializable
 data class ThreadsUnreadResponse(
-	val threads: List<RespThreadModel>? = null,
-	val data: List<ThreadsUnreadResponseData>? = null,
+	val threads: List<RespThreadModel>,
+	val data: List<ThreadsUnreadResponseData>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -3788,10 +3788,10 @@ data class ThreadsRecentParams(
 
 @Serializable
 data class ThreadsRecentResponse(
-	val threads: List<RespThreadModel>? = null,
-	val data: List<ThreadsRecentResponseData>? = null,
+	val threads: List<RespThreadModel>,
+	val data: List<ThreadsRecentResponseData>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4012,12 +4012,12 @@ data class PostsListParams(
 
 @Serializable
 data class PostsListResponse(
-	val posts: List<RespThreadModel>? = null,
-	val thread: RespThreadModel? = null,
+	val posts: List<RespThreadModel>,
+	val thread: RespThreadModel,
 	@SerialName("posts_total")
-	val postsTotal: Long? = null,
+	val postsTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4032,16 +4032,16 @@ data class PostsCreateBody(
 
 @Serializable
 data class PostsCreateResponse(
-	val post: RespPostModel? = null,
+	val post: RespPostModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class PostsGetResponse(
-	val post: RespPostModel? = null,
+	val post: RespPostModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4052,9 +4052,9 @@ data class PostsEditBody(
 
 @Serializable
 data class PostsEditResponse(
-	val post: RespPostModel? = null,
+	val post: RespPostModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4078,9 +4078,9 @@ data class PostsLikesParams(
 
 @Serializable
 data class PostsLikesResponse(
-	val users: List<PostsLikesResponseUsers>? = null,
+	val users: List<PostsLikesResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4108,9 +4108,9 @@ data class PostsUnlikeResponse(
 
 @Serializable
 data class PostsReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4137,9 +4137,9 @@ data class PostsCommentsGetParams(
 
 @Serializable
 data class PostsCommentsGetResponse(
-	val comments: List<RespPostCommentModel>? = null,
+	val comments: List<RespPostCommentModel>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4152,9 +4152,9 @@ data class PostsCommentsCreateBody(
 
 @Serializable
 data class PostsCommentsCreateResponse(
-	val comment: PostsCommentsCreateResponseComment? = null,
+	val comment: PostsCommentsCreateResponseComment,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4224,9 +4224,9 @@ data class PostsCommentsEditBody(
 
 @Serializable
 data class PostsCommentsEditResponse(
-	val comment: PostsCommentsEditResponseComment? = null,
+	val comment: PostsCommentsEditResponseComment,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4328,12 +4328,12 @@ data class UsersListParams(
 
 @Serializable
 data class UsersListResponse(
-	val users: List<RespUserModel>? = null,
+	val users: List<RespUserModel>,
 	@SerialName("users_total")
-	val usersTotal: Long? = null,
-	val links: UsersListResponseLinks? = null,
+	val usersTotal: Long,
+	val links: UsersListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4345,9 +4345,9 @@ data class UsersListResponseLinks(
 
 @Serializable
 data class UsersFieldsResponse(
-	val fields: List<UsersFieldsResponseFields>? = null,
+	val fields: List<UsersFieldsResponseFields>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4371,9 +4371,9 @@ data class UsersFindParams(
 
 @Serializable
 data class UsersFindResponse(
-	val users: List<RespUserModel>? = null,
+	val users: List<RespUserModel>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4384,9 +4384,9 @@ data class UsersGetParams(
 
 @Serializable
 data class UsersGetResponse(
-	val user: RespUserModel? = null,
+	val user: RespUserModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4459,10 +4459,10 @@ data class UsersClaimsParams(
 
 @Serializable
 data class UsersClaimsResponse(
-	val claims: List<UsersClaimsResponseClaims>? = null,
-	val stats: UsersClaimsResponseStats? = null,
+	val claims: List<UsersClaimsResponseClaims>,
+	val stats: UsersClaimsResponseStats,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4516,10 +4516,10 @@ data class UsersAvatarUploadBody(
 
 @Serializable
 data class UsersAvatarUploadResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4539,10 +4539,10 @@ data class UsersAvatarCropBody(
 
 @Serializable
 data class UsersAvatarCropResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 data class UsersBackgroundUploadBody(
@@ -4554,10 +4554,10 @@ data class UsersBackgroundUploadBody(
 
 @Serializable
 data class UsersBackgroundUploadResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4577,10 +4577,10 @@ data class UsersBackgroundCropBody(
 
 @Serializable
 data class UsersBackgroundCropResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4592,12 +4592,12 @@ data class UsersFollowersParams(
 
 @Serializable
 data class UsersFollowersResponse(
-	val users: List<UsersFollowersResponseUsers>? = null,
+	val users: List<UsersFollowersResponseUsers>,
 	@SerialName("users_total")
-	val usersTotal: Long? = null,
-	val links: UsersFollowersResponseLinks? = null,
+	val usersTotal: Long,
+	val links: UsersFollowersResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4719,11 +4719,11 @@ data class UsersFollowingsParams(
 
 @Serializable
 data class UsersFollowingsResponse(
-	val users: List<UsersFollowingsResponseUsers>? = null,
+	val users: List<UsersFollowingsResponseUsers>,
 	@SerialName("users_total")
-	val usersTotal: Long? = null,
+	val usersTotal: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4851,13 +4851,13 @@ data class UsersLikesParams(
 
 @Serializable
 data class UsersLikesResponse(
-	val page: Long? = null,
-	val perPage: Long? = null,
-	val contentType: String? = null,
-	val totalLikes: Long? = null,
-	val likes: UsersLikesResponseLikes? = null,
+	val page: Long,
+	val perPage: Long,
+	val contentType: String,
+	val totalLikes: Long,
+	val likes: UsersLikesResponseLikes,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -4896,9 +4896,9 @@ data class UsersIgnoredParams(
 
 @Serializable
 data class UsersIgnoredResponse(
-	val users: List<UsersIgnoredResponseUsers>? = null,
+	val users: List<UsersIgnoredResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5051,13 +5051,13 @@ data class UsersContentsParams(
 
 @Serializable
 data class UsersContentsResponse(
-	val data: List<UsersContentsResponseData>? = null,
+	val data: List<UsersContentsResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
-	val user: RespUserModel? = null,
-	val links: UsersContentsResponseLinks? = null,
+	val dataTotal: Long,
+	val user: RespUserModel,
+	val links: UsersContentsResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5226,9 +5226,9 @@ data class UsersContentsResponseLinks(
 
 @Serializable
 data class UsersTrophiesResponse(
-	val trophies: List<UsersTrophiesResponseTrophies>? = null,
+	val trophies: List<UsersTrophiesResponseTrophies>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5243,9 +5243,9 @@ data class UsersTrophiesResponseTrophies(
 
 @Serializable
 data class UsersSecretAnswerTypesResponse(
-	val data: List<UsersSecretAnswerTypesResponseData>? = null,
+	val data: List<UsersSecretAnswerTypesResponseData>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5257,11 +5257,11 @@ data class UsersSecretAnswerTypesResponseData(
 
 @Serializable
 data class UsersSaResetResponse(
-	val success: Boolean? = null,
+	val success: Boolean,
 	@SerialName("waiting_time")
-	val waitingTime: String? = null,
+	val waitingTime: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5287,12 +5287,12 @@ data class ProfilePostsListParams(
 @Serializable
 data class ProfilePostsListResponse(
 	@SerialName("profile_posts")
-	val profilePosts: List<RespProfilePostModel>? = null,
-	val totalProfilePosts: Long? = null,
-	val canPostOnProfile: Boolean? = null,
-	val links: ProfilePostsListResponseLinks? = null,
+	val profilePosts: List<RespProfilePostModel>,
+	val totalProfilePosts: Long,
+	val canPostOnProfile: Boolean,
+	val links: ProfilePostsListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5305,9 +5305,9 @@ data class ProfilePostsListResponseLinks(
 @Serializable
 data class ProfilePostsGetResponse(
 	@SerialName("profile_post")
-	val profilePost: RespProfilePostModel? = null,
+	val profilePost: RespProfilePostModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5321,9 +5321,9 @@ data class ProfilePostsEditBody(
 @Serializable
 data class ProfilePostsEditResponse(
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsEditResponseProfilePost? = null,
+	val profilePost: ProfilePostsEditResponseProfilePost,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5398,9 +5398,9 @@ data class ProfilePostsDeleteResponse(
 
 @Serializable
 data class ProfilePostsReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5427,9 +5427,9 @@ data class ProfilePostsCreateBody(
 @Serializable
 data class ProfilePostsCreateResponse(
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsCreateResponseProfilePost? = null,
+	val profilePost: ProfilePostsCreateResponseProfilePost,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5507,9 +5507,9 @@ data class ProfilePostsUnstickResponse(
 
 @Serializable
 data class ProfilePostsLikesResponse(
-	val users: List<ProfilePostsLikesResponseUsers>? = null,
+	val users: List<ProfilePostsLikesResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5545,15 +5545,15 @@ data class ProfilePostsCommentsListParams(
 
 @Serializable
 data class ProfilePostsCommentsListResponse(
-	val comments: List<RespProfilePostCommentModel>? = null,
+	val comments: List<RespProfilePostCommentModel>,
 	@SerialName("comments_total")
-	val commentsTotal: Long? = null,
+	val commentsTotal: Long,
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsCommentsListResponseProfilePost? = null,
+	val profilePost: ProfilePostsCommentsListResponseProfilePost,
 	@SerialName("timeline_user")
-	val timelineUser: RespUserModel? = null,
+	val timelineUser: RespUserModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5623,9 +5623,9 @@ data class ProfilePostsCommentsCreateBody(
 
 @Serializable
 data class ProfilePostsCommentsCreateResponse(
-	val comment: ProfilePostsCommentsCreateResponseComment? = null,
+	val comment: ProfilePostsCommentsCreateResponseComment,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5681,9 +5681,9 @@ data class ProfilePostsCommentsEditBody(
 
 @Serializable
 data class ProfilePostsCommentsEditResponse(
-	val comment: ProfilePostsCommentsEditResponseComment? = null,
+	val comment: ProfilePostsCommentsEditResponseComment,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5745,9 +5745,9 @@ data class ProfilePostsCommentsDeleteResponse(
 
 @Serializable
 data class ProfilePostsCommentsGetResponse(
-	val comment: RespProfilePostCommentModel? = null,
+	val comment: RespProfilePostCommentModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5774,13 +5774,13 @@ data class ConversationsListParams(
 
 @Serializable
 data class ConversationsListResponse(
-	val conversations: List<RespConversationModel>? = null,
+	val conversations: List<RespConversationModel>,
 	@SerialName("can_start")
-	val canStart: Boolean? = null,
-	val folders: List<ConversationsListResponseFolders>? = null,
-	val links: ConversationsListResponseLinks? = null,
+	val canStart: Boolean,
+	val folders: List<ConversationsListResponseFolders>,
+	val links: ConversationsListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5820,9 +5820,9 @@ data class ConversationsCreateBody(
 
 @Serializable
 data class ConversationsCreateResponse(
-	val conversation: RespConversationModel? = null,
+	val conversation: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5844,9 +5844,9 @@ data class ConversationsUpdateBody(
 
 @Serializable
 data class ConversationsUpdateResponse(
-	val conversation: RespConversationModel? = null,
+	val conversation: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5873,9 +5873,9 @@ data class ConversationsStartBody(
 
 @Serializable
 data class ConversationsStartResponse(
-	val conversation: RespConversationModel? = null,
+	val conversation: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5893,9 +5893,9 @@ data class ConversationsSaveResponse(
 
 @Serializable
 data class ConversationsGetResponse(
-	val conversation: RespConversationModel? = null,
+	val conversation: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5909,12 +5909,12 @@ data class ConversationsMessagesListParams(
 
 @Serializable
 data class ConversationsMessagesListResponse(
-	val messages: List<RespConversationMessageModel>? = null,
+	val messages: List<RespConversationMessageModel>,
 	@SerialName("messages_total")
-	val messagesTotal: Long? = null,
-	val links: ConversationsMessagesListResponseLinks? = null,
+	val messagesTotal: Long,
+	val links: ConversationsMessagesListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5934,9 +5934,9 @@ data class ConversationsMessagesCreateBody(
 
 @Serializable
 data class ConversationsMessagesCreateResponse(
-	val message: RespConversationMessageModel? = null,
+	val message: RespConversationMessageModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5950,17 +5950,17 @@ data class ConversationsSearchBody(
 
 @Serializable
 data class ConversationsSearchResponse(
-	val conversations: List<RespConversationModel>? = null,
-	val recipients: Boolean? = null,
+	val conversations: List<RespConversationModel>,
+	val recipients: Boolean,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class ConversationsMessagesGetResponse(
-	val message: RespConversationModel? = null,
+	val message: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -5971,9 +5971,9 @@ data class ConversationsMessagesEditBody(
 
 @Serializable
 data class ConversationsMessagesEditResponse(
-	val message: RespConversationModel? = null,
+	val message: RespConversationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6021,10 +6021,10 @@ data class ConversationsReadResponse(
 
 @Serializable
 data class ConversationsReadAllResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6045,34 +6045,34 @@ data class ConversationsMessagesUnstickResponse(
 
 @Serializable
 data class ConversationsStarResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class ConversationsUnstarResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class ConversationsAlertsEnableResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
 data class ConversationsAlertsDisableResponse(
-	val status: String? = null,
-	val message: String? = null,
+	val status: String,
+	val message: String,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 // ─── NotificationsApi Types ────────────────────────────────────────
@@ -6086,12 +6086,12 @@ data class NotificationsListParams(
 
 @Serializable
 data class NotificationsListResponse(
-	val notifications: List<RespNotificationModel>? = null,
+	val notifications: List<RespNotificationModel>,
 	@SerialName("notifications_total")
-	val notificationsTotal: Long? = null,
-	val links: NotificationsListResponseLinks? = null,
+	val notificationsTotal: Long,
+	val links: NotificationsListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6105,10 +6105,10 @@ data class NotificationsListResponseLinks(
 @Serializable
 data class NotificationsGetResponse(
 	@SerialName("notification_id")
-	val notificationId: Long? = null,
-	val notification: RespNotificationModel? = null,
+	val notificationId: Long,
+	val notification: RespNotificationModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6129,9 +6129,9 @@ data class NotificationsReadResponse(
 
 @Serializable
 data class TagsPopularResponse(
-	val tags: TagsPopularResponseTags? = null,
+	val tags: TagsPopularResponseTags,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6148,12 +6148,12 @@ data class TagsListParams(
 
 @Serializable
 data class TagsListResponse(
-	val tags: TagsListResponseTags? = null,
+	val tags: TagsListResponseTags,
 	@SerialName("tags_total")
-	val tagsTotal: Long? = null,
-	val links: TagsListResponseLinks? = null,
+	val tagsTotal: Long,
+	val links: TagsListResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6213,13 +6213,13 @@ data class TagsGetParams(
 
 @Serializable
 data class TagsGetResponse(
-	val tag: TagsGetResponseTag? = null,
-	val tagged: List<TagsGetResponseTagged>? = null,
+	val tag: TagsGetResponseTag,
+	val tagged: List<TagsGetResponseTagged>,
 	@SerialName("tagged_total")
-	val taggedTotal: Long? = null,
-	val links: TagsGetResponseLinks? = null,
+	val taggedTotal: Long,
+	val links: TagsGetResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6480,10 +6480,10 @@ data class TagsFindParams(
 
 @Serializable
 data class TagsFindResponse(
-	val tags: List<String>? = null,
-	val ids: List<Long>? = null,
+	val tags: List<String>,
+	val ids: List<Long>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 // ─── SearchApi Types ────────────────────────────────────────
@@ -6502,13 +6502,13 @@ data class SearchAllBody(
 
 @Serializable
 data class SearchAllResponse(
-	val data: List<SearchAllResponseData>? = null,
+	val data: List<SearchAllResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
-	val users: List<RespUserModel>? = null,
-	val links: SearchAllResponseLinks? = null,
+	val dataTotal: Long,
+	val users: List<RespUserModel>,
+	val links: SearchAllResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -6812,12 +6812,12 @@ data class SearchThreadsBody(
 
 @Serializable
 data class SearchThreadsResponse(
-	val data: List<SearchThreadsResponseData>? = null,
+	val data: List<SearchThreadsResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
-	val links: SearchThreadsResponseLinks? = null,
+	val dataTotal: Long,
+	val links: SearchThreadsResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7036,12 +7036,12 @@ data class SearchPostsBody(
 
 @Serializable
 data class SearchPostsResponse(
-	val data: List<SearchPostsResponseData>? = null,
+	val data: List<SearchPostsResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
-	val links: SearchPostsResponseLinks? = null,
+	val dataTotal: Long,
+	val links: SearchPostsResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7251,9 +7251,9 @@ data class SearchUsersBody(
 
 @Serializable
 data class SearchUsersResponse(
-	val users: List<RespUserModel>? = null,
+	val users: List<RespUserModel>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7267,12 +7267,12 @@ data class SearchProfilePostsBody(
 
 @Serializable
 data class SearchProfilePostsResponse(
-	val data: List<SearchProfilePostsResponseData>? = null,
+	val data: List<SearchProfilePostsResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
-	val links: SearchProfilePostsResponseLinks? = null,
+	val dataTotal: Long,
+	val links: SearchProfilePostsResponseLinks,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7355,13 +7355,13 @@ data class SearchTaggedBody(
 
 @Serializable
 data class SearchTaggedResponse(
-	val data: List<SearchTaggedResponseData>? = null,
+	val data: List<SearchTaggedResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
+	val dataTotal: Long,
 	@SerialName("search_tags")
-	val searchTags: SearchTaggedResponseSearchTags? = null,
+	val searchTags: SearchTaggedResponseSearchTags,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7597,13 +7597,13 @@ data class SearchResultsParams(
 
 @Serializable
 data class SearchResultsResponse(
-	val data: List<SearchResultsResponseData>? = null,
+	val data: List<SearchResultsResponseData>,
 	@SerialName("data_total")
-	val dataTotal: Long? = null,
+	val dataTotal: Long,
 	@SerialName("search_tags")
-	val searchTags: SearchResultsResponseSearchTags? = null,
+	val searchTags: SearchResultsResponseSearchTags,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7837,7 +7837,7 @@ typealias BatchExecuteBody = List<JsonObject>
 
 @Serializable
 data class BatchExecuteResponse(
-	val jobs: BatchExecuteResponseJobs? = null,
+	val jobs: BatchExecuteResponseJobs,
 )
 
 @Serializable
@@ -7856,14 +7856,14 @@ data class ChatboxIndexParams(
 
 @Serializable
 data class ChatboxIndexResponse(
-	val rooms: List<ChatboxIndexResponseRooms>? = null,
-	val ban: JsonElement? = null,
-	val ignore: List<ChatboxIndexResponseIgnore>? = null,
-	val permissions: ChatboxIndexResponsePermissions? = null,
-	val commands: List<String>? = null,
-	val roomsOnline: ChatboxIndexResponseRoomsOnline? = null,
+	val rooms: List<ChatboxIndexResponseRooms>,
+	val ban: JsonElement,
+	val ignore: List<ChatboxIndexResponseIgnore>,
+	val permissions: ChatboxIndexResponsePermissions,
+	val commands: List<String>,
+	val roomsOnline: ChatboxIndexResponseRoomsOnline,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7965,9 +7965,9 @@ data class ChatboxGetMessagesParams(
 
 @Serializable
 data class ChatboxGetMessagesResponse(
-	val messages: List<RespChatboxMessageModel>? = null,
+	val messages: List<RespChatboxMessageModel>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7981,9 +7981,9 @@ data class ChatboxPostMessageBody(
 
 @Serializable
 data class ChatboxPostMessageResponse(
-	val message: RespChatboxMessageModel? = null,
+	val message: RespChatboxMessageModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -7995,9 +7995,9 @@ data class ChatboxEditMessageBody(
 
 @Serializable
 data class ChatboxEditMessageResponse(
-	val message: RespChatboxMessageModel? = null,
+	val message: RespChatboxMessageModel,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8022,9 +8022,9 @@ data class ChatboxOnlineParams(
 
 @Serializable
 data class ChatboxOnlineResponse(
-	val users: List<ChatboxOnlineResponseUsers>? = null,
+	val users: List<ChatboxOnlineResponseUsers>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8109,9 +8109,9 @@ data class ChatboxReportReasonsParams(
 
 @Serializable
 data class ChatboxReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8136,9 +8136,9 @@ data class ChatboxGetLeaderboardParams(
 
 @Serializable
 data class ChatboxGetLeaderboardResponse(
-	val leaderboard: List<ChatboxGetLeaderboardResponseLeaderboard>? = null,
+	val leaderboard: List<ChatboxGetLeaderboardResponseLeaderboard>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8210,9 +8210,9 @@ data class ChatboxGetLeaderboardResponseLeaderboard(
 
 @Serializable
 data class ChatboxGetIgnoreResponse(
-	val ignored: List<ChatboxGetIgnoreResponseIgnored>? = null,
+	val ignored: List<ChatboxGetIgnoreResponseIgnored>,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8308,12 +8308,12 @@ data class FormsListParams(
 
 @Serializable
 data class FormsListResponse(
-	val forms: List<FormsListResponseForms>? = null,
-	val formsPerPage: Long? = null,
-	val page: Long? = null,
-	val totalForms: Long? = null,
+	val forms: List<FormsListResponseForms>,
+	val formsPerPage: Long,
+	val page: Long,
+	val totalForms: Long,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable
@@ -8361,10 +8361,10 @@ data class FormsCreateBodyV3(
 
 @Serializable
 data class FormsCreateResponse(
-	val message: String? = null,
-	val content: FormsCreateResponseContent? = null,
+	val message: String,
+	val content: FormsCreateResponseContent,
 	@SerialName("system_info")
-	val systemInfo: RespSystemInfo? = null,
+	val systemInfo: RespSystemInfo,
 )
 
 @Serializable

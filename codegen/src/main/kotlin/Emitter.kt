@@ -379,6 +379,10 @@ private fun emitResponseClass(
 	// Build a lookup from property name to raw JsonObject for inline type resolution
 	val rawProps = rawSchema?.get("properties") as? JsonObject
 
+	val requiredSet = (rawSchema?.get("required") as? JsonArray)
+		?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
+		?.toSet() ?: emptySet()
+
 	val nestedClasses = mutableListOf<String>()
 	val sb = StringBuilder()
 	sb.appendLine("@Serializable")
@@ -388,8 +392,9 @@ private fun emitResponseClass(
 		val kotlinType = responsePropertyToKotlinType(
 			prop, typeName, componentSchemaNames, rawProps, rawSpec, nestedClasses,
 		)
-		val nullable = "?"
-		val default = " = null"
+		val required = prop.name in requiredSet
+		val nullable = if (required) "" else "?"
+		val default = if (required) "" else " = null"
 		val camelName = safeKotlinName(prop.name)
 		val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
