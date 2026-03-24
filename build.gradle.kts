@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.serialization)
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
-    `maven-publish`
+    id("org.jetbrains.dokka") version "2.0.0"
+    id("com.vanniktech.maven.publish") version "0.30.0"
 }
 
 group = "com.lolzteam"
@@ -45,21 +46,33 @@ kotlin {
     }
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-            pom {
-                name.set("lolzteam-api")
-                description.set("Kotlin API wrapper for Lolzteam Forum and Market")
-                url.set("https://github.com/kyo-lzt/lolzteam-kotlin")
-                licenses {
-                    license {
-                        name.set("MIT")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
+mavenPublishing {
+    publishToMavenCentral(com.vanniktech.maven.publish.SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
+    signAllPublications()
+
+    coordinates("com.lolzteam", "lolzteam-api", version.toString())
+
+    pom {
+        name.set("lolzteam-api")
+        description.set("Kotlin API wrapper for Lolzteam Forum and Market")
+        url.set("https://github.com/kyo-lzt/lolzteam-kotlin")
+        licenses {
+            license {
+                name.set("MIT")
+                url.set("https://opensource.org/licenses/MIT")
             }
+        }
+        developers {
+            developer {
+                id.set("kyo-lzt")
+                name.set("kyo-lzt")
+                url.set("https://github.com/kyo-lzt")
+            }
+        }
+        scm {
+            url.set("https://github.com/kyo-lzt/lolzteam-kotlin")
+            connection.set("scm:git:git://github.com/kyo-lzt/lolzteam-kotlin.git")
+            developerConnection.set("scm:git:ssh://git@github.com/kyo-lzt/lolzteam-kotlin.git")
         }
     }
 }
