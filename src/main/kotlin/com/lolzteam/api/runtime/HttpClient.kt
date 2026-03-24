@@ -254,21 +254,23 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
             when (value) {
                 is JsonNull -> {}
                 is JsonPrimitive -> {
-                    val stringValue = if (value.booleanOrNull != null) {
-                        if (value.boolean) "1" else "0"
-                    } else {
-                        value.content
-                    }
+                    val stringValue =
+                        if (value.booleanOrNull != null) {
+                            if (value.boolean) "1" else "0"
+                        } else {
+                            value.content
+                        }
                     builder.append(fullKey, stringValue)
                 }
                 is JsonArray -> {
                     for (item in value) {
                         if (item is JsonPrimitive) {
-                            val stringValue = if (item.booleanOrNull != null) {
-                                if (item.boolean) "1" else "0"
-                            } else {
-                                item.content
-                            }
+                            val stringValue =
+                                if (item.booleanOrNull != null) {
+                                    if (item.boolean) "1" else "0"
+                                } else {
+                                    item.content
+                                }
                             builder.append(fullKey, stringValue)
                         }
                     }
@@ -289,21 +291,23 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
             when (value) {
                 is JsonNull -> {}
                 is JsonPrimitive -> {
-                    val stringValue = if (value.booleanOrNull != null) {
-                        if (value.boolean) "1" else "0"
-                    } else {
-                        value.content
-                    }
+                    val stringValue =
+                        if (value.booleanOrNull != null) {
+                            if (value.boolean) "1" else "0"
+                        } else {
+                            value.content
+                        }
                     builder.append(fullKey, stringValue)
                 }
                 is JsonArray -> {
                     for (item in value) {
                         if (item is JsonPrimitive) {
-                            val stringValue = if (item.booleanOrNull != null) {
-                                if (item.boolean) "1" else "0"
-                            } else {
-                                item.content
-                            }
+                            val stringValue =
+                                if (item.booleanOrNull != null) {
+                                    if (item.boolean) "1" else "0"
+                                } else {
+                                    item.content
+                                }
                             builder.append(fullKey, stringValue)
                         }
                     }
