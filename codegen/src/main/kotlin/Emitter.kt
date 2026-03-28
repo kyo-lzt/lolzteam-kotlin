@@ -25,6 +25,72 @@ private fun formatKotlinDefault(value: String, kotlinType: String, enumValues: L
 	}
 }
 
+/** Build a KDoc line for a data class field, combining description and default. */
+private fun stripCommentBreakers(s: String): String =
+	s.replace("**", "").replace("/*", "/ *").replace("*/", "* /")
+
+private fun buildFieldDoc(description: String?, defaultValue: String?): String {
+	val parts = mutableListOf<String>()
+	if (description != null) parts.add(stripCommentBreakers(description.trim().replace(Regex("\\s*\\n\\s*"), " ")))
+	if (defaultValue != null) parts.add("Default: $defaultValue")
+	if (parts.isEmpty()) return ""
+	return "    /** ${parts.joinToString(". ")} */\n"
+}
+
+/** Build a KDoc block for a method with summary, description, and @param tags. */
+private fun buildMethodKDoc(
+	method: MethodDefinition,
+	indent: String = "    ",
+): String? {
+	val hasSummary = method.summary != null
+	val hasDescription = method.description != null
+	val paramDocs = mutableListOf<Pair<String, String>>()
+
+	for (param in method.params.pathParams) {
+		if (param.description != null) {
+			paramDocs.add(snakeToCamel(param.name) to stripCommentBreakers(param.description.trim().replace(Regex("\\s*\\n\\s*"), " ")))
+		}
+	}
+	for (param in method.params.queryParams) {
+		if (param.description != null) {
+			paramDocs.add(snakeToCamel(param.name) to stripCommentBreakers(param.description.trim().replace(Regex("\\s*\\n\\s*"), " ")))
+		}
+	}
+	for (prop in method.bodyProperties) {
+		if (prop.description != null) {
+			paramDocs.add(snakeToCamel(sanitizeName(prop.name)) to stripCommentBreakers(prop.description.trim().replace(Regex("\\s*\\n\\s*"), " ")))
+		}
+	}
+
+	if (!hasSummary && !hasDescription && paramDocs.isEmpty()) return null
+
+	val sb = StringBuilder()
+	sb.appendLine("$indent/**")
+
+	if (hasSummary) {
+		for (line in method.summary!!.trim().lines()) {
+			sb.appendLine("$indent * ${stripCommentBreakers(line)}")
+		}
+	}
+
+	if (hasDescription) {
+		if (hasSummary) sb.appendLine("$indent *")
+		for (line in method.description!!.trim().lines()) {
+			sb.appendLine("$indent * ${stripCommentBreakers(line)}")
+		}
+	}
+
+	if (paramDocs.isNotEmpty()) {
+		if (hasSummary || hasDescription) sb.appendLine("$indent *")
+		for ((name, desc) in paramDocs) {
+			sb.appendLine("$indent * @param $name $desc")
+		}
+	}
+
+	sb.appendLine("$indent */")
+	return sb.toString()
+}
+
 // ─── Types File ───────────────────────────────────────────────────────────────
 
 /** Resolve the Kotlin type for a param/body property, using enum lookup if available. */
@@ -63,7 +129,7 @@ private fun emitQueryParamsClass(
 		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(param.name)
 		val serialName = if (needsSerialName(param.name)) "\t@SerialName(\"${param.name}\")\n" else ""
-		val doc = if (param.defaultValue != null) "\t/** Default: ${param.defaultValue} */\n" else ""
+		val doc = buildFieldDoc(param.description, param.defaultValue)
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(param.defaultValue!!, kotlinType, param.enumValues)}"
 		} else if (!param.required) {
@@ -127,7 +193,7 @@ private fun emitBodyClass(
 		val camelName = safeKotlinName(prop.name)
 		val skipSerialName = hasByteArrayFields
 		val serialName = if (!skipSerialName && needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
-		val doc = if (prop.defaultValue != null) "\t/** Default: ${prop.defaultValue} */\n" else ""
+		val doc = buildFieldDoc(prop.description, prop.defaultValue)
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
 		} else if (!prop.required) {
@@ -177,7 +243,7 @@ private fun emitDiscriminatedUnionBody(
 			val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 			val camelName = safeKotlinName(prop.name)
 			val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
-			val doc = if (hasDefault) "\t/** Default: ${prop.defaultValue} */\n" else ""
+			val doc = buildFieldDoc(prop.description, prop.defaultValue)
 			val default = if (hasDefault) {
 				" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
 			} else if (!prop.required) {
@@ -239,8 +305,22 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 		val required = propName in requiredSet
 		val propObj = propValue as? JsonObject
 		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
-		val nullable = if (required) "" else "?"
-		val default = if (required) "" else " = null"
+		val nullable: String
+		val default: String
+		if (required) {
+			// Add defaults for primitive types to tolerate null from API
+			// Struct/complex types also get nullable + default null for null tolerance
+			when (kotlinType) {
+				"String" -> { nullable = ""; default = " = \"\"" }
+				"Long" -> { nullable = ""; default = " = 0L" }
+				"Double" -> { nullable = ""; default = " = 0.0" }
+				"Boolean" -> { nullable = ""; default = " = false" }
+				else -> { nullable = "?"; default = " = null" }
+			}
+		} else {
+			nullable = "?"
+			default = " = null"
+		}
 		val camelName = safeKotlinName(propName)
 		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
@@ -269,10 +349,10 @@ private fun resolvePropertyKotlinType(
 ): String {
 	if (propObj == null) return "JsonElement"
 
-	// Check for $ref
+	// Check for $ref → JsonElement (API may return [] where object expected)
 	val ref = (propObj["\$ref"] as? JsonPrimitive)?.contentOrNull
 	if (ref != null && ref.startsWith("#/components/schemas/")) {
-		return componentNameToKotlin(ref.removePrefix("#/components/schemas/"))
+		return "JsonElement"
 	}
 
 	val typeEl = propObj["type"]
@@ -286,7 +366,7 @@ private fun resolvePropertyKotlinType(
 		val items = propObj["items"] as? JsonObject
 		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
 		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
-			return "List<${componentNameToKotlin(itemRef.removePrefix("#/components/schemas/"))}>"
+			return "List<JsonElement>"
 		}
 		// Inline object inside array items
 		val resolvedItems = if (items != null) derefShallow(items, rawSpec) as? JsonObject else null
@@ -307,6 +387,8 @@ private fun resolvePropertyKotlinType(
 	if (type == "object" || propObj.containsKey("properties")) {
 		val innerProps = propObj["properties"] as? JsonObject
 		if (innerProps == null || innerProps.isEmpty()) return "JsonObject"
+		// All-numeric property keys → flexible JsonElement (API returns dict-like objects)
+		if (innerProps.keys.all { it.matches(Regex("^\\d+$")) }) return "JsonElement"
 		if (parentTypeName != null && propName != null && nestedClasses != null) {
 			val nestedName = parentTypeName + snakeToPascal(sanitizeName(propName))
 			emitNestedDataClass(nestedName, propObj, rawSpec, nestedClasses)
@@ -317,9 +399,10 @@ private fun resolvePropertyKotlinType(
 
 	return when (type) {
 		"string" -> "String"
-		"integer" -> "Long"
+		"integer" -> "Double"
 		"number" -> "Double"
-		"boolean" -> "Boolean"
+		// boolean → JsonElement (API may return object where boolean expected)
+		"boolean" -> "JsonElement"
 		else -> "JsonElement"
 	}
 }
@@ -349,8 +432,20 @@ private fun emitNestedDataClass(
 		val required = propName in requiredSet
 		val propObj = propValue as? JsonObject
 		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
-		val nullable = if (required) "" else "?"
-		val default = if (required) "" else " = null"
+		val nullable: String
+		val default: String
+		if (required) {
+			when (kotlinType) {
+				"String" -> { nullable = ""; default = " = \"\"" }
+				"Long" -> { nullable = ""; default = " = 0L" }
+				"Double" -> { nullable = ""; default = " = 0.0" }
+				"Boolean" -> { nullable = ""; default = " = false" }
+				else -> { nullable = "?"; default = " = null" }
+			}
+		} else {
+			nullable = "?"
+			default = " = null"
+		}
 		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
 	}
@@ -393,8 +488,20 @@ private fun emitResponseClass(
 			prop, typeName, componentSchemaNames, rawProps, rawSpec, nestedClasses,
 		)
 		val required = prop.name in requiredSet
-		val nullable = if (required) "" else "?"
-		val default = if (required) "" else " = null"
+		val nullable: String
+		val default: String
+		if (required) {
+			when (kotlinType) {
+				"String" -> { nullable = ""; default = " = \"\"" }
+				"Long" -> { nullable = ""; default = " = 0L" }
+				"Double" -> { nullable = ""; default = " = 0.0" }
+				"Boolean" -> { nullable = ""; default = " = false" }
+				else -> { nullable = "?"; default = " = null" }
+			}
+		} else {
+			nullable = "?"
+			default = " = null"
+		}
 		val camelName = safeKotlinName(prop.name)
 		val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
@@ -421,10 +528,9 @@ private fun responsePropertyToKotlinType(
 	rawSpec: JsonObject = JsonObject(emptyMap()),
 	nestedClasses: MutableList<String>? = null,
 ): String {
-	// Component schema ref
+	// Component schema ref → JsonElement (API may return [] where object expected)
 	if (prop.componentRef != null) {
-		val kotlinName = componentNameToKotlin(prop.componentRef)
-		return if (prop.isArray) "List<$kotlinName>" else kotlinName
+		return "JsonElement"
 	}
 
 	// Array of non-ref type — try nested type generation for inline object items
@@ -663,6 +769,8 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	}
 	val returnSuffix = if (method.responseIsHtml) ")" else if (isTypedResponse) "))" else ")"
 
+	val kdoc = buildMethodKDoc(method)
+	if (kdoc != null) sb.append(kdoc)
 	sb.appendLine("\tsuspend fun ${method.methodName}($argStr): $responseName {")
 
 	if (isMultipart && hasByteArrayFields) {

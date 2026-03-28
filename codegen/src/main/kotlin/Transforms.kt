@@ -217,6 +217,7 @@ data class ParsedParameter(
 	val required: Boolean,
 	val enumValues: List<String>? = null,
 	val defaultValue: String? = null,
+	val description: String? = null,
 )
 
 data class OperationParameters(
@@ -242,6 +243,7 @@ fun extractParameters(operation: JsonObject, spec: JsonObject): OperationParamet
 
 		val enumValues = extractEnumValues(schema as? JsonObject)
 		val defaultValue = extractDefaultValue(schema)
+		val description = (param["description"] as? JsonPrimitive)?.contentOrNull
 
 		val parsed = ParsedParameter(
 			name = name,
@@ -249,6 +251,7 @@ fun extractParameters(operation: JsonObject, spec: JsonObject): OperationParamet
 			required = if (inValue == "path") true else required,
 			enumValues = enumValues,
 			defaultValue = defaultValue,
+			description = description,
 		)
 
 		if (inValue == "path") pathParams.add(parsed)
@@ -266,6 +269,7 @@ data class BodyProperty(
 	val required: Boolean,
 	val enumValues: List<String>? = null,
 	val defaultValue: String? = null,
+	val description: String? = null,
 )
 
 data class OneOfVariant(
@@ -351,11 +355,13 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 			val requiredInAll = variantRequiredSets.all { (propNames, requiredNames) ->
 				name !in propNames || name in requiredNames
 			}
+			val propObj = propSchema as? JsonObject
 			bodyProperties.add(BodyProperty(
 				name = name,
 				type = schemaToTypeString(propSchema, spec),
 				required = requiredInAll,
-				enumValues = extractEnumValues(propSchema as? JsonObject),
+				enumValues = extractEnumValues(propObj),
+				description = (propObj?.get("description") as? JsonPrimitive)?.contentOrNull,
 			))
 		}
 
@@ -381,6 +387,7 @@ fun extractBody(operation: JsonObject, spec: JsonObject): BodyExtractionResult {
 					required = name in requiredSet,
 					enumValues = extractEnumValues(propObj),
 					defaultValue = extractDefaultValue(propSchema),
+					description = (propObj?.get("description") as? JsonPrimitive)?.contentOrNull,
 				))
 			}
 		}
@@ -457,11 +464,10 @@ private fun extractResponseProperty(
 		return ResponseProperty(name, "unknown", null, false, required, emptyList())
 	}
 
-	// Direct $ref to component schema
+	// Direct $ref to component schema → JsonElement (API may return [] where object expected)
 	val ref = (propValue["\$ref"] as? JsonPrimitive)?.contentOrNull
 	if (ref != null && ref.startsWith("#/components/schemas/")) {
-		val schemaName = ref.removePrefix("#/components/schemas/")
-		return ResponseProperty(name, schemaName, schemaName, false, required, emptyList())
+		return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
 	}
 
 	val typeEl = propValue["type"]
@@ -472,8 +478,7 @@ private fun extractResponseProperty(
 		val items = propValue["items"] as? JsonObject
 		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
 		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
-			val schemaName = itemRef.removePrefix("#/components/schemas/")
-			return ResponseProperty(name, schemaName, schemaName, true, required, emptyList())
+			return ResponseProperty(name, "JsonElement", null, true, required, emptyList())
 		}
 		// Array of inline objects or primitives
 		val resolvedItems = if (items != null) derefShallow(items, rawSpec) else null
@@ -486,6 +491,10 @@ private fun extractResponseProperty(
 	if (type == "object" || propValue.containsKey("properties")) {
 		val inlineProps = propValue["properties"] as? JsonObject
 		if (inlineProps != null && inlineProps.isNotEmpty()) {
+			// All-numeric property keys → flexible JsonElement (API returns dict-like objects)
+			if (inlineProps.keys.all { it.matches(Regex("^\\d+$")) }) {
+				return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
+			}
 			val inlineRequiredSet = (propValue["required"] as? JsonArray)
 				?.mapNotNull { (it as? JsonPrimitive)?.contentOrNull }
 				?.toSet() ?: emptySet()
@@ -502,12 +511,13 @@ private fun extractResponseProperty(
 		return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
 	}
 
-	// Primitive types
+	// Primitive types — use Double for integer in responses (API may return floats)
 	val kotlinType = when (type) {
 		"string" -> "String"
-		"integer" -> "Long"
+		"integer" -> "Double"
 		"number" -> "Double"
-		"boolean" -> "Boolean"
+		// boolean → JsonElement (API may return object where boolean expected)
+		"boolean" -> "JsonElement"
 		else -> "JsonElement"
 	}
 	return ResponseProperty(name, kotlinType, null, false, required, emptyList())
@@ -578,6 +588,7 @@ fun detectDiscriminatedUnion(oneOfArray: JsonArray, spec: JsonObject): Discrimin
 				required = name in requiredSet,
 				enumValues = extractEnumValues(propObj),
 				defaultValue = extractDefaultValue(propSchema),
+				description = (propObj?.get("description") as? JsonPrimitive)?.contentOrNull,
 			)
 		}
 
@@ -636,6 +647,8 @@ data class MethodDefinition(
 	val bodyEncoding: String = "form",
 	val discriminatedUnion: DiscriminatedUnion? = null,
 	val responseIsHtml: Boolean = false,
+	val summary: String? = null,
+	val description: String? = null,
 )
 
 fun extractMethodDefinition(
@@ -646,6 +659,9 @@ fun extractMethodDefinition(
 	operation: JsonObject,
 	rawSpec: JsonObject = JsonObject(emptyMap()),
 ): MethodDefinition {
+	val summary = (operation["summary"] as? JsonPrimitive)?.contentOrNull
+	val description = (operation["description"] as? JsonPrimitive)?.contentOrNull
+
 	val spec = JsonObject(emptyMap())
 	val params = extractParameters(operation, spec)
 	val body = extractBody(operation, spec)
@@ -673,7 +689,7 @@ fun extractMethodDefinition(
 	// GET requests can't have body — treat body properties as query params
 	val effectiveQueryParams = if (isGet) {
 		params.queryParams + body.properties.map {
-			ParsedParameter(name = it.name, type = it.type, required = false, enumValues = it.enumValues, defaultValue = it.defaultValue)
+			ParsedParameter(name = it.name, type = it.type, required = false, enumValues = it.enumValues, defaultValue = it.defaultValue, description = it.description)
 		}
 	} else {
 		params.queryParams
@@ -716,5 +732,7 @@ fun extractMethodDefinition(
 		bodyEncoding = if (isGet) "form" else body.bodyEncoding,
 		discriminatedUnion = if (isGet) null else body.discriminatedUnion,
 		responseIsHtml = responseIsHtml,
+		summary = summary,
+		description = description,
 	)
 }
