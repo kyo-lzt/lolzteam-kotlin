@@ -16,6 +16,7 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.Parameters
 import io.ktor.http.content.TextContent
 import io.ktor.http.isSuccess
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -88,6 +89,11 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                 }
             }
         }
+
+    fun <T> lenientDecode(
+        deserializer: DeserializationStrategy<T>,
+        element: JsonElement,
+    ): T = json.lenientDecodeFromJsonElement(deserializer, element)
 
     suspend fun request(options: RequestOptions): JsonElement {
         rateLimiter?.acquire()

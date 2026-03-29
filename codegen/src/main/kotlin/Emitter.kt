@@ -284,6 +284,17 @@ private fun componentNameToKotlin(name: String): String =
 		if (part.isEmpty()) "" else part[0].uppercaseChar() + part.substring(1)
 	}
 
+private fun defaultForKotlinType(kotlinType: String): String = when {
+	kotlinType == "String" -> " = \"\""
+	kotlinType == "Double" -> " = 0.0"
+	kotlinType == "Long" -> " = 0L"
+	kotlinType == "Boolean" -> " = false"
+	kotlinType == "JsonElement" -> " = JsonNull"
+	kotlinType == "JsonObject" -> " = JsonObject(emptyMap())"
+	kotlinType.startsWith("List<") -> " = emptyList()"
+	else -> " = $kotlinType()"
+}
+
 /** Emit a @Serializable data class for a component schema. */
 fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObject): String {
 	val className = componentNameToKotlin(name)
@@ -305,22 +316,8 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 		val required = propName in requiredSet
 		val propObj = propValue as? JsonObject
 		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
-		val nullable: String
-		val default: String
-		if (required) {
-			// Add defaults for primitive types to tolerate null from API
-			// Struct/complex types also get nullable + default null for null tolerance
-			when (kotlinType) {
-				"String" -> { nullable = ""; default = " = \"\"" }
-				"Long" -> { nullable = ""; default = " = 0L" }
-				"Double" -> { nullable = ""; default = " = 0.0" }
-				"Boolean" -> { nullable = ""; default = " = false" }
-				else -> { nullable = "?"; default = " = null" }
-			}
-		} else {
-			nullable = "?"
-			default = " = null"
-		}
+		val nullable = if (required) "" else "?"
+		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
 		val camelName = safeKotlinName(propName)
 		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
@@ -349,10 +346,11 @@ private fun resolvePropertyKotlinType(
 ): String {
 	if (propObj == null) return "JsonElement"
 
-	// Check for $ref → JsonElement (API may return [] where object expected)
+	// Check for $ref → resolve to the component schema Kotlin type
 	val ref = (propObj["\$ref"] as? JsonPrimitive)?.contentOrNull
 	if (ref != null && ref.startsWith("#/components/schemas/")) {
-		return "JsonElement"
+		val schemaName = ref.removePrefix("#/components/schemas/")
+		return componentNameToKotlin(schemaName)
 	}
 
 	val typeEl = propObj["type"]
@@ -366,7 +364,8 @@ private fun resolvePropertyKotlinType(
 		val items = propObj["items"] as? JsonObject
 		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
 		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
-			return "List<JsonElement>"
+			val schemaName = itemRef.removePrefix("#/components/schemas/")
+			return "List<${componentNameToKotlin(schemaName)}>"
 		}
 		// Inline object inside array items
 		val resolvedItems = if (items != null) derefShallow(items, rawSpec) as? JsonObject else null
@@ -401,8 +400,7 @@ private fun resolvePropertyKotlinType(
 		"string" -> "String"
 		"integer" -> "Double"
 		"number" -> "Double"
-		// boolean → JsonElement (API may return object where boolean expected)
-		"boolean" -> "JsonElement"
+		"boolean" -> "Boolean"
 		else -> "JsonElement"
 	}
 }
@@ -432,20 +430,8 @@ private fun emitNestedDataClass(
 		val required = propName in requiredSet
 		val propObj = propValue as? JsonObject
 		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
-		val nullable: String
-		val default: String
-		if (required) {
-			when (kotlinType) {
-				"String" -> { nullable = ""; default = " = \"\"" }
-				"Long" -> { nullable = ""; default = " = 0L" }
-				"Double" -> { nullable = ""; default = " = 0.0" }
-				"Boolean" -> { nullable = ""; default = " = false" }
-				else -> { nullable = "?"; default = " = null" }
-			}
-		} else {
-			nullable = "?"
-			default = " = null"
-		}
+		val nullable = if (required) "" else "?"
+		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
 		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
 	}
@@ -488,20 +474,8 @@ private fun emitResponseClass(
 			prop, typeName, componentSchemaNames, rawProps, rawSpec, nestedClasses,
 		)
 		val required = prop.name in requiredSet
-		val nullable: String
-		val default: String
-		if (required) {
-			when (kotlinType) {
-				"String" -> { nullable = ""; default = " = \"\"" }
-				"Long" -> { nullable = ""; default = " = 0L" }
-				"Double" -> { nullable = ""; default = " = 0.0" }
-				"Boolean" -> { nullable = ""; default = " = false" }
-				else -> { nullable = "?"; default = " = null" }
-			}
-		} else {
-			nullable = "?"
-			default = " = null"
-		}
+		val nullable = if (required) "" else "?"
+		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
 		val camelName = safeKotlinName(prop.name)
 		val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
 		"$serialName\tval $camelName: $kotlinType$nullable$default,"
@@ -528,9 +502,11 @@ private fun responsePropertyToKotlinType(
 	rawSpec: JsonObject = JsonObject(emptyMap()),
 	nestedClasses: MutableList<String>? = null,
 ): String {
-	// Component schema ref → JsonElement (API may return [] where object expected)
+	// Component schema ref → resolve to the Kotlin type name
 	if (prop.componentRef != null) {
-		return "JsonElement"
+		val schemaName = prop.componentRef.removePrefix("#/components/schemas/")
+		val kotlinType = componentNameToKotlin(schemaName)
+		return if (prop.isArray) "List<$kotlinType>" else kotlinType
 	}
 
 	// Array of non-ref type — try nested type generation for inline object items
@@ -642,6 +618,7 @@ fun emitKotlinTypesFile(
 	sb.appendLine("import kotlinx.serialization.encoding.Encoder")
 	sb.appendLine("import kotlinx.serialization.json.JsonClassDiscriminator")
 	sb.appendLine("import kotlinx.serialization.json.JsonElement")
+	sb.appendLine("import kotlinx.serialization.json.JsonNull")
 	sb.appendLine("import kotlinx.serialization.json.JsonObject")
 	sb.appendLine("import com.lolzteam.api.runtime.StringOrInt")
 	sb.appendLine()
@@ -763,7 +740,7 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	val returnPrefix = if (method.responseIsHtml) {
 		"return http.requestText("
 	} else if (isTypedResponse) {
-		"return http.json.decodeFromJsonElement(serializer(), http.request("
+		"return http.lenientDecode(serializer(), http.request("
 	} else {
 		"return http.request("
 	}
@@ -928,7 +905,6 @@ fun emitKotlinClientFile(
 	sb.appendLine("import com.lolzteam.api.runtime.RateLimitConfig")
 	sb.appendLine("import com.lolzteam.api.runtime.RequestOptions")
 	sb.appendLine("import kotlinx.serialization.json.JsonElement")
-	sb.appendLine("import kotlinx.serialization.json.decodeFromJsonElement")
 	if (needsMultipartBuilders) {
 		sb.appendLine("import kotlinx.serialization.json.buildJsonObject")
 		sb.appendLine("import kotlinx.serialization.json.put")

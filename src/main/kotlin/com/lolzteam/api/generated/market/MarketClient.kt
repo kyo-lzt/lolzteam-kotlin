@@ -7,7 +7,6 @@ import com.lolzteam.api.runtime.LolzteamHttpClient
 import com.lolzteam.api.runtime.RateLimitConfig
 import com.lolzteam.api.runtime.RequestOptions
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.serializer
 import java.io.Closeable
 
@@ -41,7 +40,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param parseSameItemIds Parse same item ids.
      */
 	suspend fun all(params: CategoryAllParams? = null): CategoryAllResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -175,7 +174,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param skipVacInv Ignore inventory value if game has VAC ban.
      */
 	suspend fun steam(params: CategorySteamParams? = null): CategorySteamResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/steam",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -265,7 +264,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param notCountry[] List of disallowed countries.
      */
 	suspend fun fortnite(params: CategoryFortniteParams? = null): CategoryFortniteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/fortnite",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -362,7 +361,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param daybreak Number of days the account has been offline.
      */
 	suspend fun mihoyo(params: CategoryMihoyoParams? = null): CategoryMihoyoResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/mihoyo",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -455,7 +454,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param lolRank[] List of allowed ranks in LoL.
      */
 	suspend fun riot(params: CategoryRiotParams? = null): CategoryRiotResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/riot",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -537,7 +536,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param maxBotActiveUsers Maximum active users in bot.
      */
 	suspend fun telegram(params: CategoryTelegramParams? = null): CategoryTelegramResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/telegram",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -624,7 +623,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param creationYearMax Maximum account creation year (e.g. 2024).
      */
 	suspend fun supercell(params: CategorySupercellParams? = null): CategorySupercellResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/supercell",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -681,7 +680,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param transactions Has transactions.
      */
 	suspend fun ea(params: CategoryEaParams? = null): CategoryEaResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/ea",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -752,7 +751,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param notCountry[] List of disallowed countries.
      */
 	suspend fun wot(params: CategoryWotParams? = null): CategoryWotResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/world-of-tanks",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -823,7 +822,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param notCountry[] List of disallowed countries.
      */
 	suspend fun wotBlitz(params: CategoryWotBlitzParams? = null): CategoryWotBlitzResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/wot-blitz",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -862,7 +861,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param subscriptionPeriod In what notation is time measured.
      */
 	suspend fun gifts(params: CategoryGiftsParams? = null): CategoryGiftsResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/gifts",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -915,7 +914,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param hoursPlayedMax List of maximum hours played by game.
      */
 	suspend fun epicGames(params: CategoryEpicGamesParams? = null): CategoryEpicGamesResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/epicgames",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -961,7 +960,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param side Side in current wipe.
      */
 	suspend fun escapeFromTarkov(params: CategoryEscapeFromTarkovParams? = null): CategoryEscapeFromTarkovResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/escape-from-tarkov",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1005,7 +1004,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param game[] List of games.
      */
 	suspend fun socialClub(params: CategorySocialClubParams? = null): CategorySocialClubResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/socialclub",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1071,7 +1070,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param regPeriod In what notation is time measured.
      */
 	suspend fun uplay(params: CategoryUplayParams? = null): CategoryUplayResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/uplay",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1147,7 +1146,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param maxOrbs Maximum number of Discord Orbs.
      */
 	suspend fun discord(params: CategoryDiscordParams? = null): CategoryDiscordResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/discord",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1199,7 +1198,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param email Has linked email.
      */
 	suspend fun tikTok(params: CategoryTikTokParams? = null): CategoryTikTokResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/tiktok",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1248,7 +1247,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param regPeriod In what notation is time measured.
      */
 	suspend fun instagram(params: CategoryInstagramParams? = null): CategoryInstagramResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/instagram",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1299,7 +1298,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param balanceMax Maximum balance.
      */
 	suspend fun battleNet(params: CategoryBattleNetParams? = null): CategoryBattleNetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/battlenet",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1348,7 +1347,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param openaiBalanceMax Maximum OpenAI credit balance.
      */
 	suspend fun chatGPT(params: CategoryChatGPTParams? = null): CategoryChatGPTResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/chatgpt",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1388,7 +1387,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param autorenewal Is auto renewal enabled.
      */
 	suspend fun vpn(params: CategoryVpnParams? = null): CategoryVpnResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/vpn",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1461,7 +1460,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param notAgeGroup[] List of disallowed age groups.
      */
 	suspend fun roblox(params: CategoryRobloxParams? = null): CategoryRobloxResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/roblox",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1507,7 +1506,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param totalKreditsMax Maximum total donated Kredits.
      */
 	suspend fun warface(params: CategoryWarfaceParams? = null): CategoryWarfaceResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/warface",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1578,7 +1577,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param minecoinsMax Maximum number of Minecoins.
      */
 	suspend fun minecraft(params: CategoryMinecraftParams? = null): CategoryMinecraftResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/minecraft",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1617,7 +1616,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param profilesMax Maximum number of profiles with game.
      */
 	suspend fun hytale(params: CategoryHytaleParams? = null): CategoryHytaleResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/hytale",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1633,7 +1632,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param topQueries Display top queries for per category.
      */
 	suspend fun list(params: CategoryListParams? = null): CategoryListResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/category",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1649,7 +1648,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param categoryName Category name.
      */
 	suspend fun params(categoryName: String): CategoryParamsResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$categoryName/params",
 			isSearch = true,
@@ -1664,7 +1663,7 @@ public class CategoryApi(private val http: LolzteamHttpClient) {
      * @param categoryName Category name.
      */
 	suspend fun games(categoryName: String): CategoryGamesResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$categoryName/games",
 			isSearch = true,
@@ -1708,7 +1707,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
      * @param filterByDeleteDate Enable filtering by deletion date.
      */
 	suspend fun user(params: ListUserParams? = null): ListUserResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/user/items",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1737,7 +1736,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
      * @param nsbByMe Not sold by me before.
      */
 	suspend fun orders(params: ListOrdersParams? = null): ListOrdersResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/user/orders",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1752,7 +1751,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
      * @param userId User ID.
      */
 	suspend fun states(params: ListStatesParams? = null): ListStatesResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/user/item-states",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1819,7 +1818,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
      * @param nsbByMe Not sold by me before.
      */
 	suspend fun favorites(params: ListFavoritesParams? = null): ListFavoritesResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/fave",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1845,7 +1844,7 @@ public class ListApi(private val http: LolzteamHttpClient) {
      * @param nsbByMe Not sold by me before.
      */
 	suspend fun viewed(params: ListViewedParams? = null): ListViewedResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/viewed",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1865,7 +1864,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param parseSameItemIds Parse same item ids.
      */
 	suspend fun get(itemId: Int, params: ManagingGetParams? = null): ManagingGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1881,7 +1880,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param reason Delete reason.
      */
 	suspend fun delete(itemId: Int, body: ManagingDeleteBody? = null): ManagingDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1898,7 +1897,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param postBody You should describe what's happened. - describe the situation in a nutshell. If you wish, you can describe the situation in more detail using the "Spoiler" function. - attach screenshots of correspondence. You must upload to the site [Imgur](https://imgur.com/upload) - other evidence; - notify the respondent about the complaint you created, familiarize him with hidden content Describe the situation in as much detail as possible.
      */
 	suspend fun createClaim(body: ManagingCreateClaimBody? = null): ManagingCreateClaimResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/claims",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1915,7 +1914,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param parseSameItemIds Parse same item ids.
      */
 	suspend fun bulkGet(body: ManagingBulkGetBody): ManagingBulkGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/bulk/items",
 			body = http.json.encodeToJsonElement(serializer(), body),
@@ -1934,7 +1933,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param ignoreCache Ignore cache.
      */
 	suspend fun steamInventoryValue(itemId: Int, params: ManagingSteamInventoryValueParams? = null): ManagingSteamInventoryValueResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/inventory-value",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1953,7 +1952,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param ignoreCache Ignore cache.
      */
 	suspend fun steamValue(params: ManagingSteamValueParams? = null): ManagingSteamValueResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/steam-value",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -1994,7 +1993,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param information Account private information (visible only for buyer).
      */
 	suspend fun edit(itemId: Int, body: ManagingEditBody? = null): ManagingEditResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "PUT",
 			path = "/$itemId/edit",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2010,7 +2009,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun aIPrice(itemId: Int): ManagingAIPriceResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/ai-price",
 		)))
@@ -2024,7 +2023,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun autoBuyPrice(itemId: Int): ManagingAutoBuyPriceResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/auto-buy-price",
 		)))
@@ -2039,7 +2038,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param text Text of note.
      */
 	suspend fun note(itemId: Int, body: ManagingNoteBody? = null): ManagingNoteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/note-save",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2058,7 +2057,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param authorize Parse inventory when authorized (Parse trade banned items).
      */
 	suspend fun steamUpdateValue(itemId: Int, body: ManagingSteamUpdateValueBody? = null): ManagingSteamUpdateValueResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/update-inventory",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2074,7 +2073,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun bump(itemId: Int): ManagingBumpResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/bump",
 		)))
@@ -2089,7 +2088,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param hour Interval in hours
      */
 	suspend fun autoBump(itemId: Int, body: ManagingAutoBumpBody? = null): ManagingAutoBumpResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/auto-bump",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2105,7 +2104,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun autoBumpDisable(itemId: Int): ManagingAutoBumpDisableResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/auto-bump",
 		)))
@@ -2119,7 +2118,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun open(itemId: Int): ManagingOpenResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/open",
 		)))
@@ -2133,7 +2132,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun close(itemId: Int): ManagingCloseResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/close",
 		)))
@@ -2148,7 +2147,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param type Type of image.
      */
 	suspend fun image(itemId: Int, params: ManagingImageParams? = null): ManagingImageResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/image",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2165,7 +2164,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun emailCode(itemId: Int): ManagingEmailCodeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/email-code",
 		)))
@@ -2184,7 +2183,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param limit Number of letters to return.
      */
 	suspend fun getLetters2(params: ManagingGetLetters2Params? = null): ManagingGetLetters2Response {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/letters2",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2200,7 +2199,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun steamGetMafile(itemId: Int): ManagingSteamGetMafileResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/mafile",
 		)))
@@ -2214,7 +2213,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun steamAddMafile(itemId: Int): ManagingSteamAddMafileResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/mafile",
 		)))
@@ -2229,7 +2228,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun steamRemoveMafile(itemId: Int): ManagingSteamRemoveMafileResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/mafile",
 		)))
@@ -2243,7 +2242,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun steamMafileCode(itemId: Int): ManagingSteamMafileCodeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/guard-code",
 		)))
@@ -2263,7 +2262,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param nonce Confirmation nonce. (Required along with id if you want to confirm action).
      */
 	suspend fun steamSDA(itemId: Int, body: ManagingSteamSDABody? = null): ManagingSteamSDAResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/confirm-sda",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2279,7 +2278,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun telegramCode(itemId: Int): ManagingTelegramCodeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/telegram-login-code",
 		)))
@@ -2293,7 +2292,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun telegramResetAuth(itemId: Int): ManagingTelegramResetAuthResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/telegram-reset-authorizations",
 		)))
@@ -2307,7 +2306,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun refuseGuarantee(itemId: Int): ManagingRefuseGuaranteeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/refuse-guarantee",
 		)))
@@ -2322,7 +2321,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param iVoluntarilyAndWithFullAwarenessOfMyActionsWaiveAnyClaimsRegardingThisItem You voluntarily and with full awareness of your actions waive any claims regarding this account.
      */
 	suspend fun declineVideoRecording(itemId: Int, body: ManagingDeclineVideoRecordingBody? = null): ManagingDeclineVideoRecordingResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/decline-video-recording",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2338,7 +2337,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun checkGuarantee(itemId: Int): ManagingCheckGuaranteeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/check-guarantee",
 		)))
@@ -2353,7 +2352,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param Cancel Cancel change password recommendation. It will be helpful, if you don't want to change password and get login data.
      */
 	suspend fun changePassword(itemId: Int, body: ManagingChangePasswordBody? = null): ManagingChangePasswordResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/change-password",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2370,7 +2369,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun tempEmailPassword(itemId: Int): ManagingTempEmailPasswordResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/$itemId/temp-email-password",
 		)))
@@ -2385,7 +2384,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param tagId Tag ID.
      */
 	suspend fun tag(itemId: Int, body: ManagingTagBody? = null): ManagingTagResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2402,7 +2401,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param tagId Tag ID.
      */
 	suspend fun untag(itemId: Int, body: ManagingUntagBody? = null): ManagingUntagResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2419,7 +2418,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param tagId Tag ID.
      */
 	suspend fun publicTag(itemId: Int, body: ManagingPublicTagBody? = null): ManagingPublicTagResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/public-tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2436,7 +2435,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param tagId Tag ID.
      */
 	suspend fun publicUntag(itemId: Int, body: ManagingPublicUntagBody? = null): ManagingPublicUntagResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/public-tag",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2452,7 +2451,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun favorite(itemId: Int): ManagingFavoriteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/star",
 		)))
@@ -2466,7 +2465,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun unfavorite(itemId: Int): ManagingUnfavoriteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/star",
 		)))
@@ -2480,7 +2479,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun stick(itemId: Int): ManagingStickResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/stick",
 		)))
@@ -2494,7 +2493,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun unstick(itemId: Int): ManagingUnstickResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/stick",
 		)))
@@ -2510,7 +2509,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param secretAnswer Secret answer of your account.
      */
 	suspend fun transfer(itemId: Int, body: ManagingTransferBody? = null): ManagingTransferResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/change-owner",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2531,7 +2530,7 @@ public class ProfileApi(private val http: LolzteamHttpClient) {
      * @param claimState Filter claims by their state.
      */
 	suspend fun claims(params: ProfileClaimsParams? = null): ProfileClaimsResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/claims",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2546,7 +2545,7 @@ public class ProfileApi(private val http: LolzteamHttpClient) {
      * @param fieldsInclude List of hidden fields to include.
      */
 	suspend fun get(params: ProfileGetParams? = null): ProfileGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/me",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2570,7 +2569,7 @@ public class ProfileApi(private val http: LolzteamHttpClient) {
      * @param clearTelegramClient Clear Telegram data.
      */
 	suspend fun edit(body: ProfileEditBody? = null): ProfileEditResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "PUT",
 			path = "/me",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2611,7 +2610,7 @@ public class CartApi(private val http: LolzteamHttpClient) {
      * @param parseSameItemIds Parse same item ids.
      */
 	suspend fun get(params: CartGetParams? = null): CartGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/cart",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2626,7 +2625,7 @@ public class CartApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun add(body: CartAddBody): CartAddResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/cart",
 			body = http.json.encodeToJsonElement(serializer(), body),
@@ -2642,7 +2641,7 @@ public class CartApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun delete(body: CartDeleteBody? = null): CartDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/cart",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2666,7 +2665,7 @@ public class PurchasingApi(private val http: LolzteamHttpClient) {
      * @param balanceId Balance ID that will be used to purchase specified item.
      */
 	suspend fun fastBuy(itemId: Int, body: PurchasingFastBuyBody? = null): PurchasingFastBuyResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/fast-buy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2684,7 +2683,7 @@ public class PurchasingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun check(itemId: Int): PurchasingCheckResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/check-account",
 		)))
@@ -2702,7 +2701,7 @@ public class PurchasingApi(private val http: LolzteamHttpClient) {
      * @param balanceId Balance ID that will be used to purchase specified item.
      */
 	suspend fun confirm(itemId: Int, body: PurchasingConfirmBody? = null): PurchasingConfirmResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/confirm-buy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2720,7 +2719,7 @@ public class PurchasingApi(private val http: LolzteamHttpClient) {
      * @param message Message to the seller.
      */
 	suspend fun discountRequest(itemId: Int, body: PurchasingDiscountRequestBody? = null): PurchasingDiscountRequestResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/discount",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2736,7 +2735,7 @@ public class PurchasingApi(private val http: LolzteamHttpClient) {
      * @param itemId Item id.
      */
 	suspend fun discountCancel(itemId: Int): PurchasingDiscountCancelResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/$itemId/discount",
 		)))
@@ -2752,7 +2751,7 @@ public class CustomDiscountsApi(private val http: LolzteamHttpClient) {
      * Get a list of custom discounts.
      */
 	suspend fun get(): CustomDiscountsGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/custom-discounts",
 		)))
@@ -2770,7 +2769,7 @@ public class CustomDiscountsApi(private val http: LolzteamHttpClient) {
      * @param maxPrice Maximum accounts price for which the discount applies.
      */
 	suspend fun create(body: CustomDiscountsCreateBody? = null): CustomDiscountsCreateResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2789,7 +2788,7 @@ public class CustomDiscountsApi(private val http: LolzteamHttpClient) {
      * @param maxPrice Maximum price for which the discount applies.
      */
 	suspend fun edit(body: CustomDiscountsEditBody? = null): CustomDiscountsEditResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "PUT",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2805,7 +2804,7 @@ public class CustomDiscountsApi(private val http: LolzteamHttpClient) {
      * @param discountId ID of the discount to delete.
      */
 	suspend fun delete(body: CustomDiscountsDeleteBody? = null): CustomDiscountsDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/custom-discounts",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2843,7 +2842,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param emailType Email type.
      */
 	suspend fun fastSell(body: PublishingFastSellBody? = null): PublishingFastSellResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/item/fast-sell",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2879,7 +2878,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param randomProxy Set this parameter to true so that the Market will take a random proxy from its pool for each of your requests. Otherwise, if this parameter is set to false or not set, the Market will take a specific proxy from its pool, which is predefined for each item. > This parameter only works with proxies from the Market pool. If you want to use your own proxies, use the proxy_id or extra[proxy] parameter.
      */
 	suspend fun add(body: PublishingAddBody? = null): PublishingAddResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/item/add",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2905,7 +2904,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param emailType Email type.
      */
 	suspend fun check(itemId: Int, body: PublishingCheckBody? = null): PublishingCheckResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/goods/check",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2927,7 +2926,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param cookies Cookies.
      */
 	suspend fun external(itemId: Int, body: PublishingExternalBody? = null): PublishingExternalResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/$itemId/external-account",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2951,7 +2950,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param paymentId Payment ID.
      */
 	suspend fun invoiceGet(params: PaymentsInvoiceGetParams? = null): PaymentsInvoiceGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/invoice",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -2979,7 +2978,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param isTest Create a test invoice.
      */
 	suspend fun invoiceCreate(body: PaymentsInvoiceCreateBody? = null): PaymentsInvoiceCreateResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/invoice",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3002,7 +3001,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param merchantId Merchant ID.
      */
 	suspend fun invoiceList(params: PaymentsInvoiceListParams? = null): PaymentsInvoiceListResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/invoice/list",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3015,7 +3014,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * Get currency list.
      */
 	suspend fun currency(): PaymentsCurrencyResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/currency",
 		)))
@@ -3027,7 +3026,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * Returns list of balances.
      */
 	suspend fun balanceList(): PaymentsBalanceListResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/balance/exchange",
 		)))
@@ -3043,7 +3042,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param amount Amount to exchange
      */
 	suspend fun balanceExchange(body: PaymentsBalanceExchangeBody? = null): PaymentsBalanceExchangeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/balance/exchange",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3070,7 +3069,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param holdLengthOption Hold length option.
      */
 	suspend fun transfer(body: PaymentsTransferBody? = null): PaymentsTransferResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/balance/transfer",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3089,7 +3088,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param amount Amount you want to send in your currency.
      */
 	suspend fun fee(params: PaymentsFeeParams? = null): PaymentsFeeResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/balance/transfer/fee",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3107,7 +3106,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param paymentId Payment id.
      */
 	suspend fun cancel(body: PaymentsCancelBody? = null): PaymentsCancelResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/balance/transfer/cancel",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3140,7 +3139,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * @param showPaymentStats Display payment stats for selected period (outgoing value, incoming value).
      */
 	suspend fun history(params: PaymentsHistoryParams? = null): PaymentsHistoryResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/user/payments",
 			query = params?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3153,7 +3152,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * Get a list of available payout services.
      */
 	suspend fun payoutServices(): PaymentsPayoutServicesResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/balance/payout/services",
 		)))
@@ -3165,7 +3164,7 @@ public class PaymentsApi(private val http: LolzteamHttpClient) {
      * Creates a payout request.
      */
 	suspend fun payout(body: PaymentsPayoutBody? = null): PaymentsPayoutResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/balance/payout",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3186,7 +3185,7 @@ public class AutoPaymentsApi(private val http: LolzteamHttpClient) {
      * + payment
      */
 	suspend fun list(): AutoPaymentsListResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/auto-payments",
 		)))
@@ -3207,7 +3206,7 @@ public class AutoPaymentsApi(private val http: LolzteamHttpClient) {
      * @param description Payment description.
      */
 	suspend fun create(body: AutoPaymentsCreateBody? = null): AutoPaymentsCreateResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/auto-payment",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3226,7 +3225,7 @@ public class AutoPaymentsApi(private val http: LolzteamHttpClient) {
      * @param autoPaymentId Auto payment ID.
      */
 	suspend fun delete(body: AutoPaymentsDeleteBody? = null): AutoPaymentsDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/auto-payment",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3244,7 +3243,7 @@ public class ProxyApi(private val http: LolzteamHttpClient) {
      * Gets your proxy list.
      */
 	suspend fun get(): ProxyGetResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "GET",
 			path = "/proxy",
 		)))
@@ -3276,7 +3275,7 @@ public class ProxyApi(private val http: LolzteamHttpClient) {
      * @param proxyRow Proxy list in String format ip:port:user:pass. Each proxy must be start with new line (use \r\n separator)
      */
 	suspend fun add(body: ProxyAddBody): ProxyAddResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/proxy",
 			body = http.json.encodeToJsonElement(serializer(), body),
@@ -3293,7 +3292,7 @@ public class ProxyApi(private val http: LolzteamHttpClient) {
      * @param deleteAll Delete all proxies.
      */
 	suspend fun delete(body: ProxyDeleteBody? = null): ProxyDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/proxy",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3316,7 +3315,7 @@ public class ImapApi(private val http: LolzteamHttpClient) {
      * @param secure Whether to use a secure connection.
      */
 	suspend fun create(body: ImapCreateBody? = null): ImapCreateResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/imap",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3332,7 +3331,7 @@ public class ImapApi(private val http: LolzteamHttpClient) {
      * @param domain Domain to delete IMAP configuration for.
      */
 	suspend fun delete(body: ImapDeleteBody? = null): ImapDeleteResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "DELETE",
 			path = "/imap",
 			body = body?.let { http.json.encodeToJsonElement(serializer(), it) },
@@ -3353,7 +3352,7 @@ public class BatchApi(private val http: LolzteamHttpClient) {
      * - /item/fast-sell
      */
 	suspend fun batch(body: BatchBatchBody): BatchBatchResponse {
-		return http.json.decodeFromJsonElement(serializer(), http.request(RequestOptions(
+		return http.lenientDecode(serializer(), http.request(RequestOptions(
 			method = "POST",
 			path = "/batch",
 			body = http.json.encodeToJsonElement(serializer(), body),

@@ -12,6 +12,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonClassDiscriminator
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import com.lolzteam.api.runtime.StringOrInt
 
@@ -940,7 +941,7 @@ data class RespNotificationModel(
 	@SerialName("content_action")
 	val contentAction: String = "",
 	@SerialName("notification_is_unread")
-	val notificationIsUnread: JsonElement? = null,
+	val notificationIsUnread: Boolean = false,
 	@SerialName("creator_user_id")
 	val creatorUserId: Double = 0.0,
 	@SerialName("creator_username")
@@ -949,7 +950,7 @@ data class RespNotificationModel(
 	val creatorUsernameHtml: String = "",
 	@SerialName("notification_type")
 	val notificationType: String = "",
-	val links: RespNotificationModelLinks? = null,
+	val links: RespNotificationModelLinks = RespNotificationModelLinks(),
 	@SerialName("notification_html")
 	val notificationHtml: String = "",
 )
@@ -969,8 +970,8 @@ data class RespLinkModel(
 	val linkTitle: String = "",
 	@SerialName("link_description")
 	val linkDescription: String = "",
-	val links: RespLinkModelLinks? = null,
-	val permissions: RespLinkModelPermissions? = null,
+	val links: RespLinkModelLinks = RespLinkModelLinks(),
+	val permissions: RespLinkModelPermissions = RespLinkModelPermissions(),
 )
 
 @Serializable
@@ -981,31 +982,31 @@ data class RespLinkModelLinks(
 
 @Serializable
 data class RespLinkModelPermissions(
-	val view: JsonElement? = null,
+	val view: Boolean = false,
 )
 
 @Serializable
 data class RespChatboxMessageModel(
 	@SerialName("can_report")
-	val canReport: JsonElement? = null,
+	val canReport: Boolean = false,
 	val date: Double = 0.0,
 	@SerialName("is_deleted")
-	val isDeleted: JsonElement? = null,
+	val isDeleted: Boolean = false,
 	val message: String = "",
 	@SerialName("message_id")
 	val messageId: Double = 0.0,
 	val messageJson: String = "",
 	val messageRaw: String = "",
-	val room: RespChatboxMessageModelRoom? = null,
-	val user: RespChatboxMessageModelUser? = null,
+	val room: RespChatboxMessageModelRoom = RespChatboxMessageModelRoom(),
+	val user: RespChatboxMessageModelUser = RespChatboxMessageModelUser(),
 )
 
 @Serializable
 data class RespChatboxMessageModelRoom(
 	@SerialName("can_report")
-	val canReport: JsonElement? = null,
-	val eng: JsonElement? = null,
-	val market: JsonElement? = null,
+	val canReport: Boolean = false,
+	val eng: Boolean = false,
+	val market: Boolean = false,
 	@SerialName("room_id")
 	val roomId: Double = 0.0,
 	val title: String = "",
@@ -1021,7 +1022,7 @@ data class RespChatboxMessageModelUserRenderedAvatars(
 @Serializable
 data class RespChatboxMessageModelUserRendered(
 	val username: String = "",
-	val avatars: RespChatboxMessageModelUserRenderedAvatars? = null,
+	val avatars: RespChatboxMessageModelUserRenderedAvatars = RespChatboxMessageModelUserRenderedAvatars(),
 	val link: String = "",
 )
 
@@ -1054,13 +1055,13 @@ data class RespChatboxMessageModelUser(
 	@SerialName("display_style_group_id")
 	val displayStyleGroupId: Double = 0.0,
 	@SerialName("is_admin")
-	val isAdmin: JsonElement? = null,
+	val isAdmin: Boolean = false,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("is_moderator")
-	val isModerator: JsonElement? = null,
+	val isModerator: Boolean = false,
 	@SerialName("is_staff")
-	val isStaff: JsonElement? = null,
+	val isStaff: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -1071,13 +1072,13 @@ data class RespChatboxMessageModelUser(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: RespChatboxMessageModelUserRendered? = null,
+	val rendered: RespChatboxMessageModelUserRendered = RespChatboxMessageModelUserRendered(),
 	@SerialName("short_link")
 	val shortLink: String = "",
 	@SerialName("trophy_points")
 	val trophyPoints: Double = 0.0,
 	@SerialName("uniq_banner")
-	val uniqBanner: RespChatboxMessageModelUserUniqBanner? = null,
+	val uniqBanner: RespChatboxMessageModelUserUniqBanner = RespChatboxMessageModelUserUniqBanner(),
 	@SerialName("uniq_username_css")
 	val uniqUsernameCss: String = "",
 	@SerialName("user_id")
@@ -1130,43 +1131,43 @@ data class RespUserModel(
 	@SerialName("user_deposit")
 	val userDeposit: Double = 0.0,
 	@SerialName("user_is_valid")
-	val userIsValid: JsonElement? = null,
+	val userIsValid: Boolean = false,
 	@SerialName("user_is_verified")
-	val userIsVerified: JsonElement? = null,
+	val userIsVerified: Boolean = false,
 	@SerialName("user_is_followed")
-	val userIsFollowed: JsonElement? = null,
+	val userIsFollowed: Boolean = false,
 	@SerialName("user_last_seen_date")
 	val userLastSeenDate: Double = 0.0,
-	val links: RespUserModelLinks? = null,
-	val permissions: RespUserModelPermissions? = null,
+	val links: RespUserModelLinks = RespUserModelLinks(),
+	val permissions: RespUserModelPermissions = RespUserModelPermissions(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("user_is_visitor")
-	val userIsVisitor: JsonElement? = null,
+	val userIsVisitor: Boolean = false,
 	@SerialName("user_group_id")
 	val userGroupId: Double = 0.0,
 	@SerialName("curator_titles")
-	val curatorTitles: List<String>? = null,
+	val curatorTitles: List<String> = emptyList(),
 	@SerialName("user_groups")
-	val userGroups: List<RespUserModelUserGroups>? = null,
-	val fields: List<RespUserModelFields>? = null,
+	val userGroups: List<RespUserModelUserGroups> = emptyList(),
+	val fields: List<RespUserModelFields> = emptyList(),
 	@SerialName("user_timezone_offset")
 	val userTimezoneOffset: Double = 0.0,
 	@SerialName("user_external_authentications")
-	val userExternalAuthentications: List<RespUserModelUserExternalAuthentications>? = null,
+	val userExternalAuthentications: List<RespUserModelUserExternalAuthentications> = emptyList(),
 	@SerialName("self_permissions")
-	val selfPermissions: RespUserModelSelfPermissions? = null,
+	val selfPermissions: RespUserModelSelfPermissions = RespUserModelSelfPermissions(),
 	@SerialName("edit_permissions")
-	val editPermissions: RespUserModelEditPermissions? = null,
-	val birthday: RespUserModelBirthday? = null,
+	val editPermissions: RespUserModelEditPermissions = RespUserModelEditPermissions(),
+	val birthday: RespUserModelBirthday = RespUserModelBirthday(),
 	@SerialName("secret_answer_rendered")
 	val secretAnswerRendered: String = "",
 	@SerialName("secret_answer_first_letter")
 	val secretAnswerFirstLetter: String = "",
 	@SerialName("user_following")
-	val userFollowing: RespUserModelUserFollowing? = null,
+	val userFollowing: RespUserModelUserFollowing = RespUserModelUserFollowing(),
 	@SerialName("user_followers")
-	val userFollowers: RespUserModelUserFollowers? = null,
+	val userFollowers: RespUserModelUserFollowers = RespUserModelUserFollowers(),
 	val banner: String = "",
 )
 
@@ -1192,11 +1193,11 @@ data class RespUserModelLinks(
 
 @Serializable
 data class RespUserModelPermissions(
-	val edit: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val ignore: JsonElement? = null,
+	val edit: Boolean = false,
+	val follow: Boolean = false,
+	val ignore: Boolean = false,
 	@SerialName("profile_post")
-	val profilePost: JsonElement? = null,
+	val profilePost: Boolean = false,
 )
 
 @Serializable
@@ -1214,13 +1215,13 @@ data class RespUserModelUserGroups(
 	@SerialName("user_group_banner_text_en")
 	val userGroupBannerTextEn: String = "",
 	@SerialName("display_group_selectable")
-	val displayGroupSelectable: JsonElement? = null,
+	val displayGroupSelectable: Boolean = false,
 	@SerialName("display_banner_selectable")
-	val displayBannerSelectable: JsonElement? = null,
+	val displayBannerSelectable: Boolean = false,
 	@SerialName("display_icon_selectable")
-	val displayIconSelectable: JsonElement? = null,
+	val displayIconSelectable: Boolean = false,
 	@SerialName("is_primary_group")
-	val isPrimaryGroup: JsonElement? = null,
+	val isPrimaryGroup: Boolean = false,
 	@SerialName("user_group_icon_class")
 	val userGroupIconClass: String = "",
 )
@@ -1238,12 +1239,12 @@ data class RespUserModelFields(
 	val description: String = "",
 	val position: String = "",
 	@SerialName("is_required")
-	val isRequired: JsonElement? = null,
+	val isRequired: Boolean = false,
 	val value: String? = null,
 	@SerialName("is_multi_choice")
-	val isMultiChoice: JsonElement? = null,
-	val choices: List<RespUserModelFieldsChoices>? = null,
-	val values: List<JsonElement>? = null,
+	val isMultiChoice: Boolean = false,
+	val choices: List<RespUserModelFieldsChoices> = emptyList(),
+	val values: List<JsonElement> = emptyList(),
 )
 
 @Serializable
@@ -1256,32 +1257,32 @@ data class RespUserModelUserExternalAuthentications(
 @Serializable
 data class RespUserModelSelfPermissions(
 	@SerialName("create_conversation")
-	val createConversation: JsonElement? = null,
+	val createConversation: Boolean = false,
 )
 
 @Serializable
 data class RespUserModelEditPermissions(
-	val password: JsonElement? = null,
+	val password: Boolean = false,
 	@SerialName("user_email")
-	val userEmail: JsonElement? = null,
-	val username: JsonElement? = null,
+	val userEmail: Boolean = false,
+	val username: Boolean = false,
 	@SerialName("user_title")
-	val userTitle: JsonElement? = null,
+	val userTitle: Boolean = false,
 	@SerialName("short_link")
-	val shortLink: JsonElement? = null,
+	val shortLink: Boolean = false,
 	@SerialName("hide_username_logs")
-	val hideUsernameLogs: JsonElement? = null,
+	val hideUsernameLogs: Boolean = false,
 	@SerialName("primary_group_id")
-	val primaryGroupId: JsonElement? = null,
+	val primaryGroupId: Boolean = false,
 	@SerialName("secondary_group_ids")
-	val secondaryGroupIds: JsonElement? = null,
+	val secondaryGroupIds: Boolean = false,
 	@SerialName("user_dob_day")
-	val userDobDay: JsonElement? = null,
+	val userDobDay: Boolean = false,
 	@SerialName("user_dob_month")
-	val userDobMonth: JsonElement? = null,
+	val userDobMonth: Boolean = false,
 	@SerialName("user_dob_year")
-	val userDobYear: JsonElement? = null,
-	val fields: JsonElement? = null,
+	val userDobYear: Boolean = false,
+	val fields: Boolean = false,
 )
 
 @Serializable
@@ -1295,7 +1296,7 @@ data class RespUserModelBirthdayTimeStamp(
 @Serializable
 data class RespUserModelBirthday(
 	val age: Double = 0.0,
-	val timeStamp: RespUserModelBirthdayTimeStamp? = null,
+	val timeStamp: RespUserModelBirthdayTimeStamp = RespUserModelBirthdayTimeStamp(),
 	val format: String = "",
 )
 
@@ -1311,7 +1312,7 @@ data class RespUserModelUserFollowingUsers(
 
 @Serializable
 data class RespUserModelUserFollowing(
-	val users: List<RespUserModelUserFollowingUsers>? = null,
+	val users: List<RespUserModelUserFollowingUsers> = emptyList(),
 	val count: Double = 0.0,
 )
 
@@ -1327,7 +1328,7 @@ data class RespUserModelUserFollowersUsers(
 
 @Serializable
 data class RespUserModelUserFollowers(
-	val users: List<RespUserModelUserFollowersUsers>? = null,
+	val users: List<RespUserModelUserFollowersUsers> = emptyList(),
 	val count: Double = 0.0,
 )
 
@@ -1352,35 +1353,35 @@ data class RespThreadModel(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_closed")
-	val threadIsClosed: JsonElement? = null,
+	val threadIsClosed: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("thread_is_starred")
-	val threadIsStarred: JsonElement? = null,
+	val threadIsStarred: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: RespThreadModelFirstPost? = null,
+	val firstPost: RespThreadModelFirstPost = RespThreadModelFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement? = null,
-	val links: RespThreadModelLinks? = null,
-	val permissions: RespThreadModelPermissions? = null,
+	val threadTags: JsonElement = JsonNull,
+	val links: RespThreadModelLinks = RespThreadModelLinks(),
+	val permissions: RespThreadModelPermissions = RespThreadModelPermissions(),
 	@SerialName("node_title")
 	val nodeTitle: String = "",
-	val restrictions: RespThreadModelRestrictions? = null,
+	val restrictions: RespThreadModelRestrictions = RespThreadModelRestrictions(),
 	@SerialName("last_post")
-	val lastPost: RespThreadModelLastPost? = null,
-	val contest: RespThreadModelContest? = null,
+	val lastPost: RespThreadModelLastPost = RespThreadModelLastPost(),
+	val contest: RespThreadModelContest = RespThreadModelContest(),
 )
 
 @Serializable
@@ -1397,12 +1398,12 @@ data class RespThreadModelFirstPostLinks(
 
 @Serializable
 data class RespThreadModelFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -1433,21 +1434,21 @@ data class RespThreadModelFirstPost(
 	@SerialName("post_like_count")
 	val postLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
+	val postIsFirstPost: Boolean = false,
 	@SerialName("post_is_liked")
-	val postIsLiked: JsonElement? = null,
-	val links: RespThreadModelFirstPostLinks? = null,
-	val permissions: RespThreadModelFirstPostPermissions? = null,
+	val postIsLiked: Boolean = false,
+	val links: RespThreadModelFirstPostLinks = RespThreadModelFirstPostLinks(),
+	val permissions: RespThreadModelFirstPostPermissions = RespThreadModelFirstPostPermissions(),
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
@@ -1469,26 +1470,26 @@ data class RespThreadModelLinks(
 
 @Serializable
 data class RespThreadModelPermissionsBump(
-	val can: JsonElement? = null,
+	val can: Boolean = false,
 	@SerialName("available_count")
 	val availableCount: Double = 0.0,
-	val error: JsonElement? = null,
+	val error: JsonElement = JsonNull,
 	@SerialName("next_available_time")
-	val nextAvailableTime: JsonElement? = null,
+	val nextAvailableTime: JsonElement = JsonNull,
 )
 
 @Serializable
 data class RespThreadModelPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
+	val edit: Boolean = false,
 	@SerialName("edit_title")
-	val editTitle: JsonElement? = null,
+	val editTitle: Boolean = false,
 	@SerialName("edit_tags")
-	val editTags: JsonElement? = null,
-	val bump: RespThreadModelPermissionsBump? = null,
+	val editTags: Boolean = false,
+	val bump: RespThreadModelPermissionsBump = RespThreadModelPermissionsBump(),
 )
 
 @Serializable
@@ -1513,12 +1514,12 @@ data class RespThreadModelLastPostLinks(
 
 @Serializable
 data class RespThreadModelLastPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -1549,33 +1550,33 @@ data class RespThreadModelLastPost(
 	@SerialName("post_like_count")
 	val postLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
+	val postIsFirstPost: Boolean = false,
 	@SerialName("post_is_liked")
-	val postIsLiked: JsonElement? = null,
-	val links: RespThreadModelLastPostLinks? = null,
-	val permissions: RespThreadModelLastPostPermissions? = null,
+	val postIsLiked: Boolean = false,
+	val links: RespThreadModelLastPostLinks = RespThreadModelLastPostLinks(),
+	val permissions: RespThreadModelLastPostPermissions = RespThreadModelLastPostPermissions(),
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
 data class RespThreadModelContestPermissions(
 	@SerialName("can_finish")
-	val canFinish: JsonElement? = null,
+	val canFinish: Boolean = false,
 	@SerialName("can_participate")
-	val canParticipate: JsonElement? = null,
+	val canParticipate: Boolean = false,
 	@SerialName("can_participate_error")
 	val canParticipateError: String = "",
 	@SerialName("can_view_user_list")
-	val canViewUserList: JsonElement? = null,
+	val canViewUserList: Boolean = false,
 )
 
 @Serializable
@@ -1605,10 +1606,10 @@ data class RespThreadModelContest(
 	val isMoneyPlaces: Double = 0.0,
 	@SerialName("chance_to_win")
 	val chanceToWin: Double = 0.0,
-	val winners: List<Long>? = null,
+	val winners: List<Long> = emptyList(),
 	@SerialName("already_participate")
-	val alreadyParticipate: JsonElement? = null,
-	val permissions: RespThreadModelContestPermissions? = null,
+	val alreadyParticipate: Boolean = false,
+	val permissions: RespThreadModelContestPermissions = RespThreadModelContestPermissions(),
 )
 
 @Serializable
@@ -1639,19 +1640,19 @@ data class RespPostModel(
 	@SerialName("post_like_count")
 	val postLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: RespPostModelLinks? = null,
-	val permissions: RespPostModelPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: RespPostModelLinks = RespPostModelLinks(),
+	val permissions: RespPostModelPermissions = RespPostModelPermissions(),
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
@@ -1668,12 +1669,12 @@ data class RespPostModelLinks(
 
 @Serializable
 data class RespPostModelPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -1701,15 +1702,15 @@ data class RespPostCommentModel(
 	@SerialName("post_comment_like_count")
 	val postCommentLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_comment_is_published")
-	val postCommentIsPublished: JsonElement? = null,
+	val postCommentIsPublished: Boolean = false,
 	@SerialName("post_comment_is_deleted")
-	val postCommentIsDeleted: JsonElement? = null,
+	val postCommentIsDeleted: Boolean = false,
 	@SerialName("post_comment_update_date")
 	val postCommentUpdateDate: Double = 0.0,
-	val links: RespPostCommentModelLinks? = null,
-	val permissions: RespPostCommentModelPermissions? = null,
+	val links: RespPostCommentModelLinks = RespPostCommentModelLinks(),
+	val permissions: RespPostCommentModelPermissions = RespPostCommentModelPermissions(),
 )
 
 @Serializable
@@ -1727,12 +1728,12 @@ data class RespPostCommentModelLinks(
 
 @Serializable
 data class RespPostCommentModelPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -1764,19 +1765,19 @@ data class RespProfilePostModel(
 	@SerialName("timeline_username")
 	val timelineUsername: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_is_liked")
-	val postIsLiked: JsonElement? = null,
+	val postIsLiked: Boolean = false,
 	@SerialName("post_is_sticked")
-	val postIsSticked: JsonElement? = null,
-	val links: RespProfilePostModelLinks? = null,
-	val permissions: RespProfilePostModelPermissions? = null,
+	val postIsSticked: Boolean = false,
+	val links: RespProfilePostModelLinks = RespProfilePostModelLinks(),
+	val permissions: RespProfilePostModelPermissions = RespProfilePostModelPermissions(),
 	@SerialName("timeline_user")
-	val timelineUser: JsonElement? = null,
+	val timelineUser: RespUserModel = RespUserModel(),
 )
 
 @Serializable
@@ -1796,13 +1797,13 @@ data class RespProfilePostModelLinks(
 
 @Serializable
 data class RespProfilePostModelPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val like: JsonElement? = null,
-	val comment: JsonElement? = null,
-	val report: JsonElement? = null,
-	val stick: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val like: Boolean = false,
+	val comment: Boolean = false,
+	val report: Boolean = false,
+	val stick: Boolean = false,
 )
 
 @Serializable
@@ -1826,11 +1827,11 @@ data class RespProfilePostCommentModel(
 	@SerialName("comment_body_plain_text")
 	val commentBodyPlainText: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("timeline_user_id")
 	val timelineUserId: Double = 0.0,
-	val links: RespProfilePostCommentModelLinks? = null,
-	val permissions: RespProfilePostCommentModelPermissions? = null,
+	val links: RespProfilePostCommentModelLinks = RespProfilePostCommentModelLinks(),
+	val permissions: RespProfilePostCommentModelPermissions = RespProfilePostCommentModelPermissions(),
 )
 
 @Serializable
@@ -1848,8 +1849,8 @@ data class RespProfilePostCommentModelLinks(
 
 @Serializable
 data class RespProfilePostCommentModelPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -1879,34 +1880,34 @@ data class RespConversationModel(
 	@SerialName("is_unread")
 	val isUnread: Double = 0.0,
 	val alerts: Double = 0.0,
-	val permissions: RespConversationModelPermissions? = null,
+	val permissions: RespConversationModelPermissions = RespConversationModelPermissions(),
 	@SerialName("conversation_message_count")
 	val conversationMessageCount: Double = 0.0,
 	@SerialName("conversation_is_new")
-	val conversationIsNew: JsonElement? = null,
+	val conversationIsNew: Boolean = false,
 	@SerialName("creator_is_ignored")
-	val creatorIsIgnored: JsonElement? = null,
+	val creatorIsIgnored: Boolean = false,
 	@SerialName("conversation_is_open")
-	val conversationIsOpen: JsonElement? = null,
+	val conversationIsOpen: Boolean = false,
 	@SerialName("conversation_is_deleted")
-	val conversationIsDeleted: JsonElement? = null,
-	val recipient: RespConversationModelRecipient? = null,
-	val recipients: List<RespConversationModelRecipients>? = null,
-	val links: RespConversationModelLinks? = null,
+	val conversationIsDeleted: Boolean = false,
+	val recipient: RespConversationModelRecipient = RespConversationModelRecipient(),
+	val recipients: List<RespConversationModelRecipients> = emptyList(),
+	val links: RespConversationModelLinks = RespConversationModelLinks(),
 )
 
 @Serializable
 data class RespConversationModelPermissions(
-	val view: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val invite: JsonElement? = null,
+	val view: Boolean = false,
+	val reply: Boolean = false,
+	val invite: Boolean = false,
 	@SerialName("manage_invite_links")
-	val manageInviteLinks: JsonElement? = null,
-	val kick: JsonElement? = null,
+	val manageInviteLinks: Boolean = false,
+	val kick: Boolean = false,
 	@SerialName("upload_avatar")
-	val uploadAvatar: JsonElement? = null,
-	val editOwnPost: JsonElement? = null,
-	val stickyMessages: JsonElement? = null,
+	val uploadAvatar: Boolean = false,
+	val editOwnPost: Boolean = false,
+	val stickyMessages: Boolean = false,
 )
 
 @Serializable
@@ -1919,9 +1920,9 @@ data class RespConversationModelRecipient(
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("is_online")
-	val isOnline: JsonElement? = null,
+	val isOnline: Boolean = false,
 	@SerialName("contacts_changed")
-	val contactsChanged: JsonElement? = null,
+	val contactsChanged: Boolean = false,
 	val avatar: String = "",
 )
 
@@ -1935,9 +1936,9 @@ data class RespConversationModelRecipients(
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("is_online")
-	val isOnline: JsonElement? = null,
+	val isOnline: Boolean = false,
 	@SerialName("contacts_changed")
-	val contactsChanged: JsonElement? = null,
+	val contactsChanged: Boolean = false,
 	val avatar: String = "",
 )
 
@@ -1966,9 +1967,9 @@ data class RespConversationMessageModel(
 	@SerialName("message_is_unread")
 	val messageIsUnread: Double = 0.0,
 	@SerialName("message_need_translate")
-	val messageNeedTranslate: JsonElement? = null,
+	val messageNeedTranslate: Boolean = false,
 	@SerialName("message_is_system")
-	val messageIsSystem: JsonElement? = null,
+	val messageIsSystem: Boolean = false,
 	@SerialName("message_edit_date")
 	val messageEditDate: Double = 0.0,
 	@SerialName("message_body")
@@ -1978,9 +1979,9 @@ data class RespConversationMessageModel(
 	@SerialName("message_body_plain_text")
 	val messageBodyPlainText: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
-	val links: RespConversationMessageModelLinks? = null,
-	val permissions: RespConversationMessageModelPermissions? = null,
+	val userIsIgnored: Boolean = false,
+	val links: RespConversationMessageModelLinks = RespConversationMessageModelLinks(),
+	val permissions: RespConversationMessageModelPermissions = RespConversationMessageModelPermissions(),
 )
 
 @Serializable
@@ -1994,11 +1995,11 @@ data class RespConversationMessageModelLinks(
 
 @Serializable
 data class RespConversationMessageModelPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("stick-unstick")
-	val stickUnstick: JsonElement? = null,
+	val stickUnstick: Boolean = false,
 )
 
 @Serializable
@@ -2098,7 +2099,7 @@ data class AssetsCssParams(
 data class AssetsCssResponse(
 	val contents: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 // ─── CategoriesApi Types ────────────────────────────────────────
@@ -2117,11 +2118,11 @@ data class CategoriesListParams(
 
 @Serializable
 data class CategoriesListResponse(
-	val categories: List<CategoriesListResponseCategories>? = null,
+	val categories: List<CategoriesListResponseCategories> = emptyList(),
 	@SerialName("categories_total")
 	val categoriesTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2136,9 +2137,9 @@ data class CategoriesListResponseCategoriesLinks(
 
 @Serializable
 data class CategoriesListResponseCategoriesPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -2149,15 +2150,15 @@ data class CategoriesListResponseCategories(
 	val categoryTitle: String = "",
 	@SerialName("category_description")
 	val categoryDescription: String = "",
-	val links: CategoriesListResponseCategoriesLinks? = null,
-	val permissions: CategoriesListResponseCategoriesPermissions? = null,
+	val links: CategoriesListResponseCategoriesLinks = CategoriesListResponseCategoriesLinks(),
+	val permissions: CategoriesListResponseCategoriesPermissions = CategoriesListResponseCategoriesPermissions(),
 )
 
 @Serializable
 data class CategoriesGetResponse(
-	val category: CategoriesGetResponseCategory? = null,
+	val category: CategoriesGetResponseCategory = CategoriesGetResponseCategory(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2172,9 +2173,9 @@ data class CategoriesGetResponseCategoryLinks(
 
 @Serializable
 data class CategoriesGetResponseCategoryPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -2185,8 +2186,8 @@ data class CategoriesGetResponseCategory(
 	val categoryTitle: String = "",
 	@SerialName("category_description")
 	val categoryDescription: String = "",
-	val links: CategoriesGetResponseCategoryLinks? = null,
-	val permissions: CategoriesGetResponseCategoryPermissions? = null,
+	val links: CategoriesGetResponseCategoryLinks = CategoriesGetResponseCategoryLinks(),
+	val permissions: CategoriesGetResponseCategoryPermissions = CategoriesGetResponseCategoryPermissions(),
 )
 
 // ─── ForumsApi Types ────────────────────────────────────────
@@ -2205,12 +2206,12 @@ data class ForumsListParams(
 
 @Serializable
 data class ForumsListResponse(
-	val forums: List<ForumsListResponseForums>? = null,
+	val forums: List<ForumsListResponseForums> = emptyList(),
 	@SerialName("forums_total")
 	val forumsTotal: Double = 0.0,
-	val tabs: List<ForumsListResponseTabs>? = null,
+	val tabs: List<ForumsListResponseTabs> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2226,7 +2227,7 @@ data class ForumsListResponseForumsForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsListResponseForumsForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<ForumsListResponseForumsForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -2243,14 +2244,14 @@ data class ForumsListResponseForumsLinks(
 
 @Serializable
 data class ForumsListResponseForumsPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -2266,48 +2267,48 @@ data class ForumsListResponseForums(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsListResponseForumsForumPrefixes>? = null,
+	val forumPrefixes: List<ForumsListResponseForumsForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ForumsListResponseForumsLinks? = null,
-	val permissions: ForumsListResponseForumsPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ForumsListResponseForumsLinks = ForumsListResponseForumsLinks(),
+	val permissions: ForumsListResponseForumsPermissions = ForumsListResponseForumsPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
 data class ForumsListResponseTabs(
 	@SerialName("link_title")
 	val linkTitle: String = "",
-	val isDefault: JsonElement? = null,
+	val isDefault: Boolean = false,
 	val title: String = "",
-	val isHidden: JsonElement? = null,
+	val isHidden: Boolean = false,
 )
 
 @Serializable
 data class ForumsGroupedResponse(
-	val data: JsonElement? = null,
-	val tabs: List<ForumsGroupedResponseTabs>? = null,
+	val data: JsonElement = JsonNull,
+	val tabs: List<ForumsGroupedResponseTabs> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ForumsGroupedResponseTabs(
 	@SerialName("link_title")
 	val linkTitle: String = "",
-	val isDefault: JsonElement? = null,
+	val isDefault: Boolean = false,
 	val title: String = "",
-	val isHidden: JsonElement? = null,
+	val isHidden: Boolean = false,
 )
 
 @Serializable
 data class ForumsGetResponse(
-	val forum: ForumsGetResponseForum? = null,
+	val forum: ForumsGetResponseForum = ForumsGetResponseForum(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2323,7 +2324,7 @@ data class ForumsGetResponseForumForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsGetResponseForumForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<ForumsGetResponseForumForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -2340,16 +2341,16 @@ data class ForumsGetResponseForumLinks(
 
 @Serializable
 data class ForumsGetResponseForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -2365,29 +2366,29 @@ data class ForumsGetResponseForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsGetResponseForumForumPrefixes>? = null,
+	val forumPrefixes: List<ForumsGetResponseForumForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ForumsGetResponseForumLinks? = null,
-	val permissions: ForumsGetResponseForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ForumsGetResponseForumLinks = ForumsGetResponseForumLinks(),
+	val permissions: ForumsGetResponseForumPermissions = ForumsGetResponseForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
 data class ForumsFollowersResponse(
-	val users: List<ForumsFollowersResponseUsers>? = null,
+	val users: List<ForumsFollowersResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ForumsFollowersResponseUsersFollow(
-	val post: JsonElement? = null,
-	val alert: JsonElement? = null,
-	val email: JsonElement? = null,
+	val post: Boolean = false,
+	val alert: Boolean = false,
+	val email: Boolean = false,
 )
 
 @Serializable
@@ -2395,7 +2396,7 @@ data class ForumsFollowersResponseUsers(
 	@SerialName("user_id")
 	val userId: Double = 0.0,
 	val username: String = "",
-	val follow: ForumsFollowersResponseUsersFollow? = null,
+	val follow: ForumsFollowersResponseUsersFollow = ForumsFollowersResponseUsersFollow(),
 )
 
 @Serializable
@@ -2419,7 +2420,7 @@ data class ForumsFollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -2427,7 +2428,7 @@ data class ForumsUnfollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -2438,9 +2439,9 @@ data class ForumsFollowedParams(
 
 @Serializable
 data class ForumsFollowedResponse(
-	val forums: List<ForumsFollowedResponseForums>? = null,
+	val forums: List<ForumsFollowedResponseForums> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2456,7 +2457,7 @@ data class ForumsFollowedResponseForumsForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsFollowedResponseForumsForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<ForumsFollowedResponseForumsForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -2473,23 +2474,23 @@ data class ForumsFollowedResponseForumsLinks(
 
 @Serializable
 data class ForumsFollowedResponseForumsPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
 data class ForumsFollowedResponseForumsFollow(
-	val post: JsonElement? = null,
-	val alert: JsonElement? = null,
-	val email: JsonElement? = null,
+	val post: Boolean = false,
+	val alert: Boolean = false,
+	val email: Boolean = false,
 )
 
 @Serializable
@@ -2505,28 +2506,28 @@ data class ForumsFollowedResponseForums(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsFollowedResponseForumsForumPrefixes>? = null,
+	val forumPrefixes: List<ForumsFollowedResponseForumsForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ForumsFollowedResponseForumsLinks? = null,
-	val permissions: ForumsFollowedResponseForumsPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ForumsFollowedResponseForumsLinks = ForumsFollowedResponseForumsLinks(),
+	val permissions: ForumsFollowedResponseForumsPermissions = ForumsFollowedResponseForumsPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
-	val follow: ForumsFollowedResponseForumsFollow? = null,
+	val forumIsFollowed: Boolean = false,
+	val follow: ForumsFollowedResponseForumsFollow = ForumsFollowedResponseForumsFollow(),
 )
 
 @Serializable
 data class ForumsGetFeedOptionsResponse(
-	val forums: List<ForumsGetFeedOptionsResponseForums>? = null,
+	val forums: List<ForumsGetFeedOptionsResponseForums> = emptyList(),
 	@SerialName("excluded_forums_ids")
-	val excludedForumsIds: List<Long>? = null,
+	val excludedForumsIds: List<Long> = emptyList(),
 	@SerialName("default_excluded_forums_ids")
-	val defaultExcludedForumsIds: List<Long>? = null,
+	val defaultExcludedForumsIds: List<Long> = emptyList(),
 	val keywords: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2543,14 +2544,14 @@ data class ForumsGetFeedOptionsResponseForumsLinks(
 
 @Serializable
 data class ForumsGetFeedOptionsResponseForumsPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -2563,12 +2564,12 @@ data class ForumsGetFeedOptionsResponseForums(
 	val forumDescription: String = "",
 	@SerialName("parent_node_id")
 	val parentNodeId: Double = 0.0,
-	val links: ForumsGetFeedOptionsResponseForumsLinks? = null,
-	val permissions: ForumsGetFeedOptionsResponseForumsPermissions? = null,
+	val links: ForumsGetFeedOptionsResponseForumsLinks = ForumsGetFeedOptionsResponseForumsLinks(),
+	val permissions: ForumsGetFeedOptionsResponseForumsPermissions = ForumsGetFeedOptionsResponseForumsPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 	@SerialName("has_children")
-	val hasChildren: JsonElement? = null,
+	val hasChildren: Boolean = false,
 )
 
 @Serializable
@@ -2585,7 +2586,7 @@ data class ForumsEditFeedOptionsResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── LinksApi Types ────────────────────────────────────────
@@ -2593,19 +2594,19 @@ data class ForumsEditFeedOptionsResponse(
 @Serializable
 data class LinksListResponse(
 	@SerialName("link-forums")
-	val linkForums: List<JsonElement>? = null,
+	val linkForums: List<RespLinkModel> = emptyList(),
 	@SerialName("link-forums_total")
 	val linkForumsTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class LinksGetResponse(
 	@SerialName("link-forum")
-	val linkForum: JsonElement? = null,
+	val linkForum: RespLinkModel = RespLinkModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 // ─── PagesApi Types ────────────────────────────────────────
@@ -2621,11 +2622,11 @@ data class PagesListParams(
 
 @Serializable
 data class PagesListResponse(
-	val pages: List<PagesListResponsePages>? = null,
+	val pages: List<PagesListResponsePages> = emptyList(),
 	@SerialName("pages_total")
 	val pagesTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2638,9 +2639,9 @@ data class PagesListResponsePagesLinks(
 
 @Serializable
 data class PagesListResponsePagesPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -2651,15 +2652,15 @@ data class PagesListResponsePages(
 	val pageTitle: String = "",
 	@SerialName("page_description")
 	val pageDescription: String = "",
-	val links: PagesListResponsePagesLinks? = null,
-	val permissions: PagesListResponsePagesPermissions? = null,
+	val links: PagesListResponsePagesLinks = PagesListResponsePagesLinks(),
+	val permissions: PagesListResponsePagesPermissions = PagesListResponsePagesPermissions(),
 )
 
 @Serializable
 data class PagesGetResponse(
-	val page: PagesGetResponsePage? = null,
+	val page: PagesGetResponsePage = PagesGetResponsePage(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2672,9 +2673,9 @@ data class PagesGetResponsePageLinks(
 
 @Serializable
 data class PagesGetResponsePagePermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -2687,8 +2688,8 @@ data class PagesGetResponsePage(
 	val pageDescription: String = "",
 	@SerialName("page_view_count")
 	val pageViewCount: Double = 0.0,
-	val links: PagesGetResponsePageLinks? = null,
-	val permissions: PagesGetResponsePagePermissions? = null,
+	val links: PagesGetResponsePageLinks = PagesGetResponsePageLinks(),
+	val permissions: PagesGetResponsePagePermissions = PagesGetResponsePagePermissions(),
 	@SerialName("page_html")
 	val pageHtml: String = "",
 )
@@ -2703,11 +2704,11 @@ data class NavigationListParams(
 
 @Serializable
 data class NavigationListResponse(
-	val elements: List<NavigationListResponseElements>? = null,
+	val elements: List<NavigationListResponseElements> = emptyList(),
 	@SerialName("elements_count")
 	val elementsCount: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2724,9 +2725,9 @@ data class NavigationListResponseElementsLinks(
 
 @Serializable
 data class NavigationListResponseElementsPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -2737,8 +2738,8 @@ data class NavigationListResponseElements(
 	val categoryTitle: String = "",
 	@SerialName("category_description")
 	val categoryDescription: String = "",
-	val links: NavigationListResponseElementsLinks? = null,
-	val permissions: NavigationListResponseElementsPermissions? = null,
+	val links: NavigationListResponseElementsLinks = NavigationListResponseElementsLinks(),
+	val permissions: NavigationListResponseElementsPermissions = NavigationListResponseElementsPermissions(),
 	@SerialName("navigation_type")
 	val navigationType: String = "",
 	@SerialName("navigation_id")
@@ -2746,7 +2747,7 @@ data class NavigationListResponseElements(
 	@SerialName("navigation_parent_id")
 	val navigationParentId: Double = 0.0,
 	@SerialName("has_sub_elements")
-	val hasSubElements: JsonElement? = null,
+	val hasSubElements: Boolean = false,
 )
 
 // ─── ThreadsApi Types ────────────────────────────────────────
@@ -2802,13 +2803,13 @@ data class ThreadsListParams(
 
 @Serializable
 data class ThreadsListResponse(
-	val threads: List<JsonElement>? = null,
-	val forum: ThreadsListResponseForum? = null,
+	val threads: List<RespThreadModel> = emptyList(),
+	val forum: ThreadsListResponseForum = ThreadsListResponseForum(),
 	@SerialName("threads_total")
 	val threadsTotal: Double = 0.0,
-	val links: ThreadsListResponseLinks? = null,
+	val links: ThreadsListResponseLinks = ThreadsListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -2825,16 +2826,16 @@ data class ThreadsListResponseForumLinks(
 
 @Serializable
 data class ThreadsListResponseForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -2850,15 +2851,15 @@ data class ThreadsListResponseForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ThreadsListResponseForumLinks? = null,
-	val permissions: ThreadsListResponseForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ThreadsListResponseForumLinks = ThreadsListResponseForumLinks(),
+	val permissions: ThreadsListResponseForumPermissions = ThreadsListResponseForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -2920,9 +2921,9 @@ data class ThreadsCreateBody(
 
 @Serializable
 data class ThreadsCreateResponse(
-	val thread: JsonElement? = null,
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3007,9 +3008,9 @@ data class ThreadsCreateContestBody(
 
 @Serializable
 data class ThreadsCreateContestResponse(
-	val thread: JsonElement? = null,
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3082,9 +3083,9 @@ data class ThreadsClaimBody(
 
 @Serializable
 data class ThreadsClaimResponse(
-	val thread: JsonElement? = null,
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3096,9 +3097,9 @@ data class ThreadsGetParams(
 
 @Serializable
 data class ThreadsGetResponse(
-	val thread: JsonElement? = null,
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3132,9 +3133,9 @@ data class ThreadsEditBody(
 
 @Serializable
 data class ThreadsEditResponse(
-	val thread: JsonElement? = null,
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3148,7 +3149,7 @@ data class ThreadsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3177,7 +3178,7 @@ data class ThreadsMoveResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3185,7 +3186,7 @@ data class ThreadsBumpResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3193,7 +3194,7 @@ data class ThreadsHideResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3201,7 +3202,7 @@ data class ThreadsStarResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3209,20 +3210,20 @@ data class ThreadsUnstarResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class ThreadsFollowersResponse(
-	val users: List<ThreadsFollowersResponseUsers>? = null,
+	val users: List<ThreadsFollowersResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ThreadsFollowersResponseUsersFollow(
-	val alert: JsonElement? = null,
-	val email: JsonElement? = null,
+	val alert: Boolean = false,
+	val email: Boolean = false,
 )
 
 @Serializable
@@ -3230,7 +3231,7 @@ data class ThreadsFollowersResponseUsers(
 	@SerialName("user_id")
 	val userId: Double = 0.0,
 	val username: String = "",
-	val follow: ThreadsFollowersResponseUsersFollow? = null,
+	val follow: ThreadsFollowersResponseUsersFollow = ThreadsFollowersResponseUsersFollow(),
 )
 
 @Serializable
@@ -3244,7 +3245,7 @@ data class ThreadsFollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3252,7 +3253,7 @@ data class ThreadsUnfollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3266,11 +3267,11 @@ data class ThreadsFollowedParams(
 
 @Serializable
 data class ThreadsFollowedResponse(
-	val threads: List<ThreadsFollowedResponseThreads>? = null,
+	val threads: List<ThreadsFollowedResponseThreads> = emptyList(),
 	@SerialName("threads_total")
 	val threadsTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3301,14 +3302,14 @@ data class ThreadsFollowedResponseThreadsFirstPostLinks(
 
 @Serializable
 data class ThreadsFollowedResponseThreadsFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -3341,19 +3342,19 @@ data class ThreadsFollowedResponseThreadsFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("like_users")
-	val likeUsers: List<ThreadsFollowedResponseThreadsFirstPostLikeUsers>? = null,
+	val likeUsers: List<ThreadsFollowedResponseThreadsFirstPostLikeUsers> = emptyList(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: ThreadsFollowedResponseThreadsFirstPostLinks? = null,
-	val permissions: ThreadsFollowedResponseThreadsFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: ThreadsFollowedResponseThreadsFirstPostLinks = ThreadsFollowedResponseThreadsFirstPostLinks(),
+	val permissions: ThreadsFollowedResponseThreadsFirstPostPermissions = ThreadsFollowedResponseThreadsFirstPostPermissions(),
 )
 
 @Serializable
@@ -3375,17 +3376,17 @@ data class ThreadsFollowedResponseThreadsLinks(
 
 @Serializable
 data class ThreadsFollowedResponseThreadsPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 	@SerialName("edit_title")
-	val editTitle: JsonElement? = null,
+	val editTitle: Boolean = false,
 	@SerialName("edit_tags")
-	val editTags: JsonElement? = null,
+	val editTags: Boolean = false,
 )
 
 @Serializable
@@ -3402,16 +3403,16 @@ data class ThreadsFollowedResponseThreadsForumLinks(
 
 @Serializable
 data class ThreadsFollowedResponseThreadsForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -3427,21 +3428,21 @@ data class ThreadsFollowedResponseThreadsForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ThreadsFollowedResponseThreadsForumLinks? = null,
-	val permissions: ThreadsFollowedResponseThreadsForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ThreadsFollowedResponseThreadsForumLinks = ThreadsFollowedResponseThreadsForumLinks(),
+	val permissions: ThreadsFollowedResponseThreadsForumPermissions = ThreadsFollowedResponseThreadsForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
 data class ThreadsFollowedResponseThreadsFollow(
-	val alert: JsonElement? = null,
-	val email: JsonElement? = null,
+	val alert: Boolean = false,
+	val email: Boolean = false,
 )
 
 @Serializable
@@ -3465,36 +3466,36 @@ data class ThreadsFollowedResponseThreads(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: ThreadsFollowedResponseThreadsFirstPost? = null,
+	val firstPost: ThreadsFollowedResponseThreadsFirstPost = ThreadsFollowedResponseThreadsFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement? = null,
-	val links: ThreadsFollowedResponseThreadsLinks? = null,
-	val permissions: ThreadsFollowedResponseThreadsPermissions? = null,
-	val forum: ThreadsFollowedResponseThreadsForum? = null,
-	val follow: ThreadsFollowedResponseThreadsFollow? = null,
+	val threadTags: JsonElement = JsonNull,
+	val links: ThreadsFollowedResponseThreadsLinks = ThreadsFollowedResponseThreadsLinks(),
+	val permissions: ThreadsFollowedResponseThreadsPermissions = ThreadsFollowedResponseThreadsPermissions(),
+	val forum: ThreadsFollowedResponseThreadsForum = ThreadsFollowedResponseThreadsForum(),
+	val follow: ThreadsFollowedResponseThreadsFollow = ThreadsFollowedResponseThreadsFollow(),
 )
 
 @Serializable
 data class ThreadsNavigationResponse(
-	val elements: List<ThreadsNavigationResponseElements>? = null,
+	val elements: List<ThreadsNavigationResponseElements> = emptyList(),
 	@SerialName("elements_count")
 	val elementsCount: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3511,9 +3512,9 @@ data class ThreadsNavigationResponseElementsLinks(
 
 @Serializable
 data class ThreadsNavigationResponseElementsPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -3524,8 +3525,8 @@ data class ThreadsNavigationResponseElements(
 	val categoryTitle: String = "",
 	@SerialName("category_description")
 	val categoryDescription: String = "",
-	val links: ThreadsNavigationResponseElementsLinks? = null,
-	val permissions: ThreadsNavigationResponseElementsPermissions? = null,
+	val links: ThreadsNavigationResponseElementsLinks = ThreadsNavigationResponseElementsLinks(),
+	val permissions: ThreadsNavigationResponseElementsPermissions = ThreadsNavigationResponseElementsPermissions(),
 	@SerialName("navigation_type")
 	val navigationType: String = "",
 	@SerialName("navigation_id")
@@ -3535,14 +3536,14 @@ data class ThreadsNavigationResponseElements(
 	@SerialName("navigation_parent_id")
 	val navigationParentId: Double = 0.0,
 	@SerialName("has_sub_elements")
-	val hasSubElements: JsonElement? = null,
+	val hasSubElements: Boolean = false,
 )
 
 @Serializable
 data class ThreadsPollGetResponse(
-	val poll: ThreadsPollGetResponsePoll? = null,
+	val poll: ThreadsPollGetResponsePoll = ThreadsPollGetResponsePoll(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3557,8 +3558,8 @@ data class ThreadsPollGetResponsePollResponses(
 
 @Serializable
 data class ThreadsPollGetResponsePollPermissions(
-	val vote: JsonElement? = null,
-	val result: JsonElement? = null,
+	val vote: Boolean = false,
+	val result: Boolean = false,
 )
 
 @Serializable
@@ -3577,12 +3578,12 @@ data class ThreadsPollGetResponsePoll(
 	@SerialName("poll_max_votes")
 	val pollMaxVotes: Double = 0.0,
 	@SerialName("poll_is_open")
-	val pollIsOpen: JsonElement? = null,
+	val pollIsOpen: Boolean = false,
 	@SerialName("poll_is_voted")
-	val pollIsVoted: JsonElement? = null,
-	val responses: List<ThreadsPollGetResponsePollResponses>? = null,
-	val permissions: ThreadsPollGetResponsePollPermissions? = null,
-	val links: ThreadsPollGetResponsePollLinks? = null,
+	val pollIsVoted: Boolean = false,
+	val responses: List<ThreadsPollGetResponsePollResponses> = emptyList(),
+	val permissions: ThreadsPollGetResponsePollPermissions = ThreadsPollGetResponsePollPermissions(),
+	val links: ThreadsPollGetResponsePollLinks = ThreadsPollGetResponsePollLinks(),
 )
 
 @Serializable
@@ -3600,7 +3601,7 @@ data class ThreadsPollVoteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -3617,10 +3618,10 @@ data class ThreadsUnreadParams(
 
 @Serializable
 data class ThreadsUnreadResponse(
-	val threads: List<JsonElement>? = null,
-	val data: List<ThreadsUnreadResponseData>? = null,
+	val threads: List<RespThreadModel> = emptyList(),
+	val data: List<ThreadsUnreadResponseData> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3651,14 +3652,14 @@ data class ThreadsUnreadResponseDataFirstPostLinks(
 
 @Serializable
 data class ThreadsUnreadResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -3691,19 +3692,19 @@ data class ThreadsUnreadResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("like_users")
-	val likeUsers: List<ThreadsUnreadResponseDataFirstPostLikeUsers>? = null,
+	val likeUsers: List<ThreadsUnreadResponseDataFirstPostLikeUsers> = emptyList(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: ThreadsUnreadResponseDataFirstPostLinks? = null,
-	val permissions: ThreadsUnreadResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: ThreadsUnreadResponseDataFirstPostLinks = ThreadsUnreadResponseDataFirstPostLinks(),
+	val permissions: ThreadsUnreadResponseDataFirstPostPermissions = ThreadsUnreadResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -3727,13 +3728,13 @@ data class ThreadsUnreadResponseDataLinks(
 
 @Serializable
 data class ThreadsUnreadResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 )
 
 @Serializable
@@ -3750,16 +3751,16 @@ data class ThreadsUnreadResponseDataForumLinks(
 
 @Serializable
 data class ThreadsUnreadResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -3775,15 +3776,15 @@ data class ThreadsUnreadResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ThreadsUnreadResponseDataForumLinks? = null,
-	val permissions: ThreadsUnreadResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ThreadsUnreadResponseDataForumLinks = ThreadsUnreadResponseDataForumLinks(),
+	val permissions: ThreadsUnreadResponseDataForumPermissions = ThreadsUnreadResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -3811,26 +3812,26 @@ data class ThreadsUnreadResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: ThreadsUnreadResponseDataFirstPost? = null,
+	val firstPost: ThreadsUnreadResponseDataFirstPost = ThreadsUnreadResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: ThreadsUnreadResponseDataLinks? = null,
-	val permissions: ThreadsUnreadResponseDataPermissions? = null,
-	val forum: ThreadsUnreadResponseDataForum? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: ThreadsUnreadResponseDataLinks = ThreadsUnreadResponseDataLinks(),
+	val permissions: ThreadsUnreadResponseDataPermissions = ThreadsUnreadResponseDataPermissions(),
+	val forum: ThreadsUnreadResponseDataForum = ThreadsUnreadResponseDataForum(),
 )
 
 @Serializable
@@ -3849,10 +3850,10 @@ data class ThreadsRecentParams(
 
 @Serializable
 data class ThreadsRecentResponse(
-	val threads: List<JsonElement>? = null,
-	val data: List<ThreadsRecentResponseData>? = null,
+	val threads: List<RespThreadModel> = emptyList(),
+	val data: List<ThreadsRecentResponseData> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -3870,14 +3871,14 @@ data class ThreadsRecentResponseDataFirstPostLinks(
 
 @Serializable
 data class ThreadsRecentResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -3910,17 +3911,17 @@ data class ThreadsRecentResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: ThreadsRecentResponseDataFirstPostLinks? = null,
-	val permissions: ThreadsRecentResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: ThreadsRecentResponseDataFirstPostLinks = ThreadsRecentResponseDataFirstPostLinks(),
+	val permissions: ThreadsRecentResponseDataFirstPostPermissions = ThreadsRecentResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -3944,13 +3945,13 @@ data class ThreadsRecentResponseDataLinks(
 
 @Serializable
 data class ThreadsRecentResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 )
 
 @Serializable
@@ -3967,16 +3968,16 @@ data class ThreadsRecentResponseDataForumLinks(
 
 @Serializable
 data class ThreadsRecentResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -3992,15 +3993,15 @@ data class ThreadsRecentResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: ThreadsRecentResponseDataForumLinks? = null,
-	val permissions: ThreadsRecentResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: ThreadsRecentResponseDataForumLinks = ThreadsRecentResponseDataForumLinks(),
+	val permissions: ThreadsRecentResponseDataForumPermissions = ThreadsRecentResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -4028,26 +4029,26 @@ data class ThreadsRecentResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: ThreadsRecentResponseDataFirstPost? = null,
+	val firstPost: ThreadsRecentResponseDataFirstPost = ThreadsRecentResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: ThreadsRecentResponseDataLinks? = null,
-	val permissions: ThreadsRecentResponseDataPermissions? = null,
-	val forum: ThreadsRecentResponseDataForum? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: ThreadsRecentResponseDataLinks = ThreadsRecentResponseDataLinks(),
+	val permissions: ThreadsRecentResponseDataPermissions = ThreadsRecentResponseDataPermissions(),
+	val forum: ThreadsRecentResponseDataForum = ThreadsRecentResponseDataForum(),
 )
 
 @Serializable
@@ -4055,7 +4056,7 @@ data class ThreadsFinishResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── PostsApi Types ────────────────────────────────────────
@@ -4078,12 +4079,12 @@ data class PostsListParams(
 
 @Serializable
 data class PostsListResponse(
-	val posts: List<JsonElement>? = null,
-	val thread: JsonElement? = null,
+	val posts: List<RespThreadModel> = emptyList(),
+	val thread: RespThreadModel = RespThreadModel(),
 	@SerialName("posts_total")
 	val postsTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4101,16 +4102,16 @@ data class PostsCreateBody(
 
 @Serializable
 data class PostsCreateResponse(
-	val post: JsonElement? = null,
+	val post: RespPostModel = RespPostModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class PostsGetResponse(
-	val post: JsonElement? = null,
+	val post: RespPostModel = RespPostModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4122,9 +4123,9 @@ data class PostsEditBody(
 
 @Serializable
 data class PostsEditResponse(
-	val post: JsonElement? = null,
+	val post: RespPostModel = RespPostModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4138,7 +4139,7 @@ data class PostsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4151,9 +4152,9 @@ data class PostsLikesParams(
 
 @Serializable
 data class PostsLikesResponse(
-	val users: List<PostsLikesResponseUsers>? = null,
+	val users: List<PostsLikesResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4168,7 +4169,7 @@ data class PostsLikeResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4176,14 +4177,14 @@ data class PostsUnlikeResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class PostsReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4197,7 +4198,7 @@ data class PostsReportResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4214,9 +4215,9 @@ data class PostsCommentsGetParams(
 
 @Serializable
 data class PostsCommentsGetResponse(
-	val comments: List<JsonElement>? = null,
+	val comments: List<RespPostCommentModel> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4231,9 +4232,9 @@ data class PostsCommentsCreateBody(
 
 @Serializable
 data class PostsCommentsCreateResponse(
-	val comment: PostsCommentsCreateResponseComment? = null,
+	val comment: PostsCommentsCreateResponseComment = PostsCommentsCreateResponseComment(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4251,12 +4252,12 @@ data class PostsCommentsCreateResponseCommentLinks(
 
 @Serializable
 data class PostsCommentsCreateResponseCommentPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -4282,15 +4283,15 @@ data class PostsCommentsCreateResponseComment(
 	@SerialName("post_comment_like_count")
 	val postCommentLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_comment_is_published")
-	val postCommentIsPublished: JsonElement? = null,
+	val postCommentIsPublished: Boolean = false,
 	@SerialName("post_comment_is_deleted")
-	val postCommentIsDeleted: JsonElement? = null,
+	val postCommentIsDeleted: Boolean = false,
 	@SerialName("post_comment_update_date")
 	val postCommentUpdateDate: Double = 0.0,
-	val links: PostsCommentsCreateResponseCommentLinks? = null,
-	val permissions: PostsCommentsCreateResponseCommentPermissions? = null,
+	val links: PostsCommentsCreateResponseCommentLinks = PostsCommentsCreateResponseCommentLinks(),
+	val permissions: PostsCommentsCreateResponseCommentPermissions = PostsCommentsCreateResponseCommentPermissions(),
 )
 
 @Serializable
@@ -4305,9 +4306,9 @@ data class PostsCommentsEditBody(
 
 @Serializable
 data class PostsCommentsEditResponse(
-	val comment: PostsCommentsEditResponseComment? = null,
+	val comment: PostsCommentsEditResponseComment = PostsCommentsEditResponseComment(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4325,12 +4326,12 @@ data class PostsCommentsEditResponseCommentLinks(
 
 @Serializable
 data class PostsCommentsEditResponseCommentPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -4356,15 +4357,15 @@ data class PostsCommentsEditResponseComment(
 	@SerialName("post_comment_like_count")
 	val postCommentLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_comment_is_published")
-	val postCommentIsPublished: JsonElement? = null,
+	val postCommentIsPublished: Boolean = false,
 	@SerialName("post_comment_is_deleted")
-	val postCommentIsDeleted: JsonElement? = null,
+	val postCommentIsDeleted: Boolean = false,
 	@SerialName("post_comment_update_date")
 	val postCommentUpdateDate: Double = 0.0,
-	val links: PostsCommentsEditResponseCommentLinks? = null,
-	val permissions: PostsCommentsEditResponseCommentPermissions? = null,
+	val links: PostsCommentsEditResponseCommentLinks = PostsCommentsEditResponseCommentLinks(),
+	val permissions: PostsCommentsEditResponseCommentPermissions = PostsCommentsEditResponseCommentPermissions(),
 )
 
 @Serializable
@@ -4381,7 +4382,7 @@ data class PostsCommentsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4398,7 +4399,7 @@ data class PostsCommentsReportResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── UsersApi Types ────────────────────────────────────────
@@ -4416,12 +4417,12 @@ data class UsersListParams(
 
 @Serializable
 data class UsersListResponse(
-	val users: List<JsonElement>? = null,
+	val users: List<RespUserModel> = emptyList(),
 	@SerialName("users_total")
 	val usersTotal: Double = 0.0,
-	val links: UsersListResponseLinks? = null,
+	val links: UsersListResponseLinks = UsersListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4433,9 +4434,9 @@ data class UsersListResponseLinks(
 
 @Serializable
 data class UsersFieldsResponse(
-	val fields: List<UsersFieldsResponseFields>? = null,
+	val fields: List<UsersFieldsResponseFields> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4445,7 +4446,7 @@ data class UsersFieldsResponseFields(
 	val description: String = "",
 	val position: String = "",
 	@SerialName("is_required")
-	val isRequired: JsonElement? = null,
+	val isRequired: Boolean = false,
 )
 
 @Serializable
@@ -4462,9 +4463,9 @@ data class UsersFindParams(
 
 @Serializable
 data class UsersFindResponse(
-	val users: List<JsonElement>? = null,
+	val users: List<RespUserModel> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4476,9 +4477,9 @@ data class UsersGetParams(
 
 @Serializable
 data class UsersGetResponse(
-	val user: JsonElement? = null,
+	val user: RespUserModel = RespUserModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4566,7 +4567,7 @@ data class UsersEditResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4580,10 +4581,10 @@ data class UsersClaimsParams(
 
 @Serializable
 data class UsersClaimsResponse(
-	val claims: List<UsersClaimsResponseClaims>? = null,
-	val stats: UsersClaimsResponseStats? = null,
+	val claims: List<UsersClaimsResponseClaims> = emptyList(),
+	val stats: UsersClaimsResponseStats = UsersClaimsResponseStats(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4603,7 +4604,7 @@ data class UsersClaimsResponseClaims(
 	val amount: Double = 0.0,
 	@SerialName("amount_formatted")
 	val amountFormatted: String = "",
-	val author: JsonElement? = null,
+	val author: RespUserModel = RespUserModel(),
 )
 
 @Serializable
@@ -4624,8 +4625,8 @@ data class UsersClaimsResponseStatsNoMarket(
 
 @Serializable
 data class UsersClaimsResponseStats(
-	val market: UsersClaimsResponseStatsMarket? = null,
-	val noMarket: UsersClaimsResponseStatsNoMarket? = null,
+	val market: UsersClaimsResponseStatsMarket = UsersClaimsResponseStatsMarket(),
+	val noMarket: UsersClaimsResponseStatsNoMarket = UsersClaimsResponseStatsNoMarket(),
 )
 
 data class UsersAvatarUploadBody(
@@ -4644,7 +4645,7 @@ data class UsersAvatarUploadResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4652,7 +4653,7 @@ data class UsersAvatarDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4670,7 +4671,7 @@ data class UsersAvatarCropResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 data class UsersBackgroundUploadBody(
@@ -4689,7 +4690,7 @@ data class UsersBackgroundUploadResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4697,7 +4698,7 @@ data class UsersBackgroundDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4715,7 +4716,7 @@ data class UsersBackgroundCropResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4730,12 +4731,12 @@ data class UsersFollowersParams(
 
 @Serializable
 data class UsersFollowersResponse(
-	val users: List<UsersFollowersResponseUsers>? = null,
+	val users: List<UsersFollowersResponseUsers> = emptyList(),
 	@SerialName("users_total")
 	val usersTotal: Double = 0.0,
-	val links: UsersFollowersResponseLinks? = null,
+	val links: UsersFollowersResponseLinks = UsersFollowersResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4755,11 +4756,11 @@ data class UsersFollowersResponseUsersLinks(
 
 @Serializable
 data class UsersFollowersResponseUsersPermissions(
-	val edit: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val ignore: JsonElement? = null,
+	val edit: Boolean = false,
+	val follow: Boolean = false,
+	val ignore: Boolean = false,
 	@SerialName("profile_post")
-	val profilePost: JsonElement? = null,
+	val profilePost: Boolean = false,
 )
 
 @Serializable
@@ -4802,27 +4803,27 @@ data class UsersFollowersResponseUsers(
 	@SerialName("user_title")
 	val userTitle: String = "",
 	@SerialName("user_is_valid")
-	val userIsValid: JsonElement? = null,
+	val userIsValid: Boolean = false,
 	@SerialName("user_is_verified")
-	val userIsVerified: JsonElement? = null,
+	val userIsVerified: Boolean = false,
 	@SerialName("user_is_followed")
-	val userIsFollowed: JsonElement? = null,
+	val userIsFollowed: Boolean = false,
 	@SerialName("user_last_seen_date")
 	val userLastSeenDate: Double = 0.0,
 	@SerialName("user_following_count")
 	val userFollowingCount: Double = 0.0,
 	@SerialName("user_followers_count")
 	val userFollowersCount: Double = 0.0,
-	val links: UsersFollowersResponseUsersLinks? = null,
-	val permissions: UsersFollowersResponseUsersPermissions? = null,
+	val links: UsersFollowersResponseUsersLinks = UsersFollowersResponseUsersLinks(),
+	val permissions: UsersFollowersResponseUsersPermissions = UsersFollowersResponseUsersPermissions(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("user_is_visitor")
-	val userIsVisitor: JsonElement? = null,
+	val userIsVisitor: Boolean = false,
 	@SerialName("user_group_id")
 	val userGroupId: Double = 0.0,
 	@SerialName("custom_fields")
-	val customFields: UsersFollowersResponseUsersCustomFields? = null,
+	val customFields: UsersFollowersResponseUsersCustomFields = UsersFollowersResponseUsersCustomFields(),
 )
 
 @Serializable
@@ -4837,7 +4838,7 @@ data class UsersFollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4845,7 +4846,7 @@ data class UsersUnfollowResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -4860,11 +4861,11 @@ data class UsersFollowingsParams(
 
 @Serializable
 data class UsersFollowingsResponse(
-	val users: List<UsersFollowingsResponseUsers>? = null,
+	val users: List<UsersFollowingsResponseUsers> = emptyList(),
 	@SerialName("users_total")
 	val usersTotal: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -4884,17 +4885,17 @@ data class UsersFollowingsResponseUsersLinks(
 
 @Serializable
 data class UsersFollowingsResponseUsersPermissions(
-	val edit: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val ignore: JsonElement? = null,
+	val edit: Boolean = false,
+	val follow: Boolean = false,
+	val ignore: Boolean = false,
 	@SerialName("profile_post")
-	val profilePost: JsonElement? = null,
+	val profilePost: Boolean = false,
 )
 
 @Serializable
 data class UsersFollowingsResponseUsersCustomFields(
 	val _4: String = "",
-	val allowSelfUnban: List<JsonElement>? = null,
+	val allowSelfUnban: List<JsonElement> = emptyList(),
 	val discord: String = "",
 	val github: String = "",
 	val jabber: String = "",
@@ -4950,27 +4951,27 @@ data class UsersFollowingsResponseUsers(
 	@SerialName("user_title")
 	val userTitle: String = "",
 	@SerialName("user_is_valid")
-	val userIsValid: JsonElement? = null,
+	val userIsValid: Boolean = false,
 	@SerialName("user_is_verified")
-	val userIsVerified: JsonElement? = null,
+	val userIsVerified: Boolean = false,
 	@SerialName("user_is_followed")
-	val userIsFollowed: JsonElement? = null,
+	val userIsFollowed: Boolean = false,
 	@SerialName("user_last_seen_date")
 	val userLastSeenDate: Double = 0.0,
 	@SerialName("user_following_count")
 	val userFollowingCount: Double = 0.0,
 	@SerialName("user_followers_count")
 	val userFollowersCount: Double = 0.0,
-	val links: UsersFollowingsResponseUsersLinks? = null,
-	val permissions: UsersFollowingsResponseUsersPermissions? = null,
+	val links: UsersFollowingsResponseUsersLinks = UsersFollowingsResponseUsersLinks(),
+	val permissions: UsersFollowingsResponseUsersPermissions = UsersFollowingsResponseUsersPermissions(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("user_is_visitor")
-	val userIsVisitor: JsonElement? = null,
+	val userIsVisitor: Boolean = false,
 	@SerialName("user_group_id")
 	val userGroupId: Double = 0.0,
 	@SerialName("custom_fields")
-	val customFields: UsersFollowingsResponseUsersCustomFields? = null,
+	val customFields: UsersFollowingsResponseUsersCustomFields = UsersFollowingsResponseUsersCustomFields(),
 )
 
 @Serializable
@@ -5001,9 +5002,9 @@ data class UsersLikesResponse(
 	val perPage: Double = 0.0,
 	val contentType: String = "",
 	val totalLikes: Double = 0.0,
-	val likes: JsonElement? = null,
+	val likes: JsonElement = JsonNull,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5014,24 +5015,24 @@ data class UsersIgnoredParams(
 
 @Serializable
 data class UsersIgnoredResponse(
-	val users: List<UsersIgnoredResponseUsers>? = null,
+	val users: List<UsersIgnoredResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class UsersIgnoredResponseUsersCustomFields(
 	val _4: String = "",
-	val scamURL: JsonElement? = null,
-	val lztLikesZeroing: JsonElement? = null,
-	val lztLikesIncreasing: JsonElement? = null,
-	val lztSympathyZeroing: JsonElement? = null,
-	val lztSympathyIncreasing: JsonElement? = null,
-	val telegram: JsonElement? = null,
+	val scamURL: JsonElement = JsonNull,
+	val lztLikesZeroing: JsonElement = JsonNull,
+	val lztLikesIncreasing: JsonElement = JsonNull,
+	val lztSympathyZeroing: JsonElement = JsonNull,
+	val lztSympathyIncreasing: JsonElement = JsonNull,
+	val telegram: JsonElement = JsonNull,
 	val vk: String = "",
 	val discord: String = "",
 	val steam: String = "",
-	val matrix: JsonElement? = null,
+	val matrix: JsonElement = JsonNull,
 	val jabber: String = "",
 	val github: String = "",
 )
@@ -5056,50 +5057,50 @@ data class UsersIgnoredResponseUsersRenderedAvatars(
 @Serializable
 data class UsersIgnoredResponseUsersRendered(
 	val username: String = "",
-	val avatars: UsersIgnoredResponseUsersRenderedAvatars? = null,
-	val backgrounds: List<JsonElement>? = null,
+	val avatars: UsersIgnoredResponseUsersRenderedAvatars = UsersIgnoredResponseUsersRenderedAvatars(),
+	val backgrounds: List<JsonElement> = emptyList(),
 	val link: String = "",
 )
 
 @Serializable
 data class UsersIgnoredResponseUsers(
 	@SerialName("can_edit")
-	val canEdit: JsonElement? = null,
+	val canEdit: Boolean = false,
 	@SerialName("can_follow")
-	val canFollow: JsonElement? = null,
+	val canFollow: Boolean = false,
 	@SerialName("can_ignore")
-	val canIgnore: JsonElement? = null,
+	val canIgnore: Boolean = false,
 	@SerialName("can_post_profile")
-	val canPostProfile: JsonElement? = null,
+	val canPostProfile: Boolean = false,
 	@SerialName("can_view_profile")
-	val canViewProfile: JsonElement? = null,
+	val canViewProfile: Boolean = false,
 	@SerialName("can_view_profile_posts")
-	val canViewProfilePosts: JsonElement? = null,
+	val canViewProfilePosts: Boolean = false,
 	@SerialName("can_warn")
-	val canWarn: JsonElement? = null,
+	val canWarn: Boolean = false,
 	@SerialName("contest_count")
 	val contestCount: Double = 0.0,
 	@SerialName("conv_welcome_message")
 	val convWelcomeMessage: String = "",
 	val convertedDeposit: Double = 0.0,
 	@SerialName("custom_fields")
-	val customFields: UsersIgnoredResponseUsersCustomFields? = null,
+	val customFields: UsersIgnoredResponseUsersCustomFields = UsersIgnoredResponseUsersCustomFields(),
 	val deposit: Double = 0.0,
 	val homepage: String = "",
 	@SerialName("ignored_info")
-	val ignoredInfo: UsersIgnoredResponseUsersIgnoredInfo? = null,
+	val ignoredInfo: UsersIgnoredResponseUsersIgnoredInfo = UsersIgnoredResponseUsersIgnoredInfo(),
 	@SerialName("is_admin")
-	val isAdmin: JsonElement? = null,
+	val isAdmin: Boolean = false,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("is_followed")
-	val isFollowed: JsonElement? = null,
+	val isFollowed: Boolean = false,
 	@SerialName("is_ignored")
-	val isIgnored: JsonElement? = null,
+	val isIgnored: Boolean = false,
 	@SerialName("is_moderator")
-	val isModerator: JsonElement? = null,
+	val isModerator: Boolean = false,
 	@SerialName("is_staff")
-	val isStaff: JsonElement? = null,
+	val isStaff: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -5111,7 +5112,7 @@ data class UsersIgnoredResponseUsers(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: UsersIgnoredResponseUsersRendered? = null,
+	val rendered: UsersIgnoredResponseUsersRendered = UsersIgnoredResponseUsersRendered(),
 	@SerialName("short_link")
 	val shortLink: String = "",
 	@SerialName("trophy_points")
@@ -5132,7 +5133,7 @@ data class UsersIgnoreResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5153,7 +5154,7 @@ data class UsersIgnoreEditResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5161,7 +5162,7 @@ data class UsersUnignoreResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5174,13 +5175,13 @@ data class UsersContentsParams(
 
 @Serializable
 data class UsersContentsResponse(
-	val data: List<UsersContentsResponseData>? = null,
+	val data: List<UsersContentsResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
-	val user: JsonElement? = null,
-	val links: UsersContentsResponseLinks? = null,
+	val user: RespUserModel = RespUserModel(),
+	val links: UsersContentsResponseLinks = UsersContentsResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5211,14 +5212,14 @@ data class UsersContentsResponseDataLinks(
 
 @Serializable
 data class UsersContentsResponseDataPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -5242,12 +5243,12 @@ data class UsersContentsResponseDataThreadLinks(
 
 @Serializable
 data class UsersContentsResponseDataThreadPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -5271,23 +5272,23 @@ data class UsersContentsResponseDataThread(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: UsersContentsResponseDataThreadLinks? = null,
-	val permissions: UsersContentsResponseDataThreadPermissions? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: UsersContentsResponseDataThreadLinks = UsersContentsResponseDataThreadLinks(),
+	val permissions: UsersContentsResponseDataThreadPermissions = UsersContentsResponseDataThreadPermissions(),
 )
 
 @Serializable
@@ -5324,20 +5325,20 @@ data class UsersContentsResponseData(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("like_users")
-	val likeUsers: List<UsersContentsResponseDataLikeUsers>? = null,
+	val likeUsers: List<UsersContentsResponseDataLikeUsers> = emptyList(),
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: UsersContentsResponseDataLinks? = null,
-	val permissions: UsersContentsResponseDataPermissions? = null,
-	val thread: UsersContentsResponseDataThread? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: UsersContentsResponseDataLinks = UsersContentsResponseDataLinks(),
+	val permissions: UsersContentsResponseDataPermissions = UsersContentsResponseDataPermissions(),
+	val thread: UsersContentsResponseDataThread = UsersContentsResponseDataThread(),
 )
 
 @Serializable
@@ -5349,9 +5350,9 @@ data class UsersContentsResponseLinks(
 
 @Serializable
 data class UsersTrophiesResponse(
-	val trophies: List<UsersTrophiesResponseTrophies>? = null,
+	val trophies: List<UsersTrophiesResponseTrophies> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5366,9 +5367,9 @@ data class UsersTrophiesResponseTrophies(
 
 @Serializable
 data class UsersSecretAnswerTypesResponse(
-	val data: List<UsersSecretAnswerTypesResponseData>? = null,
+	val data: List<UsersSecretAnswerTypesResponseData> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5380,11 +5381,11 @@ data class UsersSecretAnswerTypesResponseData(
 
 @Serializable
 data class UsersSaResetResponse(
-	val success: JsonElement? = null,
+	val success: Boolean = false,
 	@SerialName("waiting_time")
 	val waitingTime: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5392,7 +5393,7 @@ data class UsersSaCancelResetResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── ProfilePostsApi Types ────────────────────────────────────────
@@ -5414,12 +5415,12 @@ data class ProfilePostsListParams(
 @Serializable
 data class ProfilePostsListResponse(
 	@SerialName("profile_posts")
-	val profilePosts: List<JsonElement>? = null,
+	val profilePosts: List<RespProfilePostModel> = emptyList(),
 	val totalProfilePosts: Double = 0.0,
-	val canPostOnProfile: JsonElement? = null,
-	val links: ProfilePostsListResponseLinks? = null,
+	val canPostOnProfile: Boolean = false,
+	val links: ProfilePostsListResponseLinks = ProfilePostsListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5432,9 +5433,9 @@ data class ProfilePostsListResponseLinks(
 @Serializable
 data class ProfilePostsGetResponse(
 	@SerialName("profile_post")
-	val profilePost: JsonElement? = null,
+	val profilePost: RespProfilePostModel = RespProfilePostModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5450,9 +5451,9 @@ data class ProfilePostsEditBody(
 @Serializable
 data class ProfilePostsEditResponse(
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsEditResponseProfilePost? = null,
+	val profilePost: ProfilePostsEditResponseProfilePost = ProfilePostsEditResponseProfilePost(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5472,12 +5473,12 @@ data class ProfilePostsEditResponseProfilePostLinks(
 
 @Serializable
 data class ProfilePostsEditResponseProfilePostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val like: JsonElement? = null,
-	val comment: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val like: Boolean = false,
+	val comment: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -5503,13 +5504,13 @@ data class ProfilePostsEditResponseProfilePost(
 	@SerialName("timeline_username")
 	val timelineUsername: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
-	val links: ProfilePostsEditResponseProfilePostLinks? = null,
-	val permissions: ProfilePostsEditResponseProfilePostPermissions? = null,
+	val postIsDeleted: Boolean = false,
+	val links: ProfilePostsEditResponseProfilePostLinks = ProfilePostsEditResponseProfilePostLinks(),
+	val permissions: ProfilePostsEditResponseProfilePostPermissions = ProfilePostsEditResponseProfilePostPermissions(),
 )
 
 @Serializable
@@ -5523,14 +5524,14 @@ data class ProfilePostsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class ProfilePostsReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5544,7 +5545,7 @@ data class ProfilePostsReportResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5559,9 +5560,9 @@ data class ProfilePostsCreateBody(
 @Serializable
 data class ProfilePostsCreateResponse(
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsCreateResponseProfilePost? = null,
+	val profilePost: ProfilePostsCreateResponseProfilePost = ProfilePostsCreateResponseProfilePost(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5581,12 +5582,12 @@ data class ProfilePostsCreateResponseProfilePostLinks(
 
 @Serializable
 data class ProfilePostsCreateResponseProfilePostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val like: JsonElement? = null,
-	val comment: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val like: Boolean = false,
+	val comment: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -5612,13 +5613,13 @@ data class ProfilePostsCreateResponseProfilePost(
 	@SerialName("timeline_username")
 	val timelineUsername: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
-	val links: ProfilePostsCreateResponseProfilePostLinks? = null,
-	val permissions: ProfilePostsCreateResponseProfilePostPermissions? = null,
+	val postIsDeleted: Boolean = false,
+	val links: ProfilePostsCreateResponseProfilePostLinks = ProfilePostsCreateResponseProfilePostLinks(),
+	val permissions: ProfilePostsCreateResponseProfilePostPermissions = ProfilePostsCreateResponseProfilePostPermissions(),
 )
 
 @Serializable
@@ -5626,7 +5627,7 @@ data class ProfilePostsStickResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5634,14 +5635,14 @@ data class ProfilePostsUnstickResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class ProfilePostsLikesResponse(
-	val users: List<ProfilePostsLikesResponseUsers>? = null,
+	val users: List<ProfilePostsLikesResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5656,7 +5657,7 @@ data class ProfilePostsLikeResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5664,7 +5665,7 @@ data class ProfilePostsUnlikeResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -5680,15 +5681,15 @@ data class ProfilePostsCommentsListParams(
 
 @Serializable
 data class ProfilePostsCommentsListResponse(
-	val comments: List<JsonElement>? = null,
+	val comments: List<RespProfilePostCommentModel> = emptyList(),
 	@SerialName("comments_total")
 	val commentsTotal: Double = 0.0,
 	@SerialName("profile_post")
-	val profilePost: ProfilePostsCommentsListResponseProfilePost? = null,
+	val profilePost: ProfilePostsCommentsListResponseProfilePost = ProfilePostsCommentsListResponseProfilePost(),
 	@SerialName("timeline_user")
-	val timelineUser: JsonElement? = null,
+	val timelineUser: RespUserModel = RespUserModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5708,12 +5709,12 @@ data class ProfilePostsCommentsListResponseProfilePostLinks(
 
 @Serializable
 data class ProfilePostsCommentsListResponseProfilePostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val like: JsonElement? = null,
-	val comment: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val like: Boolean = false,
+	val comment: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -5739,13 +5740,13 @@ data class ProfilePostsCommentsListResponseProfilePost(
 	@SerialName("timeline_username")
 	val timelineUsername: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
-	val links: ProfilePostsCommentsListResponseProfilePostLinks? = null,
-	val permissions: ProfilePostsCommentsListResponseProfilePostPermissions? = null,
+	val postIsDeleted: Boolean = false,
+	val links: ProfilePostsCommentsListResponseProfilePostLinks = ProfilePostsCommentsListResponseProfilePostLinks(),
+	val permissions: ProfilePostsCommentsListResponseProfilePostPermissions = ProfilePostsCommentsListResponseProfilePostPermissions(),
 )
 
 @Serializable
@@ -5760,9 +5761,9 @@ data class ProfilePostsCommentsCreateBody(
 
 @Serializable
 data class ProfilePostsCommentsCreateResponse(
-	val comment: ProfilePostsCommentsCreateResponseComment? = null,
+	val comment: ProfilePostsCommentsCreateResponseComment = ProfilePostsCommentsCreateResponseComment(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5780,8 +5781,8 @@ data class ProfilePostsCommentsCreateResponseCommentLinks(
 
 @Serializable
 data class ProfilePostsCommentsCreateResponseCommentPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -5801,11 +5802,11 @@ data class ProfilePostsCommentsCreateResponseComment(
 	@SerialName("comment_body")
 	val commentBody: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("timeline_user_id")
 	val timelineUserId: Double = 0.0,
-	val links: ProfilePostsCommentsCreateResponseCommentLinks? = null,
-	val permissions: ProfilePostsCommentsCreateResponseCommentPermissions? = null,
+	val links: ProfilePostsCommentsCreateResponseCommentLinks = ProfilePostsCommentsCreateResponseCommentLinks(),
+	val permissions: ProfilePostsCommentsCreateResponseCommentPermissions = ProfilePostsCommentsCreateResponseCommentPermissions(),
 )
 
 @Serializable
@@ -5820,9 +5821,9 @@ data class ProfilePostsCommentsEditBody(
 
 @Serializable
 data class ProfilePostsCommentsEditResponse(
-	val comment: ProfilePostsCommentsEditResponseComment? = null,
+	val comment: ProfilePostsCommentsEditResponseComment = ProfilePostsCommentsEditResponseComment(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5840,8 +5841,8 @@ data class ProfilePostsCommentsEditResponseCommentLinks(
 
 @Serializable
 data class ProfilePostsCommentsEditResponseCommentPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
 )
 
 @Serializable
@@ -5861,11 +5862,11 @@ data class ProfilePostsCommentsEditResponseComment(
 	@SerialName("comment_body")
 	val commentBody: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("timeline_user_id")
 	val timelineUserId: Double = 0.0,
-	val links: ProfilePostsCommentsEditResponseCommentLinks? = null,
-	val permissions: ProfilePostsCommentsEditResponseCommentPermissions? = null,
+	val links: ProfilePostsCommentsEditResponseCommentLinks = ProfilePostsCommentsEditResponseCommentLinks(),
+	val permissions: ProfilePostsCommentsEditResponseCommentPermissions = ProfilePostsCommentsEditResponseCommentPermissions(),
 )
 
 @Serializable
@@ -5880,14 +5881,14 @@ data class ProfilePostsCommentsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class ProfilePostsCommentsGetResponse(
-	val comment: JsonElement? = null,
+	val comment: RespProfilePostCommentModel = RespProfilePostCommentModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5901,7 +5902,7 @@ data class ProfilePostsCommentsReportResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── ConversationsApi Types ────────────────────────────────────────
@@ -5918,13 +5919,13 @@ data class ConversationsListParams(
 
 @Serializable
 data class ConversationsListResponse(
-	val conversations: List<JsonElement>? = null,
+	val conversations: List<RespConversationModel> = emptyList(),
 	@SerialName("can_start")
-	val canStart: JsonElement? = null,
-	val folders: List<ConversationsListResponseFolders>? = null,
-	val links: ConversationsListResponseLinks? = null,
+	val canStart: Boolean = false,
+	val folders: List<ConversationsListResponseFolders> = emptyList(),
+	val links: ConversationsListResponseLinks = ConversationsListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -5972,9 +5973,9 @@ data class ConversationsCreateBody(
 
 @Serializable
 data class ConversationsCreateResponse(
-	val conversation: JsonElement? = null,
+	val conversation: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6003,9 +6004,9 @@ data class ConversationsUpdateBody(
 
 @Serializable
 data class ConversationsUpdateResponse(
-	val conversation: JsonElement? = null,
+	val conversation: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6023,7 +6024,7 @@ data class ConversationsDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6034,9 +6035,9 @@ data class ConversationsStartBody(
 
 @Serializable
 data class ConversationsStartResponse(
-	val conversation: JsonElement? = null,
+	val conversation: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6050,14 +6051,14 @@ data class ConversationsSaveResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
 data class ConversationsGetResponse(
-	val conversation: JsonElement? = null,
+	val conversation: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6076,12 +6077,12 @@ data class ConversationsMessagesListParams(
 
 @Serializable
 data class ConversationsMessagesListResponse(
-	val messages: List<JsonElement>? = null,
+	val messages: List<RespConversationMessageModel> = emptyList(),
 	@SerialName("messages_total")
 	val messagesTotal: Double = 0.0,
-	val links: ConversationsMessagesListResponseLinks? = null,
+	val links: ConversationsMessagesListResponseLinks = ConversationsMessagesListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6103,9 +6104,9 @@ data class ConversationsMessagesCreateBody(
 
 @Serializable
 data class ConversationsMessagesCreateResponse(
-	val message: JsonElement? = null,
+	val message: RespConversationMessageModel = RespConversationMessageModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6122,17 +6123,17 @@ data class ConversationsSearchBody(
 
 @Serializable
 data class ConversationsSearchResponse(
-	val conversations: List<JsonElement>? = null,
-	val recipients: JsonElement? = null,
+	val conversations: List<RespConversationModel> = emptyList(),
+	val recipients: Boolean = false,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ConversationsMessagesGetResponse(
-	val message: JsonElement? = null,
+	val message: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6144,9 +6145,9 @@ data class ConversationsMessagesEditBody(
 
 @Serializable
 data class ConversationsMessagesEditResponse(
-	val message: JsonElement? = null,
+	val message: RespConversationModel = RespConversationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6154,7 +6155,7 @@ data class ConversationsMessagesDeleteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6168,7 +6169,7 @@ data class ConversationsInviteResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6183,7 +6184,7 @@ data class ConversationsKickResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6191,7 +6192,7 @@ data class ConversationsReadResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6199,7 +6200,7 @@ data class ConversationsReadAllResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6207,7 +6208,7 @@ data class ConversationsMessagesStickResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6215,7 +6216,7 @@ data class ConversationsMessagesUnstickResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -6223,7 +6224,7 @@ data class ConversationsStarResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6231,7 +6232,7 @@ data class ConversationsUnstarResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6239,7 +6240,7 @@ data class ConversationsAlertsEnableResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6247,7 +6248,7 @@ data class ConversationsAlertsDisableResponse(
 	val status: String = "",
 	val message: String = "",
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 // ─── NotificationsApi Types ────────────────────────────────────────
@@ -6264,12 +6265,12 @@ data class NotificationsListParams(
 
 @Serializable
 data class NotificationsListResponse(
-	val notifications: List<JsonElement>? = null,
+	val notifications: List<RespNotificationModel> = emptyList(),
 	@SerialName("notifications_total")
 	val notificationsTotal: Double = 0.0,
-	val links: NotificationsListResponseLinks? = null,
+	val links: NotificationsListResponseLinks = NotificationsListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6284,9 +6285,9 @@ data class NotificationsListResponseLinks(
 data class NotificationsGetResponse(
 	@SerialName("notification_id")
 	val notificationId: Double = 0.0,
-	val notification: JsonElement? = null,
+	val notification: RespNotificationModel = RespNotificationModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6301,16 +6302,16 @@ data class NotificationsReadResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── TagsApi Types ────────────────────────────────────────
 
 @Serializable
 data class TagsPopularResponse(
-	val tags: JsonElement? = null,
+	val tags: JsonElement = JsonNull,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6323,12 +6324,12 @@ data class TagsListParams(
 
 @Serializable
 data class TagsListResponse(
-	val tags: JsonElement? = null,
+	val tags: JsonElement = JsonNull,
 	@SerialName("tags_total")
 	val tagsTotal: Double = 0.0,
-	val links: TagsListResponseLinks? = null,
+	val links: TagsListResponseLinks = TagsListResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6348,13 +6349,13 @@ data class TagsGetParams(
 
 @Serializable
 data class TagsGetResponse(
-	val tag: TagsGetResponseTag? = null,
-	val tagged: List<TagsGetResponseTagged>? = null,
+	val tag: TagsGetResponseTag = TagsGetResponseTag(),
+	val tagged: List<TagsGetResponseTagged> = emptyList(),
 	@SerialName("tagged_total")
 	val taggedTotal: Double = 0.0,
-	val links: TagsGetResponseLinks? = null,
+	val links: TagsGetResponseLinks = TagsGetResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6371,7 +6372,7 @@ data class TagsGetResponseTag(
 	val tagText: String = "",
 	@SerialName("tag_use_count")
 	val tagUseCount: Double = 0.0,
-	val links: TagsGetResponseTagLinks? = null,
+	val links: TagsGetResponseTagLinks = TagsGetResponseTagLinks(),
 )
 
 @Serializable
@@ -6389,14 +6390,14 @@ data class TagsGetResponseTaggedFirstPostLinks(
 
 @Serializable
 data class TagsGetResponseTaggedFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -6429,17 +6430,17 @@ data class TagsGetResponseTaggedFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: TagsGetResponseTaggedFirstPostLinks? = null,
-	val permissions: TagsGetResponseTaggedFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: TagsGetResponseTaggedFirstPostLinks = TagsGetResponseTaggedFirstPostLinks(),
+	val permissions: TagsGetResponseTaggedFirstPostPermissions = TagsGetResponseTaggedFirstPostPermissions(),
 )
 
 @Serializable
@@ -6471,13 +6472,13 @@ data class TagsGetResponseTaggedLinks(
 
 @Serializable
 data class TagsGetResponseTaggedPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 )
 
 @Serializable
@@ -6493,7 +6494,7 @@ data class TagsGetResponseTaggedForumForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<TagsGetResponseTaggedForumForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<TagsGetResponseTaggedForumForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -6510,16 +6511,16 @@ data class TagsGetResponseTaggedForumLinks(
 
 @Serializable
 data class TagsGetResponseTaggedForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -6535,15 +6536,15 @@ data class TagsGetResponseTaggedForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<TagsGetResponseTaggedForumForumPrefixes>? = null,
+	val forumPrefixes: List<TagsGetResponseTaggedForumForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: TagsGetResponseTaggedForumLinks? = null,
-	val permissions: TagsGetResponseTaggedForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: TagsGetResponseTaggedForumLinks = TagsGetResponseTaggedForumLinks(),
+	val permissions: TagsGetResponseTaggedForumPermissions = TagsGetResponseTaggedForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -6571,26 +6572,26 @@ data class TagsGetResponseTagged(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: TagsGetResponseTaggedFirstPost? = null,
+	val firstPost: TagsGetResponseTaggedFirstPost = TagsGetResponseTaggedFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<TagsGetResponseTaggedThreadPrefixes>? = null,
+	val threadPrefixes: List<TagsGetResponseTaggedThreadPrefixes> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement? = null,
-	val links: TagsGetResponseTaggedLinks? = null,
-	val permissions: TagsGetResponseTaggedPermissions? = null,
-	val forum: TagsGetResponseTaggedForum? = null,
+	val threadTags: JsonElement = JsonNull,
+	val links: TagsGetResponseTaggedLinks = TagsGetResponseTaggedLinks(),
+	val permissions: TagsGetResponseTaggedPermissions = TagsGetResponseTaggedPermissions(),
+	val forum: TagsGetResponseTaggedForum = TagsGetResponseTaggedForum(),
 )
 
 @Serializable
@@ -6608,10 +6609,10 @@ data class TagsFindParams(
 
 @Serializable
 data class TagsFindResponse(
-	val tags: List<String>? = null,
-	val ids: List<Long>? = null,
+	val tags: List<String> = emptyList(),
+	val ids: List<Long> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 // ─── SearchApi Types ────────────────────────────────────────
@@ -6631,17 +6632,19 @@ data class SearchAllBody(
 	val page: Long? = null,
     /** Number of results in a page. */
 	val limit: Long? = null,
+    /** The time in milliseconds (e.g. 1767214800) before last content date. */
+	val before: Long? = null,
 )
 
 @Serializable
 data class SearchAllResponse(
-	val data: List<SearchAllResponseData>? = null,
+	val data: List<SearchAllResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
-	val users: List<JsonElement>? = null,
-	val links: SearchAllResponseLinks? = null,
+	val users: List<RespUserModel> = emptyList(),
+	val links: SearchAllResponseLinks = SearchAllResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6658,12 +6661,12 @@ data class SearchAllResponseDataFirstPostLinks(
 
 @Serializable
 data class SearchAllResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -6694,21 +6697,21 @@ data class SearchAllResponseDataFirstPost(
 	@SerialName("post_like_count")
 	val postLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
+	val postIsFirstPost: Boolean = false,
 	@SerialName("post_is_liked")
-	val postIsLiked: JsonElement? = null,
-	val links: SearchAllResponseDataFirstPostLinks? = null,
-	val permissions: SearchAllResponseDataFirstPostPermissions? = null,
+	val postIsLiked: Boolean = false,
+	val links: SearchAllResponseDataFirstPostLinks = SearchAllResponseDataFirstPostLinks(),
+	val permissions: SearchAllResponseDataFirstPostPermissions = SearchAllResponseDataFirstPostPermissions(),
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
@@ -6732,22 +6735,22 @@ data class SearchAllResponseDataLinks(
 
 @Serializable
 data class SearchAllResponseDataPermissionsBump(
-	val can: JsonElement? = null,
+	val can: Boolean = false,
 	@SerialName("available_count")
 	val availableCount: Double = 0.0,
-	val error: JsonElement? = null,
+	val error: JsonElement = JsonNull,
 	@SerialName("next_available_time")
-	val nextAvailableTime: JsonElement? = null,
+	val nextAvailableTime: JsonElement = JsonNull,
 )
 
 @Serializable
 data class SearchAllResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val bump: SearchAllResponseDataPermissionsBump? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
+	val edit: Boolean = false,
+	val bump: SearchAllResponseDataPermissionsBump = SearchAllResponseDataPermissionsBump(),
 )
 
 @Serializable
@@ -6764,14 +6767,14 @@ data class SearchAllResponseDataForumLinks(
 
 @Serializable
 data class SearchAllResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -6789,15 +6792,15 @@ data class SearchAllResponseDataForum(
 	@SerialName("parent_node_id")
 	val parentNodeId: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: SearchAllResponseDataForumLinks? = null,
-	val permissions: SearchAllResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: SearchAllResponseDataForumLinks = SearchAllResponseDataForumLinks(),
+	val permissions: SearchAllResponseDataForumPermissions = SearchAllResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -6814,12 +6817,12 @@ data class SearchAllResponseDataLastPostLinks(
 
 @Serializable
 data class SearchAllResponseDataLastPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -6850,21 +6853,21 @@ data class SearchAllResponseDataLastPost(
 	@SerialName("post_like_count")
 	val postLikeCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
+	val postIsFirstPost: Boolean = false,
 	@SerialName("post_is_liked")
-	val postIsLiked: JsonElement? = null,
-	val links: SearchAllResponseDataLastPostLinks? = null,
-	val permissions: SearchAllResponseDataLastPostPermissions? = null,
+	val postIsLiked: Boolean = false,
+	val links: SearchAllResponseDataLastPostLinks = SearchAllResponseDataLastPostLinks(),
+	val permissions: SearchAllResponseDataLastPostPermissions = SearchAllResponseDataLastPostPermissions(),
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
@@ -6892,34 +6895,34 @@ data class SearchAllResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_closed")
-	val threadIsClosed: JsonElement? = null,
+	val threadIsClosed: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("thread_is_starred")
-	val threadIsStarred: JsonElement? = null,
+	val threadIsStarred: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: SearchAllResponseDataFirstPost? = null,
+	val firstPost: SearchAllResponseDataFirstPost = SearchAllResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: SearchAllResponseDataLinks? = null,
-	val permissions: SearchAllResponseDataPermissions? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: SearchAllResponseDataLinks = SearchAllResponseDataLinks(),
+	val permissions: SearchAllResponseDataPermissions = SearchAllResponseDataPermissions(),
 	@SerialName("node_title")
 	val nodeTitle: String = "",
-	val forum: SearchAllResponseDataForum? = null,
+	val forum: SearchAllResponseDataForum = SearchAllResponseDataForum(),
 	@SerialName("last_post")
-	val lastPost: SearchAllResponseDataLastPost? = null,
+	val lastPost: SearchAllResponseDataLastPost = SearchAllResponseDataLastPost(),
 )
 
 @Serializable
@@ -6947,16 +6950,18 @@ data class SearchThreadsBody(
     /** Number of thread data to be returned. */
 	@SerialName("data_limit")
 	val dataLimit: Long? = null,
+    /** The time in milliseconds (e.g. 1767214800) before last content date. */
+	val before: Long? = null,
 )
 
 @Serializable
 data class SearchThreadsResponse(
-	val data: List<SearchThreadsResponseData>? = null,
+	val data: List<SearchThreadsResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
-	val links: SearchThreadsResponseLinks? = null,
+	val links: SearchThreadsResponseLinks = SearchThreadsResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -6974,14 +6979,14 @@ data class SearchThreadsResponseDataFirstPostLinks(
 
 @Serializable
 data class SearchThreadsResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -7014,17 +7019,17 @@ data class SearchThreadsResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: SearchThreadsResponseDataFirstPostLinks? = null,
-	val permissions: SearchThreadsResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: SearchThreadsResponseDataFirstPostLinks = SearchThreadsResponseDataFirstPostLinks(),
+	val permissions: SearchThreadsResponseDataFirstPostPermissions = SearchThreadsResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -7046,13 +7051,13 @@ data class SearchThreadsResponseDataLinks(
 
 @Serializable
 data class SearchThreadsResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 )
 
 @Serializable
@@ -7069,16 +7074,16 @@ data class SearchThreadsResponseDataForumLinks(
 
 @Serializable
 data class SearchThreadsResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -7094,15 +7099,15 @@ data class SearchThreadsResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: SearchThreadsResponseDataForumLinks? = null,
-	val permissions: SearchThreadsResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: SearchThreadsResponseDataForumLinks = SearchThreadsResponseDataForumLinks(),
+	val permissions: SearchThreadsResponseDataForumPermissions = SearchThreadsResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -7130,26 +7135,26 @@ data class SearchThreadsResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: SearchThreadsResponseDataFirstPost? = null,
+	val firstPost: SearchThreadsResponseDataFirstPost = SearchThreadsResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: SearchThreadsResponseDataLinks? = null,
-	val permissions: SearchThreadsResponseDataPermissions? = null,
-	val forum: SearchThreadsResponseDataForum? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: SearchThreadsResponseDataLinks = SearchThreadsResponseDataLinks(),
+	val permissions: SearchThreadsResponseDataPermissions = SearchThreadsResponseDataPermissions(),
+	val forum: SearchThreadsResponseDataForum = SearchThreadsResponseDataForum(),
 )
 
 @Serializable
@@ -7177,16 +7182,18 @@ data class SearchPostsBody(
     /** Number of post data to be returned. */
 	@SerialName("data_limit")
 	val dataLimit: Long? = null,
+    /** The time in milliseconds (e.g. 1767214800) before last content date. */
+	val before: Long? = null,
 )
 
 @Serializable
 data class SearchPostsResponse(
-	val data: List<SearchPostsResponseData>? = null,
+	val data: List<SearchPostsResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
-	val links: SearchPostsResponseLinks? = null,
+	val links: SearchPostsResponseLinks = SearchPostsResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -7204,14 +7211,14 @@ data class SearchPostsResponseDataFirstPostLinks(
 
 @Serializable
 data class SearchPostsResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -7244,17 +7251,17 @@ data class SearchPostsResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: SearchPostsResponseDataFirstPostLinks? = null,
-	val permissions: SearchPostsResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: SearchPostsResponseDataFirstPostLinks = SearchPostsResponseDataFirstPostLinks(),
+	val permissions: SearchPostsResponseDataFirstPostPermissions = SearchPostsResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -7276,13 +7283,13 @@ data class SearchPostsResponseDataLinks(
 
 @Serializable
 data class SearchPostsResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 )
 
 @Serializable
@@ -7299,16 +7306,16 @@ data class SearchPostsResponseDataForumLinks(
 
 @Serializable
 data class SearchPostsResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -7324,15 +7331,15 @@ data class SearchPostsResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement>? = null,
+	val forumPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: SearchPostsResponseDataForumLinks? = null,
-	val permissions: SearchPostsResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: SearchPostsResponseDataForumLinks = SearchPostsResponseDataForumLinks(),
+	val permissions: SearchPostsResponseDataForumPermissions = SearchPostsResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -7360,26 +7367,26 @@ data class SearchPostsResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: SearchPostsResponseDataFirstPost? = null,
+	val firstPost: SearchPostsResponseDataFirstPost = SearchPostsResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: SearchPostsResponseDataLinks? = null,
-	val permissions: SearchPostsResponseDataPermissions? = null,
-	val forum: SearchPostsResponseDataForum? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: SearchPostsResponseDataLinks = SearchPostsResponseDataLinks(),
+	val permissions: SearchPostsResponseDataPermissions = SearchPostsResponseDataPermissions(),
+	val forum: SearchPostsResponseDataForum = SearchPostsResponseDataForum(),
 )
 
 @Serializable
@@ -7397,9 +7404,9 @@ data class SearchUsersBody(
 
 @Serializable
 data class SearchUsersResponse(
-	val users: List<JsonElement>? = null,
+	val users: List<RespUserModel> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -7413,16 +7420,18 @@ data class SearchProfilePostsBody(
 	val page: Long? = null,
     /** Number of results in a page. */
 	val limit: Long? = null,
+    /** The time in milliseconds (e.g. 1767214800) before last content date. */
+	val before: Long? = null,
 )
 
 @Serializable
 data class SearchProfilePostsResponse(
-	val data: List<SearchProfilePostsResponseData>? = null,
+	val data: List<SearchProfilePostsResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
-	val links: SearchProfilePostsResponseLinks? = null,
+	val links: SearchProfilePostsResponseLinks = SearchProfilePostsResponseLinks(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -7442,12 +7451,12 @@ data class SearchProfilePostsResponseDataLinks(
 
 @Serializable
 data class SearchProfilePostsResponseDataPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val like: JsonElement? = null,
-	val comment: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val like: Boolean = false,
+	val comment: Boolean = false,
+	val report: Boolean = false,
 )
 
 @Serializable
@@ -7477,15 +7486,15 @@ data class SearchProfilePostsResponseData(
 	@SerialName("timeline_username")
 	val timelineUsername: String = "",
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
-	val links: SearchProfilePostsResponseDataLinks? = null,
-	val permissions: SearchProfilePostsResponseDataPermissions? = null,
+	val postIsDeleted: Boolean = false,
+	val links: SearchProfilePostsResponseDataLinks = SearchProfilePostsResponseDataLinks(),
+	val permissions: SearchProfilePostsResponseDataPermissions = SearchProfilePostsResponseDataPermissions(),
 	@SerialName("timeline_user")
-	val timelineUser: JsonElement? = null,
+	val timelineUser: RespUserModel = RespUserModel(),
 )
 
 @Serializable
@@ -7509,13 +7518,13 @@ data class SearchTaggedBody(
 
 @Serializable
 data class SearchTaggedResponse(
-	val data: List<SearchTaggedResponseData>? = null,
+	val data: List<SearchTaggedResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	@SerialName("search_tags")
-	val searchTags: JsonElement? = null,
+	val searchTags: JsonElement = JsonNull,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -7533,14 +7542,14 @@ data class SearchTaggedResponseDataFirstPostLinks(
 
 @Serializable
 data class SearchTaggedResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -7573,17 +7582,17 @@ data class SearchTaggedResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: SearchTaggedResponseDataFirstPostLinks? = null,
-	val permissions: SearchTaggedResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: SearchTaggedResponseDataFirstPostLinks = SearchTaggedResponseDataFirstPostLinks(),
+	val permissions: SearchTaggedResponseDataFirstPostPermissions = SearchTaggedResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -7605,17 +7614,17 @@ data class SearchTaggedResponseDataLinks(
 
 @Serializable
 data class SearchTaggedResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 	@SerialName("edit_title")
-	val editTitle: JsonElement? = null,
+	val editTitle: Boolean = false,
 	@SerialName("edit_tags")
-	val editTags: JsonElement? = null,
+	val editTags: Boolean = false,
 )
 
 @Serializable
@@ -7631,7 +7640,7 @@ data class SearchTaggedResponseDataForumForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<SearchTaggedResponseDataForumForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<SearchTaggedResponseDataForumForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -7648,16 +7657,16 @@ data class SearchTaggedResponseDataForumLinks(
 
 @Serializable
 data class SearchTaggedResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -7673,15 +7682,15 @@ data class SearchTaggedResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<SearchTaggedResponseDataForumForumPrefixes>? = null,
+	val forumPrefixes: List<SearchTaggedResponseDataForumForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: SearchTaggedResponseDataForumLinks? = null,
-	val permissions: SearchTaggedResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: SearchTaggedResponseDataForumLinks = SearchTaggedResponseDataForumLinks(),
+	val permissions: SearchTaggedResponseDataForumPermissions = SearchTaggedResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -7709,26 +7718,26 @@ data class SearchTaggedResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: SearchTaggedResponseDataFirstPost? = null,
+	val firstPost: SearchTaggedResponseDataFirstPost = SearchTaggedResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement? = null,
-	val links: SearchTaggedResponseDataLinks? = null,
-	val permissions: SearchTaggedResponseDataPermissions? = null,
-	val forum: SearchTaggedResponseDataForum? = null,
+	val threadTags: JsonElement = JsonNull,
+	val links: SearchTaggedResponseDataLinks = SearchTaggedResponseDataLinks(),
+	val permissions: SearchTaggedResponseDataPermissions = SearchTaggedResponseDataPermissions(),
+	val forum: SearchTaggedResponseDataForum = SearchTaggedResponseDataForum(),
 )
 
 @Serializable
@@ -7741,13 +7750,13 @@ data class SearchResultsParams(
 
 @Serializable
 data class SearchResultsResponse(
-	val data: List<SearchResultsResponseData>? = null,
+	val data: List<SearchResultsResponseData> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	@SerialName("search_tags")
-	val searchTags: JsonElement? = null,
+	val searchTags: JsonElement = JsonNull,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -7765,14 +7774,14 @@ data class SearchResultsResponseDataFirstPostLinks(
 
 @Serializable
 data class SearchResultsResponseDataFirstPostPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val reply: JsonElement? = null,
-	val like: JsonElement? = null,
-	val report: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	val reply: Boolean = false,
+	val like: Boolean = false,
+	val report: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 )
 
 @Serializable
@@ -7805,17 +7814,17 @@ data class SearchResultsResponseDataFirstPost(
 	@SerialName("post_attachment_count")
 	val postAttachmentCount: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("post_is_published")
-	val postIsPublished: JsonElement? = null,
+	val postIsPublished: Boolean = false,
 	@SerialName("post_is_deleted")
-	val postIsDeleted: JsonElement? = null,
+	val postIsDeleted: Boolean = false,
 	@SerialName("post_update_date")
 	val postUpdateDate: Double = 0.0,
 	@SerialName("post_is_first_post")
-	val postIsFirstPost: JsonElement? = null,
-	val links: SearchResultsResponseDataFirstPostLinks? = null,
-	val permissions: SearchResultsResponseDataFirstPostPermissions? = null,
+	val postIsFirstPost: Boolean = false,
+	val links: SearchResultsResponseDataFirstPostLinks = SearchResultsResponseDataFirstPostLinks(),
+	val permissions: SearchResultsResponseDataFirstPostPermissions = SearchResultsResponseDataFirstPostPermissions(),
 )
 
 @Serializable
@@ -7837,17 +7846,17 @@ data class SearchResultsResponseDataLinks(
 
 @Serializable
 data class SearchResultsResponseDataPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
-	val edit: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
+	val edit: Boolean = false,
 	@SerialName("edit_title")
-	val editTitle: JsonElement? = null,
+	val editTitle: Boolean = false,
 	@SerialName("edit_tags")
-	val editTags: JsonElement? = null,
+	val editTags: Boolean = false,
 )
 
 @Serializable
@@ -7863,7 +7872,7 @@ data class SearchResultsResponseDataForumForumPrefixes(
 	@SerialName("group_title")
 	val groupTitle: String = "",
 	@SerialName("group_prefixes")
-	val groupPrefixes: List<SearchResultsResponseDataForumForumPrefixesGroupPrefixes>? = null,
+	val groupPrefixes: List<SearchResultsResponseDataForumForumPrefixesGroupPrefixes> = emptyList(),
 )
 
 @Serializable
@@ -7880,16 +7889,16 @@ data class SearchResultsResponseDataForumLinks(
 
 @Serializable
 data class SearchResultsResponseDataForumPermissions(
-	val view: JsonElement? = null,
-	val edit: JsonElement? = null,
-	val delete: JsonElement? = null,
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
 	@SerialName("create_thread")
-	val createThread: JsonElement? = null,
+	val createThread: Boolean = false,
 	@SerialName("upload_attachment")
-	val uploadAttachment: JsonElement? = null,
+	val uploadAttachment: Boolean = false,
 	@SerialName("tag_thread")
-	val tagThread: JsonElement? = null,
-	val follow: JsonElement? = null,
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
 )
 
 @Serializable
@@ -7905,15 +7914,15 @@ data class SearchResultsResponseDataForum(
 	@SerialName("forum_post_count")
 	val forumPostCount: Double = 0.0,
 	@SerialName("forum_prefixes")
-	val forumPrefixes: List<SearchResultsResponseDataForumForumPrefixes>? = null,
+	val forumPrefixes: List<SearchResultsResponseDataForumForumPrefixes> = emptyList(),
 	@SerialName("thread_default_prefix_id")
 	val threadDefaultPrefixId: Double = 0.0,
 	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: JsonElement? = null,
-	val links: SearchResultsResponseDataForumLinks? = null,
-	val permissions: SearchResultsResponseDataForumPermissions? = null,
+	val threadPrefixIsRequired: Boolean = false,
+	val links: SearchResultsResponseDataForumLinks = SearchResultsResponseDataForumLinks(),
+	val permissions: SearchResultsResponseDataForumPermissions = SearchResultsResponseDataForumPermissions(),
 	@SerialName("forum_is_followed")
-	val forumIsFollowed: JsonElement? = null,
+	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -7941,26 +7950,26 @@ data class SearchResultsResponseData(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("first_post")
-	val firstPost: SearchResultsResponseDataFirstPost? = null,
+	val firstPost: SearchResultsResponseDataFirstPost = SearchResultsResponseDataFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement? = null,
-	val links: SearchResultsResponseDataLinks? = null,
-	val permissions: SearchResultsResponseDataPermissions? = null,
-	val forum: SearchResultsResponseDataForum? = null,
+	val threadTags: JsonElement = JsonNull,
+	val links: SearchResultsResponseDataLinks = SearchResultsResponseDataLinks(),
+	val permissions: SearchResultsResponseDataPermissions = SearchResultsResponseDataPermissions(),
+	val forum: SearchResultsResponseDataForum = SearchResultsResponseDataForum(),
 )
 
 // ─── BatchApi Types ────────────────────────────────────────
@@ -7969,13 +7978,13 @@ typealias BatchExecuteBody = List<JsonObject>
 
 @Serializable
 data class BatchExecuteResponse(
-	val jobs: BatchExecuteResponseJobs? = null,
+	val jobs: BatchExecuteResponseJobs = BatchExecuteResponseJobs(),
 )
 
 @Serializable
 data class BatchExecuteResponseJobs(
 	@SerialName("job_id")
-	val jobId: JsonObject? = null,
+	val jobId: JsonObject = JsonObject(emptyMap()),
 )
 
 // ─── ChatboxApi Types ────────────────────────────────────────
@@ -7989,22 +7998,22 @@ data class ChatboxIndexParams(
 
 @Serializable
 data class ChatboxIndexResponse(
-	val rooms: List<ChatboxIndexResponseRooms>? = null,
-	val ban: JsonElement? = null,
-	val ignore: List<ChatboxIndexResponseIgnore>? = null,
-	val permissions: ChatboxIndexResponsePermissions? = null,
-	val commands: List<String>? = null,
-	val roomsOnline: ChatboxIndexResponseRoomsOnline? = null,
+	val rooms: List<ChatboxIndexResponseRooms> = emptyList(),
+	val ban: JsonElement = JsonNull,
+	val ignore: List<ChatboxIndexResponseIgnore> = emptyList(),
+	val permissions: ChatboxIndexResponsePermissions = ChatboxIndexResponsePermissions(),
+	val commands: List<String> = emptyList(),
+	val roomsOnline: ChatboxIndexResponseRoomsOnline = ChatboxIndexResponseRoomsOnline(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ChatboxIndexResponseRooms(
 	@SerialName("can_report")
-	val canReport: JsonElement? = null,
-	val eng: JsonElement? = null,
-	val market: JsonElement? = null,
+	val canReport: Boolean = false,
+	val eng: Boolean = false,
+	val market: Boolean = false,
 	@SerialName("room_id")
 	val roomId: Double = 0.0,
 	val title: String = "",
@@ -8020,7 +8029,7 @@ data class ChatboxIndexResponseIgnoreRenderedAvatars(
 @Serializable
 data class ChatboxIndexResponseIgnoreRendered(
 	val username: String = "",
-	val avatars: ChatboxIndexResponseIgnoreRenderedAvatars? = null,
+	val avatars: ChatboxIndexResponseIgnoreRenderedAvatars = ChatboxIndexResponseIgnoreRenderedAvatars(),
 	val link: String = "",
 )
 
@@ -8041,13 +8050,13 @@ data class ChatboxIndexResponseIgnore(
 	@SerialName("display_style_group_id")
 	val displayStyleGroupId: Double = 0.0,
 	@SerialName("is_admin")
-	val isAdmin: JsonElement? = null,
+	val isAdmin: Boolean = false,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("is_moderator")
-	val isModerator: JsonElement? = null,
+	val isModerator: Boolean = false,
 	@SerialName("is_staff")
-	val isStaff: JsonElement? = null,
+	val isStaff: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -8058,13 +8067,13 @@ data class ChatboxIndexResponseIgnore(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: ChatboxIndexResponseIgnoreRendered? = null,
+	val rendered: ChatboxIndexResponseIgnoreRendered = ChatboxIndexResponseIgnoreRendered(),
 	@SerialName("short_link")
-	val shortLink: JsonElement? = null,
+	val shortLink: JsonElement = JsonNull,
 	@SerialName("trophy_points")
 	val trophyPoints: Double = 0.0,
 	@SerialName("uniq_banner")
-	val uniqBanner: JsonElement? = null,
+	val uniqBanner: JsonElement = JsonNull,
 	@SerialName("uniq_username_css")
 	val uniqUsernameCss: String = "",
 	@SerialName("user_id")
@@ -8074,12 +8083,12 @@ data class ChatboxIndexResponseIgnore(
 
 @Serializable
 data class ChatboxIndexResponsePermissions(
-	val deleteAnyMessage: JsonElement? = null,
-	val editAnyMessage: JsonElement? = null,
-	val viewAnyMessage: JsonElement? = null,
-	val viewMessages: JsonElement? = null,
-	val postMessage: JsonElement? = null,
-	val ban: JsonElement? = null,
+	val deleteAnyMessage: Boolean = false,
+	val editAnyMessage: Boolean = false,
+	val viewAnyMessage: Boolean = false,
+	val viewMessages: Boolean = false,
+	val postMessage: Boolean = false,
+	val ban: Boolean = false,
 )
 
 @Serializable
@@ -8100,9 +8109,9 @@ data class ChatboxGetMessagesParams(
 
 @Serializable
 data class ChatboxGetMessagesResponse(
-	val messages: List<JsonElement>? = null,
+	val messages: List<RespChatboxMessageModel> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8119,9 +8128,9 @@ data class ChatboxPostMessageBody(
 
 @Serializable
 data class ChatboxPostMessageResponse(
-	val message: JsonElement? = null,
+	val message: RespChatboxMessageModel = RespChatboxMessageModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8135,9 +8144,9 @@ data class ChatboxEditMessageBody(
 
 @Serializable
 data class ChatboxEditMessageResponse(
-	val message: JsonElement? = null,
+	val message: RespChatboxMessageModel = RespChatboxMessageModel(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8152,7 +8161,7 @@ data class ChatboxDeleteMessageResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -8164,9 +8173,9 @@ data class ChatboxOnlineParams(
 
 @Serializable
 data class ChatboxOnlineResponse(
-	val users: List<ChatboxOnlineResponseUsers>? = null,
+	val users: List<ChatboxOnlineResponseUsers> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8179,7 +8188,7 @@ data class ChatboxOnlineResponseUsersRenderedAvatars(
 @Serializable
 data class ChatboxOnlineResponseUsersRendered(
 	val username: String = "",
-	val avatars: ChatboxOnlineResponseUsersRenderedAvatars? = null,
+	val avatars: ChatboxOnlineResponseUsersRenderedAvatars = ChatboxOnlineResponseUsersRenderedAvatars(),
 	val link: String = "",
 )
 
@@ -8212,13 +8221,13 @@ data class ChatboxOnlineResponseUsers(
 	@SerialName("display_style_group_id")
 	val displayStyleGroupId: Double = 0.0,
 	@SerialName("is_admin")
-	val isAdmin: JsonElement? = null,
+	val isAdmin: Boolean = false,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("is_moderator")
-	val isModerator: JsonElement? = null,
+	val isModerator: Boolean = false,
 	@SerialName("is_staff")
-	val isStaff: JsonElement? = null,
+	val isStaff: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -8229,13 +8238,13 @@ data class ChatboxOnlineResponseUsers(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: ChatboxOnlineResponseUsersRendered? = null,
+	val rendered: ChatboxOnlineResponseUsersRendered = ChatboxOnlineResponseUsersRendered(),
 	@SerialName("short_link")
 	val shortLink: String = "",
 	@SerialName("trophy_points")
 	val trophyPoints: Double = 0.0,
 	@SerialName("uniq_banner")
-	val uniqBanner: ChatboxOnlineResponseUsersUniqBanner? = null,
+	val uniqBanner: ChatboxOnlineResponseUsersUniqBanner = ChatboxOnlineResponseUsersUniqBanner(),
 	@SerialName("uniq_username_css")
 	val uniqUsernameCss: String = "",
 	@SerialName("user_id")
@@ -8252,9 +8261,9 @@ data class ChatboxReportReasonsParams(
 
 @Serializable
 data class ChatboxReportReasonsResponse(
-	val reasons: List<String>? = null,
+	val reasons: List<String> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8271,7 +8280,7 @@ data class ChatboxReportResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -8282,9 +8291,9 @@ data class ChatboxGetLeaderboardParams(
 
 @Serializable
 data class ChatboxGetLeaderboardResponse(
-	val leaderboard: List<ChatboxGetLeaderboardResponseLeaderboard>? = null,
+	val leaderboard: List<ChatboxGetLeaderboardResponseLeaderboard> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8297,7 +8306,7 @@ data class ChatboxGetLeaderboardResponseLeaderboardRenderedAvatars(
 @Serializable
 data class ChatboxGetLeaderboardResponseLeaderboardRendered(
 	val username: String = "",
-	val avatars: ChatboxGetLeaderboardResponseLeaderboardRenderedAvatars? = null,
+	val avatars: ChatboxGetLeaderboardResponseLeaderboardRenderedAvatars = ChatboxGetLeaderboardResponseLeaderboardRenderedAvatars(),
 	val link: String = "",
 )
 
@@ -8331,7 +8340,7 @@ data class ChatboxGetLeaderboardResponseLeaderboard(
 	@SerialName("display_style_group_id")
 	val displayStyleGroupId: Double = 0.0,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -8342,13 +8351,13 @@ data class ChatboxGetLeaderboardResponseLeaderboard(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: ChatboxGetLeaderboardResponseLeaderboardRendered? = null,
+	val rendered: ChatboxGetLeaderboardResponseLeaderboardRendered = ChatboxGetLeaderboardResponseLeaderboardRendered(),
 	@SerialName("short_link")
-	val shortLink: JsonElement? = null,
+	val shortLink: JsonElement = JsonNull,
 	@SerialName("trophy_points")
 	val trophyPoints: Double = 0.0,
 	@SerialName("uniq_banner")
-	val uniqBanner: ChatboxGetLeaderboardResponseLeaderboardUniqBanner? = null,
+	val uniqBanner: ChatboxGetLeaderboardResponseLeaderboardUniqBanner = ChatboxGetLeaderboardResponseLeaderboardUniqBanner(),
 	@SerialName("uniq_username_css")
 	val uniqUsernameCss: String = "",
 	val username: String = "",
@@ -8356,9 +8365,9 @@ data class ChatboxGetLeaderboardResponseLeaderboard(
 
 @Serializable
 data class ChatboxGetIgnoreResponse(
-	val ignored: List<ChatboxGetIgnoreResponseIgnored>? = null,
+	val ignored: List<ChatboxGetIgnoreResponseIgnored> = emptyList(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8371,7 +8380,7 @@ data class ChatboxGetIgnoreResponseIgnoredRenderedAvatars(
 @Serializable
 data class ChatboxGetIgnoreResponseIgnoredRendered(
 	val username: String = "",
-	val avatars: ChatboxGetIgnoreResponseIgnoredRenderedAvatars? = null,
+	val avatars: ChatboxGetIgnoreResponseIgnoredRenderedAvatars = ChatboxGetIgnoreResponseIgnoredRenderedAvatars(),
 	val link: String = "",
 )
 
@@ -8392,7 +8401,7 @@ data class ChatboxGetIgnoreResponseIgnored(
 	@SerialName("display_style_group_id")
 	val displayStyleGroupId: Double = 0.0,
 	@SerialName("is_banned")
-	val isBanned: JsonElement? = null,
+	val isBanned: Boolean = false,
 	@SerialName("last_activity")
 	val lastActivity: Double = 0.0,
 	@SerialName("like2_count")
@@ -8403,13 +8412,13 @@ data class ChatboxGetIgnoreResponseIgnored(
 	val messageCount: Double = 0.0,
 	@SerialName("register_date")
 	val registerDate: Double = 0.0,
-	val rendered: ChatboxGetIgnoreResponseIgnoredRendered? = null,
+	val rendered: ChatboxGetIgnoreResponseIgnoredRendered = ChatboxGetIgnoreResponseIgnoredRendered(),
 	@SerialName("short_link")
-	val shortLink: JsonElement? = null,
+	val shortLink: JsonElement = JsonNull,
 	@SerialName("trophy_points")
 	val trophyPoints: Double = 0.0,
 	@SerialName("uniq_banner")
-	val uniqBanner: JsonElement? = null,
+	val uniqBanner: JsonElement = JsonNull,
 	@SerialName("uniq_username_css")
 	val uniqUsernameCss: String = "",
 	@SerialName("user_id")
@@ -8428,7 +8437,7 @@ data class ChatboxPostIgnoreResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 @Serializable
@@ -8442,7 +8451,7 @@ data class ChatboxDeleteIgnoreResponse(
 	val status: String? = null,
 	val message: String? = null,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo? = null,
 )
 
 // ─── FormsApi Types ────────────────────────────────────────
@@ -8455,12 +8464,12 @@ data class FormsListParams(
 
 @Serializable
 data class FormsListResponse(
-	val forms: List<FormsListResponseForms>? = null,
+	val forms: List<FormsListResponseForms> = emptyList(),
 	val formsPerPage: Double = 0.0,
 	val page: Double = 0.0,
 	val totalForms: Double = 0.0,
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8474,7 +8483,7 @@ data class FormsListResponseFormsFields(
 	@SerialName("field_id")
 	val fieldId: Double = 0.0,
 	val title: String = "",
-	val fieldChoices: FormsListResponseFormsFieldsFieldChoices? = null,
+	val fieldChoices: FormsListResponseFormsFieldsFieldChoices = FormsListResponseFormsFieldsFieldChoices(),
 	val required: Double = 0.0,
 	@SerialName("max_length")
 	val maxLength: Double = 0.0,
@@ -8488,7 +8497,7 @@ data class FormsListResponseForms(
 	val formId: Double = 0.0,
 	val title: String = "",
 	val description: String = "",
-	val fields: List<FormsListResponseFormsFields>? = null,
+	val fields: List<FormsListResponseFormsFields> = emptyList(),
 )
 
 @Serializable
@@ -8509,9 +8518,9 @@ data class FormsCreateBodyV3(
 @Serializable
 data class FormsCreateResponse(
 	val message: String = "",
-	val content: FormsCreateResponseContent? = null,
+	val content: FormsCreateResponseContent = FormsCreateResponseContent(),
 	@SerialName("system_info")
-	val systemInfo: JsonElement? = null,
+	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
@@ -8531,10 +8540,10 @@ data class FormsCreateResponseContentLinks(
 
 @Serializable
 data class FormsCreateResponseContentPermissions(
-	val view: JsonElement? = null,
-	val delete: JsonElement? = null,
-	val follow: JsonElement? = null,
-	val post: JsonElement? = null,
+	val view: Boolean = false,
+	val delete: Boolean = false,
+	val follow: Boolean = false,
+	val post: Boolean = false,
 )
 
 @Serializable
@@ -8558,25 +8567,25 @@ data class FormsCreateResponseContent(
 	@SerialName("thread_update_date")
 	val threadUpdateDate: Double = 0.0,
 	@SerialName("user_is_ignored")
-	val userIsIgnored: JsonElement? = null,
+	val userIsIgnored: Boolean = false,
 	@SerialName("thread_post_count")
 	val threadPostCount: Double = 0.0,
 	@SerialName("thread_is_published")
-	val threadIsPublished: JsonElement? = null,
+	val threadIsPublished: Boolean = false,
 	@SerialName("thread_is_deleted")
-	val threadIsDeleted: JsonElement? = null,
+	val threadIsDeleted: Boolean = false,
 	@SerialName("thread_is_sticky")
-	val threadIsSticky: JsonElement? = null,
+	val threadIsSticky: Boolean = false,
 	@SerialName("thread_is_closed")
-	val threadIsClosed: JsonElement? = null,
+	val threadIsClosed: Boolean = false,
 	@SerialName("thread_is_followed")
-	val threadIsFollowed: JsonElement? = null,
+	val threadIsFollowed: Boolean = false,
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement>? = null,
+	val threadPrefixes: List<JsonElement> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: List<JsonElement>? = null,
-	val links: FormsCreateResponseContentLinks? = null,
-	val permissions: FormsCreateResponseContentPermissions? = null,
+	val threadTags: List<JsonElement> = emptyList(),
+	val links: FormsCreateResponseContentLinks = FormsCreateResponseContentLinks(),
+	val permissions: FormsCreateResponseContentPermissions = FormsCreateResponseContentPermissions(),
 	@SerialName("node_title")
 	val nodeTitle: String = "",
 )

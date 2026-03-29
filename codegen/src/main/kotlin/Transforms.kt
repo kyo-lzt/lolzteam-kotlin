@@ -464,10 +464,10 @@ private fun extractResponseProperty(
 		return ResponseProperty(name, "unknown", null, false, required, emptyList())
 	}
 
-	// Direct $ref to component schema → JsonElement (API may return [] where object expected)
+	// Direct $ref to component schema → preserve the ref for type resolution
 	val ref = (propValue["\$ref"] as? JsonPrimitive)?.contentOrNull
 	if (ref != null && ref.startsWith("#/components/schemas/")) {
-		return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
+		return ResponseProperty(name, "JsonElement", ref, false, required, emptyList())
 	}
 
 	val typeEl = propValue["type"]
@@ -478,7 +478,7 @@ private fun extractResponseProperty(
 		val items = propValue["items"] as? JsonObject
 		val itemRef = (items?.get("\$ref") as? JsonPrimitive)?.contentOrNull
 		if (itemRef != null && itemRef.startsWith("#/components/schemas/")) {
-			return ResponseProperty(name, "JsonElement", null, true, required, emptyList())
+			return ResponseProperty(name, "JsonElement", itemRef, true, required, emptyList())
 		}
 		// Array of inline objects or primitives
 		val resolvedItems = if (items != null) derefShallow(items, rawSpec) else null
@@ -516,8 +516,7 @@ private fun extractResponseProperty(
 		"string" -> "String"
 		"integer" -> "Double"
 		"number" -> "Double"
-		// boolean → JsonElement (API may return object where boolean expected)
-		"boolean" -> "JsonElement"
+		"boolean" -> "Boolean"
 		else -> "JsonElement"
 	}
 	return ResponseProperty(name, kotlinType, null, false, required, emptyList())
