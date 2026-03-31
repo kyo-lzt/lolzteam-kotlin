@@ -101,10 +101,10 @@ class ClientTest {
                             """{"error":"rate limited"}""",
                             status = HttpStatusCode.TooManyRequests,
                             headers =
-                                headersOf(
-                                    HttpHeaders.ContentType to listOf("application/json"),
-                                    "Retry-After" to listOf("0"),
-                                ),
+                            headersOf(
+                                HttpHeaders.ContentType to listOf("application/json"),
+                                "Retry-After" to listOf("0"),
+                            ),
                         )
                     } else {
                         respond("""{"status":"ok"}""", headers = jsonHeaders())

@@ -1,0 +1,7 @@
+root = true
+
+[*.kt]
+ktlint_code_style = intellij_idea
+
+[**/generated/**]
+ktlint = disabled

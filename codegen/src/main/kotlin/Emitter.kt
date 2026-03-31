@@ -128,7 +128,7 @@ private fun emitQueryParamsClass(
 		val needsNullable = !param.required && !hasDefault
 		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(param.name)
-		val serialName = if (needsSerialName(param.name)) "\t@SerialName(\"${param.name}\")\n" else ""
+		val serialName = if (needsSerialName(param.name)) "    @SerialName(\"${param.name}\")\n" else ""
 		val doc = buildFieldDoc(param.description, param.defaultValue)
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(param.defaultValue!!, kotlinType, param.enumValues)}"
@@ -137,7 +137,7 @@ private fun emitQueryParamsClass(
 		} else {
 			""
 		}
-		"$doc$serialName\tval $camelName: $fullType$default,"
+		"$doc$serialName    val $camelName: $fullType$default,"
 	}
 
 	sb.appendLine(props.joinToString("\n"))
@@ -192,7 +192,7 @@ private fun emitBodyClass(
 		val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 		val camelName = safeKotlinName(prop.name)
 		val skipSerialName = hasByteArrayFields
-		val serialName = if (!skipSerialName && needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
+		val serialName = if (!skipSerialName && needsSerialName(prop.name)) "    @SerialName(\"${prop.name}\")\n" else ""
 		val doc = buildFieldDoc(prop.description, prop.defaultValue)
 		val default = if (hasDefault) {
 			" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
@@ -201,7 +201,7 @@ private fun emitBodyClass(
 		} else {
 			""
 		}
-		"$doc$serialName\tval $camelName: $fullType$default,"
+		"$doc$serialName    val $camelName: $fullType$default,"
 	}
 
 	sb.appendLine(props.joinToString("\n"))
@@ -242,7 +242,7 @@ private fun emitDiscriminatedUnionBody(
 			val needsNullable = !prop.required && !hasDefault
 			val fullType = if (needsNullable) "$kotlinType?" else kotlinType
 			val camelName = safeKotlinName(prop.name)
-			val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
+			val serialName = if (needsSerialName(prop.name)) "    @SerialName(\"${prop.name}\")\n" else ""
 			val doc = buildFieldDoc(prop.description, prop.defaultValue)
 			val default = if (hasDefault) {
 				" = ${formatKotlinDefault(prop.defaultValue!!, kotlinType, prop.enumValues)}"
@@ -251,7 +251,7 @@ private fun emitDiscriminatedUnionBody(
 			} else {
 				""
 			}
-			"$doc$serialName\tval $camelName: $fullType$default,"
+			"$doc$serialName    val $camelName: $fullType$default,"
 		}
 
 		sb.appendLine(props.joinToString("\n"))
@@ -320,8 +320,8 @@ fun emitComponentSchemaClass(name: String, schema: JsonObject, rawSpec: JsonObje
 		val nullable = if (required) "" else "?"
 		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
 		val camelName = safeKotlinName(propName)
-		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
-		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+		val serialName = if (needsSerialName(propName)) "    @SerialName(\"${propName}\")\n" else ""
+		"$serialName    val $camelName: $kotlinType$nullable$default,"
 	}
 
 	sb.appendLine(fields.joinToString("\n"))
@@ -440,8 +440,8 @@ private fun emitNestedDataClass(
 		val kotlinType = resolvePropertyKotlinType(propObj, rawSpec, className, propName, nestedClasses)
 		val nullable = if (required) "" else "?"
 		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
-		val serialName = if (needsSerialName(propName)) "\t@SerialName(\"${propName}\")\n" else ""
-		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+		val serialName = if (needsSerialName(propName)) "    @SerialName(\"${propName}\")\n" else ""
+		"$serialName    val $camelName: $kotlinType$nullable$default,"
 	}
 
 	sb.appendLine(fields.joinToString("\n"))
@@ -485,8 +485,8 @@ private fun emitResponseClass(
 		val nullable = if (required) "" else "?"
 		val default = if (required) defaultForKotlinType(kotlinType) else " = null"
 		val camelName = safeKotlinName(prop.name)
-		val serialName = if (needsSerialName(prop.name)) "\t@SerialName(\"${prop.name}\")\n" else ""
-		"$serialName\tval $camelName: $kotlinType$nullable$default,"
+		val serialName = if (needsSerialName(prop.name)) "    @SerialName(\"${prop.name}\")\n" else ""
+		"$serialName    val $camelName: $kotlinType$nullable$default,"
 	}
 
 	sb.appendLine(fields.joinToString("\n"))
@@ -555,7 +555,7 @@ private fun emitEnumClass(def: EnumDefinition): String {
 		val variantName = enumVariantName(value, def.valueType)
 		val literal = if (def.valueType == "Long") value else "\"$value\""
 		val suffix = if (i < def.values.size - 1) "," else ";"
-		"\t$variantName($literal)$suffix"
+		"    $variantName($literal)$suffix"
 	}
 	sb.appendLine(variants.joinToString("\n"))
 
@@ -574,28 +574,28 @@ private fun emitEnumSerializer(def: EnumDefinition): String {
 	}
 
 	sb.appendLine("internal object ${name}Serializer : KSerializer<$name> {")
-	sb.appendLine("\toverride val descriptor: SerialDescriptor =")
-	sb.appendLine("\t\tPrimitiveSerialDescriptor(\"$name\", $primitiveSerializer)")
+	sb.appendLine("    override val descriptor: SerialDescriptor =")
+	sb.appendLine("        PrimitiveSerialDescriptor(\"$name\", $primitiveSerializer)")
 	sb.appendLine()
 
 	if (def.valueType == "Long") {
-		sb.appendLine("\toverride fun serialize(encoder: Encoder, value: $name) {")
-		sb.appendLine("\t\tencoder.encodeLong(value.value)")
-		sb.appendLine("\t}")
+		sb.appendLine("    override fun serialize(encoder: Encoder, value: $name) {")
+		sb.appendLine("        encoder.encodeLong(value.value)")
+		sb.appendLine("    }")
 		sb.appendLine()
-		sb.appendLine("\toverride fun deserialize(decoder: Decoder): $name {")
-		sb.appendLine("\t\tval v = decoder.decodeLong()")
-		sb.appendLine("\t\treturn $name.entries.first { it.value == v }")
-		sb.appendLine("\t}")
+		sb.appendLine("    override fun deserialize(decoder: Decoder): $name {")
+		sb.appendLine("        val v = decoder.decodeLong()")
+		sb.appendLine("        return $name.entries.first { it.value == v }")
+		sb.appendLine("    }")
 	} else {
-		sb.appendLine("\toverride fun serialize(encoder: Encoder, value: $name) {")
-		sb.appendLine("\t\tencoder.encodeString(value.value)")
-		sb.appendLine("\t}")
+		sb.appendLine("    override fun serialize(encoder: Encoder, value: $name) {")
+		sb.appendLine("        encoder.encodeString(value.value)")
+		sb.appendLine("    }")
 		sb.appendLine()
-		sb.appendLine("\toverride fun deserialize(decoder: Decoder): $name {")
-		sb.appendLine("\t\tval v = decoder.decodeString()")
-		sb.appendLine("\t\treturn $name.entries.first { it.value == v }")
-		sb.appendLine("\t}")
+		sb.appendLine("    override fun deserialize(decoder: Decoder): $name {")
+		sb.appendLine("        val v = decoder.decodeString()")
+		sb.appendLine("        return $name.entries.first { it.value == v }")
+		sb.appendLine("    }")
 	}
 
 	sb.appendLine("}")
@@ -756,14 +756,14 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 
 	val kdoc = buildMethodKDoc(method)
 	if (kdoc != null) sb.append(kdoc)
-	sb.appendLine("\tsuspend fun ${method.methodName}($argStr): $responseName {")
+	sb.appendLine("    suspend fun ${method.methodName}($argStr): $responseName {")
 
 	if (isMultipart && hasByteArrayFields) {
 		val serializableProps = method.bodyProperties.filter { it.type != "Blob" }
 		val byteArrayFieldNames = method.bodyProperties.filter { it.type == "Blob" }.map { it.name }
 
 		val bodyRef = "body"
-		val indent = if (method.bodyRequired) "\t\t" else "\t\t\t"
+		val indent = if (method.bodyRequired) "        " else "            "
 
 		val buildLines = mutableListOf<String>()
 
@@ -773,9 +773,9 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			for (prop in serializableProps) {
 				val camelName = snakeToCamel(sanitizeName(prop.name))
 				if (prop.required) {
-					buildLines.add("$indent\tput(\"${prop.name}\", $bodyRef.$camelName)")
+					buildLines.add("$indent    put(\"${prop.name}\", $bodyRef.$camelName)")
 				} else {
-					buildLines.add("$indent\t$bodyRef.$camelName?.let { put(\"${prop.name}\", it) }")
+					buildLines.add("$indent    $bodyRef.$camelName?.let { put(\"${prop.name}\", it) }")
 				}
 			}
 			buildLines.add("$indent}")
@@ -787,29 +787,29 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			val camelName = snakeToCamel(sanitizeName(name))
 			val prop = method.bodyProperties.find { it.name == name }
 			if (prop?.required == true) {
-				buildLines.add("$indent\tput(\"$name\", $bodyRef.$camelName)")
+				buildLines.add("$indent    put(\"$name\", $bodyRef.$camelName)")
 			} else {
-				buildLines.add("$indent\t$bodyRef.$camelName?.let { put(\"$name\", it) }")
+				buildLines.add("$indent    $bodyRef.$camelName?.let { put(\"$name\", it) }")
 			}
 		}
 		buildLines.add("$indent}")
 
 		val requestLines = mutableListOf<String>()
 		requestLines.add("${indent}${returnPrefix}RequestOptions(")
-		requestLines.add("$indent\tmethod = \"${method.httpMethod}\",")
-		requestLines.add("$indent\tpath = $pathExpr,")
+		requestLines.add("$indent    method = \"${method.httpMethod}\",")
+		requestLines.add("$indent    path = $pathExpr,")
 		if (serializableProps.isNotEmpty()) {
-			requestLines.add("$indent\tbody = jsonBody,")
+			requestLines.add("$indent    body = jsonBody,")
 		}
-		requestLines.add("$indent\tbodyEncoding = \"multipart\",")
-		requestLines.add("$indent\tbyteArrayFields = byteFields,")
+		requestLines.add("$indent    bodyEncoding = \"multipart\",")
+		requestLines.add("$indent    byteArrayFields = byteFields,")
 
 		if (hasQueryType) {
-			requestLines.add("$indent\tquery = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
+			requestLines.add("$indent    query = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
 		}
 
 		if (isSearch) {
-			requestLines.add("$indent\tisSearch = true,")
+			requestLines.add("$indent    isSearch = true,")
 		}
 
 		requestLines.add("$indent)$returnSuffix")
@@ -818,53 +818,53 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 			for (line in buildLines) sb.appendLine(line)
 			for (line in requestLines) sb.appendLine(line)
 		} else {
-			sb.appendLine("\t\tif (body != null) {")
+			sb.appendLine("        if (body != null) {")
 			for (line in buildLines) sb.appendLine(line)
 			for (line in requestLines) sb.appendLine(line)
-			sb.appendLine("\t\t} else {")
-			sb.appendLine("\t\t\t${returnPrefix}RequestOptions(")
-			sb.appendLine("\t\t\t\tmethod = \"${method.httpMethod}\",")
-			sb.appendLine("\t\t\t\tpath = $pathExpr,")
-			sb.appendLine("\t\t\t\tbodyEncoding = \"multipart\",")
+			sb.appendLine("        } else {")
+			sb.appendLine("            ${returnPrefix}RequestOptions(")
+			sb.appendLine("                method = \"${method.httpMethod}\",")
+			sb.appendLine("                path = $pathExpr,")
+			sb.appendLine("                bodyEncoding = \"multipart\",")
 			if (hasQueryType) {
-				sb.appendLine("\t\t\t\tquery = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
+				sb.appendLine("                query = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
 			}
 			if (isSearch) {
-				sb.appendLine("\t\t\t\tisSearch = true,")
+				sb.appendLine("                isSearch = true,")
 			}
-			sb.appendLine("\t\t\t)$returnSuffix")
-			sb.appendLine("\t\t}")
+			sb.appendLine("            )$returnSuffix")
+			sb.appendLine("        }")
 		}
 	} else {
-		sb.appendLine("\t\t${returnPrefix}RequestOptions(")
-		sb.appendLine("\t\t\tmethod = \"${method.httpMethod}\",")
-		sb.appendLine("\t\t\tpath = $pathExpr,")
+		sb.appendLine("        ${returnPrefix}RequestOptions(")
+		sb.appendLine("            method = \"${method.httpMethod}\",")
+		sb.appendLine("            path = $pathExpr,")
 
 		if (hasQueryType) {
-			sb.appendLine("\t\t\tquery = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
+			sb.appendLine("            query = params?.let { http.json.encodeToJsonElement(serializer(), it) },")
 		}
 
 		if (hasBodyType) {
 			if (method.bodyRequired) {
-				sb.appendLine("\t\t\tbody = http.json.encodeToJsonElement(serializer(), body),")
+				sb.appendLine("            body = http.json.encodeToJsonElement(serializer(), body),")
 			} else {
-				sb.appendLine("\t\t\tbody = body?.let { http.json.encodeToJsonElement(serializer(), it) },")
+				sb.appendLine("            body = body?.let { http.json.encodeToJsonElement(serializer(), it) },")
 			}
 			if (isMultipart) {
-				sb.appendLine("\t\t\tbodyEncoding = \"multipart\",")
+				sb.appendLine("            bodyEncoding = \"multipart\",")
 			} else if (isJsonBody) {
-				sb.appendLine("\t\t\tbodyEncoding = \"json\",")
+				sb.appendLine("            bodyEncoding = \"json\",")
 			}
 		}
 
 		if (isSearch) {
-			sb.appendLine("\t\t\tisSearch = true,")
+			sb.appendLine("            isSearch = true,")
 		}
 
-		sb.appendLine("\t\t)$returnSuffix")
+		sb.appendLine("        )$returnSuffix")
 	}
 
-	sb.append("\t}")
+	sb.append("    }")
 	return sb.toString()
 }
 
@@ -933,40 +933,40 @@ fun emitKotlinClientFile(
 	for (group in groups) {
 		val propClassName = groupToClassName(group.groupName)
 		val propName = groupToPropertyName(group.groupName)
-		sb.appendLine("\tval $propName: $propClassName")
+		sb.appendLine("    val $propName: $propClassName")
 	}
 
 	sb.appendLine()
-	sb.appendLine("\tprivate val http: LolzteamHttpClient")
+	sb.appendLine("    private val http: LolzteamHttpClient")
 	sb.appendLine()
 
 	// Constructor
-	sb.appendLine("\tinit {")
-	sb.appendLine("\t\thttp = LolzteamHttpClient(config.copy(")
-	sb.appendLine("\t\t\tbaseUrl = config.baseUrl ?: \"$defaultBaseUrl\",")
-	sb.appendLine("\t\t\trateLimit = config.rateLimit ?: RateLimitConfig(requestsPerMinute = $defaultRateLimit),")
+	sb.appendLine("    init {")
+	sb.appendLine("        http = LolzteamHttpClient(config.copy(")
+	sb.appendLine("            baseUrl = config.baseUrl ?: \"$defaultBaseUrl\",")
+	sb.appendLine("            rateLimit = config.rateLimit ?: RateLimitConfig(requestsPerMinute = $defaultRateLimit),")
 	if (defaultSearchRateLimit != null) {
-		sb.appendLine("\t\t\tsearchRateLimit = config.searchRateLimit ?: RateLimitConfig(requestsPerMinute = $defaultSearchRateLimit),")
+		sb.appendLine("            searchRateLimit = config.searchRateLimit ?: RateLimitConfig(requestsPerMinute = $defaultSearchRateLimit),")
 	}
-	sb.appendLine("\t\t))")
+	sb.appendLine("        ))")
 
 	for (group in groups) {
 		val propClassName = groupToClassName(group.groupName)
 		val propName = groupToPropertyName(group.groupName)
-		sb.appendLine("\t\t$propName = $propClassName(http)")
+		sb.appendLine("        $propName = $propClassName(http)")
 	}
 
-	sb.appendLine("\t}")
+	sb.appendLine("    }")
 	sb.appendLine()
 
-	sb.appendLine("\toverride fun close() {")
-	sb.appendLine("\t\thttp.close()")
-	sb.appendLine("\t}")
+	sb.appendLine("    override fun close() {")
+	sb.appendLine("        http.close()")
+	sb.appendLine("    }")
 
 	sb.appendLine()
-	sb.appendLine("\tcompanion object {")
-	sb.appendLine("\t\tfun create(token: String): $clientName = $clientName(ClientConfig(token = token))")
-	sb.appendLine("\t}")
+	sb.appendLine("    companion object {")
+	sb.appendLine("        fun create(token: String): $clientName = $clientName(ClientConfig(token = token))")
+	sb.appendLine("    }")
 
 	sb.appendLine("}")
 	sb.appendLine()
