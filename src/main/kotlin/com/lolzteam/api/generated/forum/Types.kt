@@ -1373,7 +1373,7 @@ data class RespThreadModel(
 	@SerialName("thread_prefixes")
 	val threadPrefixes: List<RespThreadModelThreadPrefixes> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonObject = JsonObject(emptyMap()),
+	val threadTags: Map<String, String> = emptyMap(),
 	val links: RespThreadModelLinks = RespThreadModelLinks(),
 	val permissions: RespThreadModelPermissions = RespThreadModelPermissions(),
 	@SerialName("node_title")

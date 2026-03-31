@@ -292,6 +292,7 @@ private fun defaultForKotlinType(kotlinType: String): String = when {
 	kotlinType == "JsonElement" -> " = JsonNull"
 	kotlinType == "JsonObject" -> " = JsonObject(emptyMap())"
 	kotlinType.startsWith("List<") -> " = emptyList()"
+	kotlinType.startsWith("Map<") -> " = emptyMap()"
 	else -> " = $kotlinType()"
 }
 
@@ -385,7 +386,14 @@ private fun resolvePropertyKotlinType(
 
 	if (type == "object" || propObj.containsKey("properties")) {
 		val innerProps = propObj["properties"] as? JsonObject
-		if (innerProps == null || innerProps.isEmpty()) return "JsonObject"
+		if (innerProps == null || innerProps.isEmpty()) {
+			val addlProps = propObj["additionalProperties"]
+			if (addlProps != null && addlProps !is JsonPrimitive) {
+				val valType = schemaToTypeString(addlProps, rawSpec)
+				return tsTypeToKotlin("Record<string, $valType>")
+			}
+			return "JsonObject"
+		}
 		// All-numeric property keys → flexible JsonElement (API returns dict-like objects)
 		if (innerProps.keys.all { it.matches(Regex("^\\d+$")) }) return "JsonElement"
 		if (parentTypeName != null && propName != null && nestedClasses != null) {
