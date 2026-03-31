@@ -1984,7 +1984,7 @@ public class ManagingApi(private val http: LolzteamHttpClient) {
      * @param title Title of account. If title specified and title_en is empty, title_en will be automatically translated to English language.
      * @param titleEn English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language.
      * @param price Current price of account in your currency.
-     * @param itemOrigin Account origin. Where did you get it from.
+     * @param itemOrigin Account origin.
      * @param emailLoginData Email login data (email:password format).
      * @param emailType Email type.
      * @param allowAskDiscount Allow users to ask discount for this account.
@@ -2827,7 +2827,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param titleEn English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language.
      * @param price Current price of account in your currency.
      * @param categoryId Accounts category.
-     * @param itemOrigin Account origin. Where did you get it from.
+     * @param itemOrigin Account origin.
      * @param extendedGuarantee Guarantee type.
      * @param allowAskDiscount Allow users to ask discount for this account.
      * @param proxyId Proxy id that will be used to check account.
@@ -2864,7 +2864,7 @@ public class PublishingApi(private val http: LolzteamHttpClient) {
      * @param titleEn English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language.
      * @param price Current price of account in your currency.
      * @param categoryId Accounts category.
-     * @param itemOrigin Account origin. Where did you get it from.
+     * @param itemOrigin Account origin.
      * @param extendedGuarantee Guarantee type.
      * @param description Account public description.
      * @param information Account private information (visible only for buyer).

@@ -1371,17 +1371,16 @@ data class RespThreadModel(
 	@SerialName("first_post")
 	val firstPost: RespThreadModelFirstPost = RespThreadModelFirstPost(),
 	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
+	val threadPrefixes: List<RespThreadModelThreadPrefixes> = emptyList(),
 	@SerialName("thread_tags")
-	val threadTags: JsonElement = JsonNull,
+	val threadTags: JsonObject = JsonObject(emptyMap()),
 	val links: RespThreadModelLinks = RespThreadModelLinks(),
 	val permissions: RespThreadModelPermissions = RespThreadModelPermissions(),
 	@SerialName("node_title")
 	val nodeTitle: String = "",
-	val restrictions: RespThreadModelRestrictions = RespThreadModelRestrictions(),
-	@SerialName("last_post")
-	val lastPost: RespThreadModelLastPost = RespThreadModelLastPost(),
-	val contest: RespThreadModelContest = RespThreadModelContest(),
+	val forum: RespForumModel? = null,
+	val restrictions: RespThreadModelRestrictions? = null,
+	val contest: RespThreadModelContest? = null,
 )
 
 @Serializable
@@ -1452,6 +1451,14 @@ data class RespThreadModelFirstPost(
 )
 
 @Serializable
+data class RespThreadModelThreadPrefixes(
+	@SerialName("prefix_id")
+	val prefixId: Double = 0.0,
+	@SerialName("prefix_title")
+	val prefixTitle: String = "",
+)
+
+@Serializable
 data class RespThreadModelLinks(
 	val permalink: String = "",
 	val detail: String = "",
@@ -1473,9 +1480,9 @@ data class RespThreadModelPermissionsBump(
 	val can: Boolean = false,
 	@SerialName("available_count")
 	val availableCount: Double = 0.0,
-	val error: JsonElement = JsonNull,
+	val error: String = "",
 	@SerialName("next_available_time")
-	val nextAvailableTime: JsonElement = JsonNull,
+	val nextAvailableTime: Double = 0.0,
 )
 
 @Serializable
@@ -1498,73 +1505,6 @@ data class RespThreadModelRestrictions(
 	val replyDelay: Double = 0.0,
 	@SerialName("max_reply_count")
 	val maxReplyCount: Double = 0.0,
-)
-
-@Serializable
-data class RespThreadModelLastPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class RespThreadModelLastPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-)
-
-@Serializable
-data class RespThreadModelLastPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	@SerialName("post_is_liked")
-	val postIsLiked: Boolean = false,
-	val links: RespThreadModelLastPostLinks = RespThreadModelLastPostLinks(),
-	val permissions: RespThreadModelLastPostPermissions = RespThreadModelLastPostPermissions(),
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
 )
 
 @Serializable
@@ -1606,7 +1546,7 @@ data class RespThreadModelContest(
 	val isMoneyPlaces: Double = 0.0,
 	@SerialName("chance_to_win")
 	val chanceToWin: Double = 0.0,
-	val winners: List<Long> = emptyList(),
+	val winners: List<Long>? = null,
 	@SerialName("already_participate")
 	val alreadyParticipate: Boolean = false,
 	val permissions: RespThreadModelContestPermissions = RespThreadModelContestPermissions(),
@@ -2003,6 +1943,82 @@ data class RespConversationMessageModelPermissions(
 )
 
 @Serializable
+data class RespForumModel(
+	@SerialName("forum_id")
+	val forumId: Double = 0.0,
+	@SerialName("forum_title")
+	val forumTitle: String = "",
+	@SerialName("forum_description")
+	val forumDescription: String = "",
+	@SerialName("forum_thread_count")
+	val forumThreadCount: Double = 0.0,
+	@SerialName("forum_post_count")
+	val forumPostCount: Double = 0.0,
+	@SerialName("parent_node_id")
+	val parentNodeId: Double = 0.0,
+	@SerialName("node_type_id")
+	val nodeTypeId: String = "",
+	@SerialName("icon_content")
+	val iconContent: String = "",
+	@SerialName("active_icon_content")
+	val activeIconContent: String = "",
+	@SerialName("forum_rules_thread_id")
+	val forumRulesThreadId: Double = 0.0,
+	@SerialName("forum_prefixes")
+	val forumPrefixes: List<RespForumModelForumPrefixes> = emptyList(),
+	@SerialName("thread_default_prefix_id")
+	val threadDefaultPrefixId: Double = 0.0,
+	@SerialName("thread_prefix_is_required")
+	val threadPrefixIsRequired: Boolean = false,
+	val links: RespForumModelLinks = RespForumModelLinks(),
+	val permissions: RespForumModelPermissions = RespForumModelPermissions(),
+	@SerialName("forum_is_followed")
+	val forumIsFollowed: Boolean = false,
+)
+
+@Serializable
+data class RespForumModelForumPrefixesGroupPrefixes(
+	@SerialName("prefix_id")
+	val prefixId: Double = 0.0,
+	@SerialName("css_class")
+	val cssClass: String = "",
+	@SerialName("prefix_title")
+	val prefixTitle: String = "",
+)
+
+@Serializable
+data class RespForumModelForumPrefixes(
+	@SerialName("group_title")
+	val groupTitle: String = "",
+	@SerialName("group_prefixes")
+	val groupPrefixes: List<RespForumModelForumPrefixesGroupPrefixes> = emptyList(),
+)
+
+@Serializable
+data class RespForumModelLinks(
+	val permalink: String = "",
+	val detail: String = "",
+	@SerialName("sub-categories")
+	val subCategories: String = "",
+	@SerialName("sub-forums")
+	val subForums: String = "",
+	val threads: String = "",
+	val followers: String = "",
+)
+
+@Serializable
+data class RespForumModelPermissions(
+	val view: Boolean = false,
+	val edit: Boolean = false,
+	val delete: Boolean = false,
+	@SerialName("create_thread")
+	val createThread: Boolean = false,
+	@SerialName("tag_thread")
+	val tagThread: Boolean = false,
+	val follow: Boolean = false,
+)
+
+@Serializable
 data class RespSystemInfo(
 	@SerialName("visitor_id")
 	val visitorId: Double = 0.0,
@@ -2206,76 +2222,12 @@ data class ForumsListParams(
 
 @Serializable
 data class ForumsListResponse(
-	val forums: List<ForumsListResponseForums> = emptyList(),
+	val forums: List<RespForumModel> = emptyList(),
 	@SerialName("forums_total")
 	val forumsTotal: Double = 0.0,
 	val tabs: List<ForumsListResponseTabs> = emptyList(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class ForumsListResponseForumsForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class ForumsListResponseForumsForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsListResponseForumsForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class ForumsListResponseForumsLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ForumsListResponseForumsPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ForumsListResponseForums(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsListResponseForumsForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ForumsListResponseForumsLinks = ForumsListResponseForumsLinks(),
-	val permissions: ForumsListResponseForumsPermissions = ForumsListResponseForumsPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -2289,7 +2241,7 @@ data class ForumsListResponseTabs(
 
 @Serializable
 data class ForumsGroupedResponse(
-	val data: JsonElement = JsonNull,
+	val data: List<List<JsonObject>> = emptyList(),
 	val tabs: List<ForumsGroupedResponseTabs> = emptyList(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -2297,84 +2249,28 @@ data class ForumsGroupedResponse(
 
 @Serializable
 data class ForumsGroupedResponseTabs(
+	@SerialName("node_ids")
+	val nodeIds: String = "",
+	val title: String = "",
 	@SerialName("link_title")
 	val linkTitle: String = "",
-	val isDefault: Boolean = false,
-	val title: String = "",
-	val isHidden: Boolean = false,
+	val isExtendedTab: Boolean = false,
+	val prefixes: List<JsonElement> = emptyList(),
+	@SerialName("prefixes_not")
+	val prefixesNot: List<JsonElement> = emptyList(),
+	val order: String = "",
+	val direction: String = "",
+	val period: String = "",
+	val state: String = "",
+	val q: String = "",
+	val tabLink: String = "",
 )
 
 @Serializable
 data class ForumsGetResponse(
-	val forum: ForumsGetResponseForum = ForumsGetResponseForum(),
+	val forum: RespForumModel = RespForumModel(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class ForumsGetResponseForumForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class ForumsGetResponseForumForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsGetResponseForumForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class ForumsGetResponseForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ForumsGetResponseForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ForumsGetResponseForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsGetResponseForumForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ForumsGetResponseForumLinks = ForumsGetResponseForumLinks(),
-	val permissions: ForumsGetResponseForumPermissions = ForumsGetResponseForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
 )
 
 @Serializable
@@ -2439,88 +2335,14 @@ data class ForumsFollowedParams(
 
 @Serializable
 data class ForumsFollowedResponse(
-	val forums: List<ForumsFollowedResponseForums> = emptyList(),
+	val forums: List<RespForumModel> = emptyList(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
-data class ForumsFollowedResponseForumsForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class ForumsFollowedResponseForumsForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<ForumsFollowedResponseForumsForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class ForumsFollowedResponseForumsLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ForumsFollowedResponseForumsPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ForumsFollowedResponseForumsFollow(
-	val post: Boolean = false,
-	val alert: Boolean = false,
-	val email: Boolean = false,
-)
-
-@Serializable
-data class ForumsFollowedResponseForums(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<ForumsFollowedResponseForumsForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ForumsFollowedResponseForumsLinks = ForumsFollowedResponseForumsLinks(),
-	val permissions: ForumsFollowedResponseForumsPermissions = ForumsFollowedResponseForumsPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-	val follow: ForumsFollowedResponseForumsFollow = ForumsFollowedResponseForumsFollow(),
-)
-
-@Serializable
 data class ForumsGetFeedOptionsResponse(
-	val forums: List<ForumsGetFeedOptionsResponseForums> = emptyList(),
+	val forums: List<RespForumModel> = emptyList(),
 	@SerialName("excluded_forums_ids")
 	val excludedForumsIds: List<Long> = emptyList(),
 	@SerialName("default_excluded_forums_ids")
@@ -2528,48 +2350,6 @@ data class ForumsGetFeedOptionsResponse(
 	val keywords: String = "",
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class ForumsGetFeedOptionsResponseForumsLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ForumsGetFeedOptionsResponseForumsPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ForumsGetFeedOptionsResponseForums(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("parent_node_id")
-	val parentNodeId: Double = 0.0,
-	val links: ForumsGetFeedOptionsResponseForumsLinks = ForumsGetFeedOptionsResponseForumsLinks(),
-	val permissions: ForumsGetFeedOptionsResponseForumsPermissions = ForumsGetFeedOptionsResponseForumsPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-	@SerialName("has_children")
-	val hasChildren: Boolean = false,
 )
 
 @Serializable
@@ -3267,226 +3047,11 @@ data class ThreadsFollowedParams(
 
 @Serializable
 data class ThreadsFollowedResponse(
-	val threads: List<ThreadsFollowedResponseThreads> = emptyList(),
+	val threads: List<RespThreadModel> = emptyList(),
 	@SerialName("threads_total")
 	val threadsTotal: Double = 0.0,
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsFirstPostLikeUsers(
-	@SerialName("user_id")
-	val userId: Double = 0.0,
-	val username: String = "",
-	@SerialName("display_style_group_id")
-	val displayStyleGroupId: Double = 0.0,
-	@SerialName("is_banned")
-	val isBanned: Double = 0.0,
-	@SerialName("uniq_username_css")
-	val uniqUsernameCss: String = "",
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("like_users")
-	val likeUsers: List<ThreadsFollowedResponseThreadsFirstPostLikeUsers> = emptyList(),
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: ThreadsFollowedResponseThreadsFirstPostLinks = ThreadsFollowedResponseThreadsFirstPostLinks(),
-	val permissions: ThreadsFollowedResponseThreadsFirstPostPermissions = ThreadsFollowedResponseThreadsFirstPostPermissions(),
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-	@SerialName("edit_title")
-	val editTitle: Boolean = false,
-	@SerialName("edit_tags")
-	val editTags: Boolean = false,
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ThreadsFollowedResponseThreadsForumLinks = ThreadsFollowedResponseThreadsForumLinks(),
-	val permissions: ThreadsFollowedResponseThreadsForumPermissions = ThreadsFollowedResponseThreadsForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreadsFollow(
-	val alert: Boolean = false,
-	val email: Boolean = false,
-)
-
-@Serializable
-data class ThreadsFollowedResponseThreads(
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: ThreadsFollowedResponseThreadsFirstPost = ThreadsFollowedResponseThreadsFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: JsonElement = JsonNull,
-	val links: ThreadsFollowedResponseThreadsLinks = ThreadsFollowedResponseThreadsLinks(),
-	val permissions: ThreadsFollowedResponseThreadsPermissions = ThreadsFollowedResponseThreadsPermissions(),
-	val forum: ThreadsFollowedResponseThreadsForum = ThreadsFollowedResponseThreadsForum(),
-	val follow: ThreadsFollowedResponseThreadsFollow = ThreadsFollowedResponseThreadsFollow(),
 )
 
 @Serializable
@@ -3618,220 +3183,16 @@ data class ThreadsUnreadParams(
 
 @Serializable
 data class ThreadsUnreadResponse(
-	val threads: List<RespThreadModel> = emptyList(),
-	val data: List<ThreadsUnreadResponseData> = emptyList(),
+	val threads: List<ThreadsUnreadResponseThreads> = emptyList(),
+	val data: List<RespThreadModel> = emptyList(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
-data class ThreadsUnreadResponseDataFirstPostLikeUsers(
-	@SerialName("user_id")
-	val userId: Double = 0.0,
-	val username: String = "",
-	@SerialName("display_style_group_id")
-	val displayStyleGroupId: Double = 0.0,
-	@SerialName("is_banned")
-	val isBanned: Double = 0.0,
-	@SerialName("uniq_username_css")
-	val uniqUsernameCss: String = "",
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
+data class ThreadsUnreadResponseThreads(
 	@SerialName("thread_id")
 	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("like_users")
-	val likeUsers: List<ThreadsUnreadResponseDataFirstPostLikeUsers> = emptyList(),
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: ThreadsUnreadResponseDataFirstPostLinks = ThreadsUnreadResponseDataFirstPostLinks(),
-	val permissions: ThreadsUnreadResponseDataFirstPostPermissions = ThreadsUnreadResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_poster")
-	val lastPoster: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ThreadsUnreadResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ThreadsUnreadResponseDataForumLinks = ThreadsUnreadResponseDataForumLinks(),
-	val permissions: ThreadsUnreadResponseDataForumPermissions = ThreadsUnreadResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class ThreadsUnreadResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: ThreadsUnreadResponseDataFirstPost = ThreadsUnreadResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: ThreadsUnreadResponseDataLinks = ThreadsUnreadResponseDataLinks(),
-	val permissions: ThreadsUnreadResponseDataPermissions = ThreadsUnreadResponseDataPermissions(),
-	val forum: ThreadsUnreadResponseDataForum = ThreadsUnreadResponseDataForum(),
 )
 
 @Serializable
@@ -3850,205 +3211,16 @@ data class ThreadsRecentParams(
 
 @Serializable
 data class ThreadsRecentResponse(
-	val threads: List<RespThreadModel> = emptyList(),
-	val data: List<ThreadsRecentResponseData> = emptyList(),
+	val threads: List<ThreadsRecentResponseThreads> = emptyList(),
+	val data: List<RespThreadModel> = emptyList(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
-data class ThreadsRecentResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class ThreadsRecentResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class ThreadsRecentResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
+data class ThreadsRecentResponseThreads(
 	@SerialName("thread_id")
 	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: ThreadsRecentResponseDataFirstPostLinks = ThreadsRecentResponseDataFirstPostLinks(),
-	val permissions: ThreadsRecentResponseDataFirstPostPermissions = ThreadsRecentResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class ThreadsRecentResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_poster")
-	val lastPoster: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class ThreadsRecentResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-)
-
-@Serializable
-data class ThreadsRecentResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class ThreadsRecentResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class ThreadsRecentResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: ThreadsRecentResponseDataForumLinks = ThreadsRecentResponseDataForumLinks(),
-	val permissions: ThreadsRecentResponseDataForumPermissions = ThreadsRecentResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class ThreadsRecentResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: ThreadsRecentResponseDataFirstPost = ThreadsRecentResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: ThreadsRecentResponseDataLinks = ThreadsRecentResponseDataLinks(),
-	val permissions: ThreadsRecentResponseDataPermissions = ThreadsRecentResponseDataPermissions(),
-	val forum: ThreadsRecentResponseDataForum = ThreadsRecentResponseDataForum(),
 )
 
 @Serializable
@@ -5223,75 +4395,6 @@ data class UsersContentsResponseDataPermissions(
 )
 
 @Serializable
-data class UsersContentsResponseDataThreadLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_poster")
-	val lastPoster: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class UsersContentsResponseDataThreadPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class UsersContentsResponseDataThread(
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: UsersContentsResponseDataThreadLinks = UsersContentsResponseDataThreadLinks(),
-	val permissions: UsersContentsResponseDataThreadPermissions = UsersContentsResponseDataThreadPermissions(),
-)
-
-@Serializable
 data class UsersContentsResponseData(
 	@SerialName("content_type")
 	val contentType: String = "",
@@ -5338,7 +4441,7 @@ data class UsersContentsResponseData(
 	val postIsFirstPost: Boolean = false,
 	val links: UsersContentsResponseDataLinks = UsersContentsResponseDataLinks(),
 	val permissions: UsersContentsResponseDataPermissions = UsersContentsResponseDataPermissions(),
-	val thread: UsersContentsResponseDataThread = UsersContentsResponseDataThread(),
+	val thread: RespThreadModel = RespThreadModel(),
 )
 
 @Serializable
@@ -6309,7 +5412,7 @@ data class NotificationsReadResponse(
 
 @Serializable
 data class TagsPopularResponse(
-	val tags: JsonElement = JsonNull,
+	val tags: JsonObject = JsonObject(emptyMap()),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -6324,7 +5427,7 @@ data class TagsListParams(
 
 @Serializable
 data class TagsListResponse(
-	val tags: JsonElement = JsonNull,
+	val tags: JsonObject = JsonObject(emptyMap()),
 	@SerialName("tags_total")
 	val tagsTotal: Double = 0.0,
 	val links: TagsListResponseLinks = TagsListResponseLinks(),
@@ -6350,7 +5453,7 @@ data class TagsGetParams(
 @Serializable
 data class TagsGetResponse(
 	val tag: TagsGetResponseTag = TagsGetResponseTag(),
-	val tagged: List<TagsGetResponseTagged> = emptyList(),
+	val tagged: List<RespThreadModel> = emptyList(),
 	@SerialName("tagged_total")
 	val taggedTotal: Double = 0.0,
 	val links: TagsGetResponseLinks = TagsGetResponseLinks(),
@@ -6373,225 +5476,6 @@ data class TagsGetResponseTag(
 	@SerialName("tag_use_count")
 	val tagUseCount: Double = 0.0,
 	val links: TagsGetResponseTagLinks = TagsGetResponseTagLinks(),
-)
-
-@Serializable
-data class TagsGetResponseTaggedFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class TagsGetResponseTaggedFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class TagsGetResponseTaggedFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: TagsGetResponseTaggedFirstPostLinks = TagsGetResponseTaggedFirstPostLinks(),
-	val permissions: TagsGetResponseTaggedFirstPostPermissions = TagsGetResponseTaggedFirstPostPermissions(),
-)
-
-@Serializable
-data class TagsGetResponseTaggedThreadPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class TagsGetResponseTaggedLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_poster")
-	val lastPoster: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class TagsGetResponseTaggedPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-)
-
-@Serializable
-data class TagsGetResponseTaggedForumForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class TagsGetResponseTaggedForumForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<TagsGetResponseTaggedForumForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class TagsGetResponseTaggedForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class TagsGetResponseTaggedForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class TagsGetResponseTaggedForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<TagsGetResponseTaggedForumForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: TagsGetResponseTaggedForumLinks = TagsGetResponseTaggedForumLinks(),
-	val permissions: TagsGetResponseTaggedForumPermissions = TagsGetResponseTaggedForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class TagsGetResponseTagged(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: TagsGetResponseTaggedFirstPost = TagsGetResponseTaggedFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<TagsGetResponseTaggedThreadPrefixes> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: JsonElement = JsonNull,
-	val links: TagsGetResponseTaggedLinks = TagsGetResponseTaggedLinks(),
-	val permissions: TagsGetResponseTaggedPermissions = TagsGetResponseTaggedPermissions(),
-	val forum: TagsGetResponseTaggedForum = TagsGetResponseTaggedForum(),
 )
 
 @Serializable
@@ -6638,291 +5522,13 @@ data class SearchAllBody(
 
 @Serializable
 data class SearchAllResponse(
-	val data: List<SearchAllResponseData> = emptyList(),
+	val data: List<RespForumModel> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	val users: List<RespUserModel> = emptyList(),
 	val links: SearchAllResponseLinks = SearchAllResponseLinks(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class SearchAllResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchAllResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	@SerialName("post_is_liked")
-	val postIsLiked: Boolean = false,
-	val links: SearchAllResponseDataFirstPostLinks = SearchAllResponseDataFirstPostLinks(),
-	val permissions: SearchAllResponseDataFirstPostPermissions = SearchAllResponseDataFirstPostPermissions(),
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_poster")
-	val lastPoster: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class SearchAllResponseDataPermissionsBump(
-	val can: Boolean = false,
-	@SerialName("available_count")
-	val availableCount: Double = 0.0,
-	val error: JsonElement = JsonNull,
-	@SerialName("next_available_time")
-	val nextAvailableTime: JsonElement = JsonNull,
-)
-
-@Serializable
-data class SearchAllResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	val edit: Boolean = false,
-	val bump: SearchAllResponseDataPermissionsBump = SearchAllResponseDataPermissionsBump(),
-)
-
-@Serializable
-data class SearchAllResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class SearchAllResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("parent_node_id")
-	val parentNodeId: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: SearchAllResponseDataForumLinks = SearchAllResponseDataForumLinks(),
-	val permissions: SearchAllResponseDataForumPermissions = SearchAllResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseDataLastPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchAllResponseDataLastPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseDataLastPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	@SerialName("post_is_liked")
-	val postIsLiked: Boolean = false,
-	val links: SearchAllResponseDataLastPostLinks = SearchAllResponseDataLastPostLinks(),
-	val permissions: SearchAllResponseDataLastPostPermissions = SearchAllResponseDataLastPostPermissions(),
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-)
-
-@Serializable
-data class SearchAllResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: String = "",
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_closed")
-	val threadIsClosed: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("thread_is_starred")
-	val threadIsStarred: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: SearchAllResponseDataFirstPost = SearchAllResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: SearchAllResponseDataLinks = SearchAllResponseDataLinks(),
-	val permissions: SearchAllResponseDataPermissions = SearchAllResponseDataPermissions(),
-	@SerialName("node_title")
-	val nodeTitle: String = "",
-	val forum: SearchAllResponseDataForum = SearchAllResponseDataForum(),
-	@SerialName("last_post")
-	val lastPost: SearchAllResponseDataLastPost = SearchAllResponseDataLastPost(),
 )
 
 @Serializable
@@ -6956,205 +5562,12 @@ data class SearchThreadsBody(
 
 @Serializable
 data class SearchThreadsResponse(
-	val data: List<SearchThreadsResponseData> = emptyList(),
+	val data: List<RespForumModel> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	val links: SearchThreadsResponseLinks = SearchThreadsResponseLinks(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class SearchThreadsResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchThreadsResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class SearchThreadsResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: SearchThreadsResponseDataFirstPostLinks = SearchThreadsResponseDataFirstPostLinks(),
-	val permissions: SearchThreadsResponseDataFirstPostPermissions = SearchThreadsResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class SearchThreadsResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class SearchThreadsResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-)
-
-@Serializable
-data class SearchThreadsResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class SearchThreadsResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class SearchThreadsResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: SearchThreadsResponseDataForumLinks = SearchThreadsResponseDataForumLinks(),
-	val permissions: SearchThreadsResponseDataForumPermissions = SearchThreadsResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class SearchThreadsResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: SearchThreadsResponseDataFirstPost = SearchThreadsResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: SearchThreadsResponseDataLinks = SearchThreadsResponseDataLinks(),
-	val permissions: SearchThreadsResponseDataPermissions = SearchThreadsResponseDataPermissions(),
-	val forum: SearchThreadsResponseDataForum = SearchThreadsResponseDataForum(),
 )
 
 @Serializable
@@ -7188,205 +5601,12 @@ data class SearchPostsBody(
 
 @Serializable
 data class SearchPostsResponse(
-	val data: List<SearchPostsResponseData> = emptyList(),
+	val data: List<RespPostModel> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	val links: SearchPostsResponseLinks = SearchPostsResponseLinks(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class SearchPostsResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchPostsResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class SearchPostsResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: SearchPostsResponseDataFirstPostLinks = SearchPostsResponseDataFirstPostLinks(),
-	val permissions: SearchPostsResponseDataFirstPostPermissions = SearchPostsResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class SearchPostsResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class SearchPostsResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-)
-
-@Serializable
-data class SearchPostsResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class SearchPostsResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class SearchPostsResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: SearchPostsResponseDataForumLinks = SearchPostsResponseDataForumLinks(),
-	val permissions: SearchPostsResponseDataForumPermissions = SearchPostsResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class SearchPostsResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: SearchPostsResponseDataFirstPost = SearchPostsResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: SearchPostsResponseDataLinks = SearchPostsResponseDataLinks(),
-	val permissions: SearchPostsResponseDataPermissions = SearchPostsResponseDataPermissions(),
-	val forum: SearchPostsResponseDataForum = SearchPostsResponseDataForum(),
 )
 
 @Serializable
@@ -7518,226 +5738,13 @@ data class SearchTaggedBody(
 
 @Serializable
 data class SearchTaggedResponse(
-	val data: List<SearchTaggedResponseData> = emptyList(),
+	val data: List<RespThreadModel> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	@SerialName("search_tags")
 	val searchTags: JsonElement = JsonNull,
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class SearchTaggedResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchTaggedResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class SearchTaggedResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: SearchTaggedResponseDataFirstPostLinks = SearchTaggedResponseDataFirstPostLinks(),
-	val permissions: SearchTaggedResponseDataFirstPostPermissions = SearchTaggedResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class SearchTaggedResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class SearchTaggedResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-	@SerialName("edit_title")
-	val editTitle: Boolean = false,
-	@SerialName("edit_tags")
-	val editTags: Boolean = false,
-)
-
-@Serializable
-data class SearchTaggedResponseDataForumForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class SearchTaggedResponseDataForumForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<SearchTaggedResponseDataForumForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class SearchTaggedResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class SearchTaggedResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class SearchTaggedResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<SearchTaggedResponseDataForumForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: SearchTaggedResponseDataForumLinks = SearchTaggedResponseDataForumLinks(),
-	val permissions: SearchTaggedResponseDataForumPermissions = SearchTaggedResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class SearchTaggedResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: SearchTaggedResponseDataFirstPost = SearchTaggedResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: JsonElement = JsonNull,
-	val links: SearchTaggedResponseDataLinks = SearchTaggedResponseDataLinks(),
-	val permissions: SearchTaggedResponseDataPermissions = SearchTaggedResponseDataPermissions(),
-	val forum: SearchTaggedResponseDataForum = SearchTaggedResponseDataForum(),
 )
 
 @Serializable
@@ -7750,226 +5757,13 @@ data class SearchResultsParams(
 
 @Serializable
 data class SearchResultsResponse(
-	val data: List<SearchResultsResponseData> = emptyList(),
+	val data: List<RespThreadModel> = emptyList(),
 	@SerialName("data_total")
 	val dataTotal: Double = 0.0,
 	@SerialName("search_tags")
 	val searchTags: JsonElement = JsonNull,
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class SearchResultsResponseDataFirstPostLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val thread: String = "",
-	val poster: String = "",
-	val likes: String = "",
-	val report: String = "",
-	val attachments: String = "",
-	@SerialName("poster_avatar")
-	val posterAvatar: String = "",
-)
-
-@Serializable
-data class SearchResultsResponseDataFirstPostPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	val reply: Boolean = false,
-	val like: Boolean = false,
-	val report: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-)
-
-@Serializable
-data class SearchResultsResponseDataFirstPost(
-	@SerialName("post_id")
-	val postId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("poster_user_id")
-	val posterUserId: Double = 0.0,
-	@SerialName("poster_username")
-	val posterUsername: String = "",
-	@SerialName("poster_username_html")
-	val posterUsernameHtml: String = "",
-	@SerialName("post_create_date")
-	val postCreateDate: Double = 0.0,
-	@SerialName("post_body")
-	val postBody: String = "",
-	@SerialName("post_body_html")
-	val postBodyHtml: String = "",
-	@SerialName("post_body_plain_text")
-	val postBodyPlainText: String = "",
-	val signature: String = "",
-	@SerialName("signature_html")
-	val signatureHtml: String = "",
-	@SerialName("signature_plain_text")
-	val signaturePlainText: String = "",
-	@SerialName("post_like_count")
-	val postLikeCount: Double = 0.0,
-	@SerialName("post_attachment_count")
-	val postAttachmentCount: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("post_is_published")
-	val postIsPublished: Boolean = false,
-	@SerialName("post_is_deleted")
-	val postIsDeleted: Boolean = false,
-	@SerialName("post_update_date")
-	val postUpdateDate: Double = 0.0,
-	@SerialName("post_is_first_post")
-	val postIsFirstPost: Boolean = false,
-	val links: SearchResultsResponseDataFirstPostLinks = SearchResultsResponseDataFirstPostLinks(),
-	val permissions: SearchResultsResponseDataFirstPostPermissions = SearchResultsResponseDataFirstPostPermissions(),
-)
-
-@Serializable
-data class SearchResultsResponseDataLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-	@SerialName("last_post")
-	val lastPost: String = "",
-)
-
-@Serializable
-data class SearchResultsResponseDataPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	val edit: Boolean = false,
-	@SerialName("edit_title")
-	val editTitle: Boolean = false,
-	@SerialName("edit_tags")
-	val editTags: Boolean = false,
-)
-
-@Serializable
-data class SearchResultsResponseDataForumForumPrefixesGroupPrefixes(
-	@SerialName("prefix_id")
-	val prefixId: Double = 0.0,
-	@SerialName("prefix_title")
-	val prefixTitle: String = "",
-)
-
-@Serializable
-data class SearchResultsResponseDataForumForumPrefixes(
-	@SerialName("group_title")
-	val groupTitle: String = "",
-	@SerialName("group_prefixes")
-	val groupPrefixes: List<SearchResultsResponseDataForumForumPrefixesGroupPrefixes> = emptyList(),
-)
-
-@Serializable
-data class SearchResultsResponseDataForumLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	@SerialName("sub-categories")
-	val subCategories: String = "",
-	@SerialName("sub-forums")
-	val subForums: String = "",
-	val threads: String = "",
-	val followers: String = "",
-)
-
-@Serializable
-data class SearchResultsResponseDataForumPermissions(
-	val view: Boolean = false,
-	val edit: Boolean = false,
-	val delete: Boolean = false,
-	@SerialName("create_thread")
-	val createThread: Boolean = false,
-	@SerialName("upload_attachment")
-	val uploadAttachment: Boolean = false,
-	@SerialName("tag_thread")
-	val tagThread: Boolean = false,
-	val follow: Boolean = false,
-)
-
-@Serializable
-data class SearchResultsResponseDataForum(
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("forum_title")
-	val forumTitle: String = "",
-	@SerialName("forum_description")
-	val forumDescription: String = "",
-	@SerialName("forum_thread_count")
-	val forumThreadCount: Double = 0.0,
-	@SerialName("forum_post_count")
-	val forumPostCount: Double = 0.0,
-	@SerialName("forum_prefixes")
-	val forumPrefixes: List<SearchResultsResponseDataForumForumPrefixes> = emptyList(),
-	@SerialName("thread_default_prefix_id")
-	val threadDefaultPrefixId: Double = 0.0,
-	@SerialName("thread_prefix_is_required")
-	val threadPrefixIsRequired: Boolean = false,
-	val links: SearchResultsResponseDataForumLinks = SearchResultsResponseDataForumLinks(),
-	val permissions: SearchResultsResponseDataForumPermissions = SearchResultsResponseDataForumPermissions(),
-	@SerialName("forum_is_followed")
-	val forumIsFollowed: Boolean = false,
-)
-
-@Serializable
-data class SearchResultsResponseData(
-	@SerialName("content_type")
-	val contentType: String = "",
-	@SerialName("content_id")
-	val contentId: Double = 0.0,
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("first_post")
-	val firstPost: SearchResultsResponseDataFirstPost = SearchResultsResponseDataFirstPost(),
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: JsonElement = JsonNull,
-	val links: SearchResultsResponseDataLinks = SearchResultsResponseDataLinks(),
-	val permissions: SearchResultsResponseDataPermissions = SearchResultsResponseDataPermissions(),
-	val forum: SearchResultsResponseDataForum = SearchResultsResponseDataForum(),
 )
 
 // ─── BatchApi Types ────────────────────────────────────────
@@ -8518,75 +6312,8 @@ data class FormsCreateBodyV3(
 @Serializable
 data class FormsCreateResponse(
 	val message: String = "",
-	val content: FormsCreateResponseContent = FormsCreateResponseContent(),
+	val content: RespThreadModel = RespThreadModel(),
 	@SerialName("system_info")
 	val systemInfo: RespSystemInfo = RespSystemInfo(),
-)
-
-@Serializable
-data class FormsCreateResponseContentLinks(
-	val permalink: String = "",
-	val detail: String = "",
-	val followers: String = "",
-	val forum: String = "",
-	val posts: String = "",
-	@SerialName("first_poster")
-	val firstPoster: String = "",
-	@SerialName("first_poster_avatar")
-	val firstPosterAvatar: String = "",
-	@SerialName("first_post")
-	val firstPost: String = "",
-)
-
-@Serializable
-data class FormsCreateResponseContentPermissions(
-	val view: Boolean = false,
-	val delete: Boolean = false,
-	val follow: Boolean = false,
-	val post: Boolean = false,
-)
-
-@Serializable
-data class FormsCreateResponseContent(
-	@SerialName("thread_id")
-	val threadId: Double = 0.0,
-	@SerialName("forum_id")
-	val forumId: Double = 0.0,
-	@SerialName("thread_title")
-	val threadTitle: String = "",
-	@SerialName("thread_view_count")
-	val threadViewCount: Double = 0.0,
-	@SerialName("creator_user_id")
-	val creatorUserId: Double = 0.0,
-	@SerialName("creator_username")
-	val creatorUsername: String = "",
-	@SerialName("creator_username_html")
-	val creatorUsernameHtml: String = "",
-	@SerialName("thread_create_date")
-	val threadCreateDate: Double = 0.0,
-	@SerialName("thread_update_date")
-	val threadUpdateDate: Double = 0.0,
-	@SerialName("user_is_ignored")
-	val userIsIgnored: Boolean = false,
-	@SerialName("thread_post_count")
-	val threadPostCount: Double = 0.0,
-	@SerialName("thread_is_published")
-	val threadIsPublished: Boolean = false,
-	@SerialName("thread_is_deleted")
-	val threadIsDeleted: Boolean = false,
-	@SerialName("thread_is_sticky")
-	val threadIsSticky: Boolean = false,
-	@SerialName("thread_is_closed")
-	val threadIsClosed: Boolean = false,
-	@SerialName("thread_is_followed")
-	val threadIsFollowed: Boolean = false,
-	@SerialName("thread_prefixes")
-	val threadPrefixes: List<JsonElement> = emptyList(),
-	@SerialName("thread_tags")
-	val threadTags: List<JsonElement> = emptyList(),
-	val links: FormsCreateResponseContentLinks = FormsCreateResponseContentLinks(),
-	val permissions: FormsCreateResponseContentPermissions = FormsCreateResponseContentPermissions(),
-	@SerialName("node_title")
-	val nodeTitle: String = "",
 )
 

@@ -1220,6 +1220,35 @@ internal object HypixelSkyblockApiEnabledSerializer : KSerializer<HypixelSkybloc
 }
 
 
+@Serializable(with = ItemOriginSerializer::class)
+enum class ItemOrigin(val value: String) {
+	BRUTE("brute"),
+	PHISHING("phishing"),
+	STEALER("stealer"),
+	AUTOREG("autoreg"),
+	PERSONAL("personal"),
+	RESALE("resale"),
+	DUMMY("dummy"),
+	SELF_REGISTRATION("self_registration"),
+	RETRIEVE_VIA_SUPPORT("retrieve_via_support");
+}
+
+
+internal object ItemOriginSerializer : KSerializer<ItemOrigin> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("ItemOrigin", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: ItemOrigin) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): ItemOrigin {
+		val v = decoder.decodeString()
+		return ItemOrigin.entries.first { it.value == v }
+	}
+}
+
+
 @Serializable(with = JavaSerializer::class)
 enum class Java(val value: String) {
 	YES("yes"),
@@ -1400,33 +1429,6 @@ internal object MafileSerializer : KSerializer<Mafile> {
 	override fun deserialize(decoder: Decoder): Mafile {
 		val v = decoder.decodeString()
 		return Mafile.entries.first { it.value == v }
-	}
-}
-
-
-@Serializable(with = ManagingItemOriginSerializer::class)
-enum class ManagingItemOrigin(val value: String) {
-	BRUTE("brute"),
-	PHISHING("phishing"),
-	STEALER("stealer"),
-	PERSONAL("personal"),
-	RESALE("resale"),
-	AUTOREG("autoreg"),
-	DUMMY("dummy");
-}
-
-
-internal object ManagingItemOriginSerializer : KSerializer<ManagingItemOrigin> {
-	override val descriptor: SerialDescriptor =
-		PrimitiveSerialDescriptor("ManagingItemOrigin", PrimitiveKind.STRING)
-
-	override fun serialize(encoder: Encoder, value: ManagingItemOrigin) {
-		encoder.encodeString(value.value)
-	}
-
-	override fun deserialize(decoder: Decoder): ManagingItemOrigin {
-		val v = decoder.decodeString()
-		return ManagingItemOrigin.entries.first { it.value == v }
 	}
 }
 
@@ -1628,6 +1630,35 @@ internal object OrderBySerializer : KSerializer<OrderBy> {
 }
 
 
+@Serializable(with = OriginSerializer::class)
+enum class Origin(val value: String) {
+	BRUTE("brute"),
+	PHISHING("phishing"),
+	STEALER("stealer"),
+	AUTOREG("autoreg"),
+	PERSONAL("personal"),
+	RESALE("resale"),
+	DUMMY("dummy"),
+	SELF_REGISTRATION("self_registration"),
+	RETRIEVE_VIA_SUPPORT("retrieve_via_support");
+}
+
+
+internal object OriginSerializer : KSerializer<Origin> {
+	override val descriptor: SerialDescriptor =
+		PrimitiveSerialDescriptor("Origin", PrimitiveKind.STRING)
+
+	override fun serialize(encoder: Encoder, value: Origin) {
+		encoder.encodeString(value.value)
+	}
+
+	override fun deserialize(decoder: Decoder): Origin {
+		val v = decoder.decodeString()
+		return Origin.entries.first { it.value == v }
+	}
+}
+
+
 @Serializable(with = ParentControlSerializer::class)
 enum class ParentControl(val value: String) {
 	YES("yes"),
@@ -1817,34 +1848,6 @@ internal object PsnLinkableSerializer : KSerializer<PsnLinkable> {
 	override fun deserialize(decoder: Decoder): PsnLinkable {
 		val v = decoder.decodeString()
 		return PsnLinkable.entries.first { it.value == v }
-	}
-}
-
-
-@Serializable(with = PublishingItemOriginSerializer::class)
-enum class PublishingItemOrigin(val value: String) {
-	BRUTE("brute"),
-	PHISHING("phishing"),
-	STEALER("stealer"),
-	PERSONAL("personal"),
-	RESALE("resale"),
-	AUTOREG("autoreg"),
-	DUMMY("dummy"),
-	SELF_REGISTRATION("self_registration");
-}
-
-
-internal object PublishingItemOriginSerializer : KSerializer<PublishingItemOrigin> {
-	override val descriptor: SerialDescriptor =
-		PrimitiveSerialDescriptor("PublishingItemOrigin", PrimitiveKind.STRING)
-
-	override fun serialize(encoder: Encoder, value: PublishingItemOrigin) {
-		encoder.encodeString(value.value)
-	}
-
-	override fun deserialize(decoder: Decoder): PublishingItemOrigin {
-		val v = decoder.decodeString()
-		return PublishingItemOrigin.entries.first { it.value == v }
 	}
 }
 
@@ -3191,7 +3194,7 @@ data class CategoryAllParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -3265,7 +3268,7 @@ data class CategorySteamParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -3921,7 +3924,7 @@ data class CategoryFortniteParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -4393,7 +4396,7 @@ data class CategoryMihoyoParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -5052,7 +5055,7 @@ data class CategoryRiotParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -5505,7 +5508,7 @@ data class CategoryTelegramParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -5868,7 +5871,7 @@ data class CategorySupercellParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -6276,7 +6279,7 @@ data class CategoryEaParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -6587,7 +6590,7 @@ data class CategoryWotParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -6925,7 +6928,7 @@ data class CategoryWotBlitzParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -7263,7 +7266,7 @@ data class CategoryGiftsParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -7469,7 +7472,7 @@ data class CategoryEpicGamesParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -7751,7 +7754,7 @@ data class CategoryEscapeFromTarkovParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -8013,7 +8016,7 @@ data class CategorySocialClubParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -8265,7 +8268,7 @@ data class CategoryUplayParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -8615,7 +8618,7 @@ data class CategoryDiscordParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -8947,7 +8950,7 @@ data class CategoryTikTokParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -9230,7 +9233,7 @@ data class CategoryInstagramParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -9486,7 +9489,7 @@ data class CategoryBattleNetParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -9770,7 +9773,7 @@ data class CategoryChatGPTParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -10021,7 +10024,7 @@ data class CategoryVpnParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -10233,7 +10236,7 @@ data class CategoryRobloxParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -10595,7 +10598,7 @@ data class CategoryWarfaceParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -10852,7 +10855,7 @@ data class CategoryMinecraftParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11199,7 +11202,7 @@ data class CategoryHytaleParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11579,7 +11582,7 @@ data class ListUserParams(
 	val login: String? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11663,7 +11666,7 @@ data class ListOrdersParams(
 	val login: String? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11877,7 +11880,7 @@ data class ListDownloadParams(
 	val pmax: Long? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11941,7 +11944,7 @@ data class ListFavoritesParams(
 	val pmax: Long? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -11988,7 +11991,7 @@ data class ListViewedParams(
 	val pmax: Long? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -12431,9 +12434,9 @@ data class ManagingEditBody(
     /** Current price of account in your currency. */
 	val price: Long? = null,
 	val currency: Currency? = null,
-    /** Account origin. Where did you get it from. */
+    /** Account origin. */
 	@SerialName("item_origin")
-	val itemOrigin: ManagingItemOrigin? = null,
+	val itemOrigin: ItemOrigin? = null,
     /** Email login data (email:password format). */
 	@SerialName("email_login_data")
 	val emailLoginData: String? = null,
@@ -13150,7 +13153,7 @@ data class CartGetParams(
 	val notPublicTagId: List<Long>? = null,
     /** List of account origins. */
 	@SerialName("origin[]")
-	val origin: JsonElement? = null,
+	val origin: Origin? = null,
     /** List of account origins that won't be included. */
 	@SerialName("not_origin[]")
 	val notOrigin: JsonElement? = null,
@@ -13799,9 +13802,9 @@ data class PublishingFastSellBody(
 	@SerialName("category_id")
 	val categoryId: CategoryId,
 	val currency: Currency,
-    /** Account origin. Where did you get it from. */
+    /** Account origin. */
 	@SerialName("item_origin")
-	val itemOrigin: PublishingItemOrigin,
+	val itemOrigin: ItemOrigin,
     /** Title of account. If title specified and title_en is empty, title_en will be automatically translated to English language. */
 	val title: String? = null,
     /** English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language. */
@@ -13858,9 +13861,9 @@ data class PublishingAddBody(
 	@SerialName("category_id")
 	val categoryId: CategoryId,
 	val currency: Currency,
-    /** Account origin. Where did you get it from. */
+    /** Account origin. */
 	@SerialName("item_origin")
-	val itemOrigin: PublishingItemOrigin,
+	val itemOrigin: ItemOrigin,
     /** Title of account. If title specified and title_en is empty, title_en will be automatically translated to English language. */
 	val title: String? = null,
     /** English title of account. If title_en specified and title is empty, title will be automatically translated to Russian language. */
