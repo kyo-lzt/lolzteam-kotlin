@@ -19,7 +19,7 @@ private fun computeDelay(
     error: Throwable,
 ): Long {
     if (error is RateLimitException && error.retryAfter != null) {
-        return min(error.retryAfter.inWholeMilliseconds, config.maxDelay.inWholeMilliseconds)
+        return error.retryAfter.inWholeMilliseconds
     }
     val exponential = config.baseDelay.inWholeMilliseconds * (1L shl attempt)
     val jitter = (Random.nextDouble() * config.baseDelay.inWholeMilliseconds).toLong()

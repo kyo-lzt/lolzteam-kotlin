@@ -1,6 +1,8 @@
 package com.lolzteam.api.runtime
 
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.engine.cio.endpoint
+import io.ktor.client.engine.java.Java
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.forms.FormDataContent
@@ -26,6 +28,10 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
 import java.io.Closeable
+import java.net.Authenticator
+import java.net.InetSocketAddress
+import java.net.PasswordAuthentication
+import java.net.Proxy
 import java.net.URI
 import io.ktor.client.HttpClient as KtorHttpClient
 
@@ -44,8 +50,8 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
     private val token: String = config.token
     private val retryConfig: RetryConfig? = config.retry
     private val onRetry: ((RetryInfo) -> Unit)? = config.onRetry
-    private val rateLimiter: RateLimiter? = config.rateLimit?.let { RateLimiter(it.requestsPerMinute) }
-    private val searchRateLimiter: RateLimiter? = config.searchRateLimit?.let { RateLimiter(it.requestsPerMinute) }
+    private val rateLimiter: RateLimiter? = config.rateLimit?.let { RateLimiter(it.requestsPerMinute, maxBurst = it.requestsPerMinute.coerceAtMost(30)) }
+    private val searchRateLimiter: RateLimiter? = config.searchRateLimit?.let { RateLimiter(it.requestsPerMinute, maxBurst = 1) }
     private val ownsClient: Boolean = httpClient == null
 
     internal val json: Json =
@@ -57,35 +63,87 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
 
     private val client: KtorHttpClient =
         httpClient ?: run {
-            if (config.proxy != null) {
-                val uri =
-                    try {
-                        URI(config.proxy.url)
-                    } catch (e: Exception) {
-                        throw ConfigException("invalid proxy URL: ${config.proxy.url}")
+            val proxyUri =
+                if (config.proxy != null) {
+                    val uri =
+                        try {
+                            URI(config.proxy.url)
+                        } catch (e: Exception) {
+                            throw ConfigException("invalid proxy URL: ${config.proxy.url}")
+                        }
+                    val scheme = uri.scheme?.lowercase()
+                    if (scheme == null || scheme !in setOf("http", "https", "socks5")) {
+                        throw ConfigException("unsupported proxy scheme: ${scheme ?: "<none>"}")
                     }
-                val scheme = uri.scheme?.lowercase()
-                if (scheme == null || scheme !in setOf("http", "https", "socks5")) {
-                    throw ConfigException("unsupported proxy scheme: ${scheme ?: "<none>"}")
+                    if (uri.host.isNullOrEmpty()) {
+                        throw ConfigException("proxy URL has no host")
+                    }
+                    uri
+                } else {
+                    null
                 }
-                if (uri.host.isNullOrEmpty()) {
-                    throw ConfigException("proxy URL has no host")
-                }
-            }
-            KtorHttpClient(CIO) {
-                engine {
-                    if (config.proxy != null) {
-                        val uri = URI(config.proxy.url)
-                        proxy =
-                            when (uri.scheme?.lowercase()) {
-                                "socks5" -> io.ktor.client.engine.ProxyBuilder.socks(uri.host, uri.port)
-                                else -> io.ktor.client.engine.ProxyBuilder.http(io.ktor.http.Url(config.proxy.url))
+            val proxyScheme = proxyUri?.scheme?.lowercase()
+            val isSocks5WithAuth = proxyScheme == "socks5" && proxyUri?.userInfo != null
+            val useJavaEngine =
+                proxyUri != null &&
+                    (proxyScheme in setOf("http", "https") || isSocks5WithAuth)
+            val timeoutMs = config.timeout.inWholeMilliseconds
+            val connectMs = (config.timeout.inWholeMilliseconds / 3).coerceIn(5_000, 15_000)
+
+            if (useJavaEngine) {
+                val javaProxyType =
+                    if (proxyScheme == "socks5") Proxy.Type.SOCKS else Proxy.Type.HTTP
+                KtorHttpClient(Java) {
+                    engine {
+                        proxy = Proxy(javaProxyType, InetSocketAddress(proxyUri!!.host, proxyUri.port))
+                        val userInfo = proxyUri.userInfo
+                        if (userInfo != null) {
+                            val parts = userInfo.split(":", limit = 2)
+                            val user = parts[0]
+                            val pass = parts.getOrElse(1) { "" }
+                            config {
+                                authenticator(
+                                    object : Authenticator() {
+                                        override fun getPasswordAuthentication(): PasswordAuthentication =
+                                            PasswordAuthentication(user, pass.toCharArray())
+                                    },
+                                )
                             }
+                        }
+                    }
+                    expectSuccess = false
+                    install(HttpTimeout) {
+                        requestTimeoutMillis = timeoutMs
+                        connectTimeoutMillis = connectMs
                     }
                 }
-                expectSuccess = false
-                install(HttpTimeout) {
-                    requestTimeoutMillis = config.timeout.inWholeMilliseconds
+            } else {
+                KtorHttpClient(CIO) {
+                    engine {
+                        if (proxyUri != null) {
+                            proxy =
+                                when (proxyUri.scheme?.lowercase()) {
+                                    "socks5" ->
+                                        io.ktor.client.engine.ProxyBuilder.socks(
+                                            proxyUri.host,
+                                            proxyUri.port,
+                                        )
+                                    else ->
+                                        io.ktor.client.engine.ProxyBuilder.http(
+                                            io.ktor.http.Url(config.proxy!!.url),
+                                        )
+                                }
+                        }
+                        endpoint {
+                            connectTimeout = connectMs
+                            connectAttempts = 1
+                        }
+                    }
+                    expectSuccess = false
+                    install(HttpTimeout) {
+                        requestTimeoutMillis = timeoutMs
+                        connectTimeoutMillis = connectMs
+                    }
                 }
             }
         }

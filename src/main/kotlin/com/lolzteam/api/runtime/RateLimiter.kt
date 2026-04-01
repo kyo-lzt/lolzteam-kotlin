@@ -4,7 +4,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-class RateLimiter(requestsPerMinute: Int) {
+class RateLimiter(requestsPerMinute: Int, maxBurst: Int = requestsPerMinute) {
     init {
         if (requestsPerMinute <= 0) {
             throw ConfigException("requestsPerMinute must be greater than 0")
@@ -13,7 +13,7 @@ class RateLimiter(requestsPerMinute: Int) {
 
     private val maxTokens: Double = requestsPerMinute.toDouble()
     private val refillRate: Double = requestsPerMinute.toDouble() / 60_000.0
-    private var tokens: Double = maxTokens
+    private var tokens: Double = maxBurst.toDouble().coerceAtMost(maxTokens)
     private var lastRefill: Long = System.currentTimeMillis()
     private val mutex = Mutex()
 

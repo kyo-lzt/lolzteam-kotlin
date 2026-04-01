@@ -52,7 +52,7 @@ class RetryTest {
             assertFailsWith<AuthException> {
                 withRetry(RetryConfig(maxRetries = 3, baseDelay = 10.milliseconds), method = "GET", path = "/test") {
                     attempts++
-                    throw AuthException(401, "unauthorized", Headers.Empty)
+                    throw AuthException("unauthorized", Headers.Empty)
                 }
             }
             assertEquals(1, attempts)

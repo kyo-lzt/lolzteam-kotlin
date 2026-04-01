@@ -30,10 +30,14 @@ class RateLimitException(
 }
 
 class AuthException(
-    status: Int,
     body: String?,
     responseHeaders: Headers,
-) : HttpException(status, body, responseHeaders)
+) : HttpException(401, body, responseHeaders)
+
+class ForbiddenException(
+    body: String?,
+    responseHeaders: Headers,
+) : HttpException(403, body, responseHeaders)
 
 class NotFoundException(
     body: String?,
@@ -51,7 +55,8 @@ class NetworkException(override val cause: Throwable) : LolzteamException(cause.
         get() =
             cause is java.net.SocketTimeoutException ||
                 cause is java.net.ConnectException ||
-                cause is io.ktor.client.network.sockets.ConnectTimeoutException
+                cause is io.ktor.client.network.sockets.ConnectTimeoutException ||
+                cause is java.net.http.HttpTimeoutException
 }
 
 class RetryExhaustedError(
@@ -68,7 +73,8 @@ fun createHttpException(
 ): HttpException =
     when (status) {
         429 -> RateLimitException(body, headers)
-        401, 403 -> AuthException(status, body, headers)
+        401 -> AuthException(body, headers)
+        403 -> ForbiddenException(body, headers)
         404 -> NotFoundException(body, headers)
         in 500..504 -> ServerException(status, body, headers)
         else -> HttpException(status, body, headers)

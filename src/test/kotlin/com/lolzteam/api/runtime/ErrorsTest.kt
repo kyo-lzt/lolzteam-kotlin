@@ -29,7 +29,7 @@ class ErrorsTest {
 
     @Test
     fun `AuthException is HttpException`() {
-        val e = AuthException(401, "unauth", Headers.Empty)
+        val e = AuthException("unauth", Headers.Empty)
         assertIs<HttpException>(e)
         assertEquals(401, e.status)
     }
@@ -101,9 +101,9 @@ class ErrorsTest {
     }
 
     @Test
-    fun `createHttpException returns AuthException for 403`() {
+    fun `createHttpException returns ForbiddenException for 403`() {
         val e = createHttpException(403, "body", Headers.Empty)
-        assertIs<AuthException>(e)
+        assertIs<ForbiddenException>(e)
     }
 
     @Test
