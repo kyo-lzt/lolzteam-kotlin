@@ -406,7 +406,7 @@ private fun resolvePropertyKotlinType(
 
 	return when (type) {
 		"string" -> "String"
-		"integer" -> "Long"
+		"integer" -> "Double"
 		"number" -> "Double"
 		"boolean" -> "Boolean"
 		else -> "JsonElement"

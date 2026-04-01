@@ -514,7 +514,7 @@ private fun extractResponseProperty(
 	// Primitive types
 	val kotlinType = when (type) {
 		"string" -> "String"
-		"integer" -> "Long"
+		"integer" -> "Double"
 		"number" -> "Double"
 		"boolean" -> "Boolean"
 		else -> "JsonElement"
