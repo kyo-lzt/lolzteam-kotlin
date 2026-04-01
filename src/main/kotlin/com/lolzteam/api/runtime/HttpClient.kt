@@ -27,12 +27,16 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
+import java.io.ByteArrayOutputStream
 import java.io.Closeable
 import java.net.Authenticator
+import java.net.HttpURLConnection
 import java.net.InetSocketAddress
 import java.net.PasswordAuthentication
 import java.net.Proxy
 import java.net.URI
+import java.net.URLDecoder
+import java.util.UUID
 import io.ktor.client.HttpClient as KtorHttpClient
 
 data class RequestOptions(
@@ -53,6 +57,9 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
     private val rateLimiter: RateLimiter? = config.rateLimit?.let { RateLimiter(it.requestsPerMinute, maxBurst = it.requestsPerMinute.coerceAtMost(30)) }
     private val searchRateLimiter: RateLimiter? = config.searchRateLimit?.let { RateLimiter(it.requestsPerMinute, maxBurst = 1) }
     private val ownsClient: Boolean = httpClient == null
+    private val socksProxy: Proxy?
+    private val timeoutMs: Long
+    private val client: KtorHttpClient
 
     internal val json: Json =
         Json {
@@ -61,8 +68,13 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
             coerceInputValues = true
         }
 
-    private val client: KtorHttpClient =
-        httpClient ?: run {
+    init {
+        timeoutMs = config.timeout.inWholeMilliseconds
+
+        if (httpClient != null) {
+            socksProxy = null
+            client = httpClient
+        } else {
             val proxyUri =
                 if (config.proxy != null) {
                     val uri =
@@ -83,24 +95,66 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                     null
                 }
             val proxyScheme = proxyUri?.scheme?.lowercase()
-            val isSocks5WithAuth = proxyScheme == "socks5" && proxyUri?.userInfo != null
-            val useJavaEngine =
-                proxyUri != null &&
-                    (proxyScheme in setOf("http", "https") || isSocks5WithAuth)
-            val timeoutMs = config.timeout.inWholeMilliseconds
             val connectMs = (config.timeout.inWholeMilliseconds / 3).coerceIn(5_000, 15_000)
 
-            if (useJavaEngine) {
-                val javaProxyType =
-                    if (proxyScheme == "socks5") Proxy.Type.SOCKS else Proxy.Type.HTTP
-                KtorHttpClient(Java) {
+            if (proxyScheme == "socks5") {
+                // java.net.http.HttpClient (used by Ktor Java engine) ignores SOCKS proxies
+                // (JDK-8214516). Ktor CIO's ProxyBuilder.socks() doesn't support auth.
+                // Use HttpURLConnection with explicit Proxy object for SOCKS5 instead.
+                val port = if (proxyUri!!.port > 0) proxyUri.port else 1080
+                socksProxy = Proxy(Proxy.Type.SOCKS, InetSocketAddress(proxyUri.host, port))
+
+                val userInfo = proxyUri.rawUserInfo
+                if (userInfo != null) {
+                    val colonIdx = userInfo.indexOf(':')
+                    val user =
+                        if (colonIdx >= 0) {
+                            URLDecoder.decode(userInfo.substring(0, colonIdx), "UTF-8")
+                        } else {
+                            URLDecoder.decode(userInfo, "UTF-8")
+                        }
+                    val pass =
+                        if (colonIdx >= 0) {
+                            URLDecoder.decode(userInfo.substring(colonIdx + 1), "UTF-8")
+                        } else {
+                            ""
+                        }
+                    val proxyHost = proxyUri.host
+                    Authenticator.setDefault(
+                        object : Authenticator() {
+                            override fun getPasswordAuthentication(): PasswordAuthentication? =
+                                // SocksSocketImpl in JDK 21+ calls with RequestorType.SERVER
+                                // instead of PROXY, so match on host/port instead.
+                                if (requestingHost == proxyHost && requestingPort == port) {
+                                    PasswordAuthentication(user, pass.toCharArray())
+                                } else {
+                                    null
+                                }
+                        },
+                    )
+                }
+
+                // Minimal Ktor client (unused for SOCKS5, but field must be initialized)
+                client = KtorHttpClient(CIO) {
+                    expectSuccess = false
+                    install(HttpTimeout) {
+                        requestTimeoutMillis = timeoutMs
+                        connectTimeoutMillis = connectMs
+                    }
+                }
+            } else if (proxyUri != null && proxyScheme in setOf("http", "https")) {
+                socksProxy = null
+                client = KtorHttpClient(Java) {
                     engine {
-                        proxy = Proxy(javaProxyType, InetSocketAddress(proxyUri!!.host, proxyUri.port))
+                        proxy = Proxy(
+                            Proxy.Type.HTTP,
+                            InetSocketAddress(proxyUri.host, proxyUri.port),
+                        )
                         val userInfo = proxyUri.userInfo
                         if (userInfo != null) {
                             val parts = userInfo.split(":", limit = 2)
-                            val user = parts[0]
-                            val pass = parts.getOrElse(1) { "" }
+                            val user = URLDecoder.decode(parts[0], "UTF-8")
+                            val pass = URLDecoder.decode(parts.getOrElse(1) { "" }, "UTF-8")
                             config {
                                 authenticator(
                                     object : Authenticator() {
@@ -118,22 +172,9 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                     }
                 }
             } else {
-                KtorHttpClient(CIO) {
+                socksProxy = null
+                client = KtorHttpClient(CIO) {
                     engine {
-                        if (proxyUri != null) {
-                            proxy =
-                                when (proxyUri.scheme?.lowercase()) {
-                                    "socks5" ->
-                                        io.ktor.client.engine.ProxyBuilder.socks(
-                                            proxyUri.host,
-                                            proxyUri.port,
-                                        )
-                                    else ->
-                                        io.ktor.client.engine.ProxyBuilder.http(
-                                            io.ktor.http.Url(config.proxy!!.url),
-                                        )
-                                }
-                        }
                         endpoint {
                             connectTimeout = connectMs
                             connectAttempts = 1
@@ -147,6 +188,7 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
                 }
             }
         }
+    }
 
     fun <T> lenientDecode(
         deserializer: DeserializationStrategy<T>,
@@ -176,6 +218,15 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
     }
 
     private suspend fun execute(options: RequestOptions): JsonElement {
+        if (socksProxy != null) {
+            val bodyText = executeSocks5(options)
+            return try {
+                json.parseToJsonElement(bodyText)
+            } catch (e: Exception) {
+                throw NetworkException(e)
+            }
+        }
+
         var url = "$baseUrl${options.path}"
         val queryString = buildQueryString(options.query)
         if (queryString.isNotEmpty()) {
@@ -246,6 +297,10 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
     }
 
     private suspend fun executeText(options: RequestOptions): String {
+        if (socksProxy != null) {
+            return executeSocks5(options)
+        }
+
         var url = "$baseUrl${options.path}"
         val queryString = buildQueryString(options.query)
         if (queryString.isNotEmpty()) {
@@ -269,6 +324,185 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
         }
 
         return bodyText
+    }
+
+    /**
+     * Executes a request via [HttpURLConnection] through a SOCKS5 proxy.
+     * Used because [java.net.http.HttpClient] (and Ktor's Java engine) ignores SOCKS proxies
+     * entirely (JDK-8214516), and Ktor CIO's ProxyBuilder.socks() doesn't support auth.
+     */
+    private fun executeSocks5(options: RequestOptions): String {
+        var url = "$baseUrl${options.path}"
+        val queryString = buildQueryString(options.query)
+        if (queryString.isNotEmpty()) {
+            url += "?$queryString"
+        }
+
+        var conn: HttpURLConnection? = null
+        try {
+            conn = URI.create(url).toURL().openConnection(socksProxy!!) as HttpURLConnection
+            conn.requestMethod = options.method.uppercase()
+            conn.setRequestProperty("Authorization", "Bearer $token")
+            conn.instanceFollowRedirects = true
+
+            val millis = timeoutMs.toInt()
+            conn.connectTimeout = millis
+            conn.readTimeout = millis
+
+            if (options.method.uppercase() != "GET") {
+                writeSocks5Body(conn, options)
+            }
+
+            val statusCode = conn.responseCode
+            val inputStream =
+                if (statusCode in 200..299) conn.inputStream else conn.errorStream
+            val bodyText = inputStream?.readBytes()?.toString(Charsets.UTF_8) ?: ""
+
+            if (statusCode !in 200..299) {
+                val headers = Headers.build {
+                    for ((key, values) in conn.headerFields) {
+                        if (key != null) {
+                            for (v in values) {
+                                append(key, v)
+                            }
+                        }
+                    }
+                }
+                throw createHttpException(statusCode, bodyText, headers)
+            }
+
+            return bodyText
+        } catch (e: LolzteamException) {
+            throw e
+        } catch (e: Exception) {
+            throw NetworkException(e)
+        } finally {
+            conn?.disconnect()
+        }
+    }
+
+    /** Write request body to an [HttpURLConnection] for SOCKS5 requests. */
+    private fun writeSocks5Body(conn: HttpURLConnection, options: RequestOptions) {
+        when (options.bodyEncoding) {
+            "multipart" -> {
+                val boundary = UUID.randomUUID().toString()
+                conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=$boundary")
+                val baos = ByteArrayOutputStream()
+                if (options.body != null) {
+                    writeSocks5MultipartFields(baos, boundary, options.body)
+                }
+                for ((name, bytes) in options.byteArrayFields) {
+                    val header = "--$boundary\r\n" +
+                        "Content-Disposition: form-data; name=\"$name\"; filename=\"$name\"\r\n" +
+                        "Content-Type: application/octet-stream\r\n\r\n"
+                    baos.write(header.toByteArray(Charsets.UTF_8))
+                    baos.write(bytes)
+                    baos.write("\r\n".toByteArray(Charsets.UTF_8))
+                }
+                baos.write("--$boundary--\r\n".toByteArray(Charsets.UTF_8))
+                conn.doOutput = true
+                conn.outputStream.use { it.write(baos.toByteArray()) }
+            }
+            "json" -> {
+                if (options.body != null) {
+                    conn.setRequestProperty("Content-Type", "application/json")
+                    conn.doOutput = true
+                    conn.outputStream.use {
+                        it.write(options.body.toString().toByteArray(Charsets.UTF_8))
+                    }
+                }
+            }
+            else -> {
+                if (options.body != null) {
+                    conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded")
+                    val parts = mutableListOf<String>()
+                    flattenJsonToFormString(options.body, parts)
+                    conn.doOutput = true
+                    conn.outputStream.use {
+                        it.write(parts.joinToString("&").toByteArray(Charsets.UTF_8))
+                    }
+                }
+            }
+        }
+    }
+
+    private fun writeSocks5MultipartFields(
+        baos: ByteArrayOutputStream,
+        boundary: String,
+        element: JsonElement,
+        prefix: String = "",
+    ) {
+        if (element !is JsonObject) return
+        for ((key, value) in element) {
+            val fullKey = if (prefix.isEmpty()) key else "$prefix[$key]"
+            when (value) {
+                is JsonNull -> {}
+                is JsonPrimitive -> {
+                    val str = if (value.booleanOrNull != null) {
+                        if (value.boolean) "1" else "0"
+                    } else {
+                        value.content
+                    }
+                    val header = "--$boundary\r\n" +
+                        "Content-Disposition: form-data; name=\"$fullKey\"\r\n\r\n"
+                    baos.write(header.toByteArray(Charsets.UTF_8))
+                    baos.write(str.toByteArray(Charsets.UTF_8))
+                    baos.write("\r\n".toByteArray(Charsets.UTF_8))
+                }
+                is JsonArray -> {
+                    for (item in value) {
+                        if (item is JsonPrimitive) {
+                            val str = if (item.booleanOrNull != null) {
+                                if (item.boolean) "1" else "0"
+                            } else {
+                                item.content
+                            }
+                            val header = "--$boundary\r\n" +
+                                "Content-Disposition: form-data; name=\"$fullKey\"\r\n\r\n"
+                            baos.write(header.toByteArray(Charsets.UTF_8))
+                            baos.write(str.toByteArray(Charsets.UTF_8))
+                            baos.write("\r\n".toByteArray(Charsets.UTF_8))
+                        }
+                    }
+                }
+                is JsonObject -> writeSocks5MultipartFields(baos, boundary, value, fullKey)
+            }
+        }
+    }
+
+    private fun flattenJsonToFormString(
+        element: JsonElement,
+        parts: MutableList<String>,
+        prefix: String = "",
+    ) {
+        if (element !is JsonObject) return
+        for ((key, value) in element) {
+            val fullKey = if (prefix.isEmpty()) key else "$prefix[$key]"
+            when (value) {
+                is JsonNull -> {}
+                is JsonPrimitive -> {
+                    val str = if (value.booleanOrNull != null) {
+                        if (value.boolean) "1" else "0"
+                    } else {
+                        value.content
+                    }
+                    parts.add("${encode(fullKey)}=${encode(str)}")
+                }
+                is JsonArray -> {
+                    for (item in value) {
+                        if (item is JsonPrimitive) {
+                            val str = if (item.booleanOrNull != null) {
+                                if (item.boolean) "1" else "0"
+                            } else {
+                                item.content
+                            }
+                            parts.add("${encode(fullKey)}=${encode(str)}")
+                        }
+                    }
+                }
+                is JsonObject -> flattenJsonToFormString(value, parts, fullKey)
+            }
+        }
     }
 
     private fun buildQueryString(query: JsonElement?): String {
@@ -386,6 +620,9 @@ class LolzteamHttpClient(config: ClientConfig, httpClient: KtorHttpClient? = nul
     override fun close() {
         if (ownsClient) {
             client.close()
+        }
+        if (socksProxy != null) {
+            Authenticator.setDefault(null)
         }
     }
 }

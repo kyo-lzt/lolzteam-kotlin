@@ -56,7 +56,10 @@ class NetworkException(override val cause: Throwable) : LolzteamException(cause.
             cause is java.net.SocketTimeoutException ||
                 cause is java.net.ConnectException ||
                 cause is io.ktor.client.network.sockets.ConnectTimeoutException ||
-                cause is java.net.http.HttpTimeoutException
+                cause is java.net.http.HttpTimeoutException ||
+                cause is java.io.EOFException ||
+                cause is kotlinx.io.EOFException ||
+                cause is kotlinx.coroutines.channels.ClosedReceiveChannelException
 }
 
 class RetryExhaustedError(
