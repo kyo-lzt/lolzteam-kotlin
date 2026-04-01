@@ -6,6 +6,7 @@ import com.lolzteam.api.runtime.ClientConfig
 import com.lolzteam.api.runtime.LolzteamHttpClient
 import com.lolzteam.api.runtime.RateLimitConfig
 import com.lolzteam.api.runtime.RequestOptions
+import com.lolzteam.api.runtime.StringOrInt
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -97,7 +98,7 @@ public class CategoriesApi(private val http: LolzteamHttpClient) {
      *
      * @param categoryId Id of category.
      */
-    suspend fun get(categoryId: Int): CategoriesGetResponse {
+    suspend fun get(categoryId: Long): CategoriesGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/categories/$categoryId",
@@ -153,7 +154,7 @@ public class ForumsApi(private val http: LolzteamHttpClient) {
      *
      * @param forumId Id of forum.
      */
-    suspend fun get(forumId: Int): ForumsGetResponse {
+    suspend fun get(forumId: Long): ForumsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/forums/$forumId",
@@ -170,7 +171,7 @@ public class ForumsApi(private val http: LolzteamHttpClient) {
      *
      * @param forumId Id of forum.
      */
-    suspend fun followers(forumId: Int): ForumsFollowersResponse {
+    suspend fun followers(forumId: Long): ForumsFollowersResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/forums/$forumId/followers",
@@ -192,7 +193,7 @@ public class ForumsApi(private val http: LolzteamHttpClient) {
      * @param prefixIds Prefix ids.
      * @param minimalContestAmount Minimal contest amount. (Only for 766 forumId)
      */
-    suspend fun follow(forumId: Int, body: ForumsFollowBody? = null): ForumsFollowResponse {
+    suspend fun follow(forumId: Long, body: ForumsFollowBody? = null): ForumsFollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/forums/$forumId/followers",
@@ -211,7 +212,7 @@ public class ForumsApi(private val http: LolzteamHttpClient) {
      *
      * @param forumId Id of forum.
      */
-    suspend fun unfollow(forumId: Int): ForumsUnfollowResponse {
+    suspend fun unfollow(forumId: Long): ForumsUnfollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/forums/$forumId/followers",
@@ -300,7 +301,7 @@ public class LinksApi(private val http: LolzteamHttpClient) {
      *
      * @param linkId Id of link forum.
      */
-    suspend fun get(linkId: Int): LinksGetResponse {
+    suspend fun get(linkId: Long): LinksGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/link-forums/$linkId",
@@ -340,7 +341,7 @@ public class PagesApi(private val http: LolzteamHttpClient) {
      *
      * @param pageId Id of page.
      */
-    suspend fun get(pageId: Int): PagesGetResponse {
+    suspend fun get(pageId: Long): PagesGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/pages/$pageId",
@@ -537,7 +538,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param threadId Id of thread.
      * @param fieldsInclude List of fields to include.
      */
-    suspend fun get(threadId: Int, params: ThreadsGetParams? = null): ThreadsGetResponse {
+    suspend fun get(threadId: Long, params: ThreadsGetParams? = null): ThreadsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/threads/$threadId",
@@ -564,7 +565,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param replyGroup Allow to reply only users with chosen or higher group.
      * @param commentIgnoreGroup Allow commenting if user can't post in thread.
      */
-    suspend fun edit(threadId: Int, body: ThreadsEditBody? = null): ThreadsEditResponse {
+    suspend fun edit(threadId: Long, body: ThreadsEditBody? = null): ThreadsEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/threads/$threadId",
@@ -584,7 +585,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param threadId Id of thread.
      * @param reason Reason of the thread removal.
      */
-    suspend fun delete(threadId: Int, body: ThreadsDeleteBody? = null): ThreadsDeleteResponse {
+    suspend fun delete(threadId: Long, body: ThreadsDeleteBody? = null): ThreadsDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/threads/$threadId",
@@ -609,7 +610,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param applyThreadPrefix Apply thread prefix.
      * @param sendAlert Send a notification to users who are followed to target node.
      */
-    suspend fun move(threadId: Int, body: ThreadsMoveBody? = null): ThreadsMoveResponse {
+    suspend fun move(threadId: Long, body: ThreadsMoveBody? = null): ThreadsMoveResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/move",
@@ -628,7 +629,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun bump(threadId: Int): ThreadsBumpResponse {
+    suspend fun bump(threadId: Long): ThreadsBumpResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/bump",
@@ -645,7 +646,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun hide(threadId: Int): ThreadsHideResponse {
+    suspend fun hide(threadId: Long): ThreadsHideResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/hide",
@@ -662,7 +663,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun star(threadId: Int): ThreadsStarResponse {
+    suspend fun star(threadId: Long): ThreadsStarResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/star",
@@ -679,7 +680,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun unstar(threadId: Int): ThreadsUnstarResponse {
+    suspend fun unstar(threadId: Long): ThreadsUnstarResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/threads/$threadId/star",
@@ -696,7 +697,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun followers(threadId: Int): ThreadsFollowersResponse {
+    suspend fun followers(threadId: Long): ThreadsFollowersResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/threads/$threadId/followers",
@@ -714,7 +715,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param threadId Id of thread.
      * @param email Whether to receive notification as email.
      */
-    suspend fun follow(threadId: Int, body: ThreadsFollowBody? = null): ThreadsFollowResponse {
+    suspend fun follow(threadId: Long, body: ThreadsFollowBody? = null): ThreadsFollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/followers",
@@ -733,7 +734,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun unfollow(threadId: Int): ThreadsUnfollowResponse {
+    suspend fun unfollow(threadId: Long): ThreadsUnfollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/threads/$threadId/followers",
@@ -769,7 +770,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun navigation(threadId: Int): ThreadsNavigationResponse {
+    suspend fun navigation(threadId: Long): ThreadsNavigationResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/threads/$threadId/navigation",
@@ -786,7 +787,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun pollGet(threadId: Int): ThreadsPollGetResponse {
+    suspend fun pollGet(threadId: Long): ThreadsPollGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/threads/$threadId/poll",
@@ -805,7 +806,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      * @param responseId The id of the response to vote for. Can be skipped if response_ids set.
      * @param responseIds An array of ids of responses (if the poll allows multiple choices).
      */
-    suspend fun pollVote(threadId: Int, body: ThreadsPollVoteBody? = null): ThreadsPollVoteResponse {
+    suspend fun pollVote(threadId: Long, body: ThreadsPollVoteBody? = null): ThreadsPollVoteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/threads/$threadId/poll/votes",
@@ -865,7 +866,7 @@ public class ThreadsApi(private val http: LolzteamHttpClient) {
      *
      * @param threadId Id of thread.
      */
-    suspend fun finish(threadId: Int): ThreadsFinishResponse {
+    suspend fun finish(threadId: Long): ThreadsFinishResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/contests/$threadId/finish",
@@ -929,7 +930,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      *
      * @param postId Id of post.
      */
-    suspend fun get(postId: Int): PostsGetResponse {
+    suspend fun get(postId: Long): PostsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/posts/$postId",
@@ -947,7 +948,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      * @param postId Id of post.
      * @param postBody Content of the post.
      */
-    suspend fun edit(postId: Int, body: PostsEditBody? = null): PostsEditResponse {
+    suspend fun edit(postId: Long, body: PostsEditBody? = null): PostsEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/posts/$postId",
@@ -967,7 +968,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      * @param postId Id of post.
      * @param reason Reason of the post removal.
      */
-    suspend fun delete(postId: Int, body: PostsDeleteBody? = null): PostsDeleteResponse {
+    suspend fun delete(postId: Long, body: PostsDeleteBody? = null): PostsDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/posts/$postId",
@@ -988,7 +989,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      * @param page Page number of users.
      * @param limit Number of users in a page.
      */
-    suspend fun likes(postId: Int, params: PostsLikesParams? = null): PostsLikesResponse {
+    suspend fun likes(postId: Long, params: PostsLikesParams? = null): PostsLikesResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/posts/$postId/likes",
@@ -1006,7 +1007,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      *
      * @param postId Id of post.
      */
-    suspend fun like(postId: Int): PostsLikeResponse {
+    suspend fun like(postId: Long): PostsLikeResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/posts/$postId/likes",
@@ -1023,7 +1024,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      *
      * @param postId Id of post.
      */
-    suspend fun unlike(postId: Int): PostsUnlikeResponse {
+    suspend fun unlike(postId: Long): PostsUnlikeResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/posts/$postId/likes",
@@ -1040,7 +1041,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      *
      * @param postId Id of post.
      */
-    suspend fun reportReasons(postId: Int): PostsReportReasonsResponse {
+    suspend fun reportReasons(postId: Long): PostsReportReasonsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/posts/$postId/report",
@@ -1058,7 +1059,7 @@ public class PostsApi(private val http: LolzteamHttpClient) {
      * @param postId Id of post.
      * @param message Reason of the report.
      */
-    suspend fun report(postId: Int, body: PostsReportBody? = null): PostsReportResponse {
+    suspend fun report(postId: Long, body: PostsReportBody? = null): PostsReportResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/posts/$postId/report",
@@ -1238,7 +1239,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      * @param fieldsInclude List of fields to include.
      */
-    suspend fun get(userId: String, params: UsersGetParams? = null): UsersGetResponse {
+    suspend fun get(userId: StringOrInt, params: UsersGetParams? = null): UsersGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId",
@@ -1283,7 +1284,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param alert Alert settings.
      * @param fields Custom user profile fields.
      */
-    suspend fun edit(userId: String, body: UsersEditBody? = null): UsersEditResponse {
+    suspend fun edit(userId: StringOrInt, body: UsersEditBody? = null): UsersEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/users/$userId",
@@ -1304,7 +1305,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param type Filter claims by their type.
      * @param claimState Filter claims by their state.
      */
-    suspend fun claims(userId: String, params: UsersClaimsParams? = null): UsersClaimsResponse {
+    suspend fun claims(userId: StringOrInt, params: UsersClaimsParams? = null): UsersClaimsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/claims",
@@ -1326,7 +1327,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param y The starting point of the selection by height. Default value - 0
      * @param crop Selection size.
      */
-    suspend fun avatarUpload(userId: String, body: UsersAvatarUploadBody? = null): UsersAvatarUploadResponse {
+    suspend fun avatarUpload(userId: StringOrInt, body: UsersAvatarUploadBody? = null): UsersAvatarUploadResponse {
         if (body != null) {
             val jsonBody = buildJsonObject {
                 body.x?.let { put("x", it) }
@@ -1362,7 +1363,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun avatarDelete(userId: String): UsersAvatarDeleteResponse {
+    suspend fun avatarDelete(userId: StringOrInt): UsersAvatarDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/users/$userId/avatar",
@@ -1382,7 +1383,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param y The starting point of the selection by height. Default value - 0
      * @param crop Selection size.
      */
-    suspend fun avatarCrop(userId: String, body: UsersAvatarCropBody? = null): UsersAvatarCropResponse {
+    suspend fun avatarCrop(userId: StringOrInt, body: UsersAvatarCropBody? = null): UsersAvatarCropResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/users/$userId/avatar/crop",
@@ -1405,7 +1406,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param y The starting point of the selection by height. Default value - 0
      * @param crop Selection size.
      */
-    suspend fun backgroundUpload(userId: String, body: UsersBackgroundUploadBody? = null): UsersBackgroundUploadResponse {
+    suspend fun backgroundUpload(userId: StringOrInt, body: UsersBackgroundUploadBody? = null): UsersBackgroundUploadResponse {
         if (body != null) {
             val jsonBody = buildJsonObject {
                 body.x?.let { put("x", it) }
@@ -1441,7 +1442,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun backgroundDelete(userId: String): UsersBackgroundDeleteResponse {
+    suspend fun backgroundDelete(userId: StringOrInt): UsersBackgroundDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/users/$userId/background",
@@ -1461,7 +1462,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param y The starting point of the selection by height. Default value - 0
      * @param crop Selection size.
      */
-    suspend fun backgroundCrop(userId: String, body: UsersBackgroundCropBody): UsersBackgroundCropResponse {
+    suspend fun backgroundCrop(userId: StringOrInt, body: UsersBackgroundCropBody): UsersBackgroundCropResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/users/$userId/background/crop",
@@ -1483,7 +1484,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param page Page number of followers.
      * @param limit Number of followers in a page.
      */
-    suspend fun followers(userId: String, params: UsersFollowersParams? = null): UsersFollowersResponse {
+    suspend fun followers(userId: StringOrInt, params: UsersFollowersParams? = null): UsersFollowersResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/followers",
@@ -1501,7 +1502,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun follow(userId: String): UsersFollowResponse {
+    suspend fun follow(userId: StringOrInt): UsersFollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/users/$userId/followers",
@@ -1518,7 +1519,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun unfollow(userId: String): UsersUnfollowResponse {
+    suspend fun unfollow(userId: StringOrInt): UsersUnfollowResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/users/$userId/followers",
@@ -1538,7 +1539,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param page Page number of users.
      * @param limit Number of users in a page.
      */
-    suspend fun followings(userId: String, params: UsersFollowingsParams? = null): UsersFollowingsResponse {
+    suspend fun followings(userId: StringOrInt, params: UsersFollowingsParams? = null): UsersFollowingsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/followings",
@@ -1563,7 +1564,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param searchUserId Get only likes from specified user.
      * @param stats Show weekly statistics.
      */
-    suspend fun likes(userId: String, params: UsersLikesParams? = null): UsersLikesResponse {
+    suspend fun likes(userId: StringOrInt, params: UsersLikesParams? = null): UsersLikesResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/likes",
@@ -1599,7 +1600,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun ignore(userId: String): UsersIgnoreResponse {
+    suspend fun ignore(userId: StringOrInt): UsersIgnoreResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/users/$userId/ignore",
@@ -1619,7 +1620,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param ignoreContent Ignore user's content.
      * @param restrictViewProfile Restrict user from viewing your profile.
      */
-    suspend fun ignoreEdit(userId: String, params: UsersIgnoreEditParams? = null): UsersIgnoreEditResponse {
+    suspend fun ignoreEdit(userId: StringOrInt, params: UsersIgnoreEditParams? = null): UsersIgnoreEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/users/$userId/ignore",
@@ -1637,7 +1638,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun unignore(userId: String): UsersUnignoreResponse {
+    suspend fun unignore(userId: StringOrInt): UsersUnignoreResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/users/$userId/ignore",
@@ -1656,7 +1657,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      * @param page Page number of contents.
      * @param limit Number of contents in a page.
      */
-    suspend fun contents(userId: String, params: UsersContentsParams? = null): UsersContentsResponse {
+    suspend fun contents(userId: StringOrInt, params: UsersContentsParams? = null): UsersContentsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/timeline",
@@ -1674,7 +1675,7 @@ public class UsersApi(private val http: LolzteamHttpClient) {
      *
      * @param userId User ID. > You can use shortlink `me` to interact with your profile.
      */
-    suspend fun trophies(userId: String): UsersTrophiesResponse {
+    suspend fun trophies(userId: StringOrInt): UsersTrophiesResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/trophies",
@@ -1744,7 +1745,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param limit Number of contents in a page.
      * @param fieldsInclude List of fields to include.
      */
-    suspend fun list(userId: String, params: ProfilePostsListParams? = null): ProfilePostsListResponse {
+    suspend fun list(userId: StringOrInt, params: ProfilePostsListParams? = null): ProfilePostsListResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/users/$userId/profile-posts",
@@ -1762,7 +1763,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun get(profilePostId: Int): ProfilePostsGetResponse {
+    suspend fun get(profilePostId: Long): ProfilePostsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/profile-posts/$profilePostId",
@@ -1781,7 +1782,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param postBody New content of the profile post.
      * @param disableComments Disable comments.
      */
-    suspend fun edit(profilePostId: Int, body: ProfilePostsEditBody? = null): ProfilePostsEditResponse {
+    suspend fun edit(profilePostId: Long, body: ProfilePostsEditBody? = null): ProfilePostsEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/profile-posts/$profilePostId",
@@ -1801,7 +1802,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param profilePostId Id of profile post.
      * @param reason Reason of the profile post removal.
      */
-    suspend fun delete(profilePostId: Int, params: ProfilePostsDeleteParams? = null): ProfilePostsDeleteResponse {
+    suspend fun delete(profilePostId: Long, params: ProfilePostsDeleteParams? = null): ProfilePostsDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/profile-posts/$profilePostId",
@@ -1819,7 +1820,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun reportReasons(profilePostId: Int): ProfilePostsReportReasonsResponse {
+    suspend fun reportReasons(profilePostId: Long): ProfilePostsReportReasonsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/profile-posts/$profilePostId/report",
@@ -1837,7 +1838,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param profilePostId Id of profile post.
      * @param message Reason of the report.
      */
-    suspend fun report(profilePostId: Int, body: ProfilePostsReportBody? = null): ProfilePostsReportResponse {
+    suspend fun report(profilePostId: Long, body: ProfilePostsReportBody? = null): ProfilePostsReportResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/profile-posts/$profilePostId/report",
@@ -1875,7 +1876,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun stick(profilePostId: Int): ProfilePostsStickResponse {
+    suspend fun stick(profilePostId: Long): ProfilePostsStickResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/profile-posts/$profilePostId/stick",
@@ -1892,7 +1893,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun unstick(profilePostId: Int): ProfilePostsUnstickResponse {
+    suspend fun unstick(profilePostId: Long): ProfilePostsUnstickResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/profile-posts/$profilePostId/stick",
@@ -1909,7 +1910,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun likes(profilePostId: Int): ProfilePostsLikesResponse {
+    suspend fun likes(profilePostId: Long): ProfilePostsLikesResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/profile-posts/$profilePostId/likes",
@@ -1926,7 +1927,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun like(profilePostId: Int): ProfilePostsLikeResponse {
+    suspend fun like(profilePostId: Long): ProfilePostsLikeResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/profile-posts/$profilePostId/likes",
@@ -1943,7 +1944,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      *
      * @param profilePostId Id of profile post.
      */
-    suspend fun unlike(profilePostId: Int): ProfilePostsUnlikeResponse {
+    suspend fun unlike(profilePostId: Long): ProfilePostsUnlikeResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/profile-posts/$profilePostId/likes",
@@ -2040,7 +2041,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param profilePostId Id of profile post.
      * @param commentId Id of profile post comment.
      */
-    suspend fun commentsGet(profilePostId: Int, commentId: Int): ProfilePostsCommentsGetResponse {
+    suspend fun commentsGet(profilePostId: Long, commentId: Long): ProfilePostsCommentsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/profile-posts/$profilePostId/comments/$commentId",
@@ -2058,7 +2059,7 @@ public class ProfilePostsApi(private val http: LolzteamHttpClient) {
      * @param commentId Id of profile post comment.
      * @param message Reason of the report.
      */
-    suspend fun commentsReport(commentId: Int, body: ProfilePostsCommentsReportBody? = null): ProfilePostsCommentsReportResponse {
+    suspend fun commentsReport(commentId: Long, body: ProfilePostsCommentsReportBody? = null): ProfilePostsCommentsReportResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/profile-posts/comments/$commentId/report",
@@ -2213,7 +2214,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun get(conversationId: Int): ConversationsGetResponse {
+    suspend fun get(conversationId: Long): ConversationsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/conversations/$conversationId",
@@ -2236,7 +2237,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param before Date to get older messages.
      * @param after Date to get newer messages.
      */
-    suspend fun messagesList(conversationId: Int, params: ConversationsMessagesListParams? = null): ConversationsMessagesListResponse {
+    suspend fun messagesList(conversationId: Long, params: ConversationsMessagesListParams? = null): ConversationsMessagesListResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/conversations/$conversationId/messages",
@@ -2257,7 +2258,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param replyMessageId ID of the message being replied to.
      * @param messageBody Content of the new message.
      */
-    suspend fun messagesCreate(conversationId: Int, body: ConversationsMessagesCreateBody? = null): ConversationsMessagesCreateResponse {
+    suspend fun messagesCreate(conversationId: Long, body: ConversationsMessagesCreateBody? = null): ConversationsMessagesCreateResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/messages",
@@ -2299,7 +2300,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param messageId Id of message.
      */
-    suspend fun messagesGet(messageId: Int): ConversationsMessagesGetResponse {
+    suspend fun messagesGet(messageId: Long): ConversationsMessagesGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/conversations/messages/$messageId",
@@ -2319,7 +2320,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param messageId Id of message.
      * @param messageBody New content of the message.
      */
-    suspend fun messagesEdit(conversationId: Int, messageId: Int, body: ConversationsMessagesEditBody? = null): ConversationsMessagesEditResponse {
+    suspend fun messagesEdit(conversationId: Long, messageId: Long, body: ConversationsMessagesEditBody? = null): ConversationsMessagesEditResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "PUT",
             path = "/conversations/$conversationId/messages/$messageId",
@@ -2339,7 +2340,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param conversationId Id of conversation.
      * @param messageId Id of message.
      */
-    suspend fun messagesDelete(conversationId: Int, messageId: Int): ConversationsMessagesDeleteResponse {
+    suspend fun messagesDelete(conversationId: Long, messageId: Long): ConversationsMessagesDeleteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/conversations/$conversationId/messages/$messageId",
@@ -2358,7 +2359,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param conversationId Id of conversation.
      * @param recipients List of recipients username's.
      */
-    suspend fun invite(conversationId: Int, body: ConversationsInviteBody? = null): ConversationsInviteResponse {
+    suspend fun invite(conversationId: Long, body: ConversationsInviteBody? = null): ConversationsInviteResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/invite",
@@ -2378,7 +2379,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param conversationId Id of conversation.
      * @param userId Id of user to kick from conversation.
      */
-    suspend fun kick(conversationId: Int, body: ConversationsKickBody? = null): ConversationsKickResponse {
+    suspend fun kick(conversationId: Long, body: ConversationsKickBody? = null): ConversationsKickResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/kick",
@@ -2397,7 +2398,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun read(conversationId: Int): ConversationsReadResponse {
+    suspend fun read(conversationId: Long): ConversationsReadResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/read",
@@ -2432,7 +2433,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param conversationId Id of conversation.
      * @param messageId Id of message.
      */
-    suspend fun messagesStick(conversationId: Int, messageId: Int): ConversationsMessagesStickResponse {
+    suspend fun messagesStick(conversationId: Long, messageId: Long): ConversationsMessagesStickResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/messages/$messageId/stick",
@@ -2451,7 +2452,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      * @param conversationId Id of conversation.
      * @param messageId Id of message.
      */
-    suspend fun messagesUnstick(conversationId: Int, messageId: Int): ConversationsMessagesUnstickResponse {
+    suspend fun messagesUnstick(conversationId: Long, messageId: Long): ConversationsMessagesUnstickResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/conversations/$conversationId/messages/$messageId/stick",
@@ -2469,7 +2470,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun star(conversationId: Int): ConversationsStarResponse {
+    suspend fun star(conversationId: Long): ConversationsStarResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/star",
@@ -2487,7 +2488,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun unstar(conversationId: Int): ConversationsUnstarResponse {
+    suspend fun unstar(conversationId: Long): ConversationsUnstarResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/conversations/$conversationId/star",
@@ -2505,7 +2506,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun alertsEnable(conversationId: Int): ConversationsAlertsEnableResponse {
+    suspend fun alertsEnable(conversationId: Long): ConversationsAlertsEnableResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "POST",
             path = "/conversations/$conversationId/alerts",
@@ -2523,7 +2524,7 @@ public class ConversationsApi(private val http: LolzteamHttpClient) {
      *
      * @param conversationId Id of conversation.
      */
-    suspend fun alertsDisable(conversationId: Int): ConversationsAlertsDisableResponse {
+    suspend fun alertsDisable(conversationId: Long): ConversationsAlertsDisableResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "DELETE",
             path = "/conversations/$conversationId/alerts",
@@ -2564,7 +2565,7 @@ public class NotificationsApi(private val http: LolzteamHttpClient) {
      *
      * @param notificationId Id of notification.
      */
-    suspend fun get(notificationId: Int): NotificationsGetResponse {
+    suspend fun get(notificationId: Long): NotificationsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/notifications/$notificationId/content",
@@ -2640,7 +2641,7 @@ public class TagsApi(private val http: LolzteamHttpClient) {
      * @param page Page number of tagged contents.
      * @param limit Number of tagged contents in a page.
      */
-    suspend fun get(tagId: Int, params: TagsGetParams? = null): TagsGetResponse {
+    suspend fun get(tagId: Long, params: TagsGetParams? = null): TagsGetResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/tags/$tagId",
@@ -2820,7 +2821,7 @@ public class SearchApi(private val http: LolzteamHttpClient) {
      * @param page Page number of results.
      * @param limit Number of results in a page.
      */
-    suspend fun results(searchId: String, params: SearchResultsParams? = null): SearchResultsResponse {
+    suspend fun results(searchId: StringOrInt, params: SearchResultsParams? = null): SearchResultsResponse {
         return http.lenientDecode(serializer(), http.request(RequestOptions(
             method = "GET",
             path = "/search/$searchId/results",

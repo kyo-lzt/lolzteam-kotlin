@@ -406,7 +406,7 @@ private fun resolvePropertyKotlinType(
 
 	return when (type) {
 		"string" -> "String"
-		"integer" -> "Double"
+		"integer" -> "Long"
 		"number" -> "Double"
 		"boolean" -> "Boolean"
 		else -> "JsonElement"
@@ -703,17 +703,11 @@ private fun emitKotlinMethod(group: String, method: MethodDefinition, isSearch: 
 	// Path params — use native Kotlin types instead of JsonElement
 	for (param in method.params.pathParams) {
 		val kotlinType = when (param.type) {
-			"integer" -> "Int"
+			"integer" -> "Long"
 			"string" -> "String"
 			"number" -> "Double"
 			"boolean" -> "Boolean"
-			else -> {
-				// Union types containing string (e.g. "string | integer") → String
-				// Path params are interpolated into URLs, so String is always safe
-				val parts = param.type.split(" | ").map { it.trim() }
-				if (parts.any { it == "string" }) "String"
-				else tsTypeToKotlin(param.type)
-			}
+			else -> tsTypeToKotlin(param.type)
 		}
 		args.add("${snakeToCamel(param.name)}: $kotlinType")
 	}
@@ -903,6 +897,9 @@ fun emitKotlinClientFile(
 	val needsMultipartBuilders = groups.any { g ->
 		g.methods.any { m -> m.bodyEncoding == "multipart" && m.bodyProperties.any { it.type == "Blob" } }
 	}
+	val needsStringOrInt = groups.any { g ->
+		g.methods.any { m -> m.params.pathParams.any { " | " in it.type } }
+	}
 
 	sb.appendLine("// Auto-generated. Do not edit manually.")
 	sb.appendLine()
@@ -912,6 +909,9 @@ fun emitKotlinClientFile(
 	sb.appendLine("import com.lolzteam.api.runtime.LolzteamHttpClient")
 	sb.appendLine("import com.lolzteam.api.runtime.RateLimitConfig")
 	sb.appendLine("import com.lolzteam.api.runtime.RequestOptions")
+	if (needsStringOrInt) {
+		sb.appendLine("import com.lolzteam.api.runtime.StringOrInt")
+	}
 	sb.appendLine("import kotlinx.serialization.json.JsonElement")
 	if (needsMultipartBuilders) {
 		sb.appendLine("import kotlinx.serialization.json.buildJsonObject")

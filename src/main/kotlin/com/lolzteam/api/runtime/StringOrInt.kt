@@ -17,10 +17,12 @@ sealed interface StringOrInt {
 
     data class OfString(val value: String) : StringOrInt {
         override val stringValue: String get() = value
+        override fun toString(): String = value
     }
 
     data class OfInt(val value: Long) : StringOrInt {
         override val stringValue: String get() = value.toString()
+        override fun toString(): String = value.toString()
     }
 
     companion object {

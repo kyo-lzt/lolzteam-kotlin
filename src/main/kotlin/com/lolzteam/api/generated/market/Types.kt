@@ -2414,32 +2414,32 @@ internal object XboxLinkableSerializer : KSerializer<XboxLinkable> {
 @Serializable
 data class DiscountModel(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("discount_id")
-    val discountId: Double = 0.0,
+    val discountId: Long = 0L,
     @SerialName("discount_percent")
-    val discountPercent: Double = 0.0,
+    val discountPercent: Long = 0L,
     @SerialName("discount_user_id")
-    val discountUserId: Double = 0.0,
+    val discountUserId: Long = 0L,
     @SerialName("max_price")
-    val maxPrice: Double = 0.0,
+    val maxPrice: Long = 0L,
     @SerialName("min_price")
-    val minPrice: Double = 0.0,
+    val minPrice: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
 )
 
 @Serializable
 data class UserModel(
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("activity_visible")
     val activityVisible: Boolean = false,
-    val age: Double = 0.0,
+    val age: Long = 0L,
     val balance: String = "",
     val balances: List<UserModelBalances> = emptyList(),
     @SerialName("bump_item_period")
-    val bumpItemPeriod: Double = 0.0,
+    val bumpItemPeriod: Long = 0L,
     @SerialName("can_edit")
     val canEdit: Boolean = false,
     @SerialName("can_follow")
@@ -2455,12 +2455,12 @@ data class UserModel(
     @SerialName("can_warn")
     val canWarn: Boolean = false,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("conv_welcome_message")
     val convWelcomeMessage: String = "",
-    val convertedBalance: Double = 0.0,
-    val convertedDeposit: Double = 0.0,
-    val convertedHold: Double = 0.0,
+    val convertedBalance: Long = 0L,
+    val convertedDeposit: Long = 0L,
+    val convertedHold: Long = 0L,
     val currency: String = "",
     val currencyPhrase: String = "",
     @SerialName("custom_account_download_format")
@@ -2469,7 +2469,7 @@ data class UserModel(
     val customFields: UserModelCustomFields = UserModelCustomFields(),
     @SerialName("custom_title")
     val customTitle: String = "",
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val dob: UserModelDob = UserModelDob(),
     @SerialName("feedback_data")
     val feedbackData: JsonElement = JsonNull,
@@ -2492,44 +2492,44 @@ data class UserModel(
     @SerialName("is_super_admin")
     val isSuperAdmin: Boolean = false,
     @SerialName("joined_date")
-    val joinedDate: Double = 0.0,
+    val joinedDate: Long = 0L,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     val location: String = "",
     @SerialName("market_custom_title")
     val marketCustomTitle: String = "",
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("paid_mail_left")
-    val paidMailLeft: Double = 0.0,
+    val paidMailLeft: Long = 0L,
     @SerialName("public_tags")
     val publicTags: List<UserModelPublicTags> = emptyList(),
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: UserModelRendered = UserModelRendered(),
     @SerialName("restore_count")
-    val restoreCount: Double = 0.0,
+    val restoreCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: JsonElement = JsonNull,
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     val tags: List<UserModelTags> = emptyList(),
     @SerialName("telegram_client")
     val telegramClient: UserModelTelegramClient = UserModelTelegramClient(),
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("user_allow_ask_discount")
     val userAllowAskDiscount: Boolean = false,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("user_title")
     val userTitle: String = "",
     val username: String = "",
@@ -2537,24 +2537,24 @@ data class UserModel(
     val viewUrl: String = "",
     val visible: Boolean = false,
     @SerialName("warning_points")
-    val warningPoints: Double = 0.0,
+    val warningPoints: Long = 0L,
 )
 
 @Serializable
 data class UserModelBalances(
     val balance: String = "",
     @SerialName("balance_id")
-    val balanceId: Double = 0.0,
+    val balanceId: Long = 0L,
     val convertedBalance: Double = 0.0,
     @SerialName("custom_title")
     val customTitle: JsonElement = JsonNull,
     val fullTitle: String = "",
     @SerialName("merchant_id")
-    val merchantId: Double = 0.0,
+    val merchantId: Long = 0L,
     val title: String = "",
     val type: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
 )
 
 @Serializable
@@ -2585,9 +2585,9 @@ data class UserModelCustomFields(
 
 @Serializable
 data class UserModelDob(
-    val year: Double = 0.0,
-    val month: Double = 0.0,
-    val day: Double = 0.0,
+    val year: Long = 0L,
+    val month: Long = 0L,
+    val day: Long = 0L,
 )
 
 @Serializable
@@ -2595,7 +2595,7 @@ data class UserModelImapDataDomainZone(
     val domain: String = "",
     @SerialName("imap_server")
     val imapServer: String = "",
-    val port: Double = 0.0,
+    val port: Long = 0L,
     val secure: Boolean = false,
 )
 
@@ -2610,7 +2610,7 @@ data class UserModelPublicTags(
     @SerialName("background_color")
     val backgroundColor: String = "",
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
 )
 
@@ -2638,7 +2638,7 @@ data class UserModelRendered(
 @Serializable
 data class UserModelTags(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
     val isDefault: Boolean = false,
     val forOwnedAccountsOnly: Boolean = false,
@@ -2669,16 +2669,16 @@ data class UserModelTelegramClient(
 data class BalanceModel(
     val balance: String = "",
     @SerialName("balance_id")
-    val balanceId: Double = 0.0,
+    val balanceId: Long = 0L,
     @SerialName("custom_title")
     val customTitle: JsonElement = JsonNull,
     val fullTitle: String = "",
     @SerialName("merchant_id")
-    val merchantId: Double = 0.0,
+    val merchantId: Long = 0L,
     val title: String = "",
     val type: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
 )
 
 @Serializable
@@ -2698,7 +2698,7 @@ data class ExtraModel(
     @SerialName("mfa_file")
     val mfaFile: String? = null,
     @SerialName("dota2_mmr")
-    val dota2Mmr: Double? = null,
+    val dota2Mmr: Long? = null,
     @SerialName("ea_games")
     val eaGames: Boolean? = null,
     @SerialName("uplay_games")
@@ -2710,11 +2710,11 @@ data class ExtraModel(
     @SerialName("ark_ascended")
     val arkAscended: Boolean? = null,
     @SerialName("genshin_currency")
-    val genshinCurrency: Double? = null,
+    val genshinCurrency: Long? = null,
     @SerialName("honkai_currency")
-    val honkaiCurrency: Double? = null,
+    val honkaiCurrency: Long? = null,
     @SerialName("zenless_currency")
-    val zenlessCurrency: Double? = null,
+    val zenlessCurrency: Long? = null,
     val password: String? = null,
     val telegramClient: String? = null,
     val telegramJson: String? = null,
@@ -2732,18 +2732,18 @@ data class ConfirmationCodeModel(
 @Serializable
 data class ConfirmationCodeModelCodeData(
     val code: String = "",
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val textPlain: String = "",
 )
 
 @Serializable
 data class ItemListModel(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -2753,31 +2753,31 @@ data class ItemListModel(
 @Serializable
 data class ItemFromListModel(
     @SerialName("item_id")
-    val itemId: Double? = null,
+    val itemId: Long? = null,
     @SerialName("item_state")
     val itemState: String? = null,
     @SerialName("category_id")
-    val categoryId: Double? = null,
+    val categoryId: Long? = null,
     @SerialName("published_date")
-    val publishedDate: Double? = null,
+    val publishedDate: Long? = null,
     val title: String? = null,
     val description: String? = null,
-    val price: Double? = null,
+    val price: Long? = null,
     @SerialName("update_stat_date")
-    val updateStatDate: Double? = null,
+    val updateStatDate: Long? = null,
     @SerialName("refreshed_date")
-    val refreshedDate: Double? = null,
+    val refreshedDate: Long? = null,
     @SerialName("view_count")
-    val viewCount: Double? = null,
+    val viewCount: Long? = null,
     @SerialName("is_sticky")
-    val isSticky: Double? = null,
+    val isSticky: Long? = null,
     @SerialName("item_origin")
     val itemOrigin: String? = null,
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double? = null,
-    val nsb: Double? = null,
+    val extendedGuarantee: Long? = null,
+    val nsb: Long? = null,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double? = null,
+    val allowAskDiscount: Long? = null,
     @SerialName("title_en")
     val titleEn: String? = null,
     @SerialName("description_en")
@@ -2786,7 +2786,7 @@ data class ItemFromListModel(
     val itemDomain: String? = null,
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String? = null,
-    val isIgnored: Double? = null,
+    val isIgnored: Long? = null,
     val guarantee: Boolean? = null,
     val canViewLoginData: Boolean? = null,
     val canUpdateItemStats: Boolean? = null,
@@ -2802,7 +2802,7 @@ data class ItemFromListModel(
     val canBumpItem: Boolean? = null,
     val canBuyItem: Boolean? = null,
     @SerialName("rub_price")
-    val rubPrice: Double? = null,
+    val rubPrice: Long? = null,
     @SerialName("price_currency")
     val priceCurrency: String? = null,
     val canValidateAccount: Boolean? = null,
@@ -2830,60 +2830,60 @@ data class ItemFromListModelBumpSettings(
 @Serializable
 data class ItemFromListModelSeller(
     @SerialName("user_id")
-    val userId: Double? = null,
+    val userId: Long? = null,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double? = null,
+    val soldItemsCount: Long? = null,
     @SerialName("active_item_count")
-    val activeItemCount: Double? = null,
+    val activeItemCount: Long? = null,
     @SerialName("restore_data")
     val restoreData: String? = null,
     val username: String? = null,
     @SerialName("avatar_date")
-    val avatarDate: Double? = null,
+    val avatarDate: Long? = null,
     @SerialName("is_banned")
-    val isBanned: Double? = null,
+    val isBanned: Long? = null,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double? = null,
+    val displayStyleGroupId: Long? = null,
     @SerialName("restore_percents")
-    val restorePercents: Double? = null,
+    val restorePercents: Long? = null,
 )
 
 @Serializable
 data class ItemModel(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("pending_deletion_date")
-    val pendingDeletionDate: Double = 0.0,
+    val pendingDeletionDate: Long = 0L,
     val login: String = "",
     @SerialName("temp_email")
     val tempEmail: String = "",
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     val information: String = "",
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -2905,29 +2905,29 @@ data class ItemModel(
     @SerialName("content_id")
     val contentId: JsonElement = JsonNull,
     @SerialName("delete_date")
-    val deleteDate: Double = 0.0,
+    val deleteDate: Long = 0L,
     @SerialName("delete_user_id")
-    val deleteUserId: Double = 0.0,
+    val deleteUserId: Long = 0L,
     @SerialName("delete_username")
     val deleteUsername: String = "",
     @SerialName("delete_reason")
     val deleteReason: String = "",
     @SerialName("user_allow_ask_discount")
-    val userAllowAskDiscount: Double = 0.0,
+    val userAllowAskDiscount: Long = 0L,
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     @SerialName("market_custom_title")
     val marketCustomTitle: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     @SerialName("buyer_display_icon_group_id")
-    val buyerDisplayIconGroupId: Double = 0.0,
+    val buyerDisplayIconGroupId: Long = 0L,
     @SerialName("buyer_uniq_banner")
     val buyerUniqBanner: String = "",
     @SerialName("buyer_avatar_date")
-    val buyerAvatarDate: Double = 0.0,
+    val buyerAvatarDate: Long = 0L,
     @SerialName("buyer_user_group_id")
-    val buyerUserGroupId: Double = 0.0,
+    val buyerUserGroupId: Long = 0L,
     @SerialName("is_fave")
     val isFave: JsonElement = JsonNull,
     @SerialName("in_cart")
@@ -2949,7 +2949,7 @@ data class ItemModel(
     val buyer: ItemModelBuyer = ItemModelBuyer(),
     val isPersonalAccount: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val priceWithSellerFeeLabel: String = "",
@@ -2957,7 +2957,7 @@ data class ItemModel(
     val canResellItemAfterPurchase: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val canViewAccountLink: Boolean = false,
     val accountLinks: List<ItemModelAccountLinks> = emptyList(),
     val accountLink: String = "",
@@ -2974,19 +2974,19 @@ data class ItemModel(
     val isTrusted: Boolean = false,
     val isBirthdayToday: Boolean = false,
     val isIgnored: Boolean = false,
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val extraPrices: List<ItemModelExtraPrices> = emptyList(),
     val canViewAccountLoginAndTempEmail: Boolean = false,
     val bumpSettings: ItemModelBumpSettings = ItemModelBumpSettings(),
     val canCheckGuarantee: Boolean = false,
     val canShareItem: Boolean = false,
     val canCheckAiPrice: Boolean = false,
-    val aiPrice: Double = 0.0,
-    val aiPriceCheckDate: Double = 0.0,
+    val aiPrice: Long = 0L,
+    val aiPriceCheckDate: Long = 0L,
     val needToRequireVideoToViewLoginData: Boolean = false,
     val canCheckAutoBuyPrice: Boolean = false,
-    val autoBuyPrice: Double = 0.0,
-    val autoBuyPriceCheckDate: Double = 0.0,
+    val autoBuyPrice: Long = 0L,
+    val autoBuyPriceCheckDate: Long = 0L,
     val descriptionHtml: String = "",
     val descriptionEnHtml: String = "",
     val descriptionPlain: String = "",
@@ -2996,13 +2996,13 @@ data class ItemModel(
 
 @Serializable
 data class ItemModelGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
-    val endDate: Double = 0.0,
+    val endDate: Long = 0L,
     val active: Boolean = false,
     val cancelled: Boolean = false,
-    val remainingTime: Double = 0.0,
+    val remainingTime: Long = 0L,
     val remainingTimePhrase: String = "",
     val cancelledReason: String = "",
     val cancelledReasonPhrase: String = "",
@@ -3031,23 +3031,23 @@ data class ItemModelCopyFormatData(
 @Serializable
 data class ItemModelBuyer(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("operation_date")
-    val operationDate: Double = 0.0,
+    val operationDate: Long = 0L,
     val visitorIsBuyer: Boolean = false,
     val username: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("uniq_banner")
     val uniqBanner: String = "",
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
 )
 
 @Serializable
@@ -3098,24 +3098,24 @@ data class ItemModelSellerContacts(
 @Serializable
 data class ItemModelSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("joined_date")
-    val joinedDate: Double = 0.0,
+    val joinedDate: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     @SerialName("effective_last_activity")
-    val effectiveLastActivity: Double = 0.0,
+    val effectiveLastActivity: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
     val isOnline: Boolean = false,
@@ -3126,26 +3126,26 @@ data class ItemModelSeller(
 data class InvoiceModel(
     @SerialName("additional_data")
     val additionalData: String = "",
-    val amount: Double = 0.0,
+    val amount: Long = 0L,
     val comment: String = "",
     @SerialName("expires_at")
-    val expiresAt: Double = 0.0,
+    val expiresAt: Long = 0L,
     @SerialName("invoice_date")
-    val invoiceDate: Double = 0.0,
+    val invoiceDate: Long = 0L,
     @SerialName("invoice_id")
-    val invoiceId: Double = 0.0,
+    val invoiceId: Long = 0L,
     @SerialName("is_test")
     val isTest: Boolean = false,
     @SerialName("merchant_id")
-    val merchantId: Double = 0.0,
+    val merchantId: Long = 0L,
     @SerialName("paid_date")
-    val paidDate: Double = 0.0,
+    val paidDate: Long = 0L,
     @SerialName("payer_user_id")
-    val payerUserId: Double = 0.0,
+    val payerUserId: Long = 0L,
     @SerialName("payment_id")
     val paymentId: String = "",
     @SerialName("resend_attempts")
-    val resendAttempts: Double = 0.0,
+    val resendAttempts: Long = 0L,
     val status: String = "",
     val url: String = "",
     @SerialName("url_callback")
@@ -3153,16 +3153,16 @@ data class InvoiceModel(
     @SerialName("url_success")
     val urlSuccess: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
 )
 
 @Serializable
 data class RespSystemInfo(
     @SerialName("visitor_id")
-    val visitorId: Double = 0.0,
-    val time: Double = 0.0,
+    val visitorId: Long = 0L,
+    val time: Long = 0L,
     @SerialName("log_id")
-    val logId: Double = 0.0,
+    val logId: Long = 0L,
 )
 
 // ─── CategoryApi Types ────────────────────────────────────────
@@ -3230,11 +3230,11 @@ data class CategoryAllParams(
 @Serializable
 data class CategoryAllResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -3585,15 +3585,15 @@ data class CategorySteamParams(
 @Serializable
 data class CategorySteamResponse(
     val items: List<CategorySteamResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -3603,12 +3603,12 @@ data class CategorySteamResponse(
 @Serializable
 data class CategorySteamResponseItemsSteamFullGames(
     val list: JsonElement = JsonNull,
-    val total: Double = 0.0,
+    val total: Long = 0L,
 )
 
 @Serializable
 data class CategorySteamResponseItemsGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
     val endDate: JsonElement = JsonNull,
@@ -3650,54 +3650,54 @@ data class CategorySteamResponseItemsAccountLinks(
 @Serializable
 data class CategorySteamResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategorySteamResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -3711,127 +3711,127 @@ data class CategorySteamResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("steam_item_id")
-    val steamItemId: Double = 0.0,
+    val steamItemId: Long = 0L,
     @SerialName("steam_country")
     val steamCountry: String = "",
     @SerialName("steam_register_date")
-    val steamRegisterDate: Double = 0.0,
+    val steamRegisterDate: Long = 0L,
     @SerialName("steam_last_activity")
-    val steamLastActivity: Double = 0.0,
+    val steamLastActivity: Long = 0L,
     @SerialName("steam_full_games")
     val steamFullGames: CategorySteamResponseItemsSteamFullGames = CategorySteamResponseItemsSteamFullGames(),
     @SerialName("steam_community_ban")
-    val steamCommunityBan: Double = 0.0,
+    val steamCommunityBan: Long = 0L,
     @SerialName("steam_bans")
     val steamBans: String = "",
     @SerialName("steam_cs2_profile_rank")
-    val steamCs2ProfileRank: Double = 0.0,
+    val steamCs2ProfileRank: Long = 0L,
     @SerialName("steam_balance")
     val steamBalance: String = "",
     @SerialName("steam_cs2_rank_id")
-    val steamCs2RankId: Double = 0.0,
+    val steamCs2RankId: Long = 0L,
     @SerialName("steam_is_limited")
-    val steamIsLimited: Double = 0.0,
+    val steamIsLimited: Long = 0L,
     @SerialName("steam_level")
-    val steamLevel: Double = 0.0,
+    val steamLevel: Long = 0L,
     @SerialName("steam_friend_count")
-    val steamFriendCount: Double = 0.0,
+    val steamFriendCount: Long = 0L,
     @SerialName("steam_cs2_last_activity")
-    val steamCs2LastActivity: Double = 0.0,
+    val steamCs2LastActivity: Long = 0L,
     @SerialName("steam_dota2_solo_mmr")
-    val steamDota2SoloMmr: Double = 0.0,
+    val steamDota2SoloMmr: Long = 0L,
     @SerialName("steam_cs2_ban_date")
-    val steamCs2BanDate: Double = 0.0,
+    val steamCs2BanDate: Long = 0L,
     @SerialName("steam_converted_balance")
-    val steamConvertedBalance: Double = 0.0,
+    val steamConvertedBalance: Long = 0L,
     @SerialName("steam_cards_count")
-    val steamCardsCount: Double = 0.0,
+    val steamCardsCount: Long = 0L,
     @SerialName("steam_cards_games")
-    val steamCardsGames: Double = 0.0,
+    val steamCardsGames: Long = 0L,
     @SerialName("steam_pubg_inv_value")
-    val steamPubgInvValue: Double = 0.0,
+    val steamPubgInvValue: Long = 0L,
     @SerialName("steam_cs2_inv_value")
-    val steamCs2InvValue: Double = 0.0,
+    val steamCs2InvValue: Long = 0L,
     @SerialName("steam_dota2_inv_value")
-    val steamDota2InvValue: Double = 0.0,
+    val steamDota2InvValue: Long = 0L,
     @SerialName("steam_tf2_inv_value")
-    val steamTf2InvValue: Double = 0.0,
+    val steamTf2InvValue: Long = 0L,
     @SerialName("steam_rust_inv_value")
-    val steamRustInvValue: Double = 0.0,
+    val steamRustInvValue: Long = 0L,
     @SerialName("steam_cs2_wingman_rank_id")
-    val steamCs2WingmanRankId: Double = 0.0,
+    val steamCs2WingmanRankId: Long = 0L,
     @SerialName("steam_game_count")
-    val steamGameCount: Double = 0.0,
+    val steamGameCount: Long = 0L,
     @SerialName("steam_steam_inv_value")
-    val steamSteamInvValue: Double = 0.0,
+    val steamSteamInvValue: Long = 0L,
     @SerialName("steam_inv_value")
-    val steamInvValue: Double = 0.0,
+    val steamInvValue: Long = 0L,
     @SerialName("steam_cs2_win_count")
-    val steamCs2WinCount: Double = 0.0,
+    val steamCs2WinCount: Long = 0L,
     @SerialName("steam_dota2_game_count")
-    val steamDota2GameCount: Double = 0.0,
+    val steamDota2GameCount: Long = 0L,
     @SerialName("steam_dota2_lose_count")
-    val steamDota2LoseCount: Double = 0.0,
+    val steamDota2LoseCount: Long = 0L,
     @SerialName("steam_dota2_win_count")
-    val steamDota2WinCount: Double = 0.0,
+    val steamDota2WinCount: Long = 0L,
     @SerialName("steam_hours_played_recently")
     val steamHoursPlayedRecently: String = "",
     @SerialName("steam_faceit_level")
-    val steamFaceitLevel: Double = 0.0,
+    val steamFaceitLevel: Long = 0L,
     @SerialName("steam_points")
-    val steamPoints: Double = 0.0,
+    val steamPoints: Long = 0L,
     @SerialName("steam_last_transaction_date")
-    val steamLastTransactionDate: Double = 0.0,
+    val steamLastTransactionDate: Long = 0L,
     @SerialName("steam_relevant_game_count")
-    val steamRelevantGameCount: Double = 0.0,
+    val steamRelevantGameCount: Long = 0L,
     @SerialName("steam_gift_count")
-    val steamGiftCount: Double = 0.0,
+    val steamGiftCount: Long = 0L,
     @SerialName("steam_limit_spent")
     val steamLimitSpent: String = "",
     @SerialName("steam_dota2_behavior")
-    val steamDota2Behavior: Double = 0.0,
+    val steamDota2Behavior: Long = 0L,
     @SerialName("steam_mfa")
-    val steamMfa: Double = 0.0,
+    val steamMfa: Long = 0L,
     @SerialName("steam_market")
-    val steamMarket: Double = 0.0,
+    val steamMarket: Long = 0L,
     @SerialName("steam_market_restrictions")
-    val steamMarketRestrictions: Double = 0.0,
+    val steamMarketRestrictions: Long = 0L,
     @SerialName("steam_market_ban_end_date")
-    val steamMarketBanEndDate: Double = 0.0,
+    val steamMarketBanEndDate: Long = 0L,
     @SerialName("steam_unturned_inv_value")
-    val steamUnturnedInvValue: Double = 0.0,
+    val steamUnturnedInvValue: Long = 0L,
     @SerialName("steam_cs2_last_launched")
-    val steamCs2LastLaunched: Double = 0.0,
+    val steamCs2LastLaunched: Long = 0L,
     @SerialName("steam_kf2_inv_value")
-    val steamKf2InvValue: Double = 0.0,
+    val steamKf2InvValue: Long = 0L,
     @SerialName("steam_dst_inv_value")
-    val steamDstInvValue: Double = 0.0,
+    val steamDstInvValue: Long = 0L,
     @SerialName("steam_cs2_premier_elo")
-    val steamCs2PremierElo: Double = 0.0,
+    val steamCs2PremierElo: Long = 0L,
     @SerialName("steam_has_activated_keys")
-    val steamHasActivatedKeys: Double = 0.0,
+    val steamHasActivatedKeys: Long = 0L,
     @SerialName("steam_cs2_ban_type")
-    val steamCs2BanType: Double = 0.0,
+    val steamCs2BanType: Long = 0L,
     @SerialName("steam_rust_kill_player")
-    val steamRustKillPlayer: Double = 0.0,
+    val steamRustKillPlayer: Long = 0L,
     @SerialName("steam_rust_deaths")
-    val steamRustDeaths: Double = 0.0,
+    val steamRustDeaths: Long = 0L,
     @SerialName("steam_total_gifts_rub")
-    val steamTotalGiftsRub: Double = 0.0,
+    val steamTotalGiftsRub: Long = 0L,
     @SerialName("steam_total_refunds_rub")
-    val steamTotalRefundsRub: Double = 0.0,
+    val steamTotalRefundsRub: Long = 0L,
     @SerialName("steam_total_ingame_rub")
-    val steamTotalIngameRub: Double = 0.0,
+    val steamTotalIngameRub: Long = 0L,
     @SerialName("steam_total_games_rub")
-    val steamTotalGamesRub: Double = 0.0,
+    val steamTotalGamesRub: Long = 0L,
     @SerialName("steam_total_purchased_rub")
-    val steamTotalPurchasedRub: Double = 0.0,
+    val steamTotalPurchasedRub: Long = 0L,
     @SerialName("steam_dota2_last_match_date")
-    val steamDota2LastMatchDate: Double = 0.0,
+    val steamDota2LastMatchDate: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: CategorySteamResponseItemsGuarantee = CategorySteamResponseItemsGuarantee(),
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -3848,7 +3848,7 @@ data class CategorySteamResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -3856,7 +3856,7 @@ data class CategorySteamResponseItems(
     val steamData: CategorySteamResponseItemsSteamData = CategorySteamResponseItemsSteamData(),
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val hasCs2: Boolean = false,
     val hasDota2: Boolean = false,
     val hasPubg: Boolean = false,
@@ -3869,7 +3869,7 @@ data class CategorySteamResponseItems(
     val inventoryValue: List<JsonElement> = emptyList(),
     val steamCs2Medals: List<JsonElement> = emptyList(),
     val cs2RankExpired: Boolean = false,
-    val steamDota2WinRate: Double = 0.0,
+    val steamDota2WinRate: Long = 0L,
     val steamTransactions: List<CategorySteamResponseItemsSteamTransactions> = emptyList(),
     val hasPossibleBanInDota2: Boolean = false,
     val chineseAccount: Boolean = false,
@@ -3883,9 +3883,9 @@ data class CategorySteamResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -4108,15 +4108,15 @@ data class CategoryFortniteParams(
 @Serializable
 data class CategoryFortniteResponse(
     val items: List<CategoryFortniteResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -4138,7 +4138,7 @@ data class CategoryFortniteResponseItemsFortniteSkins(
     val rarity: String = "",
     val type: String = "",
     @SerialName("from_shop")
-    val fromShop: Double = 0.0,
+    val fromShop: Long = 0L,
 )
 
 @Serializable
@@ -4148,7 +4148,7 @@ data class CategoryFortniteResponseItemsFortnitePickaxe(
     val rarity: String = "",
     val type: String = "",
     @SerialName("from_shop")
-    val fromShop: Double = 0.0,
+    val fromShop: Long = 0L,
 )
 
 @Serializable
@@ -4158,7 +4158,7 @@ data class CategoryFortniteResponseItemsFortniteDance(
     val rarity: String = "",
     val type: String = "",
     @SerialName("from_shop")
-    val fromShop: Double = 0.0,
+    val fromShop: Long = 0L,
 )
 
 @Serializable
@@ -4168,27 +4168,27 @@ data class CategoryFortniteResponseItemsFortniteGliders(
     val rarity: String = "",
     val type: String = "",
     @SerialName("from_shop")
-    val fromShop: Double = 0.0,
+    val fromShop: Long = 0L,
 )
 
 @Serializable
 data class CategoryFortniteResponseItemsFortnitePastSeasons(
-    val numWins: Double = 0.0,
-    val seasonXp: Double = 0.0,
+    val numWins: Long = 0L,
+    val seasonXp: Long = 0L,
     val purchasedVIP: Boolean = false,
-    val survivorPrestige: Double = 0.0,
-    val seasonLevel: Double = 0.0,
-    val numLowBracket: Double = 0.0,
-    val bookLevel: Double = 0.0,
-    val numRoyalRoyales: Double = 0.0,
-    val seasonNumber: Double = 0.0,
-    val survivorTier: Double = 0.0,
-    val numHighBracket: Double = 0.0,
+    val survivorPrestige: Long = 0L,
+    val seasonLevel: Long = 0L,
+    val numLowBracket: Long = 0L,
+    val bookLevel: Long = 0L,
+    val numRoyalRoyales: Long = 0L,
+    val seasonNumber: Long = 0L,
+    val survivorTier: Long = 0L,
+    val numHighBracket: Long = 0L,
 )
 
 @Serializable
 data class CategoryFortniteResponseItemsFortniteTransactions(
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val title: String = "",
     val presentmentTotal: String = "",
     val orderType: String = "",
@@ -4196,63 +4196,63 @@ data class CategoryFortniteResponseItemsFortniteTransactions(
 
 @Serializable
 data class CategoryFortniteResponseItemsShopCounts(
-    val shopSkinsCount: Double = 0.0,
-    val shopPickaxesCount: Double = 0.0,
-    val shopDancesCount: Double = 0.0,
-    val shopGlidersCount: Double = 0.0,
+    val shopSkinsCount: Long = 0L,
+    val shopPickaxesCount: Long = 0L,
+    val shopDancesCount: Long = 0L,
+    val shopGlidersCount: Long = 0L,
 )
 
 @Serializable
 data class CategoryFortniteResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryFortniteResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -4266,51 +4266,51 @@ data class CategoryFortniteResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("fortnite_item_id")
-    val fortniteItemId: Double = 0.0,
+    val fortniteItemId: Long = 0L,
     @SerialName("fortnite_platform")
     val fortnitePlatform: String = "",
     @SerialName("fortnite_register_date")
-    val fortniteRegisterDate: Double = 0.0,
+    val fortniteRegisterDate: Long = 0L,
     @SerialName("fortnite_last_activity")
-    val fortniteLastActivity: Double = 0.0,
+    val fortniteLastActivity: Long = 0L,
     @SerialName("fortnite_book_level")
-    val fortniteBookLevel: Double = 0.0,
+    val fortniteBookLevel: Long = 0L,
     @SerialName("fortnite_lifetime_wins")
-    val fortniteLifetimeWins: Double = 0.0,
+    val fortniteLifetimeWins: Long = 0L,
     @SerialName("fortnite_level")
-    val fortniteLevel: Double = 0.0,
+    val fortniteLevel: Long = 0L,
     @SerialName("fortnite_season_num")
-    val fortniteSeasonNum: Double = 0.0,
+    val fortniteSeasonNum: Long = 0L,
     @SerialName("fortnite_books_purchased")
-    val fortniteBooksPurchased: Double = 0.0,
+    val fortniteBooksPurchased: Long = 0L,
     @SerialName("fortnite_balance")
-    val fortniteBalance: Double = 0.0,
+    val fortniteBalance: Long = 0L,
     @SerialName("fortnite_skin_count")
-    val fortniteSkinCount: Double = 0.0,
+    val fortniteSkinCount: Long = 0L,
     @SerialName("fortnite_change_email")
-    val fortniteChangeEmail: Double = 0.0,
+    val fortniteChangeEmail: Long = 0L,
     @SerialName("fortnite_rl_purchases")
-    val fortniteRlPurchases: Double = 0.0,
+    val fortniteRlPurchases: Long = 0L,
     @SerialName("fortnite_next_change_email_date")
-    val fortniteNextChangeEmailDate: Double = 0.0,
+    val fortniteNextChangeEmailDate: Long = 0L,
     @SerialName("fortnite_last_trans_date")
-    val fortniteLastTransDate: Double = 0.0,
+    val fortniteLastTransDate: Long = 0L,
     @SerialName("fortnite_xbox_linkable")
-    val fortniteXboxLinkable: Double = 0.0,
+    val fortniteXboxLinkable: Long = 0L,
     @SerialName("fortnite_psn_linkable")
-    val fortnitePsnLinkable: Double = 0.0,
+    val fortnitePsnLinkable: Long = 0L,
     @SerialName("fortnite_shop_skins_count")
-    val fortniteShopSkinsCount: Double = 0.0,
+    val fortniteShopSkinsCount: Long = 0L,
     @SerialName("fortnite_shop_pickaxes_count")
-    val fortniteShopPickaxesCount: Double = 0.0,
+    val fortniteShopPickaxesCount: Long = 0L,
     @SerialName("fortnite_shop_dances_count")
-    val fortniteShopDancesCount: Double = 0.0,
+    val fortniteShopDancesCount: Long = 0L,
     @SerialName("fortnite_shop_gliders_count")
-    val fortniteShopGlidersCount: Double = 0.0,
+    val fortniteShopGlidersCount: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -4327,7 +4327,7 @@ data class CategoryFortniteResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -4337,15 +4337,15 @@ data class CategoryFortniteResponseItems(
     val fortniteDance: List<CategoryFortniteResponseItemsFortniteDance> = emptyList(),
     val fortniteGliders: List<CategoryFortniteResponseItemsFortniteGliders> = emptyList(),
     @SerialName("fortnite_pickaxe_count")
-    val fortnitePickaxeCount: Double = 0.0,
+    val fortnitePickaxeCount: Long = 0L,
     @SerialName("fortnite_dance_count")
-    val fortniteDanceCount: Double = 0.0,
+    val fortniteDanceCount: Long = 0L,
     @SerialName("fortnite_glider_count")
-    val fortniteGliderCount: Double = 0.0,
+    val fortniteGliderCount: Long = 0L,
     val fortnitePastSeasons: List<CategoryFortniteResponseItemsFortnitePastSeasons> = emptyList(),
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val fortniteTransactions: List<CategoryFortniteResponseItemsFortniteTransactions> = emptyList(),
     val domain: String = "",
     val shopCounts: CategoryFortniteResponseItemsShopCounts = CategoryFortniteResponseItemsShopCounts(),
@@ -4355,9 +4355,9 @@ data class CategoryFortniteResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -4611,15 +4611,15 @@ data class CategoryMihoyoParams(
 @Serializable
 data class CategoryMihoyoResponse(
     val items: List<CategoryMihoyoResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -4642,40 +4642,40 @@ data class CategoryMihoyoResponseItemsMihoyoLinkedAccounts(
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersEquip(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
-    val rank: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
+    val rank: Long = 0L,
     val name: String = "",
     val desc: String = "",
     val icon: String = "",
-    val rarity: Double = 0.0,
+    val rarity: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersRelicsMainProperty(
     @SerialName("property_type")
-    val propertyType: Double = 0.0,
+    val propertyType: Long = 0L,
     val value: String = "",
-    val times: Double = 0.0,
+    val times: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersRelicsProperties(
     @SerialName("property_type")
-    val propertyType: Double = 0.0,
+    val propertyType: Long = 0L,
     val value: String = "",
-    val times: Double = 0.0,
+    val times: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersRelics(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
-    val pos: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
+    val pos: Long = 0L,
     val name: String = "",
     val desc: String = "",
     val icon: String = "",
-    val rarity: Double = 0.0,
+    val rarity: Long = 0L,
     @SerialName("main_property")
     val mainProperty: CategoryMihoyoResponseItemsHonkaiCharactersRelicsMainProperty = CategoryMihoyoResponseItemsHonkaiCharactersRelicsMainProperty(),
     val properties: List<CategoryMihoyoResponseItemsHonkaiCharactersRelicsProperties> = emptyList(),
@@ -4684,28 +4684,28 @@ data class CategoryMihoyoResponseItemsHonkaiCharactersRelics(
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersOrnamentsMainProperty(
     @SerialName("property_type")
-    val propertyType: Double = 0.0,
+    val propertyType: Long = 0L,
     val value: String = "",
-    val times: Double = 0.0,
+    val times: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersOrnamentsProperties(
     @SerialName("property_type")
-    val propertyType: Double = 0.0,
+    val propertyType: Long = 0L,
     val value: String = "",
-    val times: Double = 0.0,
+    val times: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharactersOrnaments(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
-    val pos: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
+    val pos: Long = 0L,
     val name: String = "",
     val desc: String = "",
     val icon: String = "",
-    val rarity: Double = 0.0,
+    val rarity: Long = 0L,
     @SerialName("main_property")
     val mainProperty: CategoryMihoyoResponseItemsHonkaiCharactersOrnamentsMainProperty = CategoryMihoyoResponseItemsHonkaiCharactersOrnamentsMainProperty(),
     val properties: List<CategoryMihoyoResponseItemsHonkaiCharactersOrnamentsProperties> = emptyList(),
@@ -4713,19 +4713,19 @@ data class CategoryMihoyoResponseItemsHonkaiCharactersOrnaments(
 
 @Serializable
 data class CategoryMihoyoResponseItemsHonkaiCharacters(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
     val name: String = "",
     val element: String = "",
     val icon: String = "",
-    val rarity: Double = 0.0,
-    val rank: Double = 0.0,
+    val rarity: Long = 0L,
+    val rank: Long = 0L,
     val image: String = "",
     val equip: CategoryMihoyoResponseItemsHonkaiCharactersEquip = CategoryMihoyoResponseItemsHonkaiCharactersEquip(),
     val relics: List<CategoryMihoyoResponseItemsHonkaiCharactersRelics> = emptyList(),
     val ornaments: List<CategoryMihoyoResponseItemsHonkaiCharactersOrnaments> = emptyList(),
     @SerialName("base_type")
-    val baseType: Double = 0.0,
+    val baseType: Long = 0L,
     @SerialName("figure_path")
     val figurePath: String = "",
     val elementImage: String = "",
@@ -4733,47 +4733,47 @@ data class CategoryMihoyoResponseItemsHonkaiCharacters(
 
 @Serializable
 data class CategoryMihoyoResponseItemsGenshinCharactersWeapon(
-    val id: Double = 0.0,
+    val id: Long = 0L,
     val name: String = "",
     val icon: String = "",
-    val type: Double = 0.0,
-    val rarity: Double = 0.0,
-    val level: Double = 0.0,
+    val type: Long = 0L,
+    val rarity: Long = 0L,
+    val level: Long = 0L,
     @SerialName("promote_level")
-    val promoteLevel: Double = 0.0,
+    val promoteLevel: Long = 0L,
     @SerialName("type_name")
     val typeName: String = "",
     val desc: String = "",
     @SerialName("affix_level")
-    val affixLevel: Double = 0.0,
+    val affixLevel: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsGenshinCharactersReliquaries(
-    val id: Double = 0.0,
+    val id: Long = 0L,
     val name: String = "",
     val icon: String = "",
-    val pos: Double = 0.0,
-    val rarity: Double = 0.0,
-    val level: Double = 0.0,
+    val pos: Long = 0L,
+    val rarity: Long = 0L,
+    val level: Long = 0L,
     @SerialName("pos_name")
     val posName: String = "",
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsGenshinCharacters(
-    val id: Double = 0.0,
+    val id: Long = 0L,
     val image: String = "",
     val icon: String = "",
     val name: String = "",
     val element: String = "",
-    val fetter: Double = 0.0,
-    val level: Double = 0.0,
-    val rarity: Double = 0.0,
+    val fetter: Long = 0L,
+    val level: Long = 0L,
+    val rarity: Long = 0L,
     val weapon: CategoryMihoyoResponseItemsGenshinCharactersWeapon = CategoryMihoyoResponseItemsGenshinCharactersWeapon(),
     val reliquaries: List<CategoryMihoyoResponseItemsGenshinCharactersReliquaries> = emptyList(),
     @SerialName("actived_constellation_num")
-    val activedConstellationNum: Double = 0.0,
+    val activedConstellationNum: Long = 0L,
     val costumes: List<JsonElement> = emptyList(),
     val external: JsonElement = JsonNull,
     val background: String = "",
@@ -4784,7 +4784,7 @@ data class CategoryMihoyoResponseItemsZenlessCharactersWeaponProperties(
     @SerialName("property_name")
     val propertyName: String = "",
     @SerialName("property_id")
-    val propertyId: Double = 0.0,
+    val propertyId: Long = 0L,
     val base: String = "",
 )
 
@@ -4793,18 +4793,18 @@ data class CategoryMihoyoResponseItemsZenlessCharactersWeaponMainProperties(
     @SerialName("property_name")
     val propertyName: String = "",
     @SerialName("property_id")
-    val propertyId: Double = 0.0,
+    val propertyId: Long = 0L,
     val base: String = "",
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsZenlessCharactersWeapon(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
     val name: String = "",
-    val star: Double = 0.0,
+    val star: Long = 0L,
     val icon: String = "",
-    val rarity: Double = 0.0,
+    val rarity: Long = 0L,
     val properties: List<CategoryMihoyoResponseItemsZenlessCharactersWeaponProperties> = emptyList(),
     @SerialName("main_properties")
     val mainProperties: List<CategoryMihoyoResponseItemsZenlessCharactersWeaponMainProperties> = emptyList(),
@@ -4812,28 +4812,28 @@ data class CategoryMihoyoResponseItemsZenlessCharactersWeapon(
     val talentTitle: String = "",
     @SerialName("talent_content")
     val talentContent: String = "",
-    val profession: Double = 0.0,
+    val profession: Long = 0L,
     val starIcon: String = "",
     val rarityIcon: String = "",
 )
 
 @Serializable
 data class CategoryMihoyoResponseItemsZenlessCharacters(
-    val id: Double = 0.0,
-    val level: Double = 0.0,
+    val id: Long = 0L,
+    val level: Long = 0L,
     @SerialName("name_mi18n")
     val nameMi18n: String = "",
     @SerialName("full_name_mi18n")
     val fullNameMi18n: String = "",
     @SerialName("element_type")
-    val elementType: Double = 0.0,
+    val elementType: Long = 0L,
     @SerialName("camp_name_mi18n")
     val campNameMi18n: String = "",
     @SerialName("avatar_profession")
-    val avatarProfession: Double = 0.0,
-    val rarity: Double = 0.0,
+    val avatarProfession: Long = 0L,
+    val rarity: Long = 0L,
     val weapon: CategoryMihoyoResponseItemsZenlessCharactersWeapon = CategoryMihoyoResponseItemsZenlessCharactersWeapon(),
-    val rank: Double = 0.0,
+    val rank: Long = 0L,
     val name: String = "",
     val rarityIcon: String = "",
     val elementIcon: String = "",
@@ -4850,54 +4850,54 @@ data class CategoryMihoyoResponseItemsAccountLinks(
 @Serializable
 data class CategoryMihoyoResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryMihoyoResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -4911,75 +4911,75 @@ data class CategoryMihoyoResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("mihoyo_item_id")
-    val mihoyoItemId: Double = 0.0,
+    val mihoyoItemId: Long = 0L,
     @SerialName("mihoyo_id")
-    val mihoyoId: Double = 0.0,
+    val mihoyoId: Long = 0L,
     @SerialName("mihoyo_email")
-    val mihoyoEmail: Double = 0.0,
+    val mihoyoEmail: Long = 0L,
     @SerialName("mihoyo_has_linked_accounts")
-    val mihoyoHasLinkedAccounts: Double = 0.0,
+    val mihoyoHasLinkedAccounts: Long = 0L,
     @SerialName("mihoyo_region")
     val mihoyoRegion: String = "",
     @SerialName("mihoyo_last_activity")
-    val mihoyoLastActivity: Double = 0.0,
+    val mihoyoLastActivity: Long = 0L,
     @SerialName("mihoyo_genshin_level")
-    val mihoyoGenshinLevel: Double = 0.0,
+    val mihoyoGenshinLevel: Long = 0L,
     @SerialName("mihoyo_genshin_character_count")
-    val mihoyoGenshinCharacterCount: Double = 0.0,
+    val mihoyoGenshinCharacterCount: Long = 0L,
     @SerialName("mihoyo_genshin_achievement_count")
-    val mihoyoGenshinAchievementCount: Double = 0.0,
+    val mihoyoGenshinAchievementCount: Long = 0L,
     @SerialName("mihoyo_genshin_abyss_process")
     val mihoyoGenshinAbyssProcess: String = "",
     @SerialName("mihoyo_genshin_legendary_characters_count")
-    val mihoyoGenshinLegendaryCharactersCount: Double = 0.0,
+    val mihoyoGenshinLegendaryCharactersCount: Long = 0L,
     @SerialName("mihoyo_genshin_constellations_count")
-    val mihoyoGenshinConstellationsCount: Double = 0.0,
+    val mihoyoGenshinConstellationsCount: Long = 0L,
     @SerialName("mihoyo_genshin_legendary_weapons_count")
-    val mihoyoGenshinLegendaryWeaponsCount: Double = 0.0,
+    val mihoyoGenshinLegendaryWeaponsCount: Long = 0L,
     @SerialName("mihoyo_genshin_activity_days")
-    val mihoyoGenshinActivityDays: Double = 0.0,
+    val mihoyoGenshinActivityDays: Long = 0L,
     @SerialName("mihoyo_genshin_currency")
-    val mihoyoGenshinCurrency: Double = 0.0,
+    val mihoyoGenshinCurrency: Long = 0L,
     @SerialName("mihoyo_honkai_level")
-    val mihoyoHonkaiLevel: Double = 0.0,
+    val mihoyoHonkaiLevel: Long = 0L,
     @SerialName("mihoyo_honkai_character_count")
-    val mihoyoHonkaiCharacterCount: Double = 0.0,
+    val mihoyoHonkaiCharacterCount: Long = 0L,
     @SerialName("mihoyo_honkai_achievement_count")
-    val mihoyoHonkaiAchievementCount: Double = 0.0,
+    val mihoyoHonkaiAchievementCount: Long = 0L,
     @SerialName("mihoyo_honkai_abyss_process")
     val mihoyoHonkaiAbyssProcess: String = "",
     @SerialName("mihoyo_honkai_legendary_characters_count")
-    val mihoyoHonkaiLegendaryCharactersCount: Double = 0.0,
+    val mihoyoHonkaiLegendaryCharactersCount: Long = 0L,
     @SerialName("mihoyo_honkai_eidolons_count")
-    val mihoyoHonkaiEidolonsCount: Double = 0.0,
+    val mihoyoHonkaiEidolonsCount: Long = 0L,
     @SerialName("mihoyo_honkai_legendary_weapons_count")
-    val mihoyoHonkaiLegendaryWeaponsCount: Double = 0.0,
+    val mihoyoHonkaiLegendaryWeaponsCount: Long = 0L,
     @SerialName("mihoyo_honkai_activity_days")
-    val mihoyoHonkaiActivityDays: Double = 0.0,
+    val mihoyoHonkaiActivityDays: Long = 0L,
     @SerialName("mihoyo_honkai_currency")
-    val mihoyoHonkaiCurrency: Double = 0.0,
+    val mihoyoHonkaiCurrency: Long = 0L,
     @SerialName("mihoyo_zenless_level")
-    val mihoyoZenlessLevel: Double = 0.0,
+    val mihoyoZenlessLevel: Long = 0L,
     @SerialName("mihoyo_zenless_character_count")
-    val mihoyoZenlessCharacterCount: Double = 0.0,
+    val mihoyoZenlessCharacterCount: Long = 0L,
     @SerialName("mihoyo_zenless_achievement_count")
-    val mihoyoZenlessAchievementCount: Double = 0.0,
+    val mihoyoZenlessAchievementCount: Long = 0L,
     @SerialName("mihoyo_zenless_abyss_process")
     val mihoyoZenlessAbyssProcess: String = "",
     @SerialName("mihoyo_zenless_legendary_characters_count")
-    val mihoyoZenlessLegendaryCharactersCount: Double = 0.0,
+    val mihoyoZenlessLegendaryCharactersCount: Long = 0L,
     @SerialName("mihoyo_zenless_cinemas_count")
-    val mihoyoZenlessCinemasCount: Double = 0.0,
+    val mihoyoZenlessCinemasCount: Long = 0L,
     @SerialName("mihoyo_zenless_legendary_weapons_count")
-    val mihoyoZenlessLegendaryWeaponsCount: Double = 0.0,
+    val mihoyoZenlessLegendaryWeaponsCount: Long = 0L,
     @SerialName("mihoyo_zenless_activity_days")
-    val mihoyoZenlessActivityDays: Double = 0.0,
+    val mihoyoZenlessActivityDays: Long = 0L,
     @SerialName("mihoyo_zenless_currency")
-    val mihoyoZenlessCurrency: Double = 0.0,
+    val mihoyoZenlessCurrency: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -4996,7 +4996,7 @@ data class CategoryMihoyoResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -5014,9 +5014,9 @@ data class CategoryMihoyoResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -5254,15 +5254,15 @@ data class CategoryRiotParams(
 @Serializable
 data class CategoryRiotResponse(
     val items: List<CategoryRiotResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -5300,54 +5300,54 @@ data class CategoryRiotResponseItemsAccountLinks(
 @Serializable
 data class CategoryRiotResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryRiotResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -5361,73 +5361,73 @@ data class CategoryRiotResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("riot_item_id")
-    val riotItemId: Double = 0.0,
+    val riotItemId: Long = 0L,
     @SerialName("riot_id")
     val riotId: String = "",
     @SerialName("riot_account_verified")
-    val riotAccountVerified: Double = 0.0,
+    val riotAccountVerified: Long = 0L,
     @SerialName("riot_email_verified")
-    val riotEmailVerified: Double = 0.0,
+    val riotEmailVerified: Long = 0L,
     @SerialName("riot_country")
     val riotCountry: String = "",
     @SerialName("riot_password_change")
-    val riotPasswordChange: Double = 0.0,
+    val riotPasswordChange: Long = 0L,
     @SerialName("riot_phone_verified")
-    val riotPhoneVerified: Double = 0.0,
+    val riotPhoneVerified: Long = 0L,
     @SerialName("riot_last_activity")
-    val riotLastActivity: Double = 0.0,
+    val riotLastActivity: Long = 0L,
     @SerialName("riot_valorant_wallet_vp")
-    val riotValorantWalletVp: Double = 0.0,
+    val riotValorantWalletVp: Long = 0L,
     @SerialName("riot_valorant_wallet_rp")
-    val riotValorantWalletRp: Double = 0.0,
+    val riotValorantWalletRp: Long = 0L,
     @SerialName("riot_valorant_wallet_fa")
-    val riotValorantWalletFa: Double = 0.0,
+    val riotValorantWalletFa: Long = 0L,
     @SerialName("riot_valorant_level")
-    val riotValorantLevel: Double = 0.0,
+    val riotValorantLevel: Long = 0L,
     @SerialName("riot_username")
     val riotUsername: String = "",
     @SerialName("riot_valorant_rank")
-    val riotValorantRank: Double = 0.0,
+    val riotValorantRank: Long = 0L,
     @SerialName("riot_valorant_region")
     val riotValorantRegion: String = "",
     @SerialName("riot_valorant_skin_count")
-    val riotValorantSkinCount: Double = 0.0,
+    val riotValorantSkinCount: Long = 0L,
     @SerialName("riot_valorant_agent_count")
-    val riotValorantAgentCount: Double = 0.0,
+    val riotValorantAgentCount: Long = 0L,
     @SerialName("riot_valorant_previous_rank")
-    val riotValorantPreviousRank: Double = 0.0,
+    val riotValorantPreviousRank: Long = 0L,
     @SerialName("riot_valorant_last_rank")
-    val riotValorantLastRank: Double = 0.0,
+    val riotValorantLastRank: Long = 0L,
     @SerialName("riot_valorant_rank_type")
     val riotValorantRankType: String = "",
     @SerialName("riot_valorant_inventory_value")
-    val riotValorantInventoryValue: Double = 0.0,
+    val riotValorantInventoryValue: Long = 0L,
     @SerialName("riot_valorant_knife")
-    val riotValorantKnife: Double = 0.0,
+    val riotValorantKnife: Long = 0L,
     @SerialName("riot_lol_region")
     val riotLolRegion: String = "",
     @SerialName("riot_lol_skin_count")
-    val riotLolSkinCount: Double = 0.0,
+    val riotLolSkinCount: Long = 0L,
     @SerialName("riot_lol_champion_count")
-    val riotLolChampionCount: Double = 0.0,
+    val riotLolChampionCount: Long = 0L,
     @SerialName("riot_lol_level")
-    val riotLolLevel: Double = 0.0,
+    val riotLolLevel: Long = 0L,
     @SerialName("riot_lol_wallet_blue")
-    val riotLolWalletBlue: Double = 0.0,
+    val riotLolWalletBlue: Long = 0L,
     @SerialName("riot_lol_wallet_orange")
-    val riotLolWalletOrange: Double = 0.0,
+    val riotLolWalletOrange: Long = 0L,
     @SerialName("riot_lol_wallet_mythic")
-    val riotLolWalletMythic: Double = 0.0,
+    val riotLolWalletMythic: Long = 0L,
     @SerialName("riot_lol_wallet_riot")
-    val riotLolWalletRiot: Double = 0.0,
+    val riotLolWalletRiot: Long = 0L,
     @SerialName("riot_lol_rank")
     val riotLolRank: String = "",
     @SerialName("riot_lol_rank_win_rate")
-    val riotLolRankWinRate: Double = 0.0,
+    val riotLolRankWinRate: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -5444,7 +5444,7 @@ data class CategoryRiotResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -5457,7 +5457,7 @@ data class CategoryRiotResponseItems(
     val lolRegionPhrase: String = "",
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val valorantInventory: CategoryRiotResponseItemsValorantInventory = CategoryRiotResponseItemsValorantInventory(),
     val lolInventory: CategoryRiotResponseItemsLolInventory = CategoryRiotResponseItemsLolInventory(),
     val canViewAccountLink: Boolean = false,
@@ -5467,9 +5467,9 @@ data class CategoryRiotResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -5676,15 +5676,15 @@ data class CategoryTelegramParams(
 @Serializable
 data class CategoryTelegramResponse(
     val items: List<CategoryTelegramResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -5701,29 +5701,29 @@ data class CategoryTelegramResponseItemsBumpSettings(
 
 @Serializable
 data class CategoryTelegramResponseItemsTelegramGroupCounters(
-    val chats: Double = 0.0,
-    val channels: Double = 0.0,
-    val conversations: Double = 0.0,
-    val admin: Double = 0.0,
+    val chats: Long = 0L,
+    val channels: Long = 0L,
+    val conversations: Long = 0L,
+    val admin: Long = 0L,
 )
 
 @Serializable
 data class CategoryTelegramResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -5731,33 +5731,33 @@ data class CategoryTelegramResponseItemsSeller(
 @Serializable
 data class CategoryTelegramResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -5771,41 +5771,41 @@ data class CategoryTelegramResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("telegram_item_id")
-    val telegramItemId: Double = 0.0,
+    val telegramItemId: Long = 0L,
     @SerialName("telegram_country")
     val telegramCountry: String = "",
     @SerialName("telegram_last_seen")
-    val telegramLastSeen: Double = 0.0,
+    val telegramLastSeen: Long = 0L,
     @SerialName("telegram_premium")
-    val telegramPremium: Double = 0.0,
+    val telegramPremium: Long = 0L,
     @SerialName("telegram_stars_count")
-    val telegramStarsCount: Double = 0.0,
+    val telegramStarsCount: Long = 0L,
     @SerialName("telegram_birthday")
-    val telegramBirthday: Double = 0.0,
+    val telegramBirthday: Long = 0L,
     @SerialName("telegram_password")
-    val telegramPassword: Double = 0.0,
+    val telegramPassword: Long = 0L,
     @SerialName("telegram_premium_expires")
-    val telegramPremiumExpires: Double = 0.0,
+    val telegramPremiumExpires: Long = 0L,
     @SerialName("telegram_spam_block")
     val telegramSpamBlock: JsonElement = JsonNull,
     @SerialName("telegram_channels_count")
-    val telegramChannelsCount: Double = 0.0,
+    val telegramChannelsCount: Long = 0L,
     @SerialName("telegram_chats_count")
-    val telegramChatsCount: Double = 0.0,
+    val telegramChatsCount: Long = 0L,
     @SerialName("telegram_admin_count")
-    val telegramAdminCount: Double = 0.0,
+    val telegramAdminCount: Long = 0L,
     @SerialName("telegram_admin_subs_count")
-    val telegramAdminSubsCount: Double = 0.0,
+    val telegramAdminSubsCount: Long = 0L,
     @SerialName("telegram_conversations_count")
-    val telegramConversationsCount: Double = 0.0,
+    val telegramConversationsCount: Long = 0L,
     @SerialName("telegram_id_count")
-    val telegramIdCount: Double = 0.0,
+    val telegramIdCount: Long = 0L,
     @SerialName("telegram_contacts_count")
-    val telegramContactsCount: Double = 0.0,
+    val telegramContactsCount: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -5822,7 +5822,7 @@ data class CategoryTelegramResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -6057,15 +6057,15 @@ data class CategorySupercellParams(
 @Serializable
 data class CategorySupercellResponse(
     val items: List<CategorySupercellResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -6090,20 +6090,20 @@ data class CategorySupercellResponseItemsAccountLinks(
 @Serializable
 data class CategorySupercellResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -6111,33 +6111,33 @@ data class CategorySupercellResponseItemsSeller(
 @Serializable
 data class CategorySupercellResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -6151,67 +6151,67 @@ data class CategorySupercellResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("supercell_item_id")
-    val supercellItemId: Double = 0.0,
+    val supercellItemId: Long = 0L,
     @SerialName("supercell_id")
     val supercellId: String = "",
     @SerialName("supercell_arena")
     val supercellArena: String = "",
     @SerialName("supercell_brawler_count")
-    val supercellBrawlerCount: Double = 0.0,
+    val supercellBrawlerCount: Long = 0L,
     @SerialName("supercell_last_activity")
-    val supercellLastActivity: Double = 0.0,
+    val supercellLastActivity: Long = 0L,
     @SerialName("supercell_legendary_brawler_count")
-    val supercellLegendaryBrawlerCount: Double = 0.0,
+    val supercellLegendaryBrawlerCount: Long = 0L,
     @SerialName("supercell_town_hall_level")
-    val supercellTownHallLevel: Double = 0.0,
+    val supercellTownHallLevel: Long = 0L,
     @SerialName("supercell_builder_hall_level")
-    val supercellBuilderHallLevel: Double = 0.0,
+    val supercellBuilderHallLevel: Long = 0L,
     @SerialName("supercell_builder_hall_cup_count")
-    val supercellBuilderHallCupCount: Double = 0.0,
+    val supercellBuilderHallCupCount: Long = 0L,
     @SerialName("supercell_phone")
-    val supercellPhone: Double = 0.0,
+    val supercellPhone: Long = 0L,
     @SerialName("supercell_laser_level")
-    val supercellLaserLevel: Double = 0.0,
+    val supercellLaserLevel: Long = 0L,
     @SerialName("supercell_scroll_level")
-    val supercellScrollLevel: Double = 0.0,
+    val supercellScrollLevel: Long = 0L,
     @SerialName("supercell_magic_level")
-    val supercellMagicLevel: Double = 0.0,
+    val supercellMagicLevel: Long = 0L,
     @SerialName("supercell_laser_trophies")
-    val supercellLaserTrophies: Double = 0.0,
+    val supercellLaserTrophies: Long = 0L,
     @SerialName("supercell_scroll_trophies")
-    val supercellScrollTrophies: Double = 0.0,
+    val supercellScrollTrophies: Long = 0L,
     @SerialName("supercell_magic_trophies")
-    val supercellMagicTrophies: Double = 0.0,
+    val supercellMagicTrophies: Long = 0L,
     @SerialName("supercell_laser_victories")
-    val supercellLaserVictories: Double = 0.0,
+    val supercellLaserVictories: Long = 0L,
     @SerialName("supercell_scroll_victories")
-    val supercellScrollVictories: Double = 0.0,
+    val supercellScrollVictories: Long = 0L,
     @SerialName("supercell_magic_victories")
-    val supercellMagicVictories: Double = 0.0,
+    val supercellMagicVictories: Long = 0L,
     @SerialName("supercell_laser_battle_pass")
-    val supercellLaserBattlePass: Double = 0.0,
+    val supercellLaserBattlePass: Long = 0L,
     @SerialName("supercell_scroll_battle_pass")
-    val supercellScrollBattlePass: Double = 0.0,
+    val supercellScrollBattlePass: Long = 0L,
     @SerialName("supercell_magic_battle_pass")
-    val supercellMagicBattlePass: Double = 0.0,
+    val supercellMagicBattlePass: Long = 0L,
     @SerialName("supercell_systems")
     val supercellSystems: String = "",
     @SerialName("supercell_king_level")
-    val supercellKingLevel: Double = 0.0,
+    val supercellKingLevel: Long = 0L,
     @SerialName("supercell_total_heroes_level")
-    val supercellTotalHeroesLevel: Double = 0.0,
+    val supercellTotalHeroesLevel: Long = 0L,
     @SerialName("supercell_total_troops_level")
-    val supercellTotalTroopsLevel: Double = 0.0,
+    val supercellTotalTroopsLevel: Long = 0L,
     @SerialName("supercell_total_spells_level")
-    val supercellTotalSpellsLevel: Double = 0.0,
+    val supercellTotalSpellsLevel: Long = 0L,
     @SerialName("supercell_total_builder_heroes_level")
-    val supercellTotalBuilderHeroesLevel: Double = 0.0,
+    val supercellTotalBuilderHeroesLevel: Long = 0L,
     @SerialName("supercell_total_builder_troops_level")
-    val supercellTotalBuilderTroopsLevel: Double = 0.0,
+    val supercellTotalBuilderTroopsLevel: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -6228,7 +6228,7 @@ data class CategorySupercellResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -6374,15 +6374,15 @@ data class CategoryEaParams(
 @Serializable
 data class CategoryEaResponse(
     val items: List<CategoryEaResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -6395,9 +6395,9 @@ data class CategoryEaResponseItemsEaGamesApexLegends(
     val gameId: String = "",
     val title: String = "",
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("total_played")
-    val totalPlayed: Double = 0.0,
+    val totalPlayed: Long = 0L,
     val img: String = "",
 )
 
@@ -6425,54 +6425,54 @@ data class CategoryEaResponseItemsAccountLinks(
 @Serializable
 data class CategoryEaResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryEaResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -6486,41 +6486,41 @@ data class CategoryEaResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("ea_item_id")
-    val eaItemId: Double = 0.0,
+    val eaItemId: Long = 0L,
     @SerialName("ea_id")
-    val eaId: Double = 0.0,
+    val eaId: Long = 0L,
     @SerialName("ea_country")
     val eaCountry: String = "",
     @SerialName("ea_games")
     val eaGames: CategoryEaResponseItemsEaGames = CategoryEaResponseItemsEaGames(),
     @SerialName("ea_game_count")
-    val eaGameCount: Double = 0.0,
+    val eaGameCount: Long = 0L,
     @SerialName("ea_last_activity")
-    val eaLastActivity: Double = 0.0,
+    val eaLastActivity: Long = 0L,
     @SerialName("ea_al_level")
-    val eaAlLevel: Double = 0.0,
+    val eaAlLevel: Long = 0L,
     @SerialName("ea_al_rank_score")
-    val eaAlRankScore: Double = 0.0,
+    val eaAlRankScore: Long = 0L,
     @SerialName("ea_subscription")
     val eaSubscription: String = "",
     @SerialName("ea_subscription_end_date")
-    val eaSubscriptionEndDate: Double = 0.0,
+    val eaSubscriptionEndDate: Long = 0L,
     @SerialName("ea_username")
     val eaUsername: String = "",
     @SerialName("ea_xbox_connected")
-    val eaXboxConnected: Double = 0.0,
+    val eaXboxConnected: Long = 0L,
     @SerialName("ea_steam_connected")
-    val eaSteamConnected: Double = 0.0,
+    val eaSteamConnected: Long = 0L,
     @SerialName("ea_psn_connected")
-    val eaPsnConnected: Double = 0.0,
+    val eaPsnConnected: Long = 0L,
     @SerialName("ea_bans")
     val eaBans: List<JsonElement> = emptyList(),
     @SerialName("ea_has_ban")
-    val eaHasBan: Double = 0.0,
+    val eaHasBan: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -6537,7 +6537,7 @@ data class CategoryEaResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -6549,9 +6549,9 @@ data class CategoryEaResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -6727,15 +6727,15 @@ data class CategoryWotParams(
 @Serializable
 data class CategoryWotResponse(
     val items: List<CategoryWotResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -6753,54 +6753,54 @@ data class CategoryWotResponseItemsBumpSettings(
 @Serializable
 data class CategoryWotResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryWotResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -6814,43 +6814,43 @@ data class CategoryWotResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("wot_item_id")
-    val wotItemId: Double = 0.0,
+    val wotItemId: Long = 0L,
     @SerialName("wot_last_activity")
-    val wotLastActivity: Double = 0.0,
+    val wotLastActivity: Long = 0L,
     @SerialName("wot_register_date")
-    val wotRegisterDate: Double = 0.0,
+    val wotRegisterDate: Long = 0L,
     @SerialName("wot_mobile")
-    val wotMobile: Double = 0.0,
+    val wotMobile: Long = 0L,
     @SerialName("wot_premium")
-    val wotPremium: Double = 0.0,
+    val wotPremium: Long = 0L,
     @SerialName("wot_premium_expires")
-    val wotPremiumExpires: Double = 0.0,
+    val wotPremiumExpires: Long = 0L,
     @SerialName("wot_gold")
-    val wotGold: Double = 0.0,
+    val wotGold: Long = 0L,
     @SerialName("wot_credits")
-    val wotCredits: Double = 0.0,
+    val wotCredits: Long = 0L,
     @SerialName("wot_battle_count")
-    val wotBattleCount: Double = 0.0,
+    val wotBattleCount: Long = 0L,
     @SerialName("wot_win_count")
-    val wotWinCount: Double = 0.0,
+    val wotWinCount: Long = 0L,
     @SerialName("wot_loss_count")
-    val wotLossCount: Double = 0.0,
+    val wotLossCount: Long = 0L,
     @SerialName("wot_win_count_percents")
-    val wotWinCountPercents: Double = 0.0,
+    val wotWinCountPercents: Long = 0L,
     @SerialName("wot_top_tanks")
-    val wotTopTanks: Double = 0.0,
+    val wotTopTanks: Long = 0L,
     @SerialName("wot_premium_tanks")
-    val wotPremiumTanks: Double = 0.0,
+    val wotPremiumTanks: Long = 0L,
     @SerialName("wot_top_premium_tanks")
-    val wotTopPremiumTanks: Double = 0.0,
+    val wotTopPremiumTanks: Long = 0L,
     @SerialName("wot_region")
     val wotRegion: String = "",
     @SerialName("wot_blitz")
-    val wotBlitz: Double = 0.0,
+    val wotBlitz: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -6867,7 +6867,7 @@ data class CategoryWotResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -6875,10 +6875,10 @@ data class CategoryWotResponseItems(
     val wotRegionPhrase: String = "",
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val wotTanks: JsonElement = JsonNull,
-    val wotPremiumTankCount: Double = 0.0,
-    val wotTankCount: Double = 0.0,
+    val wotPremiumTankCount: Long = 0L,
+    val wotTankCount: Long = 0L,
     val wotLauncherTitle: String = "",
     @SerialName("wot_has_clan")
     val wotHasClan: Boolean = false,
@@ -6887,9 +6887,9 @@ data class CategoryWotResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -7065,15 +7065,15 @@ data class CategoryWotBlitzParams(
 @Serializable
 data class CategoryWotBlitzResponse(
     val items: List<CategoryWotBlitzResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -7091,54 +7091,54 @@ data class CategoryWotBlitzResponseItemsBumpSettings(
 @Serializable
 data class CategoryWotBlitzResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryWotBlitzResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -7152,43 +7152,43 @@ data class CategoryWotBlitzResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("wot_item_id")
-    val wotItemId: Double = 0.0,
+    val wotItemId: Long = 0L,
     @SerialName("wot_last_activity")
-    val wotLastActivity: Double = 0.0,
+    val wotLastActivity: Long = 0L,
     @SerialName("wot_register_date")
-    val wotRegisterDate: Double = 0.0,
+    val wotRegisterDate: Long = 0L,
     @SerialName("wot_mobile")
-    val wotMobile: Double = 0.0,
+    val wotMobile: Long = 0L,
     @SerialName("wot_premium")
-    val wotPremium: Double = 0.0,
+    val wotPremium: Long = 0L,
     @SerialName("wot_premium_expires")
-    val wotPremiumExpires: Double = 0.0,
+    val wotPremiumExpires: Long = 0L,
     @SerialName("wot_gold")
-    val wotGold: Double = 0.0,
+    val wotGold: Long = 0L,
     @SerialName("wot_credits")
-    val wotCredits: Double = 0.0,
+    val wotCredits: Long = 0L,
     @SerialName("wot_battle_count")
-    val wotBattleCount: Double = 0.0,
+    val wotBattleCount: Long = 0L,
     @SerialName("wot_win_count")
-    val wotWinCount: Double = 0.0,
+    val wotWinCount: Long = 0L,
     @SerialName("wot_loss_count")
-    val wotLossCount: Double = 0.0,
+    val wotLossCount: Long = 0L,
     @SerialName("wot_win_count_percents")
-    val wotWinCountPercents: Double = 0.0,
+    val wotWinCountPercents: Long = 0L,
     @SerialName("wot_top_tanks")
-    val wotTopTanks: Double = 0.0,
+    val wotTopTanks: Long = 0L,
     @SerialName("wot_premium_tanks")
-    val wotPremiumTanks: Double = 0.0,
+    val wotPremiumTanks: Long = 0L,
     @SerialName("wot_top_premium_tanks")
-    val wotTopPremiumTanks: Double = 0.0,
+    val wotTopPremiumTanks: Long = 0L,
     @SerialName("wot_region")
     val wotRegion: String = "",
     @SerialName("wot_blitz")
-    val wotBlitz: Double = 0.0,
+    val wotBlitz: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -7205,7 +7205,7 @@ data class CategoryWotBlitzResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -7213,10 +7213,10 @@ data class CategoryWotBlitzResponseItems(
     val wotRegionPhrase: String = "",
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val wotTanks: JsonElement = JsonNull,
-    val wotPremiumTankCount: Double = 0.0,
-    val wotTankCount: Double = 0.0,
+    val wotPremiumTankCount: Long = 0L,
+    val wotTankCount: Long = 0L,
     val wotLauncherTitle: String = "",
     @SerialName("wot_has_clan")
     val wotHasClan: Boolean = false,
@@ -7225,9 +7225,9 @@ data class CategoryWotBlitzResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -7310,15 +7310,15 @@ data class CategoryGiftsParams(
 @Serializable
 data class CategoryGiftsResponse(
     val items: List<CategoryGiftsResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -7336,20 +7336,20 @@ data class CategoryGiftsResponseItemsBumpSettings(
 @Serializable
 data class CategoryGiftsResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -7357,33 +7357,33 @@ data class CategoryGiftsResponseItemsSeller(
 @Serializable
 data class CategoryGiftsResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -7397,17 +7397,17 @@ data class CategoryGiftsResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("gifts_item_id")
-    val giftsItemId: Double = 0.0,
+    val giftsItemId: Long = 0L,
     @SerialName("gifts_service")
     val giftsService: String = "",
     @SerialName("gifts_duration")
-    val giftsDuration: Double = 0.0,
+    val giftsDuration: Long = 0L,
     @SerialName("gifts_type")
     val giftsType: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -7424,7 +7424,7 @@ data class CategoryGiftsResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -7555,15 +7555,15 @@ data class CategoryEpicGamesParams(
 @Serializable
 data class CategoryEpicGamesResponse(
     val items: List<CategoryEpicGamesResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -7580,7 +7580,7 @@ data class CategoryEpicGamesResponseItemsBumpSettings(
 
 @Serializable
 data class CategoryEpicGamesResponseItemsEgTransactions(
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val title: String = "",
     val presentmentTotal: String = "",
     val orderType: String = "",
@@ -7589,54 +7589,54 @@ data class CategoryEpicGamesResponseItemsEgTransactions(
 @Serializable
 data class CategoryEpicGamesResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryEpicGamesResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -7650,7 +7650,7 @@ data class CategoryEpicGamesResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("eg_item_id")
-    val egItemId: Double = 0.0,
+    val egItemId: Long = 0L,
     @SerialName("eg_country")
     val egCountry: String = "",
     @SerialName("eg_code_redemption_history")
@@ -7660,31 +7660,31 @@ data class CategoryEpicGamesResponseItems(
     @SerialName("eg_games")
     val egGames: JsonElement = JsonNull,
     @SerialName("eg_change_email")
-    val egChangeEmail: Double = 0.0,
+    val egChangeEmail: Long = 0L,
     @SerialName("eg_can_update_display_name")
-    val egCanUpdateDisplayName: Double = 0.0,
+    val egCanUpdateDisplayName: Long = 0L,
     @SerialName("eg_last_activity")
-    val egLastActivity: Double = 0.0,
+    val egLastActivity: Long = 0L,
     @SerialName("eg_payment_methods")
     val egPaymentMethods: List<JsonElement> = emptyList(),
     @SerialName("eg_rl_purchases")
-    val egRlPurchases: Double = 0.0,
+    val egRlPurchases: Long = 0L,
     @SerialName("eg_username")
     val egUsername: String = "",
     @SerialName("eg_rewards_balance")
-    val egRewardsBalance: Double = 0.0,
+    val egRewardsBalance: Long = 0L,
     @SerialName("eg_rewards_expiration_date")
-    val egRewardsExpirationDate: Double = 0.0,
+    val egRewardsExpirationDate: Long = 0L,
     @SerialName("eg_next_change_email_date")
-    val egNextChangeEmailDate: Double = 0.0,
+    val egNextChangeEmailDate: Long = 0L,
     @SerialName("eg_game_count")
-    val egGameCount: Double = 0.0,
+    val egGameCount: Long = 0L,
     @SerialName("eg_balance")
-    val egBalance: Double = 0.0,
+    val egBalance: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -7701,7 +7701,7 @@ data class CategoryEpicGamesResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -7713,9 +7713,9 @@ data class CategoryEpicGamesResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -7816,15 +7816,15 @@ data class CategoryEscapeFromTarkovParams(
 @Serializable
 data class CategoryEscapeFromTarkovResponse(
     val items: List<CategoryEscapeFromTarkovResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -7842,54 +7842,54 @@ data class CategoryEscapeFromTarkovResponseItemsBumpSettings(
 @Serializable
 data class CategoryEscapeFromTarkovResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryEscapeFromTarkovResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -7903,49 +7903,49 @@ data class CategoryEscapeFromTarkovResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("tarkov_item_id")
-    val tarkovItemId: Double = 0.0,
+    val tarkovItemId: Long = 0L,
     @SerialName("tarkov_game_version")
     val tarkovGameVersion: String = "",
     @SerialName("tarkov_register_date")
-    val tarkovRegisterDate: Double = 0.0,
+    val tarkovRegisterDate: Long = 0L,
     @SerialName("tarkov_level")
-    val tarkovLevel: Double = 0.0,
+    val tarkovLevel: Long = 0L,
     @SerialName("tarkov_exp")
-    val tarkovExp: Double = 0.0,
+    val tarkovExp: Long = 0L,
     @SerialName("tarkov_last_activity")
-    val tarkovLastActivity: Double = 0.0,
+    val tarkovLastActivity: Long = 0L,
     @SerialName("tarkov_side")
     val tarkovSide: String = "",
     @SerialName("tarkov_rubles")
-    val tarkovRubles: Double = 0.0,
+    val tarkovRubles: Long = 0L,
     @SerialName("tarkov_secured_container")
     val tarkovSecuredContainer: String = "",
     @SerialName("tarkov_euros")
-    val tarkovEuros: Double = 0.0,
+    val tarkovEuros: Long = 0L,
     @SerialName("tarkov_dollars")
-    val tarkovDollars: Double = 0.0,
+    val tarkovDollars: Long = 0L,
     @SerialName("tarkov_kd")
-    val tarkovKd: Double = 0.0,
+    val tarkovKd: Long = 0L,
     @SerialName("tarkov_deaths")
-    val tarkovDeaths: Double = 0.0,
+    val tarkovDeaths: Long = 0L,
     @SerialName("tarkov_kills")
-    val tarkovKills: Double = 0.0,
+    val tarkovKills: Long = 0L,
     @SerialName("tarkov_sessions")
-    val tarkovSessions: Double = 0.0,
+    val tarkovSessions: Long = 0L,
     @SerialName("tarkov_region")
     val tarkovRegion: String = "",
     @SerialName("tarkov_total_in_game")
-    val tarkovTotalInGame: Double = 0.0,
+    val tarkovTotalInGame: Long = 0L,
     @SerialName("tarkov_mail_forwarding")
-    val tarkovMailForwarding: Double = 0.0,
+    val tarkovMailForwarding: Long = 0L,
     @SerialName("tarkov_username")
     val tarkovUsername: String = "",
     @SerialName("tarkov_purchase_date")
-    val tarkovPurchaseDate: Double = 0.0,
+    val tarkovPurchaseDate: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -7962,7 +7962,7 @@ data class CategoryEscapeFromTarkovResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -7975,9 +7975,9 @@ data class CategoryEscapeFromTarkovResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -8075,15 +8075,15 @@ data class CategorySocialClubParams(
 @Serializable
 data class CategorySocialClubResponse(
     val items: List<CategorySocialClubResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -8092,19 +8092,19 @@ data class CategorySocialClubResponse(
 
 @Serializable
 data class CategorySocialClubResponseItemsSocialclubGames(
-    val id: Double = 0.0,
+    val id: Long = 0L,
     val name: String = "",
     val defaultPlatform: String = "",
     val platform: String = "",
     val lastSeen: String = "",
     @SerialName("internal_game_id")
-    val internalGameId: Double = 0.0,
+    val internalGameId: Long = 0L,
     @SerialName("app_id")
     val appId: String = "",
     val title: String = "",
     val abbr: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     val img: String = "",
     val url: String = "",
     val ru: JsonElement = JsonNull,
@@ -8121,20 +8121,20 @@ data class CategorySocialClubResponseItemsBumpSettings(
 @Serializable
 data class CategorySocialClubResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -8142,33 +8142,33 @@ data class CategorySocialClubResponseItemsSeller(
 @Serializable
 data class CategorySocialClubResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -8182,25 +8182,25 @@ data class CategorySocialClubResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("socialclub_item_id")
-    val socialclubItemId: Double = 0.0,
+    val socialclubItemId: Long = 0L,
     @SerialName("socialclub_level")
-    val socialclubLevel: Double = 0.0,
+    val socialclubLevel: Long = 0L,
     @SerialName("socialclub_cash")
-    val socialclubCash: Double = 0.0,
+    val socialclubCash: Long = 0L,
     @SerialName("socialclub_bank_cash")
-    val socialclubBankCash: Double = 0.0,
+    val socialclubBankCash: Long = 0L,
     @SerialName("socialclub_games")
     val socialclubGames: List<CategorySocialClubResponseItemsSocialclubGames> = emptyList(),
     @SerialName("socialclub_last_activity")
-    val socialclubLastActivity: Double = 0.0,
+    val socialclubLastActivity: Long = 0L,
     @SerialName("socialclub_has_gtav")
-    val socialclubHasGtav: Double = 0.0,
+    val socialclubHasGtav: Long = 0L,
     @SerialName("socialclub_has_rdr2")
-    val socialclubHasRdr2: Double = 0.0,
+    val socialclubHasRdr2: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -8217,14 +8217,14 @@ data class CategorySocialClubResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val canViewAccountLink: Boolean = false,
     val accountLinks: List<JsonElement> = emptyList(),
     val emailLoginUrl: String = "",
@@ -8388,15 +8388,15 @@ data class CategoryUplayParams(
 @Serializable
 data class CategoryUplayResponse(
     val items: List<CategoryUplayResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -8407,8 +8407,8 @@ data class CategoryUplayResponse(
 data class CategoryUplayResponseItemsUplayGamesFfffffffFfffFfffFfffFfffffffffff(
     val title: String = "",
     val img: String = "",
-    val pvpTimePlayed: Double = 0.0,
-    val pveTimePlayed: Double = 0.0,
+    val pvpTimePlayed: Long = 0L,
+    val pveTimePlayed: Long = 0L,
     val abbr: String = "",
     val gameId: String = "",
 )
@@ -8437,54 +8437,54 @@ data class CategoryUplayResponseItemsR6Operators(
 @Serializable
 data class CategoryUplayResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryUplayResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -8498,45 +8498,45 @@ data class CategoryUplayResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("uplay_item_id")
-    val uplayItemId: Double = 0.0,
+    val uplayItemId: Long = 0L,
     @SerialName("uplay_last_activity")
-    val uplayLastActivity: Double = 0.0,
+    val uplayLastActivity: Long = 0L,
     @SerialName("uplay_country")
     val uplayCountry: String = "",
     @SerialName("uplay_created_date")
-    val uplayCreatedDate: Double = 0.0,
+    val uplayCreatedDate: Long = 0L,
     @SerialName("uplay_games")
     val uplayGames: CategoryUplayResponseItemsUplayGames = CategoryUplayResponseItemsUplayGames(),
     @SerialName("uplay_game_count")
-    val uplayGameCount: Double = 0.0,
+    val uplayGameCount: Long = 0L,
     @SerialName("uplay_r6_level")
-    val uplayR6Level: Double = 0.0,
+    val uplayR6Level: Long = 0L,
     @SerialName("uplay_r6_ban")
-    val uplayR6Ban: Double = 0.0,
+    val uplayR6Ban: Long = 0L,
     @SerialName("uplay_r6_operators")
     val uplayR6Operators: String = "",
     @SerialName("uplay_r6_operators_count")
-    val uplayR6OperatorsCount: Double = 0.0,
+    val uplayR6OperatorsCount: Long = 0L,
     @SerialName("uplay_r6_skins")
     val uplayR6Skins: String = "",
     @SerialName("uplay_r6_skins_count")
-    val uplayR6SkinsCount: Double = 0.0,
+    val uplayR6SkinsCount: Long = 0L,
     @SerialName("uplay_subscription")
     val uplaySubscription: String = "",
     @SerialName("uplay_subscription_end_date")
-    val uplaySubscriptionEndDate: Double = 0.0,
+    val uplaySubscriptionEndDate: Long = 0L,
     @SerialName("uplay_xbox_connected")
-    val uplayXboxConnected: Double = 0.0,
+    val uplayXboxConnected: Long = 0L,
     @SerialName("uplay_psn_connected")
-    val uplayPsnConnected: Double = 0.0,
+    val uplayPsnConnected: Long = 0L,
     @SerialName("uplay_steam_connected")
-    val uplaySteamConnected: Double = 0.0,
+    val uplaySteamConnected: Long = 0L,
     @SerialName("uplay_r6_rank")
-    val uplayR6Rank: Double = 0.0,
+    val uplayR6Rank: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -8553,7 +8553,7 @@ data class CategoryUplayResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -8569,7 +8569,7 @@ data class CategoryUplayResponseItems(
     val uplayR6BanActive: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val r6Skins: List<JsonElement> = emptyList(),
     val r6Operators: List<CategoryUplayResponseItemsR6Operators> = emptyList(),
     val canViewAccountLink: Boolean = false,
@@ -8577,9 +8577,9 @@ data class CategoryUplayResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -8767,15 +8767,15 @@ data class CategoryDiscordParams(
 @Serializable
 data class CategoryDiscordResponse(
     val items: List<CategoryDiscordResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -8793,20 +8793,20 @@ data class CategoryDiscordResponseItemsBumpSettings(
 @Serializable
 data class CategoryDiscordResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -8814,33 +8814,33 @@ data class CategoryDiscordResponseItemsSeller(
 @Serializable
 data class CategoryDiscordResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -8854,37 +8854,37 @@ data class CategoryDiscordResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("discord_item_id")
-    val discordItemId: Double = 0.0,
+    val discordItemId: Long = 0L,
     @SerialName("discord_chat_count")
-    val discordChatCount: Double = 0.0,
+    val discordChatCount: Long = 0L,
     @SerialName("discord_verified")
-    val discordVerified: Double = 0.0,
+    val discordVerified: Long = 0L,
     @SerialName("discord_condition")
     val discordCondition: String = "",
     @SerialName("discord_gifts")
-    val discordGifts: Double = 0.0,
+    val discordGifts: Long = 0L,
     @SerialName("discord_billing")
-    val discordBilling: Double = 0.0,
+    val discordBilling: Long = 0L,
     @SerialName("discord_register_date")
-    val discordRegisterDate: Double = 0.0,
+    val discordRegisterDate: Long = 0L,
     @SerialName("discord_locale")
     val discordLocale: String = "",
     @SerialName("discord_nitro_end_date")
-    val discordNitroEndDate: Double = 0.0,
+    val discordNitroEndDate: Long = 0L,
     @SerialName("discord_available_boosts")
-    val discordAvailableBoosts: Double = 0.0,
+    val discordAvailableBoosts: Long = 0L,
     @SerialName("discord_nitro_type")
-    val discordNitroType: Double = 0.0,
+    val discordNitroType: Long = 0L,
     @SerialName("discord_admin_members_count")
-    val discordAdminMembersCount: Double = 0.0,
+    val discordAdminMembersCount: Long = 0L,
     @SerialName("discord_admin_servers_count")
-    val discordAdminServersCount: Double = 0.0,
+    val discordAdminServersCount: Long = 0L,
     @SerialName("discord_admin_servers")
     val discordAdminServers: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -8901,7 +8901,7 @@ data class CategoryDiscordResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -9030,15 +9030,15 @@ data class CategoryTikTokParams(
 @Serializable
 data class CategoryTikTokResponse(
     val items: List<CategoryTikTokResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -9063,54 +9063,54 @@ data class CategoryTikTokResponseItemsAccountLinks(
 @Serializable
 data class CategoryTikTokResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryTikTokResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -9124,47 +9124,47 @@ data class CategoryTikTokResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("tt_item_id")
-    val ttItemId: Double = 0.0,
+    val ttItemId: Long = 0L,
     @SerialName("tt_id")
-    val ttId: Double = 0.0,
+    val ttId: Long = 0L,
     @SerialName("tt_permalink")
     val ttPermalink: String = "",
     @SerialName("tt_uniqueId")
     val ttUniqueId: String = "",
     @SerialName("tt_verified")
-    val ttVerified: Double = 0.0,
+    val ttVerified: Long = 0L,
     @SerialName("tt_createTime")
-    val ttCreateTime: Double = 0.0,
+    val ttCreateTime: Long = 0L,
     @SerialName("tt_privateAccount")
-    val ttPrivateAccount: Double = 0.0,
+    val ttPrivateAccount: Long = 0L,
     @SerialName("tt_followers")
-    val ttFollowers: Double = 0.0,
+    val ttFollowers: Long = 0L,
     @SerialName("tt_following")
-    val ttFollowing: Double = 0.0,
+    val ttFollowing: Long = 0L,
     @SerialName("tt_likes")
-    val ttLikes: Double = 0.0,
+    val ttLikes: Long = 0L,
     @SerialName("tt_videos")
-    val ttVideos: Double = 0.0,
+    val ttVideos: Long = 0L,
     @SerialName("tt_screen_name")
     val ttScreenName: String = "",
     @SerialName("tt_hasEmail")
-    val ttHasEmail: Double = 0.0,
+    val ttHasEmail: Long = 0L,
     @SerialName("tt_hasMobile")
-    val ttHasMobile: Double = 0.0,
+    val ttHasMobile: Long = 0L,
     @SerialName("tt_top_country")
     val ttTopCountry: String = "",
     @SerialName("tt_countries")
     val ttCountries: String = "",
     @SerialName("tt_coins")
-    val ttCoins: Double = 0.0,
+    val ttCoins: Long = 0L,
     @SerialName("tt_hasLivePermission")
-    val ttHasLivePermission: Double = 0.0,
+    val ttHasLivePermission: Long = 0L,
     @SerialName("tt_cookie_login")
-    val ttCookieLogin: Double = 0.0,
+    val ttCookieLogin: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -9181,7 +9181,7 @@ data class CategoryTikTokResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -9192,9 +9192,9 @@ data class CategoryTikTokResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -9305,15 +9305,15 @@ data class CategoryInstagramParams(
 @Serializable
 data class CategoryInstagramResponse(
     val items: List<CategoryInstagramResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -9338,20 +9338,20 @@ data class CategoryInstagramResponseItemsAccountLinks(
 @Serializable
 data class CategoryInstagramResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -9359,33 +9359,33 @@ data class CategoryInstagramResponseItemsSeller(
 @Serializable
 data class CategoryInstagramResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -9399,31 +9399,31 @@ data class CategoryInstagramResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("instagram_item_id")
-    val instagramItemId: Double = 0.0,
+    val instagramItemId: Long = 0L,
     @SerialName("instagram_id")
     val instagramId: String = "",
     @SerialName("instagram_follower_count")
-    val instagramFollowerCount: Double = 0.0,
+    val instagramFollowerCount: Long = 0L,
     @SerialName("instagram_follow_count")
-    val instagramFollowCount: Double = 0.0,
+    val instagramFollowCount: Long = 0L,
     @SerialName("instagram_post_count")
-    val instagramPostCount: Double = 0.0,
+    val instagramPostCount: Long = 0L,
     @SerialName("instagram_country")
     val instagramCountry: String = "",
     @SerialName("instagram_username")
     val instagramUsername: String = "",
     @SerialName("instagram_mobile")
-    val instagramMobile: Double = 0.0,
+    val instagramMobile: Long = 0L,
     @SerialName("instagram_register_date")
-    val instagramRegisterDate: Double = 0.0,
+    val instagramRegisterDate: Long = 0L,
     @SerialName("instagram_has_cookies")
-    val instagramHasCookies: Double = 0.0,
+    val instagramHasCookies: Long = 0L,
     @SerialName("instagram_login_without_cookies")
-    val instagramLoginWithoutCookies: Double = 0.0,
+    val instagramLoginWithoutCookies: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -9440,7 +9440,7 @@ data class CategoryInstagramResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -9567,15 +9567,15 @@ data class CategoryBattleNetParams(
 @Serializable
 data class CategoryBattleNetResponse(
     val items: List<CategoryBattleNetResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -9584,7 +9584,7 @@ data class CategoryBattleNetResponse(
 
 @Serializable
 data class CategoryBattleNetResponseItemsGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
     val endDate: JsonElement = JsonNull,
@@ -9603,7 +9603,7 @@ data class CategoryBattleNetResponseItemsBumpSettings(
 
 @Serializable
 data class CategoryBattleNetResponseItemsBattlenetTransactions(
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val productTitle: String = "",
     val formattedTotal: String = "",
     val total: String = "",
@@ -9612,54 +9612,54 @@ data class CategoryBattleNetResponseItemsBattlenetTransactions(
 @Serializable
 data class CategoryBattleNetResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryBattleNetResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -9673,31 +9673,31 @@ data class CategoryBattleNetResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("battlenet_item_id")
-    val battlenetItemId: Double = 0.0,
+    val battlenetItemId: Long = 0L,
     @SerialName("battlenet_balance")
     val battlenetBalance: String = "",
     @SerialName("battlenet_country")
     val battlenetCountry: String = "",
     @SerialName("battlenet_last_activity")
-    val battlenetLastActivity: Double = 0.0,
+    val battlenetLastActivity: Long = 0L,
     @SerialName("battlenet_mobile")
-    val battlenetMobile: Double = 0.0,
+    val battlenetMobile: Long = 0L,
     @SerialName("battlenet_bans")
     val battlenetBans: String = "",
     @SerialName("battlenet_can_change_tag")
-    val battlenetCanChangeTag: Double = 0.0,
+    val battlenetCanChangeTag: Long = 0L,
     @SerialName("battlenet_real_id_enabled")
-    val battlenetRealIdEnabled: Double = 0.0,
+    val battlenetRealIdEnabled: Long = 0L,
     @SerialName("battlenet_change_full_name")
-    val battlenetChangeFullName: Double = 0.0,
+    val battlenetChangeFullName: Long = 0L,
     @SerialName("battlenet_parent_control")
-    val battlenetParentControl: Double = 0.0,
+    val battlenetParentControl: Long = 0L,
     @SerialName("battlenet_converted_balance")
-    val battlenetConvertedBalance: Double = 0.0,
+    val battlenetConvertedBalance: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: CategoryBattleNetResponseItemsGuarantee = CategoryBattleNetResponseItemsGuarantee(),
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -9714,14 +9714,14 @@ data class CategoryBattleNetResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val battlenetGames: JsonElement = JsonNull,
     val hasOverwatch: Boolean = false,
     val battlenetTransactions: List<CategoryBattleNetResponseItemsBattlenetTransactions> = emptyList(),
@@ -9732,9 +9732,9 @@ data class CategoryBattleNetResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -9844,15 +9844,15 @@ data class CategoryChatGPTParams(
 @Serializable
 data class CategoryChatGPTResponse(
     val items: List<CategoryChatGPTResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -9876,20 +9876,20 @@ data class CategoryChatGPTResponseItemsBumpSettings(
 @Serializable
 data class CategoryChatGPTResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -9897,33 +9897,33 @@ data class CategoryChatGPTResponseItemsSeller(
 @Serializable
 data class CategoryChatGPTResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -9937,19 +9937,19 @@ data class CategoryChatGPTResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("chatgpt_item_id")
-    val chatgptItemId: Double = 0.0,
+    val chatgptItemId: Long = 0L,
     @SerialName("chatgpt_country")
     val chatgptCountry: String = "",
     @SerialName("chatgpt_register_date")
-    val chatgptRegisterDate: Double = 0.0,
+    val chatgptRegisterDate: Long = 0L,
     @SerialName("chatgpt_phone")
-    val chatgptPhone: Double = 0.0,
+    val chatgptPhone: Long = 0L,
     @SerialName("chatgpt_subscription")
     val chatgptSubscription: String = "",
     @SerialName("chatgpt_subscription_ends")
-    val chatgptSubscriptionEnds: Double = 0.0,
+    val chatgptSubscriptionEnds: Long = 0L,
     @SerialName("chatgpt_subscription_auto_renew")
-    val chatgptSubscriptionAutoRenew: Double = 0.0,
+    val chatgptSubscriptionAutoRenew: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
@@ -9973,7 +9973,7 @@ data class CategoryChatGPTResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val priceWithSellerFeeLabel: String = "",
@@ -10071,15 +10071,15 @@ data class CategoryVpnParams(
 @Serializable
 data class CategoryVpnResponse(
     val items: List<CategoryVpnResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -10097,54 +10097,54 @@ data class CategoryVpnResponseItemsBumpSettings(
 @Serializable
 data class CategoryVpnResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryVpnResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -10158,17 +10158,17 @@ data class CategoryVpnResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("vpn_item_id")
-    val vpnItemId: Double = 0.0,
+    val vpnItemId: Long = 0L,
     @SerialName("vpn_service")
     val vpnService: String = "",
     @SerialName("vpn_expire_date")
-    val vpnExpireDate: Double = 0.0,
+    val vpnExpireDate: Long = 0L,
     @SerialName("vpn_renewable")
-    val vpnRenewable: Double = 0.0,
+    val vpnRenewable: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -10185,7 +10185,7 @@ data class CategoryVpnResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -10195,9 +10195,9 @@ data class CategoryVpnResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -10376,15 +10376,15 @@ data class CategoryRobloxParams(
 @Serializable
 data class CategoryRobloxResponse(
     val items: List<CategoryRobloxResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -10402,7 +10402,7 @@ data class CategoryRobloxResponseItemsBumpSettings(
 @Serializable
 data class CategoryRobloxResponseItemsRobloxGameDonationsDetails(
     val product: String = "",
-    val amount: Double = 0.0,
+    val amount: Long = 0L,
     val type: String = "",
 )
 
@@ -10416,54 +10416,54 @@ data class CategoryRobloxResponseItemsAccountLinks(
 @Serializable
 data class CategoryRobloxResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryRobloxResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -10477,55 +10477,55 @@ data class CategoryRobloxResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("roblox_item_id")
-    val robloxItemId: Double = 0.0,
+    val robloxItemId: Long = 0L,
     @SerialName("roblox_id")
-    val robloxId: Double = 0.0,
+    val robloxId: Long = 0L,
     @SerialName("roblox_email_verified")
-    val robloxEmailVerified: Double = 0.0,
+    val robloxEmailVerified: Long = 0L,
     @SerialName("roblox_robux")
-    val robloxRobux: Double = 0.0,
+    val robloxRobux: Long = 0L,
     @SerialName("roblox_username")
     val robloxUsername: String = "",
     @SerialName("roblox_country")
     val robloxCountry: String = "",
     @SerialName("roblox_register_date")
-    val robloxRegisterDate: Double = 0.0,
+    val robloxRegisterDate: Long = 0L,
     @SerialName("roblox_friends")
-    val robloxFriends: Double = 0.0,
+    val robloxFriends: Long = 0L,
     @SerialName("roblox_followers")
-    val robloxFollowers: Double = 0.0,
+    val robloxFollowers: Long = 0L,
     @SerialName("roblox_subscription")
     val robloxSubscription: String = "",
     @SerialName("roblox_subscription_end_date")
-    val robloxSubscriptionEndDate: Double = 0.0,
+    val robloxSubscriptionEndDate: Long = 0L,
     @SerialName("roblox_xbox_connected")
-    val robloxXboxConnected: Double = 0.0,
+    val robloxXboxConnected: Long = 0L,
     @SerialName("roblox_incoming_robux_total")
-    val robloxIncomingRobuxTotal: Double = 0.0,
+    val robloxIncomingRobuxTotal: Long = 0L,
     @SerialName("roblox_limited_price")
-    val robloxLimitedPrice: Double = 0.0,
+    val robloxLimitedPrice: Long = 0L,
     @SerialName("roblox_verified")
-    val robloxVerified: Double = 0.0,
+    val robloxVerified: Long = 0L,
     @SerialName("roblox_age_verified")
-    val robloxAgeVerified: Double = 0.0,
+    val robloxAgeVerified: Long = 0L,
     @SerialName("roblox_psn_connected")
-    val robloxPsnConnected: Double = 0.0,
+    val robloxPsnConnected: Long = 0L,
     @SerialName("roblox_subscription_auto_renew")
-    val robloxSubscriptionAutoRenew: Double = 0.0,
+    val robloxSubscriptionAutoRenew: Long = 0L,
     @SerialName("roblox_game_pass_total_robux")
-    val robloxGamePassTotalRobux: Double = 0.0,
+    val robloxGamePassTotalRobux: Long = 0L,
     @SerialName("roblox_game_donations")
     val robloxGameDonations: String = "",
     @SerialName("roblox_inventory_price")
-    val robloxInventoryPrice: Double = 0.0,
+    val robloxInventoryPrice: Long = 0L,
     @SerialName("roblox_ugc_limited_price")
-    val robloxUgcLimitedPrice: Double = 0.0,
+    val robloxUgcLimitedPrice: Long = 0L,
     @SerialName("roblox_credit_balance")
-    val robloxCreditBalance: Double = 0.0,
+    val robloxCreditBalance: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -10542,7 +10542,7 @@ data class CategoryRobloxResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -10557,9 +10557,9 @@ data class CategoryRobloxResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -10662,15 +10662,15 @@ data class CategoryWarfaceParams(
 @Serializable
 data class CategoryWarfaceResponse(
     val items: List<CategoryWarfaceResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -10687,62 +10687,62 @@ data class CategoryWarfaceResponseItemsBumpSettings(
 
 @Serializable
 data class CategoryWarfaceResponseItemsWfServers(
-    val id: Double = 0.0,
-    val rank: Double = 0.0,
+    val id: Long = 0L,
+    val rank: Long = 0L,
     val title: String = "",
 )
 
 @Serializable
 data class CategoryWarfaceResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
 )
 
 @Serializable
 data class CategoryWarfaceResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -10756,33 +10756,33 @@ data class CategoryWarfaceResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("wf_item_id")
-    val wfItemId: Double = 0.0,
+    val wfItemId: Long = 0L,
     @SerialName("wf_players")
     val wfPlayers: Boolean = false,
     @SerialName("wf_server_1")
-    val wfServer_1: Double = 0.0,
+    val wfServer_1: Long = 0L,
     @SerialName("wf_server_2")
-    val wfServer_2: Double = 0.0,
+    val wfServer_2: Long = 0L,
     @SerialName("wf_server_3")
-    val wfServer_3: Double = 0.0,
+    val wfServer_3: Long = 0L,
     @SerialName("wf_mobile")
-    val wfMobile: Double = 0.0,
+    val wfMobile: Long = 0L,
     @SerialName("wf_bonus_rank")
-    val wfBonusRank: Double = 0.0,
+    val wfBonusRank: Long = 0L,
     @SerialName("wf_mail_mobile")
-    val wfMailMobile: Double = 0.0,
+    val wfMailMobile: Long = 0L,
     @SerialName("wf_last_game_date")
-    val wfLastGameDate: Double = 0.0,
+    val wfLastGameDate: Long = 0L,
     @SerialName("wf_loan")
     val wfLoan: Boolean = false,
     @SerialName("wf_active_loan")
-    val wfActiveLoan: Double = 0.0,
+    val wfActiveLoan: Long = 0L,
     @SerialName("wf_rank")
-    val wfRank: Double = 0.0,
+    val wfRank: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -10799,14 +10799,14 @@ data class CategoryWarfaceResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     @SerialName("wf_servers")
     val wfServers: List<CategoryWarfaceResponseItemsWfServers> = emptyList(),
     val domain: String = "",
@@ -10814,9 +10814,9 @@ data class CategoryWarfaceResponseItems(
     val canChangePassword: Boolean = false,
     val itemOriginPhrase: String = "",
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     val tags: List<JsonElement> = emptyList(),
     @SerialName("note_text")
     val noteText: JsonElement = JsonNull,
@@ -10989,15 +10989,15 @@ data class CategoryMinecraftParams(
 @Serializable
 data class CategoryMinecraftResponse(
     val items: List<CategoryMinecraftResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -11022,20 +11022,20 @@ data class CategoryMinecraftResponseItemsAccountLinks(
 @Serializable
 data class CategoryMinecraftResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -11043,33 +11043,33 @@ data class CategoryMinecraftResponseItemsSeller(
 @Serializable
 data class CategoryMinecraftResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -11083,7 +11083,7 @@ data class CategoryMinecraftResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("minecraft_item_id")
-    val minecraftItemId: Double = 0.0,
+    val minecraftItemId: Long = 0L,
     @SerialName("minecraft_id")
     val minecraftId: String = "",
     @SerialName("minecraft_nickname")
@@ -11093,49 +11093,49 @@ data class CategoryMinecraftResponseItems(
     @SerialName("minecraft_skin")
     val minecraftSkin: String = "",
     @SerialName("minecraft_java")
-    val minecraftJava: Double = 0.0,
+    val minecraftJava: Long = 0L,
     @SerialName("minecraft_bedrock")
-    val minecraftBedrock: Double = 0.0,
+    val minecraftBedrock: Long = 0L,
     @SerialName("minecraft_can_change_nickname")
-    val minecraftCanChangeNickname: Double = 0.0,
+    val minecraftCanChangeNickname: Long = 0L,
     @SerialName("minecraft_created_at")
-    val minecraftCreatedAt: Double = 0.0,
+    val minecraftCreatedAt: Long = 0L,
     @SerialName("minecraft_hypixel_rank")
     val minecraftHypixelRank: String = "",
     @SerialName("minecraft_hypixel_level")
-    val minecraftHypixelLevel: Double = 0.0,
+    val minecraftHypixelLevel: Long = 0L,
     @SerialName("minecraft_hypixel_achievement")
-    val minecraftHypixelAchievement: Double = 0.0,
+    val minecraftHypixelAchievement: Long = 0L,
     @SerialName("minecraft_hypixel_last_login")
-    val minecraftHypixelLastLogin: Double = 0.0,
+    val minecraftHypixelLastLogin: Long = 0L,
     @SerialName("minecraft_hypixel_ban")
-    val minecraftHypixelBan: Double = 0.0,
+    val minecraftHypixelBan: Long = 0L,
     @SerialName("minecraft_hypixel_ban_reason")
     val minecraftHypixelBanReason: String = "",
     @SerialName("minecraft_hypixel_skyblock_level")
-    val minecraftHypixelSkyblockLevel: Double = 0.0,
+    val minecraftHypixelSkyblockLevel: Long = 0L,
     @SerialName("minecraft_hypixel_skyblock_net_worth")
-    val minecraftHypixelSkyblockNetWorth: Double = 0.0,
+    val minecraftHypixelSkyblockNetWorth: Long = 0L,
     @SerialName("minecraft_dungeons")
-    val minecraftDungeons: Double = 0.0,
+    val minecraftDungeons: Long = 0L,
     @SerialName("minecraft_legends")
-    val minecraftLegends: Double = 0.0,
+    val minecraftLegends: Long = 0L,
     @SerialName("minecraft_capes_count")
-    val minecraftCapesCount: Double = 0.0,
+    val minecraftCapesCount: Long = 0L,
     @SerialName("minecraft_capes")
     val minecraftCapes: List<JsonElement> = emptyList(),
     @SerialName("minecraft_subscription_name")
     val minecraftSubscriptionName: String = "",
     @SerialName("minecraft_subscription_ends")
-    val minecraftSubscriptionEnds: Double = 0.0,
+    val minecraftSubscriptionEnds: Long = 0L,
     @SerialName("minecraft_subscription_auto_renew")
-    val minecraftSubscriptionAutoRenew: Double = 0.0,
+    val minecraftSubscriptionAutoRenew: Long = 0L,
     @SerialName("minecraft_email_reset_date")
-    val minecraftEmailResetDate: Double = 0.0,
+    val minecraftEmailResetDate: Long = 0L,
     @SerialName("feedback_data")
     val feedbackData: String = "",
     val isIgnored: Boolean = false,
-    val priceWithSellerFee: Double = 0.0,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: JsonElement = JsonNull,
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -11152,7 +11152,7 @@ data class CategoryMinecraftResponseItems(
     val canBumpItem: Boolean = false,
     val canBuyItem: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
@@ -11247,15 +11247,15 @@ data class CategoryHytaleParams(
 @Serializable
 data class CategoryHytaleResponse(
     val items: List<CategoryHytaleResponseItems> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val wasCached: Boolean = false,
-    val cacheTTL: Double = 0.0,
-    val lastModified: Double = 0.0,
-    val serverTime: Double = 0.0,
+    val cacheTTL: Long = 0L,
+    val lastModified: Long = 0L,
+    val serverTime: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<JsonElement> = emptyList(),
     @SerialName("system_info")
@@ -11265,7 +11265,7 @@ data class CategoryHytaleResponse(
 @Serializable
 data class CategoryHytaleResponseItemsCategory(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_name")
@@ -11283,20 +11283,20 @@ data class CategoryHytaleResponseItemsCopyFormatData(
 @Serializable
 data class CategoryHytaleResponseItemsSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("restore_percents")
     val restorePercents: JsonElement = JsonNull,
 )
@@ -11304,35 +11304,35 @@ data class CategoryHytaleResponseItemsSeller(
 @Serializable
 data class CategoryHytaleResponseItems(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("pending_deletion_date")
-    val pendingDeletionDate: Double = 0.0,
+    val pendingDeletionDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -11346,20 +11346,20 @@ data class CategoryHytaleResponseItems(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("auto_bump_period")
-    val autoBumpPeriod: Double = 0.0,
+    val autoBumpPeriod: Long = 0L,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     val discount: Boolean = false,
     @SerialName("hytale_item_id")
-    val hytaleItemId: Double = 0.0,
+    val hytaleItemId: Long = 0L,
     @SerialName("hytale_profiles")
-    val hytaleProfiles: Double = 0.0,
+    val hytaleProfiles: Long = 0L,
     @SerialName("hytale_edition")
     val hytaleEdition: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     val isIgnored: Boolean = false,
     val priceWithSellerFee: Double = 0.0,
     val category: CategoryHytaleResponseItemsCategory = CategoryHytaleResponseItemsCategory(),
@@ -11436,7 +11436,7 @@ data class CategoryListResponseCategoryLinks(
 @Serializable
 data class CategoryListResponseCategory(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_description")
@@ -11457,11 +11457,11 @@ data class CategoryParamsResponse(
 @Serializable
 data class CategoryParamsResponseCategory(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("sub_category_id")
-    val subCategoryId: Double = 0.0,
+    val subCategoryId: Long = 0L,
     @SerialName("category_order")
-    val categoryOrder: Double = 0.0,
+    val categoryOrder: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_name")
@@ -11473,58 +11473,58 @@ data class CategoryParamsResponseCategory(
     @SerialName("category_login_url")
     val categoryLoginUrl: String = "",
     @SerialName("add_item_available")
-    val addItemAvailable: Double = 0.0,
+    val addItemAvailable: Long = 0L,
     @SerialName("mass_upload_item_available")
-    val massUploadItemAvailable: Double = 0.0,
+    val massUploadItemAvailable: Long = 0L,
     @SerialName("has_guarantee")
-    val hasGuarantee: Double = 0.0,
+    val hasGuarantee: Long = 0L,
     @SerialName("has_account_link")
-    val hasAccountLink: Double = 0.0,
+    val hasAccountLink: Long = 0L,
     @SerialName("require_temp_email")
-    val requireTempEmail: Double = 0.0,
+    val requireTempEmail: Long = 0L,
     @SerialName("recovery_link")
     val recoveryLink: String = "",
     @SerialName("check_button_enabled")
-    val checkButtonEnabled: Double = 0.0,
+    val checkButtonEnabled: Long = 0L,
     @SerialName("checker_enabled")
-    val checkerEnabled: Double = 0.0,
+    val checkerEnabled: Long = 0L,
     @SerialName("support_personal_proxy")
-    val supportPersonalProxy: Double = 0.0,
+    val supportPersonalProxy: Long = 0L,
     @SerialName("support_email_login_data")
-    val supportEmailLoginData: Double = 0.0,
+    val supportEmailLoginData: Long = 0L,
     @SerialName("require_email_login_data")
-    val requireEmailLoginData: Double = 0.0,
+    val requireEmailLoginData: Long = 0L,
     @SerialName("display_in_list")
-    val displayInList: Double = 0.0,
+    val displayInList: Long = 0L,
     @SerialName("category_description_html_en")
     val categoryDescriptionHtmlEn: String = "",
     @SerialName("category_h1_html_en")
     val categoryH1HtmlEn: String = "",
     @SerialName("account_price_min")
-    val accountPriceMin: Double = 0.0,
+    val accountPriceMin: Long = 0L,
     @SerialName("require_video_recording")
-    val requireVideoRecording: Double = 0.0,
+    val requireVideoRecording: Long = 0L,
     @SerialName("top_queries")
     val topQueries: String = "",
     @SerialName("require_eld_for_native_accs")
-    val requireEldForNativeAccs: Double = 0.0,
+    val requireEldForNativeAccs: Long = 0L,
     @SerialName("can_be_resold")
-    val canBeResold: Double = 0.0,
+    val canBeResold: Long = 0L,
     @SerialName("support_temp_email")
-    val supportTempEmail: Double = 0.0,
+    val supportTempEmail: Long = 0L,
     val cookies: String = "",
     @SerialName("login_type")
     val loginType: String = "",
     @SerialName("guest_hidden")
-    val guestHidden: Double = 0.0,
+    val guestHidden: Long = 0L,
     @SerialName("available_temp_email")
-    val availableTempEmail: Double = 0.0,
+    val availableTempEmail: Long = 0L,
     @SerialName("resale_duration_limit_days")
-    val resaleDurationLimitDays: Double = 0.0,
+    val resaleDurationLimitDays: Long = 0L,
     @SerialName("buy_without_validation")
-    val buyWithoutValidation: Double = 0.0,
+    val buyWithoutValidation: Long = 0L,
     @SerialName("max_invalid_upload_tries")
-    val maxInvalidUploadTries: Double = 0.0,
+    val maxInvalidUploadTries: Long = 0L,
 )
 
 @Serializable
@@ -11549,7 +11549,7 @@ data class CategoryGamesResponseGames(
     val title: String = "",
     val abbr: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     val img: String = "",
     val url: String = "",
     val ru: String = "",
@@ -11633,11 +11633,11 @@ data class ListUserParams(
 @Serializable
 data class ListUserResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -11688,11 +11688,11 @@ data class ListOrdersParams(
 @Serializable
 data class ListOrdersResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -11718,9 +11718,9 @@ data class ListStatesResponseUserItemStatesStickied(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
-    val stickyLimit: Double = 0.0,
+    val stickyLimit: Long = 0L,
 )
 
 @Serializable
@@ -11728,7 +11728,7 @@ data class ListStatesResponseUserItemStatesDiscountRequest(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
@@ -11737,14 +11737,14 @@ data class ListStatesResponseUserItemStatesInBuyersFavorites(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
 @Serializable
 data class ListStatesResponseUserItemStatesActive(
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     val title: String = "",
@@ -11753,7 +11753,7 @@ data class ListStatesResponseUserItemStatesActive(
 @Serializable
 data class ListStatesResponseUserItemStatesPaid(
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     val title: String = "",
@@ -11764,14 +11764,14 @@ data class ListStatesResponseUserItemStatesClosed(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
 @Serializable
 data class ListStatesResponseUserItemStatesDeleted(
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     val title: String = "",
@@ -11780,7 +11780,7 @@ data class ListStatesResponseUserItemStatesDeleted(
 @Serializable
 data class ListStatesResponseUserItemStatesAwaiting(
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     val title: String = "",
@@ -11791,7 +11791,7 @@ data class ListStatesResponseUserItemStatesPreActive(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
@@ -11800,7 +11800,7 @@ data class ListStatesResponseUserItemStatesPreUpload(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
@@ -11809,14 +11809,14 @@ data class ListStatesResponseUserItemStatesPendingDeletion(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
 @Serializable
 data class ListStatesResponseUserItemStatesClosedInactive(
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     val title: String = "",
@@ -11827,7 +11827,7 @@ data class ListStatesResponseUserItemStatesAutoBump(
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("item_count")
-    val itemCount: Double = 0.0,
+    val itemCount: Long = 0L,
     val title: String = "",
 )
 
@@ -11966,11 +11966,11 @@ data class ListFavoritesParams(
 @Serializable
 data class ListFavoritesResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -12013,11 +12013,11 @@ data class ListViewedParams(
 @Serializable
 data class ListViewedResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -12054,7 +12054,7 @@ data class ManagingGetResponse(
     val itemLink: String = "",
     val canChangeOwner: Boolean = false,
     val sameItemsIds: List<Long> = emptyList(),
-    val sameItemsCount: Double = 0.0,
+    val sameItemsCount: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -12093,12 +12093,12 @@ data class ManagingCreateClaimResponse(
 @Serializable
 data class ManagingCreateClaimResponseThreadFirstPostLikeUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double? = null,
+    val displayStyleGroupId: Long? = null,
     @SerialName("is_banned")
-    val isBanned: Double? = null,
+    val isBanned: Long? = null,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String? = null,
 )
@@ -12131,15 +12131,15 @@ data class ManagingCreateClaimResponseThreadFirstPostPermissions(
 @Serializable
 data class ManagingCreateClaimResponseThreadFirstPost(
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_body_html")
@@ -12152,9 +12152,9 @@ data class ManagingCreateClaimResponseThreadFirstPost(
     @SerialName("signature_plain_text")
     val signaturePlainText: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_attachment_count")
-    val postAttachmentCount: Double = 0.0,
+    val postAttachmentCount: Long = 0L,
     @SerialName("like_users")
     val likeUsers: List<ManagingCreateClaimResponseThreadFirstPostLikeUsers> = emptyList(),
     @SerialName("user_is_ignored")
@@ -12164,7 +12164,7 @@ data class ManagingCreateClaimResponseThreadFirstPost(
     @SerialName("post_is_deleted")
     val postIsDeleted: Boolean = false,
     @SerialName("post_update_date")
-    val postUpdateDate: Double = 0.0,
+    val postUpdateDate: Long = 0L,
     @SerialName("post_is_first_post")
     val postIsFirstPost: Boolean = false,
     val links: ManagingCreateClaimResponseThreadFirstPostLinks = ManagingCreateClaimResponseThreadFirstPostLinks(),
@@ -12204,7 +12204,7 @@ data class ManagingCreateClaimResponseThreadPermissions(
 @Serializable
 data class ManagingCreateClaimResponseThreadForumForumPrefixesGroupPrefixes(
     @SerialName("prefix_id")
-    val prefixId: Double = 0.0,
+    val prefixId: Long = 0L,
     @SerialName("prefix_title")
     val prefixTitle: String = "",
 )
@@ -12246,19 +12246,19 @@ data class ManagingCreateClaimResponseThreadForumPermissions(
 @Serializable
 data class ManagingCreateClaimResponseThreadForum(
     @SerialName("forum_id")
-    val forumId: Double = 0.0,
+    val forumId: Long = 0L,
     @SerialName("forum_title")
     val forumTitle: String = "",
     @SerialName("forum_description")
     val forumDescription: String = "",
     @SerialName("forum_thread_count")
-    val forumThreadCount: Double = 0.0,
+    val forumThreadCount: Long = 0L,
     @SerialName("forum_post_count")
-    val forumPostCount: Double = 0.0,
+    val forumPostCount: Long = 0L,
     @SerialName("forum_prefixes")
     val forumPrefixes: List<ManagingCreateClaimResponseThreadForumForumPrefixes> = emptyList(),
     @SerialName("thread_default_prefix_id")
-    val threadDefaultPrefixId: Double = 0.0,
+    val threadDefaultPrefixId: Long = 0L,
     @SerialName("thread_prefix_is_required")
     val threadPrefixIsRequired: Boolean = false,
     val links: ManagingCreateClaimResponseThreadForumLinks = ManagingCreateClaimResponseThreadForumLinks(),
@@ -12270,25 +12270,25 @@ data class ManagingCreateClaimResponseThreadForum(
 @Serializable
 data class ManagingCreateClaimResponseThread(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("forum_id")
-    val forumId: Double = 0.0,
+    val forumId: Long = 0L,
     @SerialName("thread_title")
     val threadTitle: String = "",
     @SerialName("thread_view_count")
-    val threadViewCount: Double = 0.0,
+    val threadViewCount: Long = 0L,
     @SerialName("creator_user_id")
-    val creatorUserId: Double = 0.0,
+    val creatorUserId: Long = 0L,
     @SerialName("creator_username")
     val creatorUsername: String = "",
     @SerialName("thread_create_date")
-    val threadCreateDate: Double = 0.0,
+    val threadCreateDate: Long = 0L,
     @SerialName("thread_update_date")
-    val threadUpdateDate: Double = 0.0,
+    val threadUpdateDate: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("thread_post_count")
-    val threadPostCount: Double = 0.0,
+    val threadPostCount: Long = 0L,
     @SerialName("thread_is_published")
     val threadIsPublished: Boolean = false,
     @SerialName("thread_is_deleted")
@@ -12311,8 +12311,8 @@ data class ManagingCreateClaimResponseThread(
 @Serializable
 data class ManagingCreateClaimResponseSystemInfo(
     @SerialName("visitor_id")
-    val visitorId: Double = 0.0,
-    val time: Double = 0.0,
+    val visitorId: Long = 0L,
+    val time: Long = 0L,
 )
 
 @Serializable
@@ -12356,7 +12356,7 @@ data class ManagingSteamInventoryValueParams(
 data class ManagingSteamInventoryValueResponse(
     val query: String? = null,
     val data: ManagingSteamInventoryValueResponseData? = null,
-    val appId: Double? = null,
+    val appId: Long? = null,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo? = null,
 )
@@ -12366,15 +12366,15 @@ data class ManagingSteamInventoryValueResponseData(
     val items: JsonElement = JsonNull,
     @SerialName("steam_id")
     val steamId: String = "",
-    val appId: Double = 0.0,
+    val appId: Long = 0L,
     val appTitle: String = "",
     val totalValue: Double = 0.0,
-    val itemCount: Double = 0.0,
-    val marketableItemCount: Double = 0.0,
+    val itemCount: Long = 0L,
+    val marketableItemCount: Long = 0L,
     val currency: String = "",
     val currencyIcon: String = "",
     val language: String = "",
-    val time: Double = 0.0,
+    val time: Long = 0L,
 )
 
 @Serializable
@@ -12395,7 +12395,7 @@ data class ManagingSteamValueParams(
 data class ManagingSteamValueResponse(
     val query: String? = null,
     val data: ManagingSteamValueResponseData? = null,
-    val appId: Double? = null,
+    val appId: Long? = null,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo? = null,
 )
@@ -12405,15 +12405,15 @@ data class ManagingSteamValueResponseData(
     val items: JsonElement = JsonNull,
     @SerialName("steam_id")
     val steamId: String = "",
-    val appId: Double = 0.0,
+    val appId: Long = 0L,
     val appTitle: String = "",
     val totalValue: Double = 0.0,
-    val itemCount: Double = 0.0,
-    val marketableItemCount: Double = 0.0,
+    val itemCount: Long = 0L,
+    val marketableItemCount: Long = 0L,
     val currency: String = "",
     val currencyIcon: String = "",
     val language: String = "",
-    val time: Double = 0.0,
+    val time: Long = 0L,
 )
 
 @Serializable
@@ -12465,14 +12465,14 @@ data class ManagingEditResponse(
 
 @Serializable
 data class ManagingAIPriceResponse(
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
 
 @Serializable
 data class ManagingAutoBuyPriceResponse(
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -12578,7 +12578,7 @@ data class ManagingEmailCodeResponse(
 @Serializable
 data class ManagingEmailCodeResponseCodeData(
     val code: String = "",
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val textPlain: String = "",
 )
 
@@ -12608,7 +12608,7 @@ data class ManagingGetLetters2ResponseLetters(
     val textHtml: String = "",
     val textPlain: String = "",
     val from: String = "",
-    val date: Double = 0.0,
+    val date: Long = 0L,
 )
 
 @Serializable
@@ -12632,7 +12632,7 @@ data class ManagingSteamGetMafileResponseMaFile(
     @SerialName("shared_secret")
     val sharedSecret: String = "",
     @SerialName("serial_number")
-    val serialNumber: Double = 0.0,
+    val serialNumber: Long = 0L,
     @SerialName("revocation_code")
     val revocationCode: String = "",
     val uri: String = "",
@@ -12677,7 +12677,7 @@ data class ManagingSteamMafileCodeResponse(
 @Serializable
 data class ManagingSteamMafileCodeResponseCodeData(
     val code: String = "",
-    val date: Double = 0.0,
+    val date: Long = 0L,
     val textPlain: String = "",
 )
 
@@ -12706,7 +12706,7 @@ data class ManagingTelegramCodeResponse(
 @Serializable
 data class ManagingTelegramCodeResponseCodes(
     val code: String? = null,
-    val date: Double? = null,
+    val date: Long? = null,
 )
 
 @Serializable
@@ -12781,9 +12781,9 @@ data class ManagingTagBody(
 
 @Serializable
 data class ManagingTagResponse(
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     val tag: ManagingTagResponseTag = ManagingTagResponseTag(),
-    val addedTagId: Double = 0.0,
+    val addedTagId: Long = 0L,
     val deleteTags: List<Long> = emptyList(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -12792,7 +12792,7 @@ data class ManagingTagResponse(
 @Serializable
 data class ManagingTagResponseTag(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
     val isDefault: Boolean = false,
     val forOwnedAccountsOnly: Boolean = false,
@@ -12808,9 +12808,9 @@ data class ManagingUntagBody(
 
 @Serializable
 data class ManagingUntagResponse(
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     val tag: ManagingUntagResponseTag = ManagingUntagResponseTag(),
-    val addedTagId: Double = 0.0,
+    val addedTagId: Long = 0L,
     val deleteTags: List<Long> = emptyList(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -12819,7 +12819,7 @@ data class ManagingUntagResponse(
 @Serializable
 data class ManagingUntagResponseTag(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
     val isDefault: Boolean = false,
     val forOwnedAccountsOnly: Boolean = false,
@@ -12835,9 +12835,9 @@ data class ManagingPublicTagBody(
 
 @Serializable
 data class ManagingPublicTagResponse(
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     val tag: ManagingPublicTagResponseTag = ManagingPublicTagResponseTag(),
-    val addedTagId: Double = 0.0,
+    val addedTagId: Long = 0L,
     val deleteTags: List<Long> = emptyList(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -12846,7 +12846,7 @@ data class ManagingPublicTagResponse(
 @Serializable
 data class ManagingPublicTagResponseTag(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
     val isDefault: Boolean = false,
     val forOwnedAccountsOnly: Boolean = false,
@@ -12862,9 +12862,9 @@ data class ManagingPublicUntagBody(
 
 @Serializable
 data class ManagingPublicUntagResponse(
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     val tag: ManagingPublicUntagResponseTag = ManagingPublicUntagResponseTag(),
-    val addedTagId: Double = 0.0,
+    val addedTagId: Long = 0L,
     val deleteTags: List<Long> = emptyList(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -12873,7 +12873,7 @@ data class ManagingPublicUntagResponse(
 @Serializable
 data class ManagingPublicUntagResponseTag(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     val title: String = "",
     val isDefault: Boolean = false,
     val forOwnedAccountsOnly: Boolean = false,
@@ -12983,26 +12983,26 @@ data class ProfileClaimsResponseClaimsAuthorFields(
 @Serializable
 data class ProfileClaimsResponseClaimsAuthor(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("user_message_count")
-    val userMessageCount: Double = 0.0,
+    val userMessageCount: Long = 0L,
     @SerialName("user_register_date")
-    val userRegisterDate: Double = 0.0,
+    val userRegisterDate: Long = 0L,
     @SerialName("user_like_count")
-    val userLikeCount: Double = 0.0,
+    val userLikeCount: Long = 0L,
     @SerialName("user_like2_count")
-    val userLike2Count: Double = 0.0,
+    val userLike2Count: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("trophy_count")
-    val trophyCount: Double = 0.0,
+    val trophyCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("user_title")
     val userTitle: String = "",
     @SerialName("user_is_valid")
@@ -13012,7 +13012,7 @@ data class ProfileClaimsResponseClaimsAuthor(
     @SerialName("user_is_followed")
     val userIsFollowed: Boolean = false,
     @SerialName("user_last_seen_date")
-    val userLastSeenDate: Double = 0.0,
+    val userLastSeenDate: Long = 0L,
     val links: ProfileClaimsResponseClaimsAuthorLinks = ProfileClaimsResponseClaimsAuthorLinks(),
     val permissions: ProfileClaimsResponseClaimsAuthorPermissions = ProfileClaimsResponseClaimsAuthorPermissions(),
     @SerialName("user_is_ignored")
@@ -13020,7 +13020,7 @@ data class ProfileClaimsResponseClaimsAuthor(
     @SerialName("user_is_visitor")
     val userIsVisitor: Boolean = false,
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
     @SerialName("ban_reason")
     val banReason: String = "",
     val fields: List<ProfileClaimsResponseClaimsAuthorFields> = emptyList(),
@@ -13029,9 +13029,9 @@ data class ProfileClaimsResponseClaimsAuthor(
 @Serializable
 data class ProfileClaimsResponseClaims(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("claim_date")
-    val claimDate: Double = 0.0,
+    val claimDate: Long = 0L,
     @SerialName("claim_state")
     val claimState: String = "",
     @SerialName("message_body")
@@ -13043,18 +13043,18 @@ data class ProfileClaimsResponseClaims(
 
 @Serializable
 data class ProfileClaimsResponseStatsMarket(
-    val total: Double = 0.0,
-    val solved: Double = 0.0,
-    val settled: Double = 0.0,
-    val rejected: Double = 0.0,
+    val total: Long = 0L,
+    val solved: Long = 0L,
+    val settled: Long = 0L,
+    val rejected: Long = 0L,
 )
 
 @Serializable
 data class ProfileClaimsResponseStatsNoMarket(
-    val total: Double = 0.0,
-    val solved: Double = 0.0,
-    val settled: Double = 0.0,
-    val rejected: Double = 0.0,
+    val total: Long = 0L,
+    val solved: Long = 0L,
+    val settled: Long = 0L,
+    val rejected: Long = 0L,
 )
 
 @Serializable
@@ -13189,11 +13189,11 @@ data class CartGetParams(
 @Serializable
 data class CartGetResponse(
     val items: List<ItemFromListModel> = emptyList(),
-    val totalItems: Double = 0.0,
+    val totalItems: Long = 0L,
     val totalItemsPrice: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val perPage: Double = 0.0,
-    val page: Double = 0.0,
+    val perPage: Long = 0L,
+    val page: Long = 0L,
     val searchUrl: String = "",
     val stickyItems: List<ItemFromListModel> = emptyList(),
     @SerialName("system_info")
@@ -13249,13 +13249,13 @@ data class PurchasingFastBuyResponse(
 
 @Serializable
 data class PurchasingFastBuyResponseItemGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
-    val endDate: Double = 0.0,
+    val endDate: Long = 0L,
     val active: Boolean = false,
     val cancelled: Boolean = false,
-    val remainingTime: Double = 0.0,
+    val remainingTime: Long = 0L,
     val remainingTimePhrase: String = "",
 )
 
@@ -13284,19 +13284,19 @@ data class PurchasingFastBuyResponseItemEmailLoginData(
 @Serializable
 data class PurchasingFastBuyResponseItemBuyer(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("operation_date")
-    val operationDate: Double = 0.0,
+    val operationDate: Long = 0L,
     val visitorIsBuyer: Boolean = false,
     val username: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
 )
 
 @Serializable
@@ -13323,61 +13323,61 @@ data class PurchasingFastBuyResponseItemBumpSettings(
 @Serializable
 data class PurchasingFastBuyResponseItemSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("joined_date")
-    val joinedDate: Double = 0.0,
+    val joinedDate: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
     val isOnline: Boolean = false,
 )
 
 @Serializable
 data class PurchasingFastBuyResponseItem(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     val login: String = "",
     @SerialName("temp_email")
     val tempEmail: String = "",
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     val information: String = "",
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -13393,18 +13393,18 @@ data class PurchasingFastBuyResponseItem(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("user_allow_ask_discount")
-    val userAllowAskDiscount: Double = 0.0,
+    val userAllowAskDiscount: Long = 0L,
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     @SerialName("market_custom_title")
     val marketCustomTitle: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     @SerialName("buyer_avatar_date")
-    val buyerAvatarDate: Double = 0.0,
+    val buyerAvatarDate: Long = 0L,
     @SerialName("buyer_user_group_id")
-    val buyerUserGroupId: Double = 0.0,
-    val priceWithSellerFee: Double = 0.0,
+    val buyerUserGroupId: Long = 0L,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: PurchasingFastBuyResponseItemGuarantee = PurchasingFastBuyResponseItemGuarantee(),
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -13417,17 +13417,17 @@ data class PurchasingFastBuyResponseItem(
     val buyer: PurchasingFastBuyResponseItemBuyer = PurchasingFastBuyResponseItemBuyer(),
     val isPersonalAccount: Boolean = false,
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val displayConvertedBalance: Boolean = false,
     val canViewAccountLink: Boolean = false,
     val accountLinks: List<PurchasingFastBuyResponseItemAccountLinks> = emptyList(),
@@ -13443,7 +13443,7 @@ data class PurchasingFastBuyResponseItem(
     val isTrusted: Boolean = false,
     val isBirthdayToday: Boolean = false,
     val isIgnored: Boolean = false,
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val extraPrices: List<PurchasingFastBuyResponseItemExtraPrices> = emptyList(),
     val canViewAccountLoginAndTempEmail: Boolean = false,
     val bumpSettings: PurchasingFastBuyResponseItemBumpSettings = PurchasingFastBuyResponseItemBumpSettings(),
@@ -13467,7 +13467,7 @@ data class PurchasingCheckResponse(
 
 @Serializable
 data class PurchasingCheckResponseItemGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
     val endDate: JsonElement = JsonNull,
@@ -13500,20 +13500,20 @@ data class PurchasingCheckResponseItemBumpSettings(
 @Serializable
 data class PurchasingCheckResponseItemSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("joined_date")
-    val joinedDate: Double = 0.0,
+    val joinedDate: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     @SerialName("restore_percents")
@@ -13524,33 +13524,33 @@ data class PurchasingCheckResponseItemSeller(
 @Serializable
 data class PurchasingCheckResponseItem(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -13564,9 +13564,9 @@ data class PurchasingCheckResponseItem(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("user_allow_ask_discount")
-    val userAllowAskDiscount: Double = 0.0,
+    val userAllowAskDiscount: Long = 0L,
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     @SerialName("market_custom_title")
     val marketCustomTitle: String = "",
     @SerialName("feedback_data")
@@ -13576,27 +13576,27 @@ data class PurchasingCheckResponseItem(
     @SerialName("category_url")
     val categoryUrl: String = "",
     @SerialName("require_temp_email")
-    val requireTempEmail: Double = 0.0,
+    val requireTempEmail: Long = 0L,
     @SerialName("available_temp_email")
-    val availableTempEmail: Double = 0.0,
+    val availableTempEmail: Long = 0L,
     @SerialName("check_button_enabled")
-    val checkButtonEnabled: Double = 0.0,
+    val checkButtonEnabled: Long = 0L,
     @SerialName("checker_enabled")
-    val checkerEnabled: Double = 0.0,
+    val checkerEnabled: Long = 0L,
     @SerialName("buy_without_validation")
-    val buyWithoutValidation: Double = 0.0,
+    val buyWithoutValidation: Long = 0L,
     @SerialName("has_guarantee")
-    val hasGuarantee: Double = 0.0,
+    val hasGuarantee: Long = 0L,
     @SerialName("require_video_recording")
-    val requireVideoRecording: Double = 0.0,
+    val requireVideoRecording: Long = 0L,
     @SerialName("can_be_resold")
-    val canBeResold: Double = 0.0,
+    val canBeResold: Long = 0L,
     @SerialName("login_type")
     val loginType: String = "",
     @SerialName("require_email_login_data")
-    val requireEmailLoginData: Double = 0.0,
+    val requireEmailLoginData: Long = 0L,
     @SerialName("category_prefix_id")
-    val categoryPrefixId: Double = 0.0,
+    val categoryPrefixId: Long = 0L,
     @SerialName("ask_user_id")
     val askUserId: JsonElement = JsonNull,
     @SerialName("ask_item_id")
@@ -13611,8 +13611,8 @@ data class PurchasingCheckResponseItem(
     val userAlerted: JsonElement = JsonNull,
     val message: JsonElement = JsonNull,
     @SerialName("min_price")
-    val minPrice: Double = 0.0,
-    val priceWithSellerFee: Double = 0.0,
+    val minPrice: Long = 0L,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: PurchasingCheckResponseItemGuarantee = PurchasingCheckResponseItemGuarantee(),
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -13621,14 +13621,14 @@ data class PurchasingCheckResponseItem(
     val showGetEmailCodeButton: Boolean = false,
     val isPersonalAccount: Boolean = false,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     val isSmallExf: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val canViewAccountLink: Boolean = false,
     val accountLinks: List<PurchasingCheckResponseItemAccountLinks> = emptyList(),
     val accountLink: String = "",
@@ -13643,7 +13643,7 @@ data class PurchasingCheckResponseItem(
     val isTrusted: Boolean = false,
     val isBirthdayToday: Boolean = false,
     val isIgnored: Boolean = false,
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val extraPrices: List<PurchasingCheckResponseItemExtraPrices> = emptyList(),
     val canViewAccountLoginAndTempEmail: Boolean = false,
     val bumpSettings: PurchasingCheckResponseItemBumpSettings = PurchasingCheckResponseItemBumpSettings(),
@@ -13720,7 +13720,7 @@ data class PurchasingDiscountCancelResponse(
 @Serializable
 data class CustomDiscountsGetResponse(
     val discounts: List<DiscountModel> = emptyList(),
-    val total: Double = 0.0,
+    val total: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -13748,7 +13748,7 @@ data class CustomDiscountsCreateBody(
 @Serializable
 data class CustomDiscountsCreateResponse(
     val discount: DiscountModel = DiscountModel(),
-    val total: Double = 0.0,
+    val total: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -13772,7 +13772,7 @@ data class CustomDiscountsEditBody(
 @Serializable
 data class CustomDiscountsEditResponse(
     val discounts: List<DiscountModel> = emptyList(),
-    val total: Double = 0.0,
+    val total: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -13946,13 +13946,13 @@ data class PublishingCheckResponse(
 
 @Serializable
 data class PublishingCheckResponseItemGuarantee(
-    val duration: Double = 0.0,
+    val duration: Long = 0L,
     val `class`: String = "",
     val durationPhrase: String = "",
-    val endDate: Double = 0.0,
+    val endDate: Long = 0L,
     val active: Boolean = false,
     val cancelled: Boolean = false,
-    val remainingTime: Double = 0.0,
+    val remainingTime: Long = 0L,
     val remainingTimePhrase: String = "",
 )
 
@@ -13981,19 +13981,19 @@ data class PublishingCheckResponseItemEmailLoginData(
 @Serializable
 data class PublishingCheckResponseItemBuyer(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("operation_date")
-    val operationDate: Double = 0.0,
+    val operationDate: Long = 0L,
     val visitorIsBuyer: Boolean = false,
     val username: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
 )
 
 @Serializable
@@ -14020,61 +14020,61 @@ data class PublishingCheckResponseItemBumpSettings(
 @Serializable
 data class PublishingCheckResponseItemSeller(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("joined_date")
-    val joinedDate: Double = 0.0,
+    val joinedDate: Long = 0L,
     @SerialName("sold_items_count")
-    val soldItemsCount: Double = 0.0,
+    val soldItemsCount: Long = 0L,
     @SerialName("active_items_count")
-    val activeItemsCount: Double = 0.0,
+    val activeItemsCount: Long = 0L,
     @SerialName("restore_data")
     val restoreData: String = "",
     @SerialName("restore_percents")
-    val restorePercents: Double = 0.0,
+    val restorePercents: Long = 0L,
     val isOnline: Boolean = false,
 )
 
 @Serializable
 data class PublishingCheckResponseItem(
     @SerialName("item_id")
-    val itemId: Double = 0.0,
+    val itemId: Long = 0L,
     @SerialName("item_state")
     val itemState: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("published_date")
-    val publishedDate: Double = 0.0,
+    val publishedDate: Long = 0L,
     val title: String = "",
     val description: String = "",
-    val price: Double = 0.0,
+    val price: Long = 0L,
     @SerialName("update_stat_date")
-    val updateStatDate: Double = 0.0,
+    val updateStatDate: Long = 0L,
     @SerialName("refreshed_date")
-    val refreshedDate: Double = 0.0,
+    val refreshedDate: Long = 0L,
     @SerialName("edit_date")
-    val editDate: Double = 0.0,
+    val editDate: Long = 0L,
     val login: String = "",
     @SerialName("temp_email")
     val tempEmail: String = "",
     @SerialName("view_count")
-    val viewCount: Double = 0.0,
+    val viewCount: Long = 0L,
     @SerialName("is_sticky")
-    val isSticky: Double = 0.0,
+    val isSticky: Long = 0L,
     val information: String = "",
     @SerialName("item_origin")
     val itemOrigin: String = "",
     @SerialName("extended_guarantee")
-    val extendedGuarantee: Double = 0.0,
-    val nsb: Double = 0.0,
+    val extendedGuarantee: Long = 0L,
+    val nsb: Long = 0L,
     @SerialName("allow_ask_discount")
-    val allowAskDiscount: Double = 0.0,
+    val allowAskDiscount: Long = 0L,
     @SerialName("title_en")
     val titleEn: String = "",
     @SerialName("description_en")
@@ -14090,18 +14090,18 @@ data class PublishingCheckResponseItem(
     @SerialName("resale_item_origin")
     val resaleItemOrigin: String = "",
     @SerialName("user_allow_ask_discount")
-    val userAllowAskDiscount: Double = 0.0,
+    val userAllowAskDiscount: Long = 0L,
     @SerialName("max_discount_percent")
-    val maxDiscountPercent: Double = 0.0,
+    val maxDiscountPercent: Long = 0L,
     @SerialName("market_custom_title")
     val marketCustomTitle: String = "",
     @SerialName("feedback_data")
     val feedbackData: String = "",
     @SerialName("buyer_avatar_date")
-    val buyerAvatarDate: Double = 0.0,
+    val buyerAvatarDate: Long = 0L,
     @SerialName("buyer_user_group_id")
-    val buyerUserGroupId: Double = 0.0,
-    val priceWithSellerFee: Double = 0.0,
+    val buyerUserGroupId: Long = 0L,
+    val priceWithSellerFee: Long = 0L,
     val guarantee: PublishingCheckResponseItemGuarantee = PublishingCheckResponseItemGuarantee(),
     val canViewLoginData: Boolean = false,
     val canUpdateItemStats: Boolean = false,
@@ -14114,17 +14114,17 @@ data class PublishingCheckResponseItem(
     val buyer: PublishingCheckResponseItemBuyer = PublishingCheckResponseItemBuyer(),
     val isPersonalAccount: Boolean = false,
     @SerialName("sold_items_category_count")
-    val soldItemsCategoryCount: Double = 0.0,
+    val soldItemsCategoryCount: Long = 0L,
     @SerialName("restore_items_category_count")
-    val restoreItemsCategoryCount: Double = 0.0,
+    val restoreItemsCategoryCount: Long = 0L,
     @SerialName("rub_price")
-    val rubPrice: Double = 0.0,
+    val rubPrice: Long = 0L,
     @SerialName("price_currency")
     val priceCurrency: String = "",
     val canValidateAccount: Boolean = false,
     val canResellItemAfterPurchase: Boolean = false,
     @SerialName("account_last_activity")
-    val accountLastActivity: Double = 0.0,
+    val accountLastActivity: Long = 0L,
     val displayConvertedBalance: Boolean = false,
     val canViewAccountLink: Boolean = false,
     val accountLinks: List<PublishingCheckResponseItemAccountLinks> = emptyList(),
@@ -14140,7 +14140,7 @@ data class PublishingCheckResponseItem(
     val isTrusted: Boolean = false,
     val isBirthdayToday: Boolean = false,
     val isIgnored: Boolean = false,
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val extraPrices: List<PublishingCheckResponseItemExtraPrices> = emptyList(),
     val canViewAccountLoginAndTempEmail: Boolean = false,
     val bumpSettings: PublishingCheckResponseItemBumpSettings = PublishingCheckResponseItemBumpSettings(),
@@ -14253,9 +14253,9 @@ data class PaymentsInvoiceListParams(
 @Serializable
 data class PaymentsInvoiceListResponse(
     val invoices: List<InvoiceModel> = emptyList(),
-    val count: Double = 0.0,
-    val page: Double = 0.0,
-    val perPage: Double = 0.0,
+    val count: Long = 0L,
+    val page: Long = 0L,
+    val perPage: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -14263,7 +14263,7 @@ data class PaymentsInvoiceListResponse(
 @Serializable
 data class PaymentsCurrencyResponse(
     val currencyList: PaymentsCurrencyResponseCurrencyList = PaymentsCurrencyResponseCurrencyList(),
-    val lastUpdate: Double = 0.0,
+    val lastUpdate: Long = 0L,
     val visitorCurrency: String = "",
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -14656,7 +14656,7 @@ data class PaymentsCurrencyResponseCurrencyListINR(
 @Serializable
 data class PaymentsCurrencyResponseCurrencyListRUB(
     val title: String = "",
-    val rate: Double = 0.0,
+    val rate: Long = 0L,
     val formattedRate: String = "",
     val symbol: String = "",
 )
@@ -14824,7 +14824,7 @@ data class PaymentsBalanceListResponse(
 @Serializable
 data class PaymentsBalanceListResponseFromBalance(
     val balance: String = "",
-    val convertedBalance: Double = 0.0,
+    val convertedBalance: Long = 0L,
     val fullTitle: String = "",
     val title: String = "",
     val type: String = "",
@@ -14865,7 +14865,7 @@ data class PaymentsBalanceExchangeResponse(
 @Serializable
 data class PaymentsBalanceExchangeResponseFromBalance(
     val balance: String = "",
-    val convertedBalance: Double = 0.0,
+    val convertedBalance: Long = 0L,
     val fullTitle: String = "",
     val title: String = "",
     val type: String = "",
@@ -14929,8 +14929,8 @@ data class PaymentsFeeParams(
 @Serializable
 data class PaymentsFeeResponse(
     @SerialName("commission_percentage")
-    val commissionPercentage: Double = 0.0,
-    val spentCurrentMonth: Double = 0.0,
+    val commissionPercentage: Long = 0L,
+    val spentCurrentMonth: Long = 0L,
     val calculator: PaymentsFeeResponseCalculator = PaymentsFeeResponseCalculator(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -14938,9 +14938,9 @@ data class PaymentsFeeResponse(
 
 @Serializable
 data class PaymentsFeeResponseCalculator(
-    val inputAmount: Double = 0.0,
-    val commissionAmount: Double = 0.0,
-    val totalOutputAmount: Double = 0.0,
+    val inputAmount: Long = 0L,
+    val commissionAmount: Long = 0L,
+    val totalOutputAmount: Long = 0L,
 )
 
 @Serializable
@@ -15000,7 +15000,7 @@ data class PaymentsHistoryParams(
 data class PaymentsHistoryResponse(
     val payments: JsonElement = JsonNull,
     val perPage: String = "",
-    val page: Double = 0.0,
+    val page: Long = 0L,
     val pageNavLink: String = "",
     val pageNavParams: PaymentsHistoryResponsePageNavParams = PaymentsHistoryResponsePageNavParams(),
     val periodLabel: String = "",
@@ -15009,7 +15009,7 @@ data class PaymentsHistoryResponse(
     val input: PaymentsHistoryResponseInput = PaymentsHistoryResponseInput(),
     val paymentStats: JsonElement = JsonNull,
     val hasNextPage: Boolean = false,
-    val lastOperationId: Double = 0.0,
+    val lastOperationId: Long = 0L,
     val nextPageHref: String = "",
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -15025,11 +15025,11 @@ data class PaymentsHistoryResponsePageNavParams(
 @Serializable
 data class PaymentsHistoryResponseInput(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val type: String = "",
     val startDate: String = "",
     val endDate: String = "",
-    val page: Double = 0.0,
+    val page: Long = 0L,
     @SerialName("period_label")
     val periodLabel: String = "",
     val receiver: String = "",
@@ -15038,13 +15038,13 @@ data class PaymentsHistoryResponseInput(
     val pmin: String = "",
     val pmax: String = "",
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     val wallet: String = "",
     @SerialName("is_hold")
     val isHold: Boolean = false,
     val currency: String = "",
     @SerialName("operation_id_lt")
-    val operationIdLt: Double = 0.0,
+    val operationIdLt: Long = 0L,
 )
 
 @Serializable
@@ -15160,8 +15160,8 @@ data class PaymentsPayoutServicesResponseSystemsProviders(
 data class PaymentsPayoutServicesResponseSystems(
     val system: String = "",
     val commission: String = "",
-    val min: Double = 0.0,
-    val max: Double = 0.0,
+    val min: Long = 0L,
+    val max: Long = 0L,
     @SerialName("instant_payout")
     val instantPayout: Boolean = false,
     @SerialName("problematic_payout")
@@ -15225,7 +15225,7 @@ data class AutoPaymentsCreateResponse(
     val status: String = "",
     val message: String = "",
     @SerialName("auto_payment_id")
-    val autoPaymentId: Double = 0.0,
+    val autoPaymentId: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -15257,13 +15257,13 @@ data class ProxyGetResponse(
 @Serializable
 data class ProxyGetResponseProxiesProxy(
     @SerialName("proxy_id")
-    val proxyId: Double = 0.0,
+    val proxyId: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("proxy_ip")
     val proxyIp: String = "",
     @SerialName("proxy_port")
-    val proxyPort: Double = 0.0,
+    val proxyPort: Long = 0L,
     @SerialName("proxy_user")
     val proxyUser: String = "",
     @SerialName("proxy_pass")

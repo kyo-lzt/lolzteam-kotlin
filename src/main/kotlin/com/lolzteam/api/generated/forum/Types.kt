@@ -931,19 +931,19 @@ internal object UsersTypeSerializer : KSerializer<UsersType> {
 @Serializable
 data class RespNotificationModel(
     @SerialName("notification_id")
-    val notificationId: Double = 0.0,
+    val notificationId: Long = 0L,
     @SerialName("notification_create_date")
-    val notificationCreateDate: Double = 0.0,
+    val notificationCreateDate: Long = 0L,
     @SerialName("content_type")
     val contentType: String = "",
     @SerialName("content_id")
-    val contentId: Double = 0.0,
+    val contentId: Long = 0L,
     @SerialName("content_action")
     val contentAction: String = "",
     @SerialName("notification_is_unread")
     val notificationIsUnread: Boolean = false,
     @SerialName("creator_user_id")
-    val creatorUserId: Double = 0.0,
+    val creatorUserId: Long = 0L,
     @SerialName("creator_username")
     val creatorUsername: String = "",
     @SerialName("creator_username_html")
@@ -965,7 +965,7 @@ data class RespNotificationModelLinks(
 @Serializable
 data class RespLinkModel(
     @SerialName("link_id")
-    val linkId: Double = 0.0,
+    val linkId: Long = 0L,
     @SerialName("link_title")
     val linkTitle: String = "",
     @SerialName("link_description")
@@ -989,12 +989,12 @@ data class RespLinkModelPermissions(
 data class RespChatboxMessageModel(
     @SerialName("can_report")
     val canReport: Boolean = false,
-    val date: Double = 0.0,
+    val date: Long = 0L,
     @SerialName("is_deleted")
     val isDeleted: Boolean = false,
     val message: String = "",
     @SerialName("message_id")
-    val messageId: Double = 0.0,
+    val messageId: Long = 0L,
     val messageJson: String = "",
     val messageRaw: String = "",
     val room: RespChatboxMessageModelRoom = RespChatboxMessageModelRoom(),
@@ -1008,7 +1008,7 @@ data class RespChatboxMessageModelRoom(
     val eng: Boolean = false,
     val market: Boolean = false,
     @SerialName("room_id")
-    val roomId: Double = 0.0,
+    val roomId: Long = 0L,
     val title: String = "",
 )
 
@@ -1041,19 +1041,19 @@ data class RespChatboxMessageModelUserUniqBanner(
 @Serializable
 data class RespChatboxMessageModelUser(
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("background_date")
-    val backgroundDate: Double = 0.0,
+    val backgroundDate: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_admin")
     val isAdmin: Boolean = false,
     @SerialName("is_banned")
@@ -1063,73 +1063,73 @@ data class RespChatboxMessageModelUser(
     @SerialName("is_staff")
     val isStaff: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: RespChatboxMessageModelUserRendered = RespChatboxMessageModelUserRendered(),
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("uniq_banner")
     val uniqBanner: RespChatboxMessageModelUserUniqBanner = RespChatboxMessageModelUserUniqBanner(),
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
 @Serializable
 data class RespUserModel(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("user_message_count")
-    val userMessageCount: Double = 0.0,
+    val userMessageCount: Long = 0L,
     @SerialName("user_register_date")
-    val userRegisterDate: Double = 0.0,
+    val userRegisterDate: Long = 0L,
     @SerialName("user_like_count")
-    val userLikeCount: Double = 0.0,
+    val userLikeCount: Long = 0L,
     @SerialName("user_like2_count")
-    val userLike2Count: Double = 0.0,
+    val userLike2Count: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("trophy_count")
-    val trophyCount: Double = 0.0,
+    val trophyCount: Long = 0L,
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     val balance: String = "",
     val hold: String = "",
     val currency: String = "",
     @SerialName("user_email")
     val userEmail: String = "",
     @SerialName("user_unread_notification_count")
-    val userUnreadNotificationCount: Double = 0.0,
+    val userUnreadNotificationCount: Long = 0L,
     @SerialName("user_unread_conversation_count")
-    val userUnreadConversationCount: Double = 0.0,
+    val userUnreadConversationCount: Long = 0L,
     @SerialName("conv_welcome_message")
     val convWelcomeMessage: String = "",
     @SerialName("user_title")
     val userTitle: String = "",
     @SerialName("user_deposit")
-    val userDeposit: Double = 0.0,
+    val userDeposit: Long = 0L,
     @SerialName("user_is_valid")
     val userIsValid: Boolean = false,
     @SerialName("user_is_verified")
@@ -1137,7 +1137,7 @@ data class RespUserModel(
     @SerialName("user_is_followed")
     val userIsFollowed: Boolean = false,
     @SerialName("user_last_seen_date")
-    val userLastSeenDate: Double = 0.0,
+    val userLastSeenDate: Long = 0L,
     val links: RespUserModelLinks = RespUserModelLinks(),
     val permissions: RespUserModelPermissions = RespUserModelPermissions(),
     @SerialName("user_is_ignored")
@@ -1145,14 +1145,14 @@ data class RespUserModel(
     @SerialName("user_is_visitor")
     val userIsVisitor: Boolean = false,
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
     @SerialName("curator_titles")
     val curatorTitles: List<String> = emptyList(),
     @SerialName("user_groups")
     val userGroups: List<RespUserModelUserGroups> = emptyList(),
     val fields: List<RespUserModelFields> = emptyList(),
     @SerialName("user_timezone_offset")
-    val userTimezoneOffset: Double = 0.0,
+    val userTimezoneOffset: Long = 0L,
     @SerialName("user_external_authentications")
     val userExternalAuthentications: List<RespUserModelUserExternalAuthentications> = emptyList(),
     @SerialName("self_permissions")
@@ -1203,7 +1203,7 @@ data class RespUserModelPermissions(
 @Serializable
 data class RespUserModelUserGroups(
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
     @SerialName("user_group_title")
     val userGroupTitle: String = "",
     @SerialName("user_group_title_en")
@@ -1289,13 +1289,13 @@ data class RespUserModelEditPermissions(
 data class RespUserModelBirthdayTimeStamp(
     val date: String = "",
     @SerialName("timezone_type")
-    val timezoneType: Double = 0.0,
+    val timezoneType: Long = 0L,
     val timezone: String = "",
 )
 
 @Serializable
 data class RespUserModelBirthday(
-    val age: Double = 0.0,
+    val age: Long = 0L,
     val timeStamp: RespUserModelBirthdayTimeStamp = RespUserModelBirthdayTimeStamp(),
     val format: String = "",
 )
@@ -1303,7 +1303,7 @@ data class RespUserModelBirthday(
 @Serializable
 data class RespUserModelUserFollowingUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
@@ -1313,13 +1313,13 @@ data class RespUserModelUserFollowingUsers(
 @Serializable
 data class RespUserModelUserFollowing(
     val users: List<RespUserModelUserFollowingUsers> = emptyList(),
-    val count: Double = 0.0,
+    val count: Long = 0L,
 )
 
 @Serializable
 data class RespUserModelUserFollowersUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
@@ -1329,33 +1329,33 @@ data class RespUserModelUserFollowersUsers(
 @Serializable
 data class RespUserModelUserFollowers(
     val users: List<RespUserModelUserFollowersUsers> = emptyList(),
-    val count: Double = 0.0,
+    val count: Long = 0L,
 )
 
 @Serializable
 data class RespThreadModel(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("forum_id")
-    val forumId: Double = 0.0,
+    val forumId: Long = 0L,
     @SerialName("thread_title")
     val threadTitle: String = "",
     @SerialName("thread_view_count")
-    val threadViewCount: Double = 0.0,
+    val threadViewCount: Long = 0L,
     @SerialName("creator_user_id")
-    val creatorUserId: Double = 0.0,
+    val creatorUserId: Long = 0L,
     @SerialName("creator_username")
     val creatorUsername: String = "",
     @SerialName("creator_username_html")
     val creatorUsernameHtml: String = "",
     @SerialName("thread_create_date")
-    val threadCreateDate: Double = 0.0,
+    val threadCreateDate: Long = 0L,
     @SerialName("thread_update_date")
-    val threadUpdateDate: Double = 0.0,
+    val threadUpdateDate: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("thread_post_count")
-    val threadPostCount: Double = 0.0,
+    val threadPostCount: Long = 0L,
     @SerialName("thread_is_published")
     val threadIsPublished: Boolean = false,
     @SerialName("thread_is_deleted")
@@ -1408,17 +1408,17 @@ data class RespThreadModelFirstPostPermissions(
 @Serializable
 data class RespThreadModelFirstPost(
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_body_html")
@@ -1431,7 +1431,7 @@ data class RespThreadModelFirstPost(
     @SerialName("signature_plain_text")
     val signaturePlainText: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("post_is_published")
@@ -1439,7 +1439,7 @@ data class RespThreadModelFirstPost(
     @SerialName("post_is_deleted")
     val postIsDeleted: Boolean = false,
     @SerialName("post_update_date")
-    val postUpdateDate: Double = 0.0,
+    val postUpdateDate: Long = 0L,
     @SerialName("post_is_first_post")
     val postIsFirstPost: Boolean = false,
     @SerialName("post_is_liked")
@@ -1453,7 +1453,7 @@ data class RespThreadModelFirstPost(
 @Serializable
 data class RespThreadModelThreadPrefixes(
     @SerialName("prefix_id")
-    val prefixId: Double = 0.0,
+    val prefixId: Long = 0L,
     @SerialName("prefix_title")
     val prefixTitle: String = "",
 )
@@ -1479,10 +1479,10 @@ data class RespThreadModelLinks(
 data class RespThreadModelPermissionsBump(
     val can: Boolean = false,
     @SerialName("available_count")
-    val availableCount: Double = 0.0,
+    val availableCount: Long = 0L,
     val error: String = "",
     @SerialName("next_available_time")
-    val nextAvailableTime: Double = 0.0,
+    val nextAvailableTime: Long = 0L,
 )
 
 @Serializable
@@ -1502,9 +1502,9 @@ data class RespThreadModelPermissions(
 @Serializable
 data class RespThreadModelRestrictions(
     @SerialName("reply_delay")
-    val replyDelay: Double = 0.0,
+    val replyDelay: Long = 0L,
     @SerialName("max_reply_count")
-    val maxReplyCount: Double = 0.0,
+    val maxReplyCount: Long = 0L,
 )
 
 @Serializable
@@ -1523,27 +1523,27 @@ data class RespThreadModelContestPermissions(
 data class RespThreadModelContest(
     val type: String = "",
     @SerialName("finish_date")
-    val finishDate: Double = 0.0,
+    val finishDate: Long = 0L,
     @SerialName("now_count_members")
-    val nowCountMembers: Double = 0.0,
+    val nowCountMembers: Long = 0L,
     @SerialName("needed_members")
-    val neededMembers: Double = 0.0,
+    val neededMembers: Long = 0L,
     @SerialName("is_finished")
-    val isFinished: Double = 0.0,
+    val isFinished: Long = 0L,
     @SerialName("count_winners")
-    val countWinners: Double = 0.0,
+    val countWinners: Long = 0L,
     @SerialName("require_like_count")
-    val requireLikeCount: Double = 0.0,
+    val requireLikeCount: Long = 0L,
     @SerialName("require_total_like_count")
-    val requireTotalLikeCount: Double = 0.0,
+    val requireTotalLikeCount: Long = 0L,
     @SerialName("prize_type")
     val prizeType: String = "",
     @SerialName("prize_type_phrase")
     val prizeTypePhrase: String = "",
     @SerialName("prize_data")
-    val prizeData: Double = 0.0,
+    val prizeData: Long = 0L,
     @SerialName("is_money_places")
-    val isMoneyPlaces: Double = 0.0,
+    val isMoneyPlaces: Long = 0L,
     @SerialName("chance_to_win")
     val chanceToWin: Double = 0.0,
     val winners: List<Long>? = null,
@@ -1555,17 +1555,17 @@ data class RespThreadModelContest(
 @Serializable
 data class RespPostModel(
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_body_html")
@@ -1578,7 +1578,7 @@ data class RespPostModel(
     @SerialName("signature_plain_text")
     val signaturePlainText: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("post_is_published")
@@ -1586,7 +1586,7 @@ data class RespPostModel(
     @SerialName("post_is_deleted")
     val postIsDeleted: Boolean = false,
     @SerialName("post_update_date")
-    val postUpdateDate: Double = 0.0,
+    val postUpdateDate: Long = 0L,
     @SerialName("post_is_first_post")
     val postIsFirstPost: Boolean = false,
     val links: RespPostModelLinks = RespPostModelLinks(),
@@ -1620,19 +1620,19 @@ data class RespPostModelPermissions(
 @Serializable
 data class RespPostCommentModel(
     @SerialName("post_comment_id")
-    val postCommentId: Double = 0.0,
+    val postCommentId: Long = 0L,
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_comment_create_date")
-    val postCommentCreateDate: Double = 0.0,
+    val postCommentCreateDate: Long = 0L,
     @SerialName("post_comment_body")
     val postCommentBody: String = "",
     @SerialName("post_comment_body_html")
@@ -1640,7 +1640,7 @@ data class RespPostCommentModel(
     @SerialName("post_comment_body_plain_text")
     val postCommentBodyPlainText: String = "",
     @SerialName("post_comment_like_count")
-    val postCommentLikeCount: Double = 0.0,
+    val postCommentLikeCount: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("post_comment_is_published")
@@ -1648,7 +1648,7 @@ data class RespPostCommentModel(
     @SerialName("post_comment_is_deleted")
     val postCommentIsDeleted: Boolean = false,
     @SerialName("post_comment_update_date")
-    val postCommentUpdateDate: Double = 0.0,
+    val postCommentUpdateDate: Long = 0L,
     val links: RespPostCommentModelLinks = RespPostCommentModelLinks(),
     val permissions: RespPostCommentModelPermissions = RespPostCommentModelPermissions(),
 )
@@ -1679,17 +1679,17 @@ data class RespPostCommentModelPermissions(
 @Serializable
 data class RespProfilePostModel(
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_body_html")
@@ -1697,11 +1697,11 @@ data class RespProfilePostModel(
     @SerialName("post_body_plain_text")
     val postBodyPlainText: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_comment_count")
-    val postCommentCount: Double = 0.0,
+    val postCommentCount: Long = 0L,
     @SerialName("post_comments_is_disabled")
-    val postCommentsIsDisabled: Double = 0.0,
+    val postCommentsIsDisabled: Long = 0L,
     @SerialName("timeline_username")
     val timelineUsername: String = "",
     @SerialName("user_is_ignored")
@@ -1749,17 +1749,17 @@ data class RespProfilePostModelPermissions(
 @Serializable
 data class RespProfilePostCommentModel(
     @SerialName("comment_id")
-    val commentId: Double = 0.0,
+    val commentId: Long = 0L,
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("comment_user_id")
-    val commentUserId: Double = 0.0,
+    val commentUserId: Long = 0L,
     @SerialName("comment_username")
     val commentUsername: String = "",
     @SerialName("comment_username_html")
     val commentUsernameHtml: String = "",
     @SerialName("comment_create_date")
-    val commentCreateDate: Double = 0.0,
+    val commentCreateDate: Long = 0L,
     @SerialName("comment_body")
     val commentBody: String = "",
     @SerialName("comment_body_html")
@@ -1769,7 +1769,7 @@ data class RespProfilePostCommentModel(
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     val links: RespProfilePostCommentModelLinks = RespProfilePostCommentModelLinks(),
     val permissions: RespProfilePostCommentModelPermissions = RespProfilePostCommentModelPermissions(),
 )
@@ -1796,33 +1796,33 @@ data class RespProfilePostCommentModelPermissions(
 @Serializable
 data class RespConversationModel(
     @SerialName("conversation_id")
-    val conversationId: Double = 0.0,
+    val conversationId: Long = 0L,
     @SerialName("conversation_title")
     val conversationTitle: String = "",
     @SerialName("creator_user_id")
-    val creatorUserId: Double = 0.0,
+    val creatorUserId: Long = 0L,
     @SerialName("creator_username")
     val creatorUsername: String = "",
     @SerialName("creator_username_html")
     val creatorUsernameHtml: String = "",
     @SerialName("conversation_create_date")
-    val conversationCreateDate: Double = 0.0,
+    val conversationCreateDate: Long = 0L,
     @SerialName("conversation_update_date")
-    val conversationUpdateDate: Double = 0.0,
+    val conversationUpdateDate: Long = 0L,
     @SerialName("conversation_last_read_date")
-    val conversationLastReadDate: Double = 0.0,
+    val conversationLastReadDate: Long = 0L,
     @SerialName("conversation_online_count")
-    val conversationOnlineCount: Double = 0.0,
+    val conversationOnlineCount: Long = 0L,
     @SerialName("is_starred")
-    val isStarred: Double = 0.0,
+    val isStarred: Long = 0L,
     @SerialName("is_group")
-    val isGroup: Double = 0.0,
+    val isGroup: Long = 0L,
     @SerialName("is_unread")
-    val isUnread: Double = 0.0,
-    val alerts: Double = 0.0,
+    val isUnread: Long = 0L,
+    val alerts: Long = 0L,
     val permissions: RespConversationModelPermissions = RespConversationModelPermissions(),
     @SerialName("conversation_message_count")
-    val conversationMessageCount: Double = 0.0,
+    val conversationMessageCount: Long = 0L,
     @SerialName("conversation_is_new")
     val conversationIsNew: Boolean = false,
     @SerialName("creator_is_ignored")
@@ -1853,12 +1853,12 @@ data class RespConversationModelPermissions(
 @Serializable
 data class RespConversationModelRecipient(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("is_online")
     val isOnline: Boolean = false,
     @SerialName("contacts_changed")
@@ -1869,12 +1869,12 @@ data class RespConversationModelRecipient(
 @Serializable
 data class RespConversationModelRecipients(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("is_online")
     val isOnline: Boolean = false,
     @SerialName("contacts_changed")
@@ -1893,25 +1893,25 @@ data class RespConversationModelLinks(
 @Serializable
 data class RespConversationMessageModel(
     @SerialName("message_id")
-    val messageId: Double = 0.0,
+    val messageId: Long = 0L,
     @SerialName("conversation_id")
-    val conversationId: Double = 0.0,
+    val conversationId: Long = 0L,
     @SerialName("creator_user_id")
-    val creatorUserId: Double = 0.0,
+    val creatorUserId: Long = 0L,
     @SerialName("creator_username")
     val creatorUsername: String = "",
     @SerialName("creator_username_html")
     val creatorUsernameHtml: String = "",
     @SerialName("message_create_date")
-    val messageCreateDate: Double = 0.0,
+    val messageCreateDate: Long = 0L,
     @SerialName("message_is_unread")
-    val messageIsUnread: Double = 0.0,
+    val messageIsUnread: Long = 0L,
     @SerialName("message_need_translate")
     val messageNeedTranslate: Boolean = false,
     @SerialName("message_is_system")
     val messageIsSystem: Boolean = false,
     @SerialName("message_edit_date")
-    val messageEditDate: Double = 0.0,
+    val messageEditDate: Long = 0L,
     @SerialName("message_body")
     val messageBody: String = "",
     @SerialName("message_body_html")
@@ -1945,17 +1945,17 @@ data class RespConversationMessageModelPermissions(
 @Serializable
 data class RespForumModel(
     @SerialName("forum_id")
-    val forumId: Double = 0.0,
+    val forumId: Long = 0L,
     @SerialName("forum_title")
     val forumTitle: String = "",
     @SerialName("forum_description")
     val forumDescription: String = "",
     @SerialName("forum_thread_count")
-    val forumThreadCount: Double = 0.0,
+    val forumThreadCount: Long = 0L,
     @SerialName("forum_post_count")
-    val forumPostCount: Double = 0.0,
+    val forumPostCount: Long = 0L,
     @SerialName("parent_node_id")
-    val parentNodeId: Double = 0.0,
+    val parentNodeId: Long = 0L,
     @SerialName("node_type_id")
     val nodeTypeId: String = "",
     @SerialName("icon_content")
@@ -1963,11 +1963,11 @@ data class RespForumModel(
     @SerialName("active_icon_content")
     val activeIconContent: String = "",
     @SerialName("forum_rules_thread_id")
-    val forumRulesThreadId: Double = 0.0,
+    val forumRulesThreadId: Long = 0L,
     @SerialName("forum_prefixes")
     val forumPrefixes: List<RespForumModelForumPrefixes> = emptyList(),
     @SerialName("thread_default_prefix_id")
-    val threadDefaultPrefixId: Double = 0.0,
+    val threadDefaultPrefixId: Long = 0L,
     @SerialName("thread_prefix_is_required")
     val threadPrefixIsRequired: Boolean = false,
     val links: RespForumModelLinks = RespForumModelLinks(),
@@ -1979,7 +1979,7 @@ data class RespForumModel(
 @Serializable
 data class RespForumModelForumPrefixesGroupPrefixes(
     @SerialName("prefix_id")
-    val prefixId: Double = 0.0,
+    val prefixId: Long = 0L,
     @SerialName("css_class")
     val cssClass: String = "",
     @SerialName("prefix_title")
@@ -2021,8 +2021,8 @@ data class RespForumModelPermissions(
 @Serializable
 data class RespSystemInfo(
     @SerialName("visitor_id")
-    val visitorId: Double = 0.0,
-    val time: Double = 0.0,
+    val visitorId: Long = 0L,
+    val time: Long = 0L,
 )
 
 // ─── OAuthApi Types ────────────────────────────────────────
@@ -2097,7 +2097,7 @@ data class OAuthTokenResponse(
     @SerialName("token_type")
     val tokenType: String = "",
     @SerialName("expires_in")
-    val expiresIn: Double = 0.0,
+    val expiresIn: Long = 0L,
     @SerialName("refresh_token")
     val refreshToken: String? = null,
     val scope: String? = null,
@@ -2136,7 +2136,7 @@ data class CategoriesListParams(
 data class CategoriesListResponse(
     val categories: List<CategoriesListResponseCategories> = emptyList(),
     @SerialName("categories_total")
-    val categoriesTotal: Double = 0.0,
+    val categoriesTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -2161,7 +2161,7 @@ data class CategoriesListResponseCategoriesPermissions(
 @Serializable
 data class CategoriesListResponseCategories(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_description")
@@ -2197,7 +2197,7 @@ data class CategoriesGetResponseCategoryPermissions(
 @Serializable
 data class CategoriesGetResponseCategory(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_description")
@@ -2224,7 +2224,7 @@ data class ForumsListParams(
 data class ForumsListResponse(
     val forums: List<RespForumModel> = emptyList(),
     @SerialName("forums_total")
-    val forumsTotal: Double = 0.0,
+    val forumsTotal: Long = 0L,
     val tabs: List<ForumsListResponseTabs> = emptyList(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -2290,7 +2290,7 @@ data class ForumsFollowersResponseUsersFollow(
 @Serializable
 data class ForumsFollowersResponseUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     val follow: ForumsFollowersResponseUsersFollow = ForumsFollowersResponseUsersFollow(),
 )
@@ -2376,7 +2376,7 @@ data class LinksListResponse(
     @SerialName("link-forums")
     val linkForums: List<RespLinkModel> = emptyList(),
     @SerialName("link-forums_total")
-    val linkForumsTotal: Double = 0.0,
+    val linkForumsTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -2404,7 +2404,7 @@ data class PagesListParams(
 data class PagesListResponse(
     val pages: List<PagesListResponsePages> = emptyList(),
     @SerialName("pages_total")
-    val pagesTotal: Double = 0.0,
+    val pagesTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -2427,7 +2427,7 @@ data class PagesListResponsePagesPermissions(
 @Serializable
 data class PagesListResponsePages(
     @SerialName("page_id")
-    val pageId: Double = 0.0,
+    val pageId: Long = 0L,
     @SerialName("page_title")
     val pageTitle: String = "",
     @SerialName("page_description")
@@ -2461,13 +2461,13 @@ data class PagesGetResponsePagePermissions(
 @Serializable
 data class PagesGetResponsePage(
     @SerialName("page_id")
-    val pageId: Double = 0.0,
+    val pageId: Long = 0L,
     @SerialName("page_title")
     val pageTitle: String = "",
     @SerialName("page_description")
     val pageDescription: String = "",
     @SerialName("page_view_count")
-    val pageViewCount: Double = 0.0,
+    val pageViewCount: Long = 0L,
     val links: PagesGetResponsePageLinks = PagesGetResponsePageLinks(),
     val permissions: PagesGetResponsePagePermissions = PagesGetResponsePagePermissions(),
     @SerialName("page_html")
@@ -2486,7 +2486,7 @@ data class NavigationListParams(
 data class NavigationListResponse(
     val elements: List<NavigationListResponseElements> = emptyList(),
     @SerialName("elements_count")
-    val elementsCount: Double = 0.0,
+    val elementsCount: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -2513,7 +2513,7 @@ data class NavigationListResponseElementsPermissions(
 @Serializable
 data class NavigationListResponseElements(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_description")
@@ -2523,9 +2523,9 @@ data class NavigationListResponseElements(
     @SerialName("navigation_type")
     val navigationType: String = "",
     @SerialName("navigation_id")
-    val navigationId: Double = 0.0,
+    val navigationId: Long = 0L,
     @SerialName("navigation_parent_id")
-    val navigationParentId: Double = 0.0,
+    val navigationParentId: Long = 0L,
     @SerialName("has_sub_elements")
     val hasSubElements: Boolean = false,
 )
@@ -2586,7 +2586,7 @@ data class ThreadsListResponse(
     val threads: List<RespThreadModel> = emptyList(),
     val forum: ThreadsListResponseForum = ThreadsListResponseForum(),
     @SerialName("threads_total")
-    val threadsTotal: Double = 0.0,
+    val threadsTotal: Long = 0L,
     val links: ThreadsListResponseLinks = ThreadsListResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -2621,19 +2621,19 @@ data class ThreadsListResponseForumPermissions(
 @Serializable
 data class ThreadsListResponseForum(
     @SerialName("forum_id")
-    val forumId: Double = 0.0,
+    val forumId: Long = 0L,
     @SerialName("forum_title")
     val forumTitle: String = "",
     @SerialName("forum_description")
     val forumDescription: String = "",
     @SerialName("forum_thread_count")
-    val forumThreadCount: Double = 0.0,
+    val forumThreadCount: Long = 0L,
     @SerialName("forum_post_count")
-    val forumPostCount: Double = 0.0,
+    val forumPostCount: Long = 0L,
     @SerialName("forum_prefixes")
     val forumPrefixes: List<JsonElement> = emptyList(),
     @SerialName("thread_default_prefix_id")
-    val threadDefaultPrefixId: Double = 0.0,
+    val threadDefaultPrefixId: Long = 0L,
     @SerialName("thread_prefix_is_required")
     val threadPrefixIsRequired: Boolean = false,
     val links: ThreadsListResponseForumLinks = ThreadsListResponseForumLinks(),
@@ -2644,8 +2644,8 @@ data class ThreadsListResponseForum(
 
 @Serializable
 data class ThreadsListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -3009,7 +3009,7 @@ data class ThreadsFollowersResponseUsersFollow(
 @Serializable
 data class ThreadsFollowersResponseUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     val follow: ThreadsFollowersResponseUsersFollow = ThreadsFollowersResponseUsersFollow(),
 )
@@ -3049,7 +3049,7 @@ data class ThreadsFollowedParams(
 data class ThreadsFollowedResponse(
     val threads: List<RespThreadModel> = emptyList(),
     @SerialName("threads_total")
-    val threadsTotal: Double = 0.0,
+    val threadsTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -3058,7 +3058,7 @@ data class ThreadsFollowedResponse(
 data class ThreadsNavigationResponse(
     val elements: List<ThreadsNavigationResponseElements> = emptyList(),
     @SerialName("elements_count")
-    val elementsCount: Double = 0.0,
+    val elementsCount: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -3085,7 +3085,7 @@ data class ThreadsNavigationResponseElementsPermissions(
 @Serializable
 data class ThreadsNavigationResponseElements(
     @SerialName("category_id")
-    val categoryId: Double = 0.0,
+    val categoryId: Long = 0L,
     @SerialName("category_title")
     val categoryTitle: String = "",
     @SerialName("category_description")
@@ -3095,11 +3095,11 @@ data class ThreadsNavigationResponseElements(
     @SerialName("navigation_type")
     val navigationType: String = "",
     @SerialName("navigation_id")
-    val navigationId: Double = 0.0,
+    val navigationId: Long = 0L,
     @SerialName("navigation_depth")
-    val navigationDepth: Double = 0.0,
+    val navigationDepth: Long = 0L,
     @SerialName("navigation_parent_id")
-    val navigationParentId: Double = 0.0,
+    val navigationParentId: Long = 0L,
     @SerialName("has_sub_elements")
     val hasSubElements: Boolean = false,
 )
@@ -3114,11 +3114,11 @@ data class ThreadsPollGetResponse(
 @Serializable
 data class ThreadsPollGetResponsePollResponses(
     @SerialName("response_id")
-    val responseId: Double = 0.0,
+    val responseId: Long = 0L,
     @SerialName("response_answer")
     val responseAnswer: String = "",
     @SerialName("response_vote_count")
-    val responseVoteCount: Double = 0.0,
+    val responseVoteCount: Long = 0L,
 )
 
 @Serializable
@@ -3135,13 +3135,13 @@ data class ThreadsPollGetResponsePollLinks(
 @Serializable
 data class ThreadsPollGetResponsePoll(
     @SerialName("poll_id")
-    val pollId: Double = 0.0,
+    val pollId: Long = 0L,
     @SerialName("poll_question")
     val pollQuestion: String = "",
     @SerialName("poll_vote_count")
-    val pollVoteCount: Double = 0.0,
+    val pollVoteCount: Long = 0L,
     @SerialName("poll_max_votes")
-    val pollMaxVotes: Double = 0.0,
+    val pollMaxVotes: Long = 0L,
     @SerialName("poll_is_open")
     val pollIsOpen: Boolean = false,
     @SerialName("poll_is_voted")
@@ -3192,7 +3192,7 @@ data class ThreadsUnreadResponse(
 @Serializable
 data class ThreadsUnreadResponseThreads(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
 )
 
 @Serializable
@@ -3220,7 +3220,7 @@ data class ThreadsRecentResponse(
 @Serializable
 data class ThreadsRecentResponseThreads(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
 )
 
 @Serializable
@@ -3254,7 +3254,7 @@ data class PostsListResponse(
     val posts: List<RespThreadModel> = emptyList(),
     val thread: RespThreadModel = RespThreadModel(),
     @SerialName("posts_total")
-    val postsTotal: Double = 0.0,
+    val postsTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -3332,7 +3332,7 @@ data class PostsLikesResponse(
 @Serializable
 data class PostsLikesResponseUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
@@ -3435,13 +3435,13 @@ data class PostsCommentsCreateResponseCommentPermissions(
 @Serializable
 data class PostsCommentsCreateResponseComment(
     @SerialName("post_comment_id")
-    val postCommentId: Double = 0.0,
+    val postCommentId: Long = 0L,
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
@@ -3453,7 +3453,7 @@ data class PostsCommentsCreateResponseComment(
     @SerialName("post_comment_body_plain_text")
     val postCommentBodyPlainText: String = "",
     @SerialName("post_comment_like_count")
-    val postCommentLikeCount: Double = 0.0,
+    val postCommentLikeCount: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("post_comment_is_published")
@@ -3461,7 +3461,7 @@ data class PostsCommentsCreateResponseComment(
     @SerialName("post_comment_is_deleted")
     val postCommentIsDeleted: Boolean = false,
     @SerialName("post_comment_update_date")
-    val postCommentUpdateDate: Double = 0.0,
+    val postCommentUpdateDate: Long = 0L,
     val links: PostsCommentsCreateResponseCommentLinks = PostsCommentsCreateResponseCommentLinks(),
     val permissions: PostsCommentsCreateResponseCommentPermissions = PostsCommentsCreateResponseCommentPermissions(),
 )
@@ -3509,13 +3509,13 @@ data class PostsCommentsEditResponseCommentPermissions(
 @Serializable
 data class PostsCommentsEditResponseComment(
     @SerialName("post_comment_id")
-    val postCommentId: Double = 0.0,
+    val postCommentId: Long = 0L,
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
@@ -3527,7 +3527,7 @@ data class PostsCommentsEditResponseComment(
     @SerialName("post_comment_body_plain_text")
     val postCommentBodyPlainText: String = "",
     @SerialName("post_comment_like_count")
-    val postCommentLikeCount: Double = 0.0,
+    val postCommentLikeCount: Long = 0L,
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("post_comment_is_published")
@@ -3535,7 +3535,7 @@ data class PostsCommentsEditResponseComment(
     @SerialName("post_comment_is_deleted")
     val postCommentIsDeleted: Boolean = false,
     @SerialName("post_comment_update_date")
-    val postCommentUpdateDate: Double = 0.0,
+    val postCommentUpdateDate: Long = 0L,
     val links: PostsCommentsEditResponseCommentLinks = PostsCommentsEditResponseCommentLinks(),
     val permissions: PostsCommentsEditResponseCommentPermissions = PostsCommentsEditResponseCommentPermissions(),
 )
@@ -3591,7 +3591,7 @@ data class UsersListParams(
 data class UsersListResponse(
     val users: List<RespUserModel> = emptyList(),
     @SerialName("users_total")
-    val usersTotal: Double = 0.0,
+    val usersTotal: Long = 0L,
     val links: UsersListResponseLinks = UsersListResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -3599,8 +3599,8 @@ data class UsersListResponse(
 
 @Serializable
 data class UsersListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -3762,9 +3762,9 @@ data class UsersClaimsResponse(
 @Serializable
 data class UsersClaimsResponseClaims(
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("claim_date")
-    val claimDate: Double = 0.0,
+    val claimDate: Long = 0L,
     @SerialName("claim_state")
     val claimState: String = "",
     @SerialName("message_body")
@@ -3773,7 +3773,7 @@ data class UsersClaimsResponseClaims(
     val messageBodyHtml: String = "",
     @SerialName("message_body_plain_text")
     val messageBodyPlainText: String = "",
-    val amount: Double = 0.0,
+    val amount: Long = 0L,
     @SerialName("amount_formatted")
     val amountFormatted: String = "",
     val author: RespUserModel = RespUserModel(),
@@ -3781,18 +3781,18 @@ data class UsersClaimsResponseClaims(
 
 @Serializable
 data class UsersClaimsResponseStatsMarket(
-    val total: Double = 0.0,
-    val solved: Double = 0.0,
-    val settled: Double = 0.0,
-    val rejected: Double = 0.0,
+    val total: Long = 0L,
+    val solved: Long = 0L,
+    val settled: Long = 0L,
+    val rejected: Long = 0L,
 )
 
 @Serializable
 data class UsersClaimsResponseStatsNoMarket(
-    val total: Double = 0.0,
-    val solved: Double = 0.0,
-    val settled: Double = 0.0,
-    val rejected: Double = 0.0,
+    val total: Long = 0L,
+    val solved: Long = 0L,
+    val settled: Long = 0L,
+    val rejected: Long = 0L,
 )
 
 @Serializable
@@ -3905,7 +3905,7 @@ data class UsersFollowersParams(
 data class UsersFollowersResponse(
     val users: List<UsersFollowersResponseUsers> = emptyList(),
     @SerialName("users_total")
-    val usersTotal: Double = 0.0,
+    val usersTotal: Long = 0L,
     val links: UsersFollowersResponseLinks = UsersFollowersResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -3948,30 +3948,30 @@ data class UsersFollowersResponseUsers(
     @SerialName("content_type")
     val contentType: String = "",
     @SerialName("content_id")
-    val contentId: Double = 0.0,
+    val contentId: Long = 0L,
     @SerialName("follow_date")
-    val followDate: Double = 0.0,
+    val followDate: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("user_message_count")
-    val userMessageCount: Double = 0.0,
+    val userMessageCount: Long = 0L,
     @SerialName("user_register_date")
-    val userRegisterDate: Double = 0.0,
+    val userRegisterDate: Long = 0L,
     @SerialName("user_like_count")
-    val userLikeCount: Double = 0.0,
+    val userLikeCount: Long = 0L,
     @SerialName("user_like2_count")
-    val userLike2Count: Double = 0.0,
+    val userLike2Count: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("trophy_count")
-    val trophyCount: Double = 0.0,
+    val trophyCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("user_title")
     val userTitle: String = "",
     @SerialName("user_is_valid")
@@ -3981,11 +3981,11 @@ data class UsersFollowersResponseUsers(
     @SerialName("user_is_followed")
     val userIsFollowed: Boolean = false,
     @SerialName("user_last_seen_date")
-    val userLastSeenDate: Double = 0.0,
+    val userLastSeenDate: Long = 0L,
     @SerialName("user_following_count")
-    val userFollowingCount: Double = 0.0,
+    val userFollowingCount: Long = 0L,
     @SerialName("user_followers_count")
-    val userFollowersCount: Double = 0.0,
+    val userFollowersCount: Long = 0L,
     val links: UsersFollowersResponseUsersLinks = UsersFollowersResponseUsersLinks(),
     val permissions: UsersFollowersResponseUsersPermissions = UsersFollowersResponseUsersPermissions(),
     @SerialName("user_is_ignored")
@@ -3993,15 +3993,15 @@ data class UsersFollowersResponseUsers(
     @SerialName("user_is_visitor")
     val userIsVisitor: Boolean = false,
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
     @SerialName("custom_fields")
     val customFields: UsersFollowersResponseUsersCustomFields = UsersFollowersResponseUsersCustomFields(),
 )
 
 @Serializable
 data class UsersFollowersResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -4035,7 +4035,7 @@ data class UsersFollowingsParams(
 data class UsersFollowingsResponse(
     val users: List<UsersFollowingsResponseUsers> = emptyList(),
     @SerialName("users_total")
-    val usersTotal: Double = 0.0,
+    val usersTotal: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -4094,32 +4094,32 @@ data class UsersFollowingsResponseUsers(
     @SerialName("content_type")
     val contentType: String = "",
     @SerialName("content_id")
-    val contentId: Double = 0.0,
+    val contentId: Long = 0L,
     @SerialName("follow_date")
-    val followDate: Double = 0.0,
+    val followDate: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("username_html")
     val usernameHtml: String = "",
     @SerialName("user_message_count")
-    val userMessageCount: Double = 0.0,
+    val userMessageCount: Long = 0L,
     @SerialName("user_register_date")
-    val userRegisterDate: Double = 0.0,
+    val userRegisterDate: Long = 0L,
     @SerialName("user_like_count")
-    val userLikeCount: Double = 0.0,
+    val userLikeCount: Long = 0L,
     @SerialName("user_like2_count")
-    val userLike2Count: Double = 0.0,
+    val userLike2Count: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("trophy_count")
-    val trophyCount: Double = 0.0,
+    val trophyCount: Long = 0L,
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("user_title")
     val userTitle: String = "",
     @SerialName("user_is_valid")
@@ -4129,11 +4129,11 @@ data class UsersFollowingsResponseUsers(
     @SerialName("user_is_followed")
     val userIsFollowed: Boolean = false,
     @SerialName("user_last_seen_date")
-    val userLastSeenDate: Double = 0.0,
+    val userLastSeenDate: Long = 0L,
     @SerialName("user_following_count")
-    val userFollowingCount: Double = 0.0,
+    val userFollowingCount: Long = 0L,
     @SerialName("user_followers_count")
-    val userFollowersCount: Double = 0.0,
+    val userFollowersCount: Long = 0L,
     val links: UsersFollowingsResponseUsersLinks = UsersFollowingsResponseUsersLinks(),
     val permissions: UsersFollowingsResponseUsersPermissions = UsersFollowingsResponseUsersPermissions(),
     @SerialName("user_is_ignored")
@@ -4141,7 +4141,7 @@ data class UsersFollowingsResponseUsers(
     @SerialName("user_is_visitor")
     val userIsVisitor: Boolean = false,
     @SerialName("user_group_id")
-    val userGroupId: Double = 0.0,
+    val userGroupId: Long = 0L,
     @SerialName("custom_fields")
     val customFields: UsersFollowingsResponseUsersCustomFields = UsersFollowingsResponseUsersCustomFields(),
 )
@@ -4170,10 +4170,10 @@ data class UsersLikesParams(
 
 @Serializable
 data class UsersLikesResponse(
-    val page: Double = 0.0,
-    val perPage: Double = 0.0,
+    val page: Long = 0L,
+    val perPage: Long = 0L,
     val contentType: String = "",
-    val totalLikes: Double = 0.0,
+    val totalLikes: Long = 0L,
     val likes: JsonElement = JsonNull,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -4212,11 +4212,11 @@ data class UsersIgnoredResponseUsersCustomFields(
 @Serializable
 data class UsersIgnoredResponseUsersIgnoredInfo(
     @SerialName("ignore_content")
-    val ignoreContent: Double = 0.0,
+    val ignoreContent: Long = 0L,
     @SerialName("ignore_conversations")
-    val ignoreConversations: Double = 0.0,
+    val ignoreConversations: Long = 0L,
     @SerialName("restrict_view_profile")
-    val restrictViewProfile: Double = 0.0,
+    val restrictViewProfile: Long = 0L,
 )
 
 @Serializable
@@ -4251,13 +4251,13 @@ data class UsersIgnoredResponseUsers(
     @SerialName("can_warn")
     val canWarn: Boolean = false,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("conv_welcome_message")
     val convWelcomeMessage: String = "",
-    val convertedDeposit: Double = 0.0,
+    val convertedDeposit: Long = 0L,
     @SerialName("custom_fields")
     val customFields: UsersIgnoredResponseUsersCustomFields = UsersIgnoredResponseUsersCustomFields(),
-    val deposit: Double = 0.0,
+    val deposit: Long = 0L,
     val homepage: String = "",
     @SerialName("ignored_info")
     val ignoredInfo: UsersIgnoredResponseUsersIgnoredInfo = UsersIgnoredResponseUsersIgnoredInfo(),
@@ -4274,30 +4274,30 @@ data class UsersIgnoredResponseUsers(
     @SerialName("is_staff")
     val isStaff: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     val location: String = "",
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: UsersIgnoredResponseUsersRendered = UsersIgnoredResponseUsersRendered(),
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("user_title")
     val userTitle: String = "",
     val username: String = "",
     @SerialName("view_url")
     val viewUrl: String = "",
     @SerialName("warning_points")
-    val warningPoints: Double = 0.0,
+    val warningPoints: Long = 0L,
 )
 
 @Serializable
@@ -4349,7 +4349,7 @@ data class UsersContentsParams(
 data class UsersContentsResponse(
     val data: List<UsersContentsResponseData> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     val user: RespUserModel = RespUserModel(),
     val links: UsersContentsResponseLinks = UsersContentsResponseLinks(),
     @SerialName("system_info")
@@ -4359,12 +4359,12 @@ data class UsersContentsResponse(
 @Serializable
 data class UsersContentsResponseDataLikeUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_banned")
-    val isBanned: Double = 0.0,
+    val isBanned: Long = 0L,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
 )
@@ -4399,19 +4399,19 @@ data class UsersContentsResponseData(
     @SerialName("content_type")
     val contentType: String = "",
     @SerialName("content_id")
-    val contentId: Double = 0.0,
+    val contentId: Long = 0L,
     @SerialName("post_id")
-    val postId: Double = 0.0,
+    val postId: Long = 0L,
     @SerialName("thread_id")
-    val threadId: Double = 0.0,
+    val threadId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_body_html")
@@ -4424,9 +4424,9 @@ data class UsersContentsResponseData(
     @SerialName("signature_plain_text")
     val signaturePlainText: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_attachment_count")
-    val postAttachmentCount: Double = 0.0,
+    val postAttachmentCount: Long = 0L,
     @SerialName("like_users")
     val likeUsers: List<UsersContentsResponseDataLikeUsers> = emptyList(),
     @SerialName("user_is_ignored")
@@ -4436,7 +4436,7 @@ data class UsersContentsResponseData(
     @SerialName("post_is_deleted")
     val postIsDeleted: Boolean = false,
     @SerialName("post_update_date")
-    val postUpdateDate: Double = 0.0,
+    val postUpdateDate: Long = 0L,
     @SerialName("post_is_first_post")
     val postIsFirstPost: Boolean = false,
     val links: UsersContentsResponseDataLinks = UsersContentsResponseDataLinks(),
@@ -4446,8 +4446,8 @@ data class UsersContentsResponseData(
 
 @Serializable
 data class UsersContentsResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -4461,7 +4461,7 @@ data class UsersTrophiesResponse(
 @Serializable
 data class UsersTrophiesResponseTrophies(
     @SerialName("trophy_id")
-    val trophyId: Double = 0.0,
+    val trophyId: Long = 0L,
     val title: String = "",
     val description: String = "",
     @SerialName("trophy_url")
@@ -4478,7 +4478,7 @@ data class UsersSecretAnswerTypesResponse(
 @Serializable
 data class UsersSecretAnswerTypesResponseData(
     @SerialName("sa_id")
-    val saId: Double = 0.0,
+    val saId: Long = 0L,
     val renderedPhrase: String = "",
 )
 
@@ -4519,7 +4519,7 @@ data class ProfilePostsListParams(
 data class ProfilePostsListResponse(
     @SerialName("profile_posts")
     val profilePosts: List<RespProfilePostModel> = emptyList(),
-    val totalProfilePosts: Double = 0.0,
+    val totalProfilePosts: Long = 0L,
     val canPostOnProfile: Boolean = false,
     val links: ProfilePostsListResponseLinks = ProfilePostsListResponseLinks(),
     @SerialName("system_info")
@@ -4528,8 +4528,8 @@ data class ProfilePostsListResponse(
 
 @Serializable
 data class ProfilePostsListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -4587,23 +4587,23 @@ data class ProfilePostsEditResponseProfilePostPermissions(
 @Serializable
 data class ProfilePostsEditResponseProfilePost(
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_comment_count")
-    val postCommentCount: Double = 0.0,
+    val postCommentCount: Long = 0L,
     @SerialName("timeline_username")
     val timelineUsername: String = "",
     @SerialName("user_is_ignored")
@@ -4696,23 +4696,23 @@ data class ProfilePostsCreateResponseProfilePostPermissions(
 @Serializable
 data class ProfilePostsCreateResponseProfilePost(
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_comment_count")
-    val postCommentCount: Double = 0.0,
+    val postCommentCount: Long = 0L,
     @SerialName("timeline_username")
     val timelineUsername: String = "",
     @SerialName("user_is_ignored")
@@ -4751,7 +4751,7 @@ data class ProfilePostsLikesResponse(
 @Serializable
 data class ProfilePostsLikesResponseUsers(
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
@@ -4786,7 +4786,7 @@ data class ProfilePostsCommentsListParams(
 data class ProfilePostsCommentsListResponse(
     val comments: List<RespProfilePostCommentModel> = emptyList(),
     @SerialName("comments_total")
-    val commentsTotal: Double = 0.0,
+    val commentsTotal: Long = 0L,
     @SerialName("profile_post")
     val profilePost: ProfilePostsCommentsListResponseProfilePost = ProfilePostsCommentsListResponseProfilePost(),
     @SerialName("timeline_user")
@@ -4823,23 +4823,23 @@ data class ProfilePostsCommentsListResponseProfilePostPermissions(
 @Serializable
 data class ProfilePostsCommentsListResponseProfilePost(
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_comment_count")
-    val postCommentCount: Double = 0.0,
+    val postCommentCount: Long = 0L,
     @SerialName("timeline_username")
     val timelineUsername: String = "",
     @SerialName("user_is_ignored")
@@ -4891,23 +4891,23 @@ data class ProfilePostsCommentsCreateResponseCommentPermissions(
 @Serializable
 data class ProfilePostsCommentsCreateResponseComment(
     @SerialName("comment_id")
-    val commentId: Double = 0.0,
+    val commentId: Long = 0L,
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("comment_user_id")
-    val commentUserId: Double = 0.0,
+    val commentUserId: Long = 0L,
     @SerialName("comment_username")
     val commentUsername: String = "",
     @SerialName("comment_username_html")
     val commentUsernameHtml: String = "",
     @SerialName("comment_create_date")
-    val commentCreateDate: Double = 0.0,
+    val commentCreateDate: Long = 0L,
     @SerialName("comment_body")
     val commentBody: String = "",
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     val links: ProfilePostsCommentsCreateResponseCommentLinks = ProfilePostsCommentsCreateResponseCommentLinks(),
     val permissions: ProfilePostsCommentsCreateResponseCommentPermissions = ProfilePostsCommentsCreateResponseCommentPermissions(),
 )
@@ -4951,23 +4951,23 @@ data class ProfilePostsCommentsEditResponseCommentPermissions(
 @Serializable
 data class ProfilePostsCommentsEditResponseComment(
     @SerialName("comment_id")
-    val commentId: Double = 0.0,
+    val commentId: Long = 0L,
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("comment_user_id")
-    val commentUserId: Double = 0.0,
+    val commentUserId: Long = 0L,
     @SerialName("comment_username")
     val commentUsername: String = "",
     @SerialName("comment_username_html")
     val commentUsernameHtml: String = "",
     @SerialName("comment_create_date")
-    val commentCreateDate: Double = 0.0,
+    val commentCreateDate: Long = 0L,
     @SerialName("comment_body")
     val commentBody: String = "",
     @SerialName("user_is_ignored")
     val userIsIgnored: Boolean = false,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     val links: ProfilePostsCommentsEditResponseCommentLinks = ProfilePostsCommentsEditResponseCommentLinks(),
     val permissions: ProfilePostsCommentsEditResponseCommentPermissions = ProfilePostsCommentsEditResponseCommentPermissions(),
 )
@@ -5040,8 +5040,8 @@ data class ConversationsListResponseFolders(
 
 @Serializable
 data class ConversationsListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5182,7 +5182,7 @@ data class ConversationsMessagesListParams(
 data class ConversationsMessagesListResponse(
     val messages: List<RespConversationMessageModel> = emptyList(),
     @SerialName("messages_total")
-    val messagesTotal: Double = 0.0,
+    val messagesTotal: Long = 0L,
     val links: ConversationsMessagesListResponseLinks = ConversationsMessagesListResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5190,8 +5190,8 @@ data class ConversationsMessagesListResponse(
 
 @Serializable
 data class ConversationsMessagesListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5370,7 +5370,7 @@ data class NotificationsListParams(
 data class NotificationsListResponse(
     val notifications: List<RespNotificationModel> = emptyList(),
     @SerialName("notifications_total")
-    val notificationsTotal: Double = 0.0,
+    val notificationsTotal: Long = 0L,
     val links: NotificationsListResponseLinks = NotificationsListResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5379,15 +5379,15 @@ data class NotificationsListResponse(
 @Serializable
 data class NotificationsListResponseLinks(
     val read: String = "",
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
 @Serializable
 data class NotificationsGetResponse(
     @SerialName("notification_id")
-    val notificationId: Double = 0.0,
+    val notificationId: Long = 0L,
     val notification: RespNotificationModel = RespNotificationModel(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5429,7 +5429,7 @@ data class TagsListParams(
 data class TagsListResponse(
     val tags: JsonObject = JsonObject(emptyMap()),
     @SerialName("tags_total")
-    val tagsTotal: Double = 0.0,
+    val tagsTotal: Long = 0L,
     val links: TagsListResponseLinks = TagsListResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5437,8 +5437,8 @@ data class TagsListResponse(
 
 @Serializable
 data class TagsListResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5455,7 +5455,7 @@ data class TagsGetResponse(
     val tag: TagsGetResponseTag = TagsGetResponseTag(),
     val tagged: List<RespThreadModel> = emptyList(),
     @SerialName("tagged_total")
-    val taggedTotal: Double = 0.0,
+    val taggedTotal: Long = 0L,
     val links: TagsGetResponseLinks = TagsGetResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5470,18 +5470,18 @@ data class TagsGetResponseTagLinks(
 @Serializable
 data class TagsGetResponseTag(
     @SerialName("tag_id")
-    val tagId: Double = 0.0,
+    val tagId: Long = 0L,
     @SerialName("tag_text")
     val tagText: String = "",
     @SerialName("tag_use_count")
-    val tagUseCount: Double = 0.0,
+    val tagUseCount: Long = 0L,
     val links: TagsGetResponseTagLinks = TagsGetResponseTagLinks(),
 )
 
 @Serializable
 data class TagsGetResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5524,7 +5524,7 @@ data class SearchAllBody(
 data class SearchAllResponse(
     val data: List<RespForumModel> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     val users: List<RespUserModel> = emptyList(),
     val links: SearchAllResponseLinks = SearchAllResponseLinks(),
     @SerialName("system_info")
@@ -5533,8 +5533,8 @@ data class SearchAllResponse(
 
 @Serializable
 data class SearchAllResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5564,7 +5564,7 @@ data class SearchThreadsBody(
 data class SearchThreadsResponse(
     val data: List<RespForumModel> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     val links: SearchThreadsResponseLinks = SearchThreadsResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5572,8 +5572,8 @@ data class SearchThreadsResponse(
 
 @Serializable
 data class SearchThreadsResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5603,7 +5603,7 @@ data class SearchPostsBody(
 data class SearchPostsResponse(
     val data: List<RespPostModel> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     val links: SearchPostsResponseLinks = SearchPostsResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5611,8 +5611,8 @@ data class SearchPostsResponse(
 
 @Serializable
 data class SearchPostsResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5648,7 +5648,7 @@ data class SearchProfilePostsBody(
 data class SearchProfilePostsResponse(
     val data: List<SearchProfilePostsResponseData> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     val links: SearchProfilePostsResponseLinks = SearchProfilePostsResponseLinks(),
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
@@ -5684,25 +5684,25 @@ data class SearchProfilePostsResponseData(
     @SerialName("content_type")
     val contentType: String = "",
     @SerialName("content_id")
-    val contentId: Double = 0.0,
+    val contentId: Long = 0L,
     @SerialName("profile_post_id")
-    val profilePostId: Double = 0.0,
+    val profilePostId: Long = 0L,
     @SerialName("timeline_user_id")
-    val timelineUserId: Double = 0.0,
+    val timelineUserId: Long = 0L,
     @SerialName("poster_user_id")
-    val posterUserId: Double = 0.0,
+    val posterUserId: Long = 0L,
     @SerialName("poster_username")
     val posterUsername: String = "",
     @SerialName("poster_username_html")
     val posterUsernameHtml: String = "",
     @SerialName("post_create_date")
-    val postCreateDate: Double = 0.0,
+    val postCreateDate: Long = 0L,
     @SerialName("post_body")
     val postBody: String = "",
     @SerialName("post_like_count")
-    val postLikeCount: Double = 0.0,
+    val postLikeCount: Long = 0L,
     @SerialName("post_comment_count")
-    val postCommentCount: Double = 0.0,
+    val postCommentCount: Long = 0L,
     @SerialName("timeline_username")
     val timelineUsername: String = "",
     @SerialName("user_is_ignored")
@@ -5719,8 +5719,8 @@ data class SearchProfilePostsResponseData(
 
 @Serializable
 data class SearchProfilePostsResponseLinks(
-    val pages: Double = 0.0,
-    val page: Double = 0.0,
+    val pages: Long = 0L,
+    val page: Long = 0L,
     val next: String = "",
 )
 
@@ -5740,7 +5740,7 @@ data class SearchTaggedBody(
 data class SearchTaggedResponse(
     val data: List<RespThreadModel> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     @SerialName("search_tags")
     val searchTags: JsonElement = JsonNull,
     @SerialName("system_info")
@@ -5759,7 +5759,7 @@ data class SearchResultsParams(
 data class SearchResultsResponse(
     val data: List<RespThreadModel> = emptyList(),
     @SerialName("data_total")
-    val dataTotal: Double = 0.0,
+    val dataTotal: Long = 0L,
     @SerialName("search_tags")
     val searchTags: JsonElement = JsonNull,
     @SerialName("system_info")
@@ -5809,7 +5809,7 @@ data class ChatboxIndexResponseRooms(
     val eng: Boolean = false,
     val market: Boolean = false,
     @SerialName("room_id")
-    val roomId: Double = 0.0,
+    val roomId: Long = 0L,
     val title: String = "",
 )
 
@@ -5830,19 +5830,19 @@ data class ChatboxIndexResponseIgnoreRendered(
 @Serializable
 data class ChatboxIndexResponseIgnore(
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("background_date")
-    val backgroundDate: Double = 0.0,
+    val backgroundDate: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_admin")
     val isAdmin: Boolean = false,
     @SerialName("is_banned")
@@ -5852,26 +5852,26 @@ data class ChatboxIndexResponseIgnore(
     @SerialName("is_staff")
     val isStaff: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: ChatboxIndexResponseIgnoreRendered = ChatboxIndexResponseIgnoreRendered(),
     @SerialName("short_link")
     val shortLink: JsonElement = JsonNull,
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("uniq_banner")
     val uniqBanner: JsonElement = JsonNull,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
@@ -5888,7 +5888,7 @@ data class ChatboxIndexResponsePermissions(
 @Serializable
 data class ChatboxIndexResponseRoomsOnline(
     @SerialName("chat:0")
-    val chat_0: Double = 0.0,
+    val chat_0: Long = 0L,
 )
 
 @Serializable
@@ -6001,19 +6001,19 @@ data class ChatboxOnlineResponseUsersUniqBanner(
 @Serializable
 data class ChatboxOnlineResponseUsers(
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("background_date")
-    val backgroundDate: Double = 0.0,
+    val backgroundDate: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_admin")
     val isAdmin: Boolean = false,
     @SerialName("is_banned")
@@ -6023,26 +6023,26 @@ data class ChatboxOnlineResponseUsers(
     @SerialName("is_staff")
     val isStaff: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: ChatboxOnlineResponseUsersRendered = ChatboxOnlineResponseUsersRendered(),
     @SerialName("short_link")
     val shortLink: String = "",
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("uniq_banner")
     val uniqBanner: ChatboxOnlineResponseUsersUniqBanner = ChatboxOnlineResponseUsersUniqBanner(),
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
@@ -6116,40 +6116,40 @@ data class ChatboxGetLeaderboardResponseLeaderboardUniqBanner(
 
 @Serializable
 data class ChatboxGetLeaderboardResponseLeaderboard(
-    val count: Double = 0.0,
+    val count: Long = 0L,
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("background_date")
-    val backgroundDate: Double = 0.0,
+    val backgroundDate: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_banned")
     val isBanned: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: ChatboxGetLeaderboardResponseLeaderboardRendered = ChatboxGetLeaderboardResponseLeaderboardRendered(),
     @SerialName("short_link")
     val shortLink: JsonElement = JsonNull,
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("uniq_banner")
     val uniqBanner: ChatboxGetLeaderboardResponseLeaderboardUniqBanner = ChatboxGetLeaderboardResponseLeaderboardUniqBanner(),
     @SerialName("uniq_username_css")
@@ -6181,42 +6181,42 @@ data class ChatboxGetIgnoreResponseIgnoredRendered(
 @Serializable
 data class ChatboxGetIgnoreResponseIgnored(
     @SerialName("avatar_date")
-    val avatarDate: Double = 0.0,
+    val avatarDate: Long = 0L,
     @SerialName("background_date")
-    val backgroundDate: Double = 0.0,
+    val backgroundDate: Long = 0L,
     @SerialName("contest_count")
-    val contestCount: Double = 0.0,
+    val contestCount: Long = 0L,
     @SerialName("custom_title")
     val customTitle: String = "",
     @SerialName("display_banner_id")
-    val displayBannerId: Double = 0.0,
+    val displayBannerId: Long = 0L,
     @SerialName("display_icon_group_id")
-    val displayIconGroupId: Double = 0.0,
+    val displayIconGroupId: Long = 0L,
     @SerialName("display_style_group_id")
-    val displayStyleGroupId: Double = 0.0,
+    val displayStyleGroupId: Long = 0L,
     @SerialName("is_banned")
     val isBanned: Boolean = false,
     @SerialName("last_activity")
-    val lastActivity: Double = 0.0,
+    val lastActivity: Long = 0L,
     @SerialName("like2_count")
-    val like2Count: Double = 0.0,
+    val like2Count: Long = 0L,
     @SerialName("like_count")
-    val likeCount: Double = 0.0,
+    val likeCount: Long = 0L,
     @SerialName("message_count")
-    val messageCount: Double = 0.0,
+    val messageCount: Long = 0L,
     @SerialName("register_date")
-    val registerDate: Double = 0.0,
+    val registerDate: Long = 0L,
     val rendered: ChatboxGetIgnoreResponseIgnoredRendered = ChatboxGetIgnoreResponseIgnoredRendered(),
     @SerialName("short_link")
     val shortLink: JsonElement = JsonNull,
     @SerialName("trophy_points")
-    val trophyPoints: Double = 0.0,
+    val trophyPoints: Long = 0L,
     @SerialName("uniq_banner")
     val uniqBanner: JsonElement = JsonNull,
     @SerialName("uniq_username_css")
     val uniqUsernameCss: String = "",
     @SerialName("user_id")
-    val userId: Double = 0.0,
+    val userId: Long = 0L,
     val username: String = "",
 )
 
@@ -6259,9 +6259,9 @@ data class FormsListParams(
 @Serializable
 data class FormsListResponse(
     val forms: List<FormsListResponseForms> = emptyList(),
-    val formsPerPage: Double = 0.0,
-    val page: Double = 0.0,
-    val totalForms: Double = 0.0,
+    val formsPerPage: Long = 0L,
+    val page: Long = 0L,
+    val totalForms: Long = 0L,
     @SerialName("system_info")
     val systemInfo: RespSystemInfo = RespSystemInfo(),
 )
@@ -6275,12 +6275,12 @@ data class FormsListResponseFormsFieldsFieldChoices(
 @Serializable
 data class FormsListResponseFormsFields(
     @SerialName("field_id")
-    val fieldId: Double = 0.0,
+    val fieldId: Long = 0L,
     val title: String = "",
     val fieldChoices: FormsListResponseFormsFieldsFieldChoices = FormsListResponseFormsFieldsFieldChoices(),
-    val required: Double = 0.0,
+    val required: Long = 0L,
     @SerialName("max_length")
-    val maxLength: Double = 0.0,
+    val maxLength: Long = 0L,
     @SerialName("default_value")
     val defaultValue: String = "",
 )
@@ -6288,7 +6288,7 @@ data class FormsListResponseFormsFields(
 @Serializable
 data class FormsListResponseForms(
     @SerialName("form_id")
-    val formId: Double = 0.0,
+    val formId: Long = 0L,
     val title: String = "",
     val description: String = "",
     val fields: List<FormsListResponseFormsFields> = emptyList(),

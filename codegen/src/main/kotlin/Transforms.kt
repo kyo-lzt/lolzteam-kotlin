@@ -511,10 +511,10 @@ private fun extractResponseProperty(
 		return ResponseProperty(name, "JsonElement", null, false, required, emptyList())
 	}
 
-	// Primitive types — use Double for integer in responses (API may return floats)
+	// Primitive types
 	val kotlinType = when (type) {
 		"string" -> "String"
-		"integer" -> "Double"
+		"integer" -> "Long"
 		"number" -> "Double"
 		"boolean" -> "Boolean"
 		else -> "JsonElement"
